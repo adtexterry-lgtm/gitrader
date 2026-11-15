@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:RiskPreset",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "RiskPreset",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^p-lev\\d+-o\\d+-d\\d+$"
+    },
+    "maxLeverage": {
+      "type": "number"
+    },
+    "maxOrderNotional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxPositionNotionalRatio": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxTotalNotionalRatio": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxOpenPositions": {
+      "type": "integer"
+    },
+    "maxDailyLossRatio": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "cooldownSec": {
+      "type": "number",
+      "minimum": 0
+    },
+    "display": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "maxLeverage",
+    "maxOrderNotional",
+    "maxPositionNotionalRatio",
+    "maxTotalNotionalRatio",
+    "maxOpenPositions",
+    "maxDailyLossRatio",
+    "cooldownSec",
+    "display"
+  ]
+}

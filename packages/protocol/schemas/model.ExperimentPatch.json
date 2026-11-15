@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ExperimentPatch",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ExperimentPatch",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hypothesis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "strategy": {
+          "$ref": "urn:gitrader:schema:model:0.1:Pin"
+        },
+        "workflow": {
+          "$ref": "urn:gitrader:schema:model:0.1:Pin"
+        },
+        "params": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "number",
+              "boolean",
+              "string"
+            ]
+          }
+        }
+      },
+      "required": [
+        "params"
+      ]
+    },
+    "params": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "number",
+          "boolean",
+          "string"
+        ]
+      }
+    },
+    "assumptions": {
+      "$ref": "urn:gitrader:schema:model:0.1:BacktestAssumptions"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "range": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+          }
+        },
+        "required": [
+          "source",
+          "range",
+          "sha256"
+        ]
+      }
+    },
+    "conclusion": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "origin": {
+              "$ref": "urn:gitrader:schema:model:0.1:Origin"
+            },
+            "at": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+            }
+          },
+          "required": [
+            "text",
+            "origin",
+            "at"
+          ]
+        }
+      ]
+    },
+    "conclusions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "origin": {
+            "$ref": "urn:gitrader:schema:model:0.1:Origin"
+          },
+          "at": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "text",
+          "origin",
+          "at",
+          "version"
+        ]
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "origin": {
+            "$ref": "urn:gitrader:schema:model:0.1:Origin"
+          },
+          "at": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          }
+        },
+        "required": [
+          "text",
+          "origin",
+          "at"
+        ]
+      }
+    },
+    "llm": {
+      "type": "object",
+      "properties": {
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "trainingCutoff": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+              },
+              "source": {
+                "enum": [
+                  "kernel-table",
+                  "declared"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "source"
+            ]
+          }
+        },
+        "derivedFrom": {
+          "enum": [
+            "creator",
+            "workflow",
+            "declared"
+          ]
+        },
+        "involved": {
+          "const": true
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "properties": {
+        "parentExperimentId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ExpId"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "holdoutWindow": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Window"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  },
+  "propertyNames": {
+    "not": {
+      "pattern": "^(?:stage|metrics|forward|baseline|packs|subjectKey|executorKind|stageEnteredAt|reviewFrom|owner|version|holdoutRunId|runs)(?:$|\\.|\\[)"
+    }
+  }
+}

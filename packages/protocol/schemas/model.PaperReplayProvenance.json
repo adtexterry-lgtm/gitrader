@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:PaperReplayProvenance",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "PaperReplayProvenance",
+  "type": "object",
+  "properties": {
+    "source": {
+      "const": "replay"
+    },
+    "fixtureDigest": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "source",
+    "fixtureDigest"
+  ],
+  "additionalProperties": false
+}

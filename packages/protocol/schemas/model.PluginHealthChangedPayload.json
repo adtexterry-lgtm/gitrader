@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:PluginHealthChangedPayload",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "PluginHealthChangedPayload",
+  "type": "object",
+  "properties": {
+    "pluginId": {
+      "type": "string"
+    },
+    "from": {
+      "type": "string"
+    },
+    "to": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "pluginId",
+    "from",
+    "to"
+  ]
+}

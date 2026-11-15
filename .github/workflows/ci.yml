@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: CPAL-1.0
+# CI：安装、类型检查、测试、公开卫生检查、协议 schema 一致性、运维配置校验、用户文档校验，
+# 再构建、第三方声明校验、打包清单检查。Node 22 与 24 矩阵；Windows 是首要平台，另加一格 windows-latest / Node 22。
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / Node ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        node: [22, 24]
+        include:
+          - os: windows-latest
+            node: 22
+    env:
+      # 干净环境里没有 Edge / playwright-core：浏览器用例在这里跳过（本地验收脚本负责），并在日志里可见
+      GITRADER_SKIP_BROWSER: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Test
+        run: npm test
+      - name: Public hygiene (internal records, local paths, banned words, e-mails)
+        run: node scripts/check-public.mjs
+      - name: Release hygiene (first-line SPDX matches the package licence)
+        run: node tools/release/audit-headers.mjs
+      - name: Release hygiene (runtime dependencies are workspace packages or whitelisted)
+        run: node tools/release/deps-audit.mjs
+      - name: Release hygiene tests (fake bad SPDX / bad dependencies / bad pack contents)
+        run: node --test tools/release/test/
+      - name: Release hygiene (plugin completeness — manifest, permissions, secrets, tool names, SPDX)
+        run: node tools/release/plugin-audit.mjs
+      - name: Protocol schemas match the TypeScript source
+        run: npm run check:schemas -w packages/protocol
+      - name: Observability config (dashboards, alert rules, scrape config)
+        run: node ops/verify-ops.mjs
+      - name: Docker deployment files (static checks, no docker needed)
+        run: node docker/verify-docker.mjs
+      - name: User documentation (commands, config keys, banned words)
+        run: node docs/user/verify-docs.mjs
+      - name: English user documentation (one-to-one pages, no untranslated text)
+        run: node docs/user/en/verify-docs-en.mjs
+      - name: Public release readiness (templates, root docs, CI commands resolve)
+        run: node tools/release/verify-public-readiness.mjs
+      - name: Snapshot third-party notices
+        shell: bash
+        run: cp THIRD-PARTY-NOTICES.md "$RUNNER_TEMP/notices.before"
+      - name: Build the gitrader package (CLI + kernel + MCP + engine + workbench)
+        run: npm run build -w gitrader
+      - name: Third-party notices are up to date
+        shell: bash
+        run: node scripts/check-public.mjs --notices "$RUNNER_TEMP/notices.before" THIRD-PARTY-NOTICES.md
+      - name: Release hygiene (npm pack --dry-run, only allowed files and entry points)
+        run: node tools/release/pack-dry-run.mjs
+      - name: Package contents
+        shell: bash
+        run: |
+          npm pack --dry-run --json -w packages/cli > "$RUNNER_TEMP/pack.json"
+          node scripts/check-public.mjs --pack "$RUNNER_TEMP/pack.json"

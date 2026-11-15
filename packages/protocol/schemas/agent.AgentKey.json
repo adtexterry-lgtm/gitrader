@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:agent:0.1:AgentKey",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: agent | Version: 0.1 | Status: draft",
+  "title": "AgentKey",
+  "type": "object",
+  "properties": {
+    "keyId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AkId"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "host": {
+      "enum": [
+        "claude-code",
+        "codex",
+        "hermes",
+        "unigit",
+        "other"
+      ]
+    },
+    "mandateId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "suspended",
+        "revoked"
+      ]
+    },
+    "createdAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "expiresAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "lastSeenAt": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "createdBy": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/UserActor"
+    }
+  },
+  "required": [
+    "keyId",
+    "name",
+    "host",
+    "mandateId",
+    "status",
+    "createdAt",
+    "expiresAt",
+    "lastSeenAt",
+    "createdBy"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "engine": {
+    "id": "gitrader-core",
+    "name": "Gitrader Core",
+    "version": "0.1.0",
+    "vendor": {"id": "gitrader", "name": "Gitrader", "kind": "builtin", "verified": true},
+    "license": "Apache-2.0",
+    "runtime": "node"
+  },
+  "protocol": {"version": "0.1.0", "transports": ["stdio", "ws"]},
+  "capabilities": {
+    "execution.modeA": true,
+    "execution.modeB": false,
+    "market.useHost": true,
+    "market.own": false,
+    "strategy": true,
+    "strategy.hotUpdate": true,
+    "backtest": true,
+    "backtest.fillModels": ["next-bar-open"],
+    "replay": true,
+    "events.resume": true,
+    "events.retention": {"minEvents": 10000, "minMs": 900000},
+    "risk.cooperative": true,
+    "halt.levels": ["halt_new", "cancel_all", "flatten_all"],
+    "builder.attach": false,
+    "decision.log": true
+  },
+  "venues": [],
+  "data": {"intervals": ["1m", "5m", "15m", "1h", "4h", "1d"], "maxHistoryBars": 5000},
+  "strategies": [
+    {"id": "ema-trend", "name": "EMA trend (example)", "version": "0.1.0", "kind": "target-position", "paramsSchemaRef": "strategy.params"}
+  ],
+  "limits": {"maxConcurrentBacktests": 2, "maxStrategyInstances": 20},
+  "assumptions": {
+    "backtest": {"fill": "next-bar-open", "slippageBps": 2, "fees": "venue-taker", "funding": false, "liquidation": false, "maxBars": 5000}
+  }
+}

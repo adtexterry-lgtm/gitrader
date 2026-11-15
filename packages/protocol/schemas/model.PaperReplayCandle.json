@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:PaperReplayCandle",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "PaperReplayCandle",
+  "type": "object",
+  "properties": {
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "interval": {
+      "enum": [
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "4h",
+        "8h",
+        "12h",
+        "1d",
+        "3d",
+        "1w",
+        "1M"
+      ]
+    },
+    "t": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "closedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "o": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "h": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "l": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "c": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "v": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    }
+  },
+  "required": [
+    "instrumentId",
+    "interval",
+    "t",
+    "closedAt",
+    "o",
+    "h",
+    "l",
+    "c",
+    "v"
+  ]
+}

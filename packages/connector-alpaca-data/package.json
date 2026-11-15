@@ -1,0 +1,21 @@
+{
+  "name": "@gitrader/connector-alpaca-data",
+  "version": "0.1.0",
+  "description": "Gitrader Alpaca US-equity market-data connector (read-only: assets, bars, quotes, calendar/clock).",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

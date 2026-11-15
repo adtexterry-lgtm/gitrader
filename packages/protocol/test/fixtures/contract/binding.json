@@ -1,0 +1,11 @@
+{
+  "bindingId": "bind_01JABA",
+  "accounts": [
+    {"accountId": "acct_01JABAPAPER000000000000001", "mode": "A", "mandateId": "mdt_01JABAENG01"},
+    {"accountId": "acct_01JAB0QZ8W3K5M7N9P1R3T5V7X", "mode": "A", "mandateId": "mdt_01JABAENG02"}
+  ],
+  "data": {"source": "host", "instruments": ["hyperliquid:BTC", "hyperliquid:ETH"]},
+  "policies": [{"policyId": "pol_01JAB1", "version": 3, "digest": "sha256:<64hex>"}],
+  "builder": {"attachedBy": "host"},
+  "heartbeatMs": 5000
+}

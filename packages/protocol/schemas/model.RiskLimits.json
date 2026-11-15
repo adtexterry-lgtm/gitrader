@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:RiskLimits",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "RiskLimits",
+  "type": "object",
+  "properties": {
+    "maxLeverage": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "maxOrderNotional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxPositionNotionalRatio": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxTotalNotionalRatio": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxOpenPositions": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "maxDailyLossRatio": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxDailyNotional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxSlippageBps": {
+      "type": "number",
+      "minimum": 0
+    },
+    "maxOrdersPerMinute": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maxDailyOrders": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maxCancelsPerMinute": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "duplicateIntentWindowSec": {
+      "type": "number",
+      "minimum": 0
+    },
+    "instrumentAllowlist": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+      }
+    },
+    "venueAllowlist": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+      }
+    }
+  },
+  "required": [
+    "maxSlippageBps"
+  ]
+}

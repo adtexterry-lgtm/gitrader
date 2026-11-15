@@ -1,0 +1,26 @@
+{
+  "name": "@gitrader/plugin-template",
+  "version": "0.1.0",
+  "description": "Gitrader example plugin (indicator block): an EMA reading block you can copy into ~/.gitrader/plugins/.",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*",
+    "@gitrader/blocks-sdk": "*"
+  },
+  "devDependencies": {
+    "@gitrader/kernel": "*",
+    "esbuild": "^0.28.2",
+    "vitest": "^5.0.3",
+    "ws": "^8.22.0"
+  }
+}

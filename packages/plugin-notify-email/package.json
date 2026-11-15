@@ -1,0 +1,17 @@
+{
+  "name": "@gitrader/plugin-notify-email",
+  "version": "0.1.0",
+  "description": "Gitrader notification channel plugin: SMTP email through the notify.send tool. Pure .mjs, no build step, no third-party dependencies.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./gsp": "./gsp.mjs"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  }
+}

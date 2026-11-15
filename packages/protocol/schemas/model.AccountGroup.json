@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:AccountGroup",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "AccountGroup",
+  "type": "object",
+  "properties": {
+    "groupId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/GrpId"
+    },
+    "orgId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrgId"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accountIds": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+      }
+    },
+    "policyIds": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PolId"
+      }
+    },
+    "bindingIds": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/BindId"
+      }
+    }
+  },
+  "required": [
+    "groupId",
+    "orgId",
+    "name",
+    "accountIds"
+  ]
+}

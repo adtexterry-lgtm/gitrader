@@ -1,0 +1,196 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+/* 总览页专用样式（类名 g5o-*，只引用令牌；通用组件样式在 workbench/src/ui/r5/components.css）。值取自 reports/visual-r5/overview/index.html 的页内段。 */
+
+/* 列距：表格列之间的间隙随视口档位变（视觉稿页内变量；全局令牌里暂无，见 P1 回报） */
+:root[data-ui="r5"] [data-g5-page="overview"]{--tbl-gap:12px}
+@media (min-width:1400px){ :root[data-ui="r5"] [data-g5-page="overview"]{--tbl-gap:20px} }
+@media (min-width:1760px){ :root[data-ui="r5"] [data-g5-page="overview"]{--tbl-gap:32px} }
+:root[data-ui="r5"][data-nav="rail"] [data-g5-page="overview"]{--tbl-gap:8px}
+@media (min-width:1400px){ :root[data-ui="r5"][data-nav="rail"] [data-g5-page="overview"]{--tbl-gap:16px} }
+@media (min-width:1760px){ :root[data-ui="r5"][data-nav="rail"] [data-g5-page="overview"]{--tbl-gap:32px} }
+
+/* 卡内一行消息（空 / 读取失败 / 未接通）：左缘 20，与卡头标题共线 */
+:root[data-ui="r5"] .g5o-msg{padding:0 20px 20px;display:flex;align-items:center;gap:12px;font-size:13px;line-height:20px;color:var(--gr-text-body)}
+:root[data-ui="r5"] .g5o-msg .g5-msg{font-size:12px;line-height:16px;color:var(--gr-text-3);min-width:0;overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5o-msg [data-wire]{display:flex;align-items:center;gap:12px;min-width:0}
+:root[data-ui="r5"] .g5o-err,:root[data-ui="r5"] .g5o-ferr{font-size:12px;line-height:16px;color:var(--gr-danger);padding:4px 0;overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5o-err .g5-msg{color:var(--gr-danger)}
+:root[data-ui="r5"] .g5-armed + .g5o-err{padding:4px 4px 0}
+
+/* 行内按钮式链接（标的名 → 图表、实验号、引擎名 → 策略页） */
+:root[data-ui="r5"] button.g5o-lnk{cursor:pointer;text-underline-offset:3px}
+:root[data-ui="r5"] button.g5o-lnk:hover{text-decoration:underline;text-decoration-thickness:1px}
+:root[data-ui="r5"] .g5-res.g5o-lnk{color:var(--gr-counter)}
+:root[data-ui="r5"] .g5o-eng{display:inline-flex;cursor:pointer;text-underline-offset:3px}
+:root[data-ui="r5"] .g5o-eng:hover{text-decoration:underline;text-decoration-thickness:1px}
+:root[data-ui="r5"] .g5o-me .g5-actor{color:var(--gr-text);font-weight:500}
+
+/* 持仓：武装行 / 展开区 */
+:root[data-ui="r5"] .g5-tbl tr.g5o-armrow > td{padding:0;box-shadow:none}
+:root[data-ui="r5"] .g5-tbl tr.g5o-xrow > td{padding:0 0 8px;box-shadow:none;white-space:normal}
+:root[data-ui="r5"] .g5-tbl tr.g5o-armrow:hover td,:root[data-ui="r5"] .g5-tbl tr.g5o-xrow:hover td{background:none}
+:root[data-ui="r5"] .g5o-detail{display:grid;grid-template-columns:minmax(140px,0.7fr) minmax(0,1fr) 360px;column-gap:24px;padding:8px 4px 4px;background:var(--gr-fill-1);border-radius:var(--gr-r-ctl)}
+:root[data-ui="r5"] .g5o-kv{margin:0;min-width:0}
+:root[data-ui="r5"] .g5o-kv > div{height:24px;display:flex;align-items:baseline;justify-content:space-between;gap:8px;white-space:nowrap}
+:root[data-ui="r5"] .g5o-kv dt{font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5o-kv dd{margin:0;font-size:13px;line-height:20px;color:var(--gr-text-body)}
+:root[data-ui="r5"] .g5o-chain{margin:0;padding:0;list-style:none;min-width:0;display:flex;flex-direction:column}
+:root[data-ui="r5"] .g5o-chain li{min-height:24px;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px;font-size:12px;line-height:16px;min-width:0}
+:root[data-ui="r5"] .g5o-chain .g5o-tm{flex:none}
+:root[data-ui="r5"] .g5o-form{min-width:0;display:flex;flex-direction:column;gap:4px}
+:root[data-ui="r5"] .g5o-frm{display:flex;align-items:center;gap:8px;min-height:32px;white-space:nowrap}
+:root[data-ui="r5"] .g5o-frm > .g5-k{width:72px;flex:none;font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5o-frm .g5-inp{width:144px;max-width:100%;flex:none}
+:root[data-ui="r5"] .g5o-pct{display:inline-flex;gap:8px}
+:root[data-ui="r5"] .g5o-arm{display:inline-flex;gap:8px}
+
+/* 活动：新动作整行 */
+:root[data-ui="r5"] .g5o-fresh{align-self:flex-start;margin:0 16px 8px;height:28px}
+:root[data-ui="r5"] .g5o-clock{margin-left:4px}
+:root[data-ui="r5"] .g5-ar .g5-tx .g5-l2.g5o-why{color:var(--gr-text-2);white-space:normal}
+/* ux-fix2 B2：Agent 自己的失败——规则行的拦截图标不标红，挂一行三级灰的说明（它的事，不用人处理） */
+:root[data-ui="r5"] .g5-ar[data-agent-miss] .g5-tx .g5-l2 svg{color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-ar .g5-tx .g5-l2.g5o-agent{color:var(--gr-text-3);white-space:normal}
+
+/* X1: the header and body share one table; keep numeric anchors and long content inside it. */
+:root[data-ui="r5"] [data-view="positions"] .g5-tw{min-width:0;max-width:100%;overflow-x:auto}
+:root[data-ui="r5"] [data-tab="positions"] th.g5-n,:root[data-ui="r5"] [data-tab="positions"] td.g5-n{text-align:right;padding-left:max(12px,var(--tbl-gap))}
+:root[data-ui="r5"] .g5o-frm{flex-wrap:wrap;white-space:normal}
+:root[data-ui="r5"] .g5o-detail{grid-template-columns:minmax(120px,.7fr) minmax(0,1fr) minmax(280px,360px)}
+:root[data-ui="r5"] .g5-alist{grid-template-columns:64px fit-content(160px) minmax(0,1fr)}
+:root[data-ui="r5"] .g5-ar > .g5-actor{min-width:0;white-space:normal;overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5-ar .g5-tx .g5-l1,:root[data-ui="r5"] .g5-ar .g5-tx .g5-l2{white-space:normal;overflow-wrap:anywhere;max-width:100%}
+:root[data-ui="r5"] .g5-ar .g5-tx .g5-l2{align-items:baseline}
+:root[data-ui="r5"] .g5-ar .g5-tx .g5-l2.g5-await,:root[data-ui="r5"] .g5-ar .g5-tx .g5-l2.g5-await svg,:root[data-ui="r5"] .g5-pendpop .g5-await{color:var(--gr-warn)}
+:root[data-ui="r5"] .g5-pfuse{min-width:0}
+:root[data-ui="r5"] .g5-pfuse > .g5-al{min-width:0;overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5-pfuse .g5-fuse{min-width:16px}
+:root[data-ui="r5"] .g5-pfuse .g5-cd,:root[data-ui="r5"] .g5-pq .g5-cd{flex:none;white-space:nowrap}
+:root[data-ui="r5"] .g5-pq{display:grid;grid-template-columns:minmax(0,1fr) auto;height:auto;min-height:40px;gap:4px 12px;padding-top:8px;padding-bottom:8px}
+:root[data-ui="r5"] .g5-pq > .g5-actor{grid-column:1;white-space:normal;min-width:0;overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5-pq > .g5-tb{grid-column:1;white-space:normal;overflow-wrap:anywhere;min-width:0}
+:root[data-ui="r5"] .g5-pq > .g5-cd,:root[data-ui="r5"] .g5-pq > .g5-res{grid-column:2;grid-row:1 / 4;align-self:center}
+:root[data-ui="r5"] .g5-pendpop .g5-what,:root[data-ui="r5"] .g5-pendpop .g5-pline{white-space:normal;overflow-wrap:anywhere;flex-wrap:wrap}
+:root[data-ui="r5"] .g5-why-copy{min-width:0;flex:1 1 100%;white-space:normal;overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5-why-copy[data-expanded="false"]{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+@media (min-width:600px) and (max-width:1099px){
+  :root[data-ui="r5"] .g5-alist{grid-template-columns:56px minmax(0,1fr);column-gap:12px}
+  :root[data-ui="r5"] .g5-ar .g5-tx{grid-column:2}
+  :root[data-ui="r5"] .g5o-detail{grid-template-columns:minmax(0,1fr);gap:12px}
+}
+
+/* Agent：卡里名字 13/20、主字色 */
+:root[data-ui="r5"] .g5o-lg .g5-actor{font-size:13px;line-height:20px;color:var(--gr-text)}
+:root[data-ui="r5"] .g5-krow .g5o-keyerr{grid-column:1 / -1}
+
+/* 风险 */
+:root[data-ui="r5"] .g5-racts.g5o-armed{margin:0 -4px 4px}
+:root[data-ui="r5"] .g5-rbody > .g5-armed{margin:0 -4px 8px}
+/* 风险卡按内容定高（不再伸缩），正文跟着内容走，不被压成 0；剩余高度归 Agent 卡（release-r1 P1-8） */
+:root[data-ui="r5"] [data-view="risk"] .g5-rbody{flex:none}
+:root[data-ui="r5"] .g5o-armed > .g5-armed{flex:1;min-width:0}
+/* ux-fix2 B2：武装行下的失败原文另起一行（原先与武装行同排，英文界面里压在「确认」键上）；只在有错时出现，不动无错时的几何 */
+:root[data-ui="r5"] .g5-racts.g5o-armed{flex-wrap:wrap}
+:root[data-ui="r5"] .g5o-armed > .g5o-err{flex:1 0 100%}
+:root[data-ui="r5"] .g5o-status{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-height:28px;margin-bottom:8px}
+:root[data-ui="r5"] .g5o-status .g5-blocked{min-width:0}
+/* 恢复被对账挡住：与 .g5-blocked 同高（12/16），琥珀警示，不吃右边的钮 */
+:root[data-ui="r5"] .g5-rec-blocked{display:inline-flex;align-items:center;gap:4px;font-size:12px;line-height:16px;color:var(--gr-warn);min-width:0}
+:root[data-ui="r5"] .g5-rec-blocked svg{color:var(--gr-warn)}
+/* 临时放宽：卡头小字（超宽时截断，全文在 title）与被放宽限额行的「临时」小标 + 琥珀轨 */
+:root[data-ui="r5"] [data-view="risk"] .g5-hd .g5-r{min-width:0}
+:root[data-ui="r5"] .g5o-relaxing{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+:root[data-ui="r5"] .g5o-rx{margin-left:4px;font-size:11px;font-style:normal;color:var(--gr-warn)}
+:root[data-ui="r5"] .g5-lim[data-relaxed] .g5-bar::before{background:var(--gr-warn)}
+:root[data-ui="r5"] .g5o-relax .g5o-perm{align-self:flex-start;padding-left:0}
+:root[data-ui="r5"] .g5-mi[disabled]{opacity:.4;cursor:default}
+:root[data-ui="r5"] .g5-mi[disabled]:hover{background:none}
+:root[data-ui="r5"] .g5o-leftover{display:flex;align-items:center;gap:8px;min-height:28px;margin-bottom:8px;margin-right:0}
+:root[data-ui="r5"] .g5o-bad{margin-bottom:8px;display:flex}
+:root[data-ui="r5"] .g5o-guard{margin-left:auto;display:inline-flex;align-items:center;gap:8px}
+:root[data-ui="r5"] .g5-prot .g5-ph .g5o-guard + .g5-btn-icon{margin-left:0}
+:root[data-ui="r5"] button.g5-sw{padding:0;border:0;cursor:pointer}
+:root[data-ui="r5"] button.g5-sw[disabled]{opacity:.4;cursor:default}
+:root[data-ui="r5"] .g5o-relax{padding:8px 12px 12px;display:flex;flex-direction:column;gap:12px}
+:root[data-ui="r5"] .g5o-relax-f{flex-wrap:wrap}
+:root[data-ui="r5"] .g5o-relax .g5-inp input{text-align:left}
+
+/* 资金卡 */
+:root[data-ui="r5"] button.g5-fs{text-align:left;cursor:pointer}
+:root[data-ui="r5"] .g5o-neterr{display:inline-block;max-width:240px;overflow:hidden;text-overflow:ellipsis}
+:root[data-ui="r5"] .g5-fs .g5-val .g5-unv{margin-left:8px}
+:root[data-ui="r5"] .g5-btn-takeover[disabled]{background:var(--gr-fill-2);color:var(--gr-text-dis);box-shadow:none;cursor:default}
+
+/* 浮层：没有状态机（或收起 / 没有待批）时不显示；队列行是整行按钮 */
+:root[data-ui="r5"]:not([data-pend="open"]) .g5-pendpop{display:none}
+:root[data-ui="r5"] button.g5-pq{width:100%;text-align:left}
+:root[data-ui="r5"] .g5-pacts .g5-blocked{min-width:0;white-space:normal}
+:root[data-ui="r5"] .g5-pacts .g5-ok{color:var(--gr-text-2)}
+
+/* 菜单浮层（挂 body，固定定位） */
+:root[data-ui="r5"] .g5o-pop{position:fixed;z-index:50}
+
+/* 待批三态写在 <html data-pend>：components.css 里的同名规则带 `:root[data-ui] [data-pend]` 前缀，只匹配 <html> 的后代，匹配不到 <html> 自己，这里补 <html> 版本 */
+:root[data-ui="r5"][data-pend="none"] [data-p="1"]{display:none}
+:root[data-ui="r5"][data-pend="none"] [data-p="0"]{display:inline-flex}
+:root[data-ui="r5"][data-pend="open"] .g5-ws > .g5-col:last-child .g5-card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--gr-scrim);pointer-events:none}
+
+@media (max-width: 599px) {
+  :root[data-ui="r5"] .g5-ws[data-g5-page="workbench"] { display: flex; flex-direction: column; }
+  :root[data-ui="r5"] .g5-ws[data-g5-page="workbench"] > .g5-col { display: contents; }
+  :root[data-ui="r5"] .g5-ws [data-g5-page="overview"] { flex: none; }
+  :root[data-ui="r5"] .g5-ws [data-view="positions"] { order: 1; }
+  :root[data-ui="r5"] .g5-ws [data-view="risk"] { order: 2; }
+  :root[data-ui="r5"] .g5-ws [data-view="keys"] { order: 3; }
+  :root[data-ui="r5"] .g5-ws [data-view="feed"] { order: 4; }
+  :root[data-ui="r5"] .g5-fund { height: auto; padding: 12px; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  :root[data-ui="r5"] .g5-fund .g5-frow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; white-space: normal; }
+  :root[data-ui="r5"] .g5-fund .g5-fs { min-width: 0; }
+  :root[data-ui="r5"] .g5-fund [data-act="to-funds"],
+  :root[data-ui="r5"] .g5-fund [data-seg="paper"],
+  :root[data-ui="r5"] .g5-fund [data-act="network"] { grid-column: 1 / -1; }
+  :root[data-ui="r5"] .g5-fund [data-p] { order: -1; grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; margin: 0; padding: 4px 0; }
+  :root[data-ui="r5"] .g5-fund .g5-val { line-height: 28px; white-space: normal; }
+  :root[data-ui="r5"] .g5-fund .g5-eq { font-size: 28px; }
+  :root[data-ui="r5"] .g5-fund [data-seg="takeover"] { position: fixed; z-index: 45; top: 8px; right: 16px; }
+  :root[data-ui="r5"] .g5-fund [data-seg="takeover"] > .g5-k { display: none; }
+  :root[data-ui="r5"] .g5-fund .g5-tkrow { height: 32px; }
+  :root[data-ui="r5"] [data-g5-page="overview"] { --tbl-gap: 8px; }
+  :root[data-ui="r5"] [data-g5-page="overview"] .g5-hd { height: auto; min-height: 40px; flex-wrap: wrap; padding: 8px 12px; }
+  :root[data-ui="r5"] [data-g5-page="overview"] .g5-hd .g5-tabs { flex-wrap: wrap; margin: 0; }
+  :root[data-ui="r5"] [data-g5-page="overview"] .g5-tw { padding: 0 8px 8px; }
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl,
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl thead,
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl tbody { display: contents; }
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .7fr) minmax(0, 1fr) auto; height: auto; min-height: 32px; }
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl th,
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl td { width: auto; white-space: normal; overflow-wrap: anywhere; min-width: 0; }
+  :root[data-ui="r5"] [data-tab="positions"] thead th:not(:nth-child(1), :nth-child(2), :nth-child(5), :nth-child(9)),
+  :root[data-ui="r5"] [data-tab="positions"] .g5-row > td:not(:nth-child(1), :nth-child(2), :nth-child(5), :nth-child(9)),
+  :root[data-ui="r5"] table[data-tab="orders"] thead th:not(:nth-child(1), :nth-child(3), :nth-child(4), :nth-child(7)),
+  :root[data-ui="r5"] table[data-tab="orders"] .g5-row > td:not(:nth-child(1), :nth-child(3), :nth-child(4), :nth-child(7)) { display: none; }
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl tr.g5-grp { display: flex; justify-content: space-between; gap: 8px; }
+  :root[data-ui="r5"] [data-view="positions"] .g5-grp td:last-child { display: none; }
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl .g5-acts { flex-direction: column; gap: 0; }
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl .g5-sl { flex-wrap: wrap; gap: 4px; }
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl .g5o-xrow,
+  :root[data-ui="r5"] [data-view="positions"] .g5-tbl .g5o-armrow { grid-template-columns: minmax(0, 1fr); }
+  :root[data-ui="r5"] .g5o-detail { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  :root[data-ui="r5"] .g5o-frm, :root[data-ui="r5"] .g5-racts { flex-wrap: wrap; }
+  :root[data-ui="r5"] [data-view="risk"] .g5-rbody { flex: none; padding: 0 12px 8px; }
+  :root[data-ui="r5"] .g5-lims { column-gap: 8px; }
+  :root[data-ui="r5"] .g5-krow { padding: 8px 12px; }
+  :root[data-ui="r5"] .g5-krow .g5-top, :root[data-ui="r5"] .g5-krow .g5-sub { flex-wrap: wrap; white-space: normal; gap: 4px 8px; overflow-wrap: anywhere; }
+  :root[data-ui="r5"] .g5-krow .g5-sub { grid-column: 1 / -1; }
+  :root[data-ui="r5"] .g5-krow .g5-dd { grid-row: 1; }
+  :root[data-ui="r5"] [data-view="feed"] .g5-alist { flex: none; grid-template-columns: 56px minmax(0, 1fr); column-gap: 8px; padding: 0 8px 8px; max-height: none !important; overflow: visible; }
+  :root[data-ui="r5"] .g5-ar .g5-tx { grid-column: 2; }
+  :root[data-ui="r5"] .g5-ar .g5-tx .g5-l1, :root[data-ui="r5"] .g5-ar .g5-tx .g5-l2 { white-space: normal; flex-wrap: wrap; overflow-wrap: anywhere; }
+  /* 桌面 JS 锚点仍会写 inline top/left；仅窄屏用固定边界覆盖。 */
+  :root[data-ui="r5"] .g5-pendpop { position: fixed; z-index: 30; left: 16px !important; top: 56px !important; width: calc(100vw - 32px); max-height: calc(100dvh - 72px); overflow-y: auto; }
+  :root[data-ui="r5"] .g5-pendpop::before { display: none; }
+  :root[data-ui="r5"] .g5-pendpop .g5-pitem { padding: 0 12px 12px; }
+  :root[data-ui="r5"] .g5-pendpop .g5-what { white-space: normal; }
+  :root[data-ui="r5"] .g5-pendpop .g5-pline, :root[data-ui="r5"] .g5-pendpop .g5-pacts { flex-wrap: wrap; white-space: normal; }
+  :root[data-ui="r5"] .g5-pendpop .g5-pq { height: auto; min-height: 40px; flex-wrap: wrap; padding: 8px 12px; gap: 8px; white-space: normal; }
+}

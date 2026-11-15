@@ -1,0 +1,121 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+@keyframes g5-chart-arrive{from{opacity:.35}to{opacity:1}}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-ghostplot,
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-plot{animation:g5-chart-arrive var(--gr-dur-reveal) var(--gr-ease-out) both}
+@media (prefers-reduced-motion:reduce){:root[data-ui="r5"] [data-g5-page="chart"] .g5-ghostplot,:root[data-ui="r5"] [data-g5-page="chart"] .g5-plot{animation:none}}
+/* 图表页（图表 / 标的 / 本标的 / 下单）专用样式：components.css 里没有的页内规则，类名 g5-，只许 var(--gr-*)。 */
+:root[data-ui="r5"] .g5-card[data-g5-page="chart"] [data-state="offline"],
+:root[data-ui="r5"] .g5-card[data-g5-page="chart-mine"] [data-state="offline"]{display:flex;flex-direction:column;flex:1 1 0;min-height:0}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-trw{overflow-y:auto;min-height:0;flex:1 1 0}
+
+/* 卡内状态行：空 / 错误 / 未接通 */
+:root[data-ui="r5"] [data-g5-page^="chart"] .g5-pstate{padding:0 20px 20px;display:flex;align-items:center;gap:12px;font-size:13px;line-height:20px;color:var(--gr-text-body);flex-wrap:wrap}
+:root[data-ui="r5"] [data-g5-page^="chart"] .g5-pstate [data-wire="off"]{display:flex;align-items:baseline;gap:12px}
+:root[data-ui="r5"] [data-g5-page^="chart"] .g5-pstate .g5-msg{font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page^="chart"] .g5-msg.g5-danger{color:var(--gr-danger)}
+
+/* 图表卡 */
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-hd{gap:8px}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-lwc-host{display:flex;flex-direction:column}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-lwc-host > .g5-plot{position:relative;flex:1 1 0;min-height:0}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-mcard{z-index:5;pointer-events:auto;white-space:nowrap}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-mcard[hidden]{display:none}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-mcard .g5-m3{margin-top:4px;display:flex;align-items:baseline;gap:12px;font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-mcard .g5-lnk{height:auto;padding:0;color:var(--gr-text-2);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-mcard .g5-hollow{box-shadow:inset 0 0 0 1.5px currentColor;background:none}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-ohlc .g5-ldot.g5-off{opacity:.35}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-tools .g5-dd .g5-t3{color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-mi .g5-r .g5-s12{color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-mi.g5-dis{color:var(--gr-text-dis)}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-off .g5-last,
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-off .g5-s12{color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-plot-sk{position:absolute;inset:0}
+
+/* 标的卡 */
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-srow{cursor:pointer}
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-srow .g5-rm{width:20px;height:20px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--gr-r-mark);color:var(--gr-text-3);opacity:0}
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-srow:hover .g5-rm,
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-srow:focus-within .g5-rm{opacity:1}
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-srow .g5-rm:hover{background:var(--gr-fill-2);color:var(--gr-text)}
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-srow .g5-nm{min-width:0}
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-srow .g5-sym{font-size:13px;line-height:20px;color:var(--gr-text)}
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-hits{margin:0 16px 8px;padding:4px;border-radius:var(--gr-r-ctl);background:var(--gr-fill-1);box-shadow:inset 0 0 0 1px var(--gr-line)}
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-hit{width:100%;height:32px;padding:0 8px;display:flex;align-items:center;gap:12px;border-radius:var(--gr-r-ctl);font-size:13px;line-height:20px;color:var(--gr-text-body);text-align:left}
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-hit:hover,
+:root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-hit:focus-visible{background:var(--gr-fill-2)}
+@media (max-width:1279px){
+  :root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-srow{grid-template-columns:minmax(0,1fr) auto}
+  :root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-srow .g5-ch,
+  :root[data-ui="r5"] [data-g5-page="chart-symbols"] .g5-srow .g5-vchip .g5-vn{display:none}
+}
+
+/* 本标的卡 */
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-stopf{display:flex;align-items:center;gap:8px;padding:8px 4px;flex-wrap:wrap}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-stopf .g5-inp{width:160px}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-pxd{display:grid;grid-template-columns:1fr 1fr;gap:4px 32px;padding:8px 4px 12px;box-shadow:inset 0 -1px 0 var(--gr-sep)}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-armed{margin:4px 0}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-armed .g5-msg{flex:1 1 auto;min-width:0}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-tr1 .g5-kv{min-width:0}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-tr1 .g5-side{white-space:nowrap}
+
+/* 下单票据 */
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-hd .g5-r{gap:12px}
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-cb[aria-checked="true"] i{background:var(--gr-counter);box-shadow:none}
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-cb[aria-disabled="true"]{color:var(--gr-text-dis);cursor:default}
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-fgrid .g5-pct{grid-column:2}
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-armed{width:100%;margin-top:16px;height:auto;min-height:40px;flex-wrap:wrap;padding:4px}
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-armed .g5-msg{flex:1 1 100%}
+/* 被拒后错误占一整行，取消 / 确认仍留在右侧原位（release-r1 P0-3） */
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-armed .g5-msg + .g5-btn{margin-left:auto}
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-blocked{white-space:normal}
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-tabs{margin-right:auto}
+
+/* 卡内容器（离线时只加 g5-off / data-state，不换元素：图表挂载元素不能被重建） */
+:root[data-ui="r5"] .g5-card[data-g5-page="chart"] > .g5-pbody,
+:root[data-ui="r5"] .g5-card[data-g5-page="chart-mine"] > .g5-pbody{display:flex;flex-direction:column;flex:1 1 0;min-height:0}
+:root[data-ui="r5"] .g5-card[data-g5-page="chart-ticket"] > .g5-pbody{display:block}
+
+/* 涨跌 / 灰度字色压过 .g5-kv .g5-v 的默认正文色（后者特异性更高） */
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-kv .g5-v.g5-up{color:var(--gr-up)}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-kv .g5-v.g5-down{color:var(--gr-down)}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-kv .g5-v.g5-t2{color:var(--gr-text-2)}
+
+/* 待批一行：窄屏收紧间距；1400 以下不写票号（票号在总览待批卡里有） */
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-pendr .g5-ln{gap:12px}
+@media (max-width:1399px){ :root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-pendr .g5-tk{display:none} }
+
+/* 离线卡头：已暂停更新 + 价格块同一行，不换行 */
+:root[data-ui="r5"] .g5-card[data-g5-page="chart"] .g5-hd .g5-r .g5-s12{white-space:nowrap}
+
+/* 骨架尺寸与菜单项小件（原行内样式挪到这里） */
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-sk-price{width:96px;height:20px}
+:root[data-ui="r5"] [data-g5-page="chart"] .g5-sk-ohlc{width:320px}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-sk-a{width:160px}
+:root[data-ui="r5"] [data-g5-page="chart-mine"] .g5-sk-b{width:220px}
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-sk-seg{width:100%;height:32px}
+:root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-sk-line{width:60%;margin-top:12px}
+:root[data-ui="r5"] .g5-mi.g5-mi-bare{padding:0;height:auto}
+:root[data-ui="r5"] .g5-tri .g5-swp{stroke:none}
+:root[data-ui="r5"] .g5-tri .g5-swr{fill:none}
+:root[data-ui="r5"] .g5-tri.g5-sw-human .g5-swp{fill:var(--gr-actor-human)} :root[data-ui="r5"] .g5-tri.g5-sw-human .g5-swr{stroke:var(--gr-actor-human)}
+:root[data-ui="r5"] .g5-tri.g5-sw-agent .g5-swp{fill:var(--gr-actor-agent)} :root[data-ui="r5"] .g5-tri.g5-sw-agent .g5-swr{stroke:var(--gr-actor-agent)}
+:root[data-ui="r5"] .g5-tri.g5-sw-engine .g5-swp{fill:var(--gr-actor-engine)} :root[data-ui="r5"] .g5-tri.g5-sw-engine .g5-swr{stroke:var(--gr-actor-engine)}
+:root[data-ui="r5"] .g5-tri.g5-sw-system .g5-swp{fill:var(--gr-actor-system)} :root[data-ui="r5"] .g5-tri.g5-sw-system .g5-swr{stroke:var(--gr-actor-system)}
+@media (max-width:1279px){
+  /* 只管图表卡自己的卡头：工作区 .g5-ws 也带 data-g5-page="chart"，不限定会让右栏三张卡的卡头各高 4px（R4） */
+  :root[data-ui="r5"] .g5-card[data-g5-page="chart"] > .g5-hd{flex-wrap:wrap;height:auto;min-height:var(--gr-hd);row-gap:4px;padding-block:8px}
+  :root[data-ui="r5"] [data-g5-page="chart"] .g5-ohlc{flex-wrap:wrap;row-gap:4px}
+  /* 1024×768：下单键行上距 16 → 12，本标的卡正好放下 持仓一行 + 挂单一行（R4） */
+  :root[data-ui="r5"] [data-g5-page="chart-ticket"] .g5-oacts{margin-top:12px}
+}
+/* 卡头只有一个子元素 .g5-hrow（标的 / 场所 / 周期 / 工具 / 最新价都在它里面），折行要落在它身上；手机宽（<600）布局另算，不动 */
+@media (min-width:600px) and (max-width:1279px){
+  :root[data-ui="r5"] [data-g5-page="chart"] .g5-hrow{flex-wrap:wrap;row-gap:4px}
+  /* 工具组折到行首时，幽灵钮 8px 内边距让「指标」字比上一行「BTC-PERP」右缩 12px：负边距把字收回左缘（release-r1 R5） */
+  :root[data-ui="r5"] [data-g5-page="chart"] .g5-hd .g5-hrow .g5-tools{margin-left:-8px}
+}
+/* UX-22：手机宽（<600）单列堆叠时，图表卡与「本标的」卡的 flex:1 1 0 没有定高的父级，高度塌成 0（只剩一条线）；给个下限 */
+@media (max-width:599px){
+  :root[data-ui="r5"] .g5-card[data-g5-page="chart"]{min-height:360px}
+  :root[data-ui="r5"] .g5-card[data-g5-page="chart-mine"]{min-height:180px}
+}

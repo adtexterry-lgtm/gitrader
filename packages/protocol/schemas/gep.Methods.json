@@ -1,0 +1,2016 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:Methods",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "Methods",
+  "$defs": {
+    "Empty": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Ok": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "const": true
+        }
+      },
+      "required": [
+        "ok"
+      ]
+    },
+    "AccountSnapshot": {
+      "type": "object",
+      "properties": {
+        "balances": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Balance"
+          }
+        },
+        "margin": {
+          "$ref": "urn:gitrader:schema:model:0.1:MarginSnapshot"
+        },
+        "positions": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Position"
+          }
+        },
+        "openOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Order"
+          }
+        },
+        "ts": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "attestation": {
+          "enum": [
+            "engine-reported",
+            "kernel-observed"
+          ]
+        }
+      },
+      "required": [
+        "balances",
+        "margin",
+        "positions",
+        "openOrders",
+        "ts",
+        "attestation"
+      ]
+    },
+    "StrategyInstance": {
+      "type": "object",
+      "properties": {
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        },
+        "strategyId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "running",
+            "stopped",
+            "error",
+            "starting"
+          ]
+        },
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        },
+        "instruments": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+          }
+        },
+        "interval": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "number",
+              "boolean",
+              "string"
+            ]
+          }
+        },
+        "mandateId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+        },
+        "startedAt": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "error": {
+          "$ref": "urn:gitrader:schema:model:0.1:Problem"
+        }
+      },
+      "required": [
+        "instanceId",
+        "strategyId",
+        "status",
+        "accountId",
+        "instruments",
+        "params",
+        "mandateId"
+      ]
+    },
+    "TakeoverScope": {
+      "type": "object",
+      "properties": {
+        "accountIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+          }
+        },
+        "strategyIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instrumentIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+          }
+        }
+      }
+    },
+    "EngineOrderParams": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        },
+        "intent": {
+          "$ref": "urn:gitrader:schema:model:0.1:OrderIntent"
+        },
+        "orderRef": {
+          "type": "object",
+          "properties": {
+            "orderId": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+            },
+            "clientOrderId": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "orderId"
+              ]
+            },
+            {
+              "required": [
+                "clientOrderId"
+              ]
+            }
+          ]
+        },
+        "clientOrderId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+        },
+        "takeoverId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/TkoId"
+        },
+        "origin": {
+          "$ref": "urn:gitrader:schema:model:0.1:Origin"
+        }
+      },
+      "required": [
+        "accountId",
+        "origin"
+      ]
+    },
+    "MarketChannel": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "quote",
+            "book",
+            "trades",
+            "candles",
+            "context"
+          ]
+        },
+        "instrumentId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+        },
+        "interval": {
+          "type": "string"
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "type",
+        "instrumentId"
+      ]
+    },
+    "MarketSubscribeParams": {
+      "type": "object",
+      "properties": {
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "quote",
+                  "book",
+                  "trades",
+                  "candles",
+                  "context"
+                ]
+              },
+              "instrumentId": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+              },
+              "interval": {
+                "type": "string"
+              },
+              "depth": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "type",
+              "instrumentId"
+            ]
+          },
+          "minItems": 1
+        },
+        "maxHz": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "channels"
+      ]
+    },
+    "MarketSnapshotParams": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "quote",
+            "book",
+            "trades",
+            "candles",
+            "context"
+          ]
+        },
+        "instrumentId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "type",
+        "instrumentId"
+      ]
+    },
+    "MarketSnapshotResult": {
+      "anyOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Quote"
+        },
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Book"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "candles": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:gitrader:schema:model:0.1:Candle"
+              }
+            }
+          },
+          "required": [
+            "candles"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "trades": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:gitrader:schema:model:0.1:Trade"
+              }
+            }
+          },
+          "required": [
+            "trades"
+          ]
+        },
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:MarketContext"
+        }
+      ]
+    },
+    "MarketHistoryParams": {
+      "type": "object",
+      "properties": {
+        "instrumentId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+        },
+        "interval": {
+          "type": "string",
+          "minLength": 1
+        },
+        "from": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "to": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5000
+        }
+      },
+      "required": [
+        "instrumentId",
+        "interval"
+      ]
+    },
+    "MarketHistoryResult": {
+      "type": "object",
+      "properties": {
+        "candles": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Candle"
+          }
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "candles",
+        "source",
+        "complete"
+      ]
+    },
+    "HostOrderPlaceParams": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        },
+        "intent": {
+          "$ref": "urn:gitrader:schema:model:0.1:OrderIntent"
+        },
+        "clientOrderId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+        },
+        "strategyId": {
+          "type": "string"
+        },
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        },
+        "origin": {
+          "$ref": "#/$defs/OriginHint"
+        }
+      },
+      "required": [
+        "accountId",
+        "intent",
+        "clientOrderId"
+      ]
+    },
+    "HostOrderRef": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+        },
+        "clientOrderId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "orderId"
+          ]
+        },
+        {
+          "required": [
+            "clientOrderId"
+          ]
+        }
+      ]
+    },
+    "StrategySizing": {
+      "type": "object",
+      "properties": {
+        "allocRatio": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "allocCapNotional": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "leverage": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "maxSlippageBps": {
+          "type": "number",
+          "minimum": 0
+        },
+        "minStepNotional": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "OriginHint": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "type": "string",
+          "minLength": 1
+        },
+        "causation": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      "required": [
+        "tool"
+      ]
+    },
+    "MarketCandleData": {
+      "type": "object",
+      "properties": {
+        "interval": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candle": {
+          "$ref": "urn:gitrader:schema:model:0.1:Candle"
+        },
+        "closed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "interval",
+        "candle"
+      ]
+    },
+    "MarketCandlesData": {
+      "type": "object",
+      "properties": {
+        "interval": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candles": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Candle"
+          }
+        },
+        "closed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "interval",
+        "candles"
+      ]
+    },
+    "ReplayState": {
+      "type": "object",
+      "properties": {
+        "replayId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "enum": [
+            "running",
+            "paused",
+            "done",
+            "stopped"
+          ]
+        },
+        "clock": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "replayId",
+        "state",
+        "clock"
+      ]
+    },
+    "BacktestState": {
+      "enum": [
+        "queued",
+        "running",
+        "done",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "gep.hello:params": {
+      "$ref": "urn:gitrader:schema:gep:0.1:GepHelloParams"
+    },
+    "gep.hello:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:GepHelloResult"
+    },
+    "engine.describe:params": {
+      "$ref": "#/$defs/Empty"
+    },
+    "engine.describe:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:EngineDescribe"
+    },
+    "engine.bind:params": {
+      "$ref": "urn:gitrader:schema:gep:0.1:Binding"
+    },
+    "engine.bind:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:BindResult"
+    },
+    "engine.health:params": {
+      "$ref": "#/$defs/Empty"
+    },
+    "engine.health:result": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "ok",
+            "degraded",
+            "down"
+          ]
+        },
+        "metrics": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "ts": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "status",
+        "metrics",
+        "ts"
+      ]
+    },
+    "engine.snapshot:params": {
+      "type": "object",
+      "properties": {
+        "accountIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+          }
+        }
+      }
+    },
+    "engine.snapshot:result": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "strategies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/StrategyInstance"
+          }
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Order"
+          }
+        },
+        "positions": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Position"
+          }
+        },
+        "accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AccountSnapshot"
+          }
+        }
+      },
+      "required": [
+        "seq",
+        "strategies",
+        "orders"
+      ]
+    },
+    "engine.halt:params": {
+      "type": "object",
+      "properties": {
+        "takeoverId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/TkoId"
+        },
+        "level": {
+          "enum": [
+            "halt_new",
+            "cancel_all",
+            "flatten_all"
+          ]
+        },
+        "scope": {
+          "type": "object",
+          "properties": {
+            "accountIds": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+              }
+            },
+            "strategyIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "instrumentIds": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+              }
+            }
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deadlineMs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "takeoverId",
+        "level",
+        "scope",
+        "reason",
+        "deadlineMs"
+      ]
+    },
+    "engine.halt:result": {
+      "type": "object",
+      "properties": {
+        "ack": {
+          "const": true
+        },
+        "appliedAt": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "ack",
+        "appliedAt"
+      ]
+    },
+    "engine.resume:params": {
+      "type": "object",
+      "properties": {
+        "takeoverId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/TkoId"
+        },
+        "scope": {
+          "type": "object",
+          "properties": {
+            "accountIds": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+              }
+            },
+            "strategyIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "instrumentIds": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+              }
+            }
+          }
+        },
+        "approvedBy": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "takeoverId",
+        "scope",
+        "approvedBy"
+      ]
+    },
+    "engine.resume:result": {
+      "type": "object",
+      "properties": {
+        "resumedAt": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "resumedAt"
+      ]
+    },
+    "engine.shutdown:params": {
+      "type": "object",
+      "properties": {
+        "graceMs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "graceMs"
+      ]
+    },
+    "engine.shutdown:result": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "const": true
+        }
+      },
+      "required": [
+        "ok"
+      ]
+    },
+    "events.subscribe:params": {
+      "type": "object",
+      "properties": {
+        "streams": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "order",
+              "fill",
+              "position",
+              "funding",
+              "account",
+              "strategy",
+              "signal",
+              "decision",
+              "backtest",
+              "takeover",
+              "policy",
+              "health",
+              "log",
+              "market"
+            ]
+          },
+          "minItems": 1
+        },
+        "accountIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+          }
+        },
+        "fromSeq": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "streams"
+      ]
+    },
+    "events.subscribe:result": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fromSeq": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "fromSeq"
+      ]
+    },
+    "events.unsubscribe:params": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "subscriptionId"
+      ]
+    },
+    "events.unsubscribe:result": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "const": true
+        }
+      },
+      "required": [
+        "ok"
+      ]
+    },
+    "risk.policy.push:params": {
+      "type": "object",
+      "properties": {
+        "policies": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:RiskPolicy"
+          },
+          "minItems": 1
+        },
+        "effectiveAt": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "policies",
+        "effectiveAt"
+      ]
+    },
+    "risk.policy.push:result": {
+      "type": "object",
+      "properties": {
+        "acceptedVersions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "required": [
+        "acceptedVersions"
+      ]
+    },
+    "strategy.list:params": {
+      "$ref": "#/$defs/Empty"
+    },
+    "strategy.list:result": {
+      "type": "object",
+      "properties": {
+        "strategies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "type": "string",
+                "minLength": 1
+              },
+              "paramsSchemaRef": {
+                "type": "string"
+              },
+              "sha256": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "version",
+              "kind"
+            ]
+          }
+        }
+      },
+      "required": [
+        "strategies"
+      ]
+    },
+    "strategy.params:params": {
+      "type": "object",
+      "properties": {
+        "strategyId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "strategyId"
+      ]
+    },
+    "strategy.params:result": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "object"
+        },
+        "defaults": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema",
+        "defaults"
+      ]
+    },
+    "strategy.start:params": {
+      "type": "object",
+      "properties": {
+        "strategyId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        },
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        },
+        "instruments": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+          },
+          "minItems": 1
+        },
+        "interval": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "number",
+              "boolean",
+              "string"
+            ]
+          }
+        },
+        "mandateId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+        },
+        "sizing": {
+          "$ref": "#/$defs/StrategySizing"
+        }
+      },
+      "required": [
+        "strategyId",
+        "accountId",
+        "instruments",
+        "params",
+        "mandateId"
+      ]
+    },
+    "strategy.start:result": {
+      "type": "object",
+      "properties": {
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        },
+        "status": {
+          "enum": [
+            "running",
+            "stopped",
+            "error",
+            "starting"
+          ]
+        }
+      },
+      "required": [
+        "instanceId",
+        "status"
+      ]
+    },
+    "strategy.stop:params": {
+      "type": "object",
+      "properties": {
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        },
+        "flatten": {
+          "const": false
+        }
+      },
+      "required": [
+        "instanceId"
+      ]
+    },
+    "strategy.stop:result": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "running",
+            "stopped",
+            "error",
+            "starting"
+          ]
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "strategy.update:params": {
+      "type": "object",
+      "properties": {
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        },
+        "params": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "number",
+              "boolean",
+              "string"
+            ]
+          }
+        }
+      },
+      "required": [
+        "instanceId",
+        "params"
+      ]
+    },
+    "strategy.update:result": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "running",
+            "stopped",
+            "error",
+            "starting"
+          ]
+        },
+        "appliedAt": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "status",
+        "appliedAt"
+      ]
+    },
+    "strategy.status:params": {
+      "type": "object",
+      "properties": {
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        }
+      }
+    },
+    "strategy.status:result": {
+      "type": "object",
+      "properties": {
+        "instances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/StrategyInstance"
+          }
+        }
+      },
+      "required": [
+        "instances"
+      ]
+    },
+    "backtest.run:params": {
+      "type": "object",
+      "properties": {
+        "spec": {
+          "$ref": "urn:gitrader:schema:gep:0.1:BacktestSpec"
+        }
+      },
+      "required": [
+        "spec"
+      ]
+    },
+    "backtest.run:result": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "jobId"
+      ]
+    },
+    "backtest.status:params": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "jobId"
+      ]
+    },
+    "backtest.status:result": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/BacktestState"
+        },
+        "progress": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "state",
+        "progress"
+      ]
+    },
+    "backtest.result:params": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "jobId"
+      ]
+    },
+    "backtest.result:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:BacktestResult"
+    },
+    "backtest.cancel:params": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "jobId"
+      ]
+    },
+    "backtest.cancel:result": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/BacktestState"
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "replay.start:params": {
+      "type": "object",
+      "properties": {
+        "spec": {
+          "$ref": "urn:gitrader:schema:gep:0.1:BacktestSpec"
+        }
+      },
+      "required": [
+        "spec"
+      ]
+    },
+    "replay.start:result": {
+      "type": "object",
+      "properties": {
+        "replayId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "replayId"
+      ]
+    },
+    "replay.stop:params": {
+      "type": "object",
+      "properties": {
+        "replayId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "replayId"
+      ]
+    },
+    "replay.stop:result": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "running",
+            "paused",
+            "done",
+            "stopped"
+          ]
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "replay.status:params": {
+      "type": "object",
+      "properties": {
+        "replayId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "replayId"
+      ]
+    },
+    "replay.status:result": {
+      "$ref": "#/$defs/ReplayState"
+    },
+    "order.place:params": {
+      "$ref": "#/$defs/EngineOrderParams"
+    },
+    "order.place:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:OrderResult"
+    },
+    "order.amend:params": {
+      "$ref": "#/$defs/EngineOrderParams"
+    },
+    "order.amend:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:OrderResult"
+    },
+    "order.cancel:params": {
+      "$ref": "#/$defs/EngineOrderParams"
+    },
+    "order.cancel:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:OrderResult"
+    },
+    "order.cancelAll:params": {
+      "$ref": "#/$defs/EngineOrderParams"
+    },
+    "order.cancelAll:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:OrderResult"
+    },
+    "account.snapshot:params": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        }
+      },
+      "required": [
+        "accountId"
+      ]
+    },
+    "account.snapshot:result": {
+      "$ref": "#/$defs/AccountSnapshot"
+    },
+    "market.subscribe:params": {
+      "$ref": "#/$defs/MarketSubscribeParams"
+    },
+    "market.subscribe:result": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "subscriptionId"
+      ]
+    },
+    "market.snapshot:params": {
+      "$ref": "#/$defs/MarketSnapshotParams"
+    },
+    "market.snapshot:result": {
+      "$ref": "#/$defs/MarketSnapshotResult"
+    },
+    "market.history:params": {
+      "$ref": "#/$defs/MarketHistoryParams"
+    },
+    "market.history:result": {
+      "$ref": "#/$defs/MarketHistoryResult"
+    },
+    "host.describe:params": {
+      "$ref": "#/$defs/Empty"
+    },
+    "host.describe:result": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "name",
+            "version"
+          ]
+        },
+        "venues": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:VenueCapabilities"
+          }
+        },
+        "accounts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accountId": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+              },
+              "alias": {
+                "type": "string",
+                "minLength": 1
+              },
+              "venue": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+              },
+              "environment": {
+                "enum": [
+                  "mainnet",
+                  "testnet"
+                ]
+              },
+              "mode": {
+                "enum": [
+                  "live",
+                  "paper",
+                  "shadow"
+                ]
+              }
+            },
+            "required": [
+              "accountId",
+              "alias",
+              "venue",
+              "environment",
+              "mode"
+            ]
+          }
+        }
+      },
+      "required": [
+        "host",
+        "venues",
+        "accounts"
+      ]
+    },
+    "host.instruments:params": {
+      "type": "object",
+      "properties": {
+        "venue": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+          }
+        }
+      }
+    },
+    "host.instruments:result": {
+      "type": "object",
+      "properties": {
+        "instruments": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Instrument"
+          }
+        }
+      },
+      "required": [
+        "instruments"
+      ]
+    },
+    "host.market.subscribe:params": {
+      "$ref": "#/$defs/MarketSubscribeParams"
+    },
+    "host.market.subscribe:result": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "subscriptionId"
+      ]
+    },
+    "host.market.unsubscribe:params": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "subscriptionId"
+      ]
+    },
+    "host.market.unsubscribe:result": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "const": true
+        }
+      },
+      "required": [
+        "ok"
+      ]
+    },
+    "host.market.snapshot:params": {
+      "$ref": "#/$defs/MarketSnapshotParams"
+    },
+    "host.market.snapshot:result": {
+      "$ref": "#/$defs/MarketSnapshotResult"
+    },
+    "host.market.history:params": {
+      "$ref": "#/$defs/MarketHistoryParams"
+    },
+    "host.market.history:result": {
+      "$ref": "#/$defs/MarketHistoryResult"
+    },
+    "host.account.snapshot:params": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        }
+      },
+      "required": [
+        "accountId"
+      ]
+    },
+    "host.account.snapshot:result": {
+      "$ref": "#/$defs/AccountSnapshot"
+    },
+    "host.order.place:params": {
+      "$ref": "#/$defs/HostOrderPlaceParams"
+    },
+    "host.order.place:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:OrderResult"
+    },
+    "host.order.amend:params": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+        },
+        "clientOrderId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+        },
+        "price": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "size": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "triggerPrice": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "orderId"
+          ]
+        },
+        {
+          "required": [
+            "clientOrderId"
+          ]
+        }
+      ]
+    },
+    "host.order.amend:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:OrderResult"
+    },
+    "host.order.cancel:params": {
+      "$ref": "#/$defs/HostOrderRef"
+    },
+    "host.order.cancel:result": {
+      "$ref": "urn:gitrader:schema:gep:0.1:OrderResult"
+    },
+    "host.order.cancelAll:params": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        },
+        "instrumentId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+        },
+        "keepProtective": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "accountId",
+        "keepProtective"
+      ]
+    },
+    "host.order.cancelAll:result": {
+      "type": "object",
+      "properties": {
+        "cancelled": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "cancelled"
+      ]
+    },
+    "host.order.batch:params": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/HostOrderPlaceParams"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "orders"
+      ]
+    },
+    "host.order.batch:result": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:gep:0.1:OrderResult"
+          }
+        }
+      },
+      "required": [
+        "results"
+      ]
+    },
+    "host.order.status:params": {
+      "$ref": "#/$defs/HostOrderRef"
+    },
+    "host.order.status:result": {
+      "$ref": "urn:gitrader:schema:model:0.1:Order"
+    },
+    "host.proposal.create:params": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        },
+        "intents": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:OrderIntent"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:EvidenceRef"
+          }
+        },
+        "strategyId": {
+          "type": "string"
+        },
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        },
+        "origin": {
+          "$ref": "#/$defs/OriginHint"
+        }
+      },
+      "required": [
+        "accountId",
+        "intents",
+        "reason"
+      ]
+    },
+    "host.proposal.create:result": {
+      "type": "object",
+      "properties": {
+        "proposalId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ticket": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ticket"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "denied"
+          ]
+        },
+        "precheck": {
+          "$ref": "urn:gitrader:schema:model:0.1:PrecheckResult"
+        },
+        "problem": {
+          "$ref": "urn:gitrader:schema:model:0.1:Problem"
+        },
+        "expiresAt": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "proposalId",
+        "ticket",
+        "status",
+        "precheck",
+        "expiresAt"
+      ]
+    },
+    "host.risk.precheck:params": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        },
+        "intent": {
+          "$ref": "urn:gitrader:schema:model:0.1:OrderIntent"
+        }
+      },
+      "required": [
+        "accountId",
+        "intent"
+      ]
+    },
+    "host.risk.precheck:result": {
+      "$ref": "urn:gitrader:schema:model:0.1:PrecheckResult"
+    },
+    "host.events.subscribe:params": {
+      "type": "object",
+      "properties": {
+        "streams": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "order",
+              "fill",
+              "position",
+              "funding",
+              "account",
+              "strategy",
+              "signal",
+              "decision",
+              "backtest",
+              "takeover",
+              "policy",
+              "health",
+              "log",
+              "market"
+            ]
+          },
+          "minItems": 1
+        },
+        "accountIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+          }
+        }
+      },
+      "required": [
+        "streams",
+        "accountIds"
+      ]
+    },
+    "host.events.subscribe:result": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "subscriptionId"
+      ]
+    },
+    "host.ledger.append:params": {
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "signal",
+                  "decision",
+                  "note",
+                  "log"
+                ]
+              },
+              "data": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "type",
+              "data"
+            ]
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "entries"
+      ]
+    },
+    "host.ledger.append:result": {
+      "type": "object",
+      "properties": {
+        "seqs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "required": [
+        "seqs"
+      ]
+    },
+    "host.artifact.put:params": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kind": {
+          "enum": [
+            "tearsheet",
+            "trades",
+            "equity"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "mediaType",
+        "sizeBytes",
+        "kind"
+      ]
+    },
+    "host.artifact.put:result": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "artifactId"
+      ]
+    },
+    "host.market.fundingHistory:params": {
+      "type": "object",
+      "properties": {
+        "instrumentId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+        },
+        "from": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "to": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "instrumentId",
+        "from"
+      ]
+    },
+    "host.market.fundingHistory:result": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:FundingRatePoint"
+          }
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "points",
+        "complete"
+      ]
+    },
+    "paper.replay.start:params": {
+      "$ref": "urn:gitrader:schema:model:0.1:PaperReplayStart"
+    },
+    "paper.replay.start:result": {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "runId"
+      ]
+    },
+    "paper.replay.status:params": {
+      "$ref": "#/$defs/Empty"
+    },
+    "paper.replay.status:result": {
+      "$ref": "urn:gitrader:schema:model:0.1:PaperReplayStatus"
+    },
+    "paper.replay.stop:params": {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "runId"
+      ]
+    },
+    "paper.replay.stop:result": {
+      "$ref": "urn:gitrader:schema:model:0.1:PaperReplayStatus"
+    },
+    "events.push:params": {
+      "$ref": "urn:gitrader:schema:gep:0.1:EventsPushParams"
+    },
+    "gep.heartbeat:params": {
+      "type": "object",
+      "properties": {
+        "ts": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "events.ack:params": {
+      "type": "object",
+      "properties": {
+        "upToSeq": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "upToSeq"
+      ]
+    },
+    "gep.overflow:params": {
+      "type": "object",
+      "properties": {
+        "stream": {
+          "enum": [
+            "order",
+            "fill",
+            "position",
+            "funding",
+            "account",
+            "strategy",
+            "signal",
+            "decision",
+            "backtest",
+            "takeover",
+            "policy",
+            "health",
+            "log",
+            "market"
+          ]
+        },
+        "dropped": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ts": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      }
+    },
+    "host.events.ack:params": {
+      "type": "object",
+      "properties": {
+        "upToSeq": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "upToSeq"
+      ]
+    }
+  }
+}

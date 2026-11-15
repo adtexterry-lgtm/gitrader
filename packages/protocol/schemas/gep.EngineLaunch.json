@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:EngineLaunch",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "EngineLaunch",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "cwd": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "command"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^wss?://"
+        },
+        "auth": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "const": "token"
+                },
+                "tokenRef": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "method",
+                "tokenRef"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "const": "mtls"
+                },
+                "clientCertRef": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "caCertRef": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "method",
+                "clientCertRef"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "url",
+        "auth"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Balance",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Balance",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "asset": {
+      "type": "string",
+      "minLength": 1
+    },
+    "total": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "available": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "hold": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "borrowed": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    }
+  },
+  "required": [
+    "accountId",
+    "asset",
+    "total",
+    "available",
+    "hold",
+    "ts"
+  ]
+}

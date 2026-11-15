@@ -1,0 +1,386 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:ledger:1",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: ledger | Version: 1 | Status: draft",
+  "title": "LedgerEntry",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "gitrader-ledger/1"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "id": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/LedId"
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "recordedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "type": {
+      "enum": [
+        "order.intent",
+        "risk.precheck",
+        "risk.denied",
+        "order.submitted",
+        "order.accepted",
+        "order.rejected",
+        "order.amended",
+        "order.cancelled",
+        "order.expired",
+        "order.triggered",
+        "fill",
+        "funding",
+        "liquidation",
+        "position.snapshot",
+        "order.status_unknown",
+        "proposal.created",
+        "proposal.decided",
+        "proposal.expired",
+        "proposal.withdrawn",
+        "proposal.executed",
+        "proposal.failed",
+        "mandate.issued",
+        "mandate.changed",
+        "mandate.downgraded",
+        "mandate.expired",
+        "mandate.revoked",
+        "policy.changed",
+        "policy.relaxed",
+        "policy.reverted",
+        "protector.triggered",
+        "trading_state.changed",
+        "takeover.requested",
+        "takeover.applied",
+        "takeover.completed",
+        "takeover.failed",
+        "engine.bound",
+        "engine.event",
+        "engine.health_changed",
+        "plugin.installed",
+        "plugin.updated",
+        "plugin.removed",
+        "plugin.permission_granted",
+        "plugin.health_changed",
+        "signal.emitted",
+        "decision.made",
+        "decision.resolved",
+        "note",
+        "experiment.created",
+        "experiment.updated",
+        "experiment.stage_changed",
+        "backtest.completed",
+        "model.trained",
+        "session.unlocked",
+        "key.created",
+        "key.rotated",
+        "key.revoked",
+        "signer.signed",
+        "startup.reconciled",
+        "reconciliation",
+        "annotation",
+        "checkpoint",
+        "export.created"
+      ]
+    },
+    "origin": {
+      "$ref": "urn:gitrader:schema:model:0.1:Origin"
+    },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "orgId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrgId"
+        },
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        },
+        "instrumentId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+        },
+        "orderId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+        },
+        "clientOrderId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+        },
+        "fillId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/FillId"
+        },
+        "proposalId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PropId"
+        },
+        "ticket": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ticket"
+        },
+        "mandateId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+        },
+        "policyId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PolId"
+        },
+        "takeoverId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/TkoId"
+        },
+        "engineId": {
+          "type": "string"
+        },
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        },
+        "workflowId": {
+          "type": "string"
+        },
+        "experimentId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ExpId"
+        },
+        "pluginId": {
+          "type": "string"
+        },
+        "precheckId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PckId"
+        },
+        "ledgerRef": {
+          "type": "string"
+        }
+      },
+      "minProperties": 1
+    },
+    "precheck": {
+      "type": "object",
+      "properties": {
+        "precheckId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PckId"
+        },
+        "verdict": {
+          "enum": [
+            "allow",
+            "deny",
+            "review"
+          ]
+        },
+        "policyVersion": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "estimates": {
+          "$ref": "urn:gitrader:schema:model:0.1:PrecheckEstimates"
+        }
+      },
+      "required": [
+        "precheckId",
+        "verdict",
+        "policyVersion",
+        "estimates"
+      ]
+    },
+    "ruleHits": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:RuleHit"
+      }
+    },
+    "payload": {
+      "type": "object"
+    },
+    "payloadHash": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "attestation": {
+      "enum": [
+        "kernel-observed",
+        "venue-confirmed",
+        "engine-reported",
+        "user-asserted"
+      ]
+    },
+    "venueRef": {
+      "type": "object",
+      "properties": {
+        "venue": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+        },
+        "nativeOrderId": {
+          "type": "string"
+        },
+        "nativeFillId": {
+          "type": "string"
+        },
+        "txHash": {
+          "type": "string"
+        },
+        "receiptHash": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        }
+      },
+      "required": [
+        "venue"
+      ]
+    },
+    "engineRef": {
+      "type": "object",
+      "properties": {
+        "engineId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sessionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eventId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "engineId",
+        "sessionId",
+        "seq",
+        "eventId"
+      ]
+    },
+    "prevHash": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "hash": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    }
+  },
+  "required": [
+    "schema",
+    "seq",
+    "id",
+    "ts",
+    "recordedAt",
+    "type",
+    "origin",
+    "subject",
+    "payloadHash",
+    "attestation",
+    "prevHash",
+    "hash"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "order.intent",
+              "risk.precheck",
+              "risk.denied",
+              "proposal.created"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "precheck"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "risk.denied",
+              "protector.triggered",
+              "takeover.requested",
+              "takeover.applied",
+              "takeover.completed",
+              "takeover.failed"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "ruleHits"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "precheck"
+        ],
+        "properties": {
+          "precheck": {
+            "properties": {
+              "verdict": {
+                "enum": [
+                  "deny",
+                  "review"
+                ]
+              }
+            },
+            "required": [
+              "verdict"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "ruleHits"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "engine.event"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "engineRef"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "seq": {
+            "const": 0
+          }
+        },
+        "required": [
+          "seq"
+        ]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "checkpoint"
+          },
+          "prevHash": {
+            "const": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          }
+        }
+      }
+    }
+  ]
+}

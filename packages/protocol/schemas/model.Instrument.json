@@ -1,0 +1,333 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Instrument",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Instrument",
+  "type": "object",
+  "properties": {
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "venue": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+    },
+    "symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "displaySymbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "perp",
+        "spot",
+        "future",
+        "option",
+        "outcome"
+      ]
+    },
+    "base": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quote": {
+      "type": "string",
+      "minLength": 1
+    },
+    "settle": {
+      "type": "string",
+      "minLength": 1
+    },
+    "settlement": {
+      "enum": [
+        "linear",
+        "inverse"
+      ]
+    },
+    "contractSize": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "venueSizeUnit": {
+      "enum": [
+        "base",
+        "contract"
+      ]
+    },
+    "assetClass": {
+      "enum": [
+        "crypto",
+        "stocks",
+        "indices",
+        "sectors",
+        "metals",
+        "commodities",
+        "fx",
+        "rates",
+        "private"
+      ]
+    },
+    "marketGroup": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "underlying": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "synthetic": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "description",
+        "synthetic"
+      ]
+    },
+    "status": {
+      "enum": [
+        "trading",
+        "reduce_only",
+        "halted",
+        "delisted"
+      ]
+    },
+    "price": {
+      "type": "object",
+      "properties": {
+        "tick": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "sigFigs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maxDecimals": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "tick"
+          ]
+        },
+        {
+          "required": [
+            "sigFigs"
+          ]
+        }
+      ]
+    },
+    "size": {
+      "type": "object",
+      "properties": {
+        "step": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "decimals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "min": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        }
+      },
+      "required": [
+        "step",
+        "decimals",
+        "min"
+      ]
+    },
+    "minNotional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxLeverage": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "marginModes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "cross",
+          "isolated",
+          "strictIsolated",
+          "noCross"
+        ]
+      }
+    },
+    "orderTypes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "market",
+          "limit",
+          "stop_market",
+          "stop_limit",
+          "take_market",
+          "take_limit",
+          "trailing_stop",
+          "twap"
+        ]
+      }
+    },
+    "tif": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "gtc",
+          "ioc",
+          "fok",
+          "alo",
+          "gtd"
+        ]
+      }
+    },
+    "triggerPriceTypes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "mark",
+          "last",
+          "index"
+        ]
+      }
+    },
+    "fundingIntervalMs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sessions": {
+      "type": "object",
+      "properties": {
+        "tz": {
+          "type": "string",
+          "minLength": 1
+        },
+        "windows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "days": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 6
+                },
+                "minItems": 1
+              },
+              "from": {
+                "type": "string",
+                "pattern": "^[0-9]{2}:[0-9]{2}$"
+              },
+              "to": {
+                "type": "string",
+                "pattern": "^[0-9]{2}:[0-9]{2}$"
+              },
+              "quality": {
+                "enum": [
+                  "regular",
+                  "thin",
+                  "closed"
+                ]
+              },
+              "typicalSpreadBps": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "days",
+              "from",
+              "to",
+              "quality"
+            ]
+          }
+        }
+      },
+      "required": [
+        "tz",
+        "windows"
+      ]
+    },
+    "typicalSpreadBps": {
+      "type": "number",
+      "minimum": 0
+    },
+    "fees": {
+      "type": "object",
+      "properties": {
+        "maker": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "taker": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "source": {
+          "enum": [
+            "venue",
+            "tier",
+            "assumed"
+          ]
+        }
+      },
+      "required": [
+        "maker",
+        "taker",
+        "source"
+      ]
+    },
+    "updatedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    }
+  },
+  "required": [
+    "instrumentId",
+    "venue",
+    "symbol",
+    "displaySymbol",
+    "kind",
+    "base",
+    "quote",
+    "settle",
+    "settlement",
+    "contractSize",
+    "venueSizeUnit",
+    "assetClass",
+    "status",
+    "price",
+    "size",
+    "orderTypes",
+    "tif",
+    "triggerPriceTypes",
+    "updatedAt"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "perp"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "fundingIntervalMs"
+        ]
+      }
+    }
+  ]
+}

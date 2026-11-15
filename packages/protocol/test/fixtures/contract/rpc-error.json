@@ -1,0 +1,1 @@
+{"jsonrpc": "2.0", "id": 77, "error": {"code": 5002, "message": "capability not supported", "data": {"code": 5002, "name": "CAPABILITY_UNSUPPORTED", "category": "PROTOCOL", "message": "replay is not declared in engine.describe", "retryable": false}}}

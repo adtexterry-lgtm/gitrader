@@ -1,0 +1,117 @@
+/* Tailwind v4 入口（只在构建期跑：build.mjs 用 @tailwindcss/cli 把本文件编成临时 CSS，经 virtual:tw 第一个进包，运行时 0 依赖）。
+   令牌真源在 theme.css 的 --gr-*；这里只做映射，并清空 Tailwind 自带的颜色 / 字号 / 圆角 / 阴影 / 字体 / 缓动 / 动画——默认蓝紫色板根本写不出来（PLAN 4.11）。
+   build.mjs 另有源码门禁：类名里出现默认色板名（bg-blue-500 之类）或任意值颜色 / 字号（-[#…]、-[rgb…]、text-[12px]）就构建失败。 */
+@layer theme, base, gr-legacy, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source "../";
+@source "../../../blocks-default/src";
+
+/* 字体：Geist / Geist Mono 可变字重拉丁子集（OFL-1.1，原字节见 ./fonts/SHA256SUMS，build.mjs 校验并按原字节拷进 dist/fonts/）。中文走系统字体栈，不打包。
+   url 相对本文件（build.mjs 让 virtual:tw 以 src/ui 为解析目录）。 */
+@font-face {
+  font-family: "Geist Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("./fonts/geist-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Geist Mono Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("./fonts/geist-mono-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+  --color-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --font-*: initial;
+  --ease-*: initial;
+  --animate-*: initial;
+  --spacing: 4px;
+  --text-2xs: 11px; --text-2xs--line-height: 16px;
+  --text-xs: 12px; --text-xs--line-height: 16px;
+  --text-sm: 13px; --text-sm--line-height: 20px;
+  --text-base: 14px; --text-base--line-height: 20px;
+  --text-md: 16px; --text-md--line-height: 24px;
+  --text-lg: 20px; --text-lg--line-height: 28px;
+  --text-xl: 22px; --text-xl--line-height: 28px;
+  --text-2xl: 28px; --text-2xl--line-height: 32px;
+  --text-3xl: 36px; --text-3xl--line-height: 40px;
+  --text-hero: 44px; --text-hero--line-height: 44px;
+  /* r4 圆角只产出 2 / 4 / 6 / 10 / 12：旧阶名保留、值收档（md → 6，xl / 2xl / 3xl → 12）；full 也收进控件档 6px（整体微圆角，真圆点在源码里单独写） */
+  --radius-xs: 4px; --radius-sm: 6px; --radius-md: 6px; --radius-lg: 12px;
+  --radius-xl: 12px; --radius-2xl: 12px; --radius-3xl: 12px; --radius-full: var(--gr-r-ctl);
+  --radius-bar: 2px; --radius-mark: 4px; --radius-ctl: 6px; --radius-float: 12px;
+  --tracking-num: -0.01em; --tracking-display: -0.02em; --tracking-caps: 0.02em;
+}
+
+@theme inline {
+  --font-sans: var(--gr-font);
+  --font-num: var(--gr-font-num);
+  --font-mono: var(--gr-font-mono);
+  --ease-out: var(--gr-ease-out);
+  --ease-in-out: var(--gr-ease-in-out);
+  --ease-exit: var(--gr-ease-exit);
+  /* Gitrader 自己的名字 */
+  --color-ink-0: var(--gr-ink-0); --color-ink-1: var(--gr-ink-1); --color-ink-2: var(--gr-ink-2);
+  --color-ink-3: var(--gr-ink-3); --color-ink-4: var(--gr-ink-4);
+  --color-text: var(--gr-text); --color-text-body: var(--gr-text-body); --color-text-2: var(--gr-text-2);
+  --color-text-3: var(--gr-text-3); --color-text-dis: var(--gr-text-dis);
+  --color-line-1: var(--gr-line-1); --color-line-2: var(--gr-line-2); --color-line-3: var(--gr-line-3);
+  --color-fill-hover: var(--gr-hover-fill); --color-fill-sel: var(--gr-sel-fill); --color-fill-press: var(--gr-press-fill);
+  --color-up: var(--gr-up); --color-down: var(--gr-down); --color-warn: var(--gr-warn); --color-amber: var(--gr-amber);
+  --color-up-a10: var(--gr-up-a10); --color-down-a10: var(--gr-down-a10); --color-warn-a10: var(--gr-warn-a10); --color-accent-a12: var(--gr-accent-a12);
+  --shadow-ring: var(--gr-ring); --shadow-edge: var(--gr-edge); --shadow-tile: var(--gr-shadow-tile); --shadow-float: var(--gr-shadow-float);
+  /* 令牌桥①：shadcn 语义名 → Gitrader（复制来的 shadcn 配方原样可用）。primary = 暖白，不是橙 */
+  --color-background: var(--gr-ink-0); --color-foreground: var(--gr-text);
+  --color-card: var(--gr-ink-1); --color-card-foreground: var(--gr-text);
+  --color-popover: var(--gr-ink-2); --color-popover-foreground: var(--gr-text);
+  --color-primary: var(--gr-text); --color-primary-foreground: var(--gr-ink-0);
+  --color-secondary: var(--gr-ink-2); --color-secondary-foreground: var(--gr-text);
+  --color-muted: var(--gr-ink-3); --color-muted-foreground: var(--gr-text-3);
+  --color-accent: var(--gr-sel-fill); --color-accent-foreground: var(--gr-text);
+  --color-destructive: var(--gr-down);
+  --color-border: var(--gr-line-1); --color-input: var(--gr-line-2); --color-ring: var(--gr-amber);
+  /* 令牌桥②：Beautiful UI 语义名 → Gitrader。它的 orange 表「进行中」→ 映射到 warn，不是品牌橙 */
+  --color-page: var(--gr-ink-0); --color-canvas: var(--gr-ink-0); --color-surface: var(--gr-ink-2);
+  --color-inset: var(--gr-ink-1); --color-field: var(--gr-hover-fill);
+  --color-hover: var(--gr-hover-fill); --color-hover-2: var(--gr-sel-fill);
+  --color-ink: var(--gr-text);
+  --color-line: var(--gr-line-1); --color-line-strong: var(--gr-line-2);
+  --color-green: var(--gr-up); --color-red: var(--gr-down); --color-orange: var(--gr-warn);
+  --color-green-tint: var(--gr-up-a10); --color-red-tint: var(--gr-down-a10); --color-orange-tint: var(--gr-warn-a10);
+  --color-accent-tint: var(--gr-sel-fill); --color-accent-ink: var(--gr-text);
+  --shadow-hairline: var(--gr-ring); --shadow-btn: var(--gr-ring), var(--gr-edge);
+  --shadow-card: var(--gr-ring), var(--gr-edge); --shadow-raised: var(--gr-ring), var(--gr-shadow-tile);
+  --shadow-overlay: var(--gr-shadow-float);
+  /* r4：card = 卡 10（rounded-card）；control → 6、window → 12（收进五档） */
+  --radius-chip: 4px; --radius-control: 6px; --radius-card: 10px; --radius-window: 12px;
+}
+
+/* 三种材质（PLAN 4.8）。底色走 background-color：减少透明度时令牌把它换成实底（theme.css），体检也读得到真实底色 */
+@utility material-glass {
+  background-color: var(--gr-glass-fill);
+  background-image: var(--gr-glass-img);
+  -webkit-backdrop-filter: var(--gr-glass-blur);
+  backdrop-filter: var(--gr-glass-blur);
+  box-shadow: var(--gr-glass-shadow);
+}
+@utility material-tile {
+  background-color: var(--gr-tile-fill);
+  background-image: var(--gr-tile-img);
+  box-shadow: var(--gr-tile-shadow);
+}
+@utility material-metal {
+  background-image: var(--gr-metal);
+  box-shadow: var(--gr-edge);
+}

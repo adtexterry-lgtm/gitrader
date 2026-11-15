@@ -1,0 +1,19 @@
+{
+  "name": "@gitrader/exec-reconcile",
+  "version": "0.1.0",
+  "description": "Gitrader execution reconciliation (pure functions): classify differences between the local ledger view and venue reports, and suggest an action with evidence. Never mutates accounts.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  },
+  "dependencies": {}
+}

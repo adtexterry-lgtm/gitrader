@@ -1,0 +1,21 @@
+{
+  "name": "@gitrader/sim-book",
+  "version": "0.1.0",
+  "description": "Order-book level fill simulation as deterministic functions: JSONL book snapshot / delta / trade records with a validator, an in-memory book with a liquidity consumption ledger, and matching for market, limit, stop, stop-limit, post-only, IOC, FOK and reduce-only orders. Core has no I/O and no kernel wiring.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

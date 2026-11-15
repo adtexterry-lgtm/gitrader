@@ -1,0 +1,170 @@
+{
+  "id": "01-single-account",
+  "input": {
+    "tier": "forward_paper",
+    "window": {
+      "from": 0,
+      "to": 864000000
+    },
+    "stageEnteredAt": 0,
+    "runs": [
+      {
+        "runId": "run-acct_one",
+        "accountId": "acct_one",
+        "executor": {
+          "kind": "engine",
+          "engineId": "engine-fixture",
+          "instanceId": "inst_fixture",
+          "codeDigest": null
+        },
+        "attachedAt": 0,
+        "to": null
+      }
+    ],
+    "initialEquity": [
+      {
+        "accountId": "acct_one",
+        "at": 0,
+        "equity": "100",
+        "unrealizedPnl": "0"
+      }
+    ],
+    "fills": [],
+    "snapshots": [
+      {
+        "seq": 1,
+        "accountId": "acct_one",
+        "at": 86400000,
+        "recordedAt": 86400000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "120",
+        "unrealizedPnl": "20",
+        "valuationCcy": "USD"
+      },
+      {
+        "seq": 2,
+        "accountId": "acct_one",
+        "at": 172800000,
+        "recordedAt": 172800000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "108",
+        "unrealizedPnl": "8",
+        "valuationCcy": "USD"
+      },
+      {
+        "seq": 3,
+        "accountId": "acct_one",
+        "at": 259200000,
+        "recordedAt": 259200000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "129.6",
+        "unrealizedPnl": "29.6",
+        "valuationCcy": "USD"
+      },
+      {
+        "seq": 4,
+        "accountId": "acct_one",
+        "at": 345600000,
+        "recordedAt": 345600000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "116.64",
+        "unrealizedPnl": "16.64",
+        "valuationCcy": "USD"
+      },
+      {
+        "seq": 5,
+        "accountId": "acct_one",
+        "at": 432000000,
+        "recordedAt": 432000000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "139.968",
+        "unrealizedPnl": "39.968",
+        "valuationCcy": "USD"
+      },
+      {
+        "seq": 6,
+        "accountId": "acct_one",
+        "at": 518400000,
+        "recordedAt": 518400000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "125.9712",
+        "unrealizedPnl": "25.9712",
+        "valuationCcy": "USD"
+      },
+      {
+        "seq": 7,
+        "accountId": "acct_one",
+        "at": 604800000,
+        "recordedAt": 604800000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "151.16544",
+        "unrealizedPnl": "51.16544",
+        "valuationCcy": "USD"
+      },
+      {
+        "seq": 8,
+        "accountId": "acct_one",
+        "at": 691200000,
+        "recordedAt": 691200000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "136.048896",
+        "unrealizedPnl": "36.048896",
+        "valuationCcy": "USD"
+      },
+      {
+        "seq": 9,
+        "accountId": "acct_one",
+        "at": 777600000,
+        "recordedAt": 777600000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "163.2586752",
+        "unrealizedPnl": "63.2586752",
+        "valuationCcy": "USD"
+      },
+      {
+        "seq": 10,
+        "accountId": "acct_one",
+        "at": 864000000,
+        "recordedAt": 864000000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "146.93280768",
+        "unrealizedPnl": "46.93280768",
+        "valuationCcy": "USD"
+      }
+    ],
+    "valuationCcy": "USD",
+    "periodsPerYear": 365,
+    "finalized": true,
+    "computedAt": 864000000
+  },
+  "expect": {
+    "sample": {
+      "trades": 0,
+      "fills": 0,
+      "roundTrips": 0,
+      "spanDays": 10,
+      "activeDays": 0,
+      "snapshotDays": 10
+    },
+    "realizedPnl": "0",
+    "unrealizedPnlEnd": "46.93280768",
+    "fees": "0",
+    "funding": "0",
+    "returnRatio": 0.4693280768,
+    "maxDrawdownRatio": 0.1,
+    "sharpe": 6.041522986797286,
+    "sortino": 13.509256086106296,
+    "winRatio": null
+  },
+  "tolerance": 1e-9
+}

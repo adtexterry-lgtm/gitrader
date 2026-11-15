@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:workflow:2",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: workflow | Version: 2 | Status: draft",
+  "title": "Gitrader workflow",
+  "type": "object",
+  "required": ["schema", "id", "name", "version", "nodes", "edges"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "gitrader-workflow/2"},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 80},
+    "desc": {"type": "string", "maxLength": 2000},
+    "version": {"type": "integer", "minimum": 1},
+    "params": {"type": "object", "additionalProperties": {"type": ["number", "boolean", "string"]}},
+    "paramDefs": {"type": "array", "items": {"$ref": "#/$defs/paramDef"}},
+    "requires": {"type": "array", "items": {"$ref": "#/$defs/pin"}},
+    "nodes": {"type": "array", "minItems": 1, "maxItems": 200, "items": {"$ref": "#/$defs/node"}},
+    "edges": {"type": "array", "maxItems": 400, "items": {"$ref": "#/$defs/edge"}},
+    "meta": {"$ref": "#/$defs/meta"}
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "required": ["id", "type", "params"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,40}$"},
+        "type": {"type": "string", "pattern": "^([a-z]+\\.[a-z0-9_]+|plugin:[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+/[a-z]+\\.[a-z0-9_]+)$"},
+        "label": {"type": "string", "maxLength": 60},
+        "params": {"type": "object", "additionalProperties": {"type": ["number", "boolean", "string"]}},
+        "position": {"type": "object", "properties": {"x": {"type": "number"}, "y": {"type": "number"}}, "required": ["x", "y"], "additionalProperties": false}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "required": ["from", "to"],
+      "additionalProperties": false,
+      "properties": {
+        "from": {"$ref": "#/$defs/endpoint"},
+        "to": {"$ref": "#/$defs/endpoint"}
+      }
+    },
+    "endpoint": {
+      "type": "object",
+      "required": ["node", "port"],
+      "additionalProperties": false,
+      "properties": {"node": {"type": "string"}, "port": {"type": "string"}}
+    },
+    "pin": {
+      "type": "object",
+      "required": ["kind", "id", "version", "sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {"enum": ["plugin", "engine"]},
+        "id": {"type": "string"},
+        "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "paramDef": {
+      "type": "object",
+      "required": ["key", "label", "type", "default"],
+      "properties": {
+        "key": {"type": "string"},
+        "label": {"type": "string"},
+        "type": {"enum": ["number", "integer", "boolean", "select", "string"]},
+        "default": {"type": ["number", "boolean", "string"]},
+        "min": {"type": "number"},
+        "max": {"type": "number"},
+        "step": {"type": "number"},
+        "options": {"type": "array", "items": {"type": "string"}},
+        "help": {"type": "string"}
+      }
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "object",
+          "required": ["author", "license"],
+          "properties": {
+            "author": {"type": "string"},
+            "license": {"type": "string"},
+            "inspiredBy": {"type": "string"},
+            "sha256": {"type": "string"}
+          }
+        },
+        "tags": {"type": "array", "items": {"type": "string"}},
+        "builtin": {"type": "boolean"},
+        "strategyId": {"type": "string"}
+      }
+    }
+  }
+}

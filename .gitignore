@@ -1,0 +1,44 @@
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+Thumbs.db
+# 运行时目录（GITRADER_HOME 默认 ~/.gitrader，测试请指向临时目录）
+.gitrader/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+# 本机密钥与环境
+.env
+.env.*
+*.key
+*.pem
+
+# 发布包构建时从根目录复制 / 生成的文件
+packages/cli/NOTICE
+packages/cli/THIRD-PARTY-NOTICES.md
+*.tgz
+
+# 内部施工记录与验收产物：不进公开仓库（规则与 scripts/check-public.mjs 一致，见 docs/release-checklist.md）
+/before-r1/
+packages/*/before-r1/
+/reports/
+/dist-store/
+packages/*/CHANGES.md
+packages/*/test-out/
+
+# 施工沙箱遗留的内核测试目录（K1.1 起测试改用 mkdtemp）
+packages/kernel/.test-home/
+
+# Python 字节码缓存与本机基准输出（不入库）
+__pycache__/
+tools/bench/results/
+tools/parity/out/
+# 本地打包产物（npm run pack:release / pack:portable）与验收脚本临时文件
+dist-release/
+dist-portable/
+**/verify/.tmp/
+
+# 内部质检记录：已移出公开仓库（归档在本机知识库）
+docs/qa/

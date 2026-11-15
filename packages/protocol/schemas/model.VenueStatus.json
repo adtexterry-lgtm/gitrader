@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:VenueStatus",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "VenueStatus",
+  "type": "object",
+  "properties": {
+    "venue": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+    },
+    "environment": {
+      "enum": [
+        "mainnet",
+        "testnet"
+      ]
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "wsState": {
+      "enum": [
+        "connected",
+        "connecting",
+        "disconnected"
+      ]
+    },
+    "latencyMs": {
+      "type": "object",
+      "properties": {
+        "p50": {
+          "type": "number"
+        },
+        "p95": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "p50",
+        "p95"
+      ]
+    },
+    "rateBudget": {
+      "type": "object",
+      "properties": {
+        "used": {
+          "type": "number"
+        },
+        "limit": {
+          "type": "number"
+        },
+        "windowMs": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "used",
+        "limit",
+        "windowMs"
+      ]
+    }
+  },
+  "required": [
+    "venue",
+    "environment",
+    "ts",
+    "wsState"
+  ]
+}

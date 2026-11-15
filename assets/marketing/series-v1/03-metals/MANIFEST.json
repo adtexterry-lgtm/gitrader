@@ -1,0 +1,98 @@
+{
+  "canvas": {
+    "width": 2048,
+    "height": 3072,
+    "colorSpace": "sRGB",
+    "background": "#0A0A0B"
+  },
+  "sourceScene": {
+    "file": "scene.png",
+    "width": 1024,
+    "height": 1536,
+    "sha256": "33948D8EDBE3E58AC4536F0F657897E03C80F376243D0ED259EA069F470FCB60",
+    "generatedNative2k": false
+  },
+  "brand": {
+    "source": "../../brand/gitrader-wordmark.svg",
+    "sha256": "7BD5526F8C439C17BCA10A8C37193A6B231884EA0CBDACEF05CC2E9A511A1B05",
+    "embeddedOriginalBytes": true
+  },
+  "prompt": {
+    "file": "../PROMPTS.md",
+    "section": "03-metals",
+    "sha256": "07C440E63262355F0906DCB0CCF368545CC4BE709AA71F24952FD889C7047557"
+  },
+  "typography": {
+    "family": "Microsoft YaHei",
+    "weights": [
+      400,
+      700
+    ],
+    "isolatedFontconfig": true,
+    "fontFiles": [
+      {
+        "file": "msyh.ttc",
+        "bytes": 19704352,
+        "sha256": "D79C55E68B1131EEA0CC1C47BE4F572D964F28C682E143DB2AD09C1E4CB07A3F"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "bytes": 16883552,
+        "sha256": "4508821B3DFFE01F0EF5E5326A3E60DF705A44633858811F67B6982DCE3F6EE6"
+      }
+    ],
+    "renderEvidence": [
+      {
+        "file": "msyh.ttc",
+        "loaded": true,
+        "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+        "style": "style: \"Regular\"(s) \"Normal\"(s) \"obyčejné\"(s) \"Standard\"(s) \"Κανονικά\"(s) \"Normaali\"(s) \"Normál\"(s) \"Normale\"(s) \"Standaard\"(s) \"Normalny\"(s) \"Обычный\"(s) \"Normálne\"(s) \"Navadno\"(s) \"Arrunta\"(s)",
+        "weight": "weight: 80(f)(s)"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "loaded": true,
+        "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+        "style": "style: \"Bold\"(s) \"Negreta\"(s) \"tučné\"(s) \"fed\"(s) \"Fett\"(s) \"Έντονα\"(s) \"Negrita\"(s) \"Lihavoitu\"(s) \"Gras\"(s) \"Félkövér\"(s) \"Grassetto\"(s) \"Vet\"(s) \"Halvfet\"(s) \"Pogrubiony\"(s) \"Negrito\"(s) \"Полужирный\"(s) \"Fet\"(s) \"Kalın\"(s) \"Krepko\"(s) \"Lodia\"(s)",
+        "weight": "weight: 200(f)(s)"
+      }
+    ]
+  },
+  "outputs": {
+    "poster.svg": {
+      "sha256": "578C533D38422585C852E5E07CC46B2B3129DD08E5DA63889C10360CA86D48E3"
+    },
+    "poster.png": {
+      "bytes": 3040183,
+      "sha256": "76F8DA2550C7D6689C50C963A841C92A17AD86B8941FB1F67EEEE82937322BDE",
+      "width": 2048,
+      "height": 3072
+    },
+    "poster-preview.png": {
+      "bytes": 1115044,
+      "sha256": "FE0A711D0015BEE27843F23ACDED763DB697C85241F74B4AE37CBF69B343AA90",
+      "width": 1024,
+      "height": 1536
+    }
+  },
+  "copy": {
+    "headline": [
+      "黄金与白银",
+      "也有你的交易方式"
+    ],
+    "eyebrow": "AGENT TRADING / PRECIOUS METALS",
+    "support": [
+      "把黄金、白银相关场景纳入你自己的 AI 交易工作流。",
+      "自带数据与策略，按已接入场所选择标的，保留你的判断。"
+    ],
+    "sceneLabel": "黄金 · 白银 · 贵金属相关场景",
+    "shortTag": "接入构想 · 标的依场所",
+    "benefits": [
+      "自带策略",
+      "自选场所",
+      "操作可查"
+    ],
+    "cta": "探索贵金属接入",
+    "footer": "开源底座 · M1 开发中"
+  }
+}

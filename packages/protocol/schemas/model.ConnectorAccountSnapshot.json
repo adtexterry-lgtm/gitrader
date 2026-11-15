@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ConnectorAccountSnapshot",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ConnectorAccountSnapshot",
+  "type": "object",
+  "properties": {
+    "accountModel": {
+      "enum": [
+        "standard",
+        "unified",
+        "portfolio"
+      ]
+    },
+    "balances": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Balance"
+      }
+    },
+    "margin": {
+      "$ref": "urn:gitrader:schema:model:0.1:MarginSnapshot"
+    },
+    "positions": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Position"
+      }
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "asOf": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "confirmedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "stale": {
+      "type": "boolean"
+    },
+    "source": {
+      "enum": [
+        "ws",
+        "rest",
+        "replay",
+        "fixture"
+      ]
+    },
+    "availableDeductsOpenOrders": {
+      "type": "boolean"
+    },
+    "openOrders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "instrumentId": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+          },
+          "side": {
+            "enum": [
+              "buy",
+              "sell"
+            ]
+          },
+          "notional": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "instrumentId",
+          "side",
+          "notional",
+          "count"
+        ]
+      }
+    },
+    "stopLossOrderIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "maxOpenOrders": {
+          "type": "object",
+          "properties": {
+            "cap": {
+              "type": "number",
+              "minimum": 0
+            },
+            "current": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "cap",
+            "current"
+          ]
+        },
+        "marketPriceBandBps": {
+          "type": "number",
+          "minimum": 0
+        },
+        "minOrderNotional": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        }
+      }
+    }
+  },
+  "required": [
+    "accountModel",
+    "balances",
+    "margin",
+    "positions",
+    "ts"
+  ]
+}

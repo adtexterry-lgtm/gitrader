@@ -1,0 +1,22 @@
+# Gitrader 以「外部 MCP」方式挂进 UNIGIT（不依赖商店服务端 / 配方下发）。
+# 用法：把下面的 insert 段追加进目标 home 的 profiles/desktop/cordis.patch.yml，重启 UNIGIT，
+# 对话里就有 mcp__gitrader__* 工具（数量随钥匙级别：只读 13，纸面 / 需确认 / 限额自动 16）。
+# 也可用 `gitrader mcp snippet unigit` 生成带你本机绝对路径的版本（推荐，路径不用手改）。
+#
+# 前提
+#   1. 同一个数据目录里有一个在运行的 `gitrader serve`（MCP 每次调用时读 <数据目录>/service.json 找端口）。
+#   2. 钥匙与令牌：在 Gitrader 里创建 Agent 钥匙（宿主选 unigit），把令牌那一行存进 <数据目录>/agent-unigit.token。
+#      令牌不写进本文件。没有钥匙 / 内核没起来时工具会如实返回原因，不会拦住 UNIGIT（failOnStartupError: false）。
+# command 用宿主自己的 process.execPath + ELECTRON_RUN_AS_NODE=1：用户机不需要另装 Node。
+# 下面两处路径是占位，换成你机器上的绝对路径：<GITRADER_DIR>（含 gitrader-mcp.js 的目录）、<DATA_DIR>（serve 的 --home）。
+- insert:
+    - id: unigit-gitrader-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: gitrader
+        transport: stdio
+        command: !!js 'process.execPath'
+        args: ['<GITRADER_DIR>/gitrader-mcp.js']
+        env: { ELECTRON_RUN_AS_NODE: '1', GITRADER_HOME: '<DATA_DIR>', GITRADER_AGENT_TOKEN_FILE: '<DATA_DIR>/agent-unigit.token' }
+        toolCallTimeoutMs: 120000
+        failOnStartupError: false

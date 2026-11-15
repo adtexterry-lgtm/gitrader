@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:PrecheckEstimates",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "PrecheckEstimates",
+  "type": "object",
+  "properties": {
+    "notional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "marginRequired": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "liquidationPrice": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "slippageBps": {
+      "type": "number"
+    },
+    "feeEstimate": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "positionNotionalRatioAfter": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "totalNotionalRatioAfter": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "rateBudgetRemaining": {
+      "type": "integer"
+    }
+  }
+}

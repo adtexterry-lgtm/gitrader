@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:OrderAmendedPayload",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "OrderAmendedPayload",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+    },
+    "before": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "size": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "triggerPrice": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "after": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "size": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "triggerPrice": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "orderId",
+    "before",
+    "after"
+  ]
+}

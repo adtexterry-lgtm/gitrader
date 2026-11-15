@@ -1,0 +1,172 @@
+{
+  "schema": "gitrader-plugin/1",
+  "id": "connector.gitrader.notify-wecom",
+  "package": "block",
+  "kind": "connector",
+  "name": "企业微信通知通道",
+  "desc": "把内核通知发到企业微信群机器人：插件只按官方消息格式渲染事实字段、按 UTF-8 字节上限分块、按官方 errcode 判定可否重试，不改写通知正文。webhook 地址只从环境变量读。",
+  "tags": [
+    "utility",
+    "notify"
+  ],
+  "version": "0.1.0",
+  "vendor": {
+    "id": "gitrader",
+    "name": "Gitrader",
+    "kind": "builtin",
+    "verified": true,
+    "url": null
+  },
+  "source": {
+    "repo": "local/plugin-notify-wecom",
+    "commit": "0000000000000000000000000000000000000000",
+    "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "fetchedAt": 1760000000000
+  },
+  "license": {
+    "spdx": "CPAL-1.0",
+    "redistribute": "bundle",
+    "notice": "通知通道插件，随本体发布。",
+    "commercialUse": true
+  },
+  "runtime": {
+    "type": "node",
+    "node": "22",
+    "native": false,
+    "diskMB": 1
+  },
+  "entry": {
+    "module": "./gsp.mjs"
+  },
+  "install": {
+    "by": "user-install",
+    "requireHashes": true
+  },
+  "permissions": [
+    "net.fetch"
+  ],
+  "net": {
+    "hosts": [
+      "qyapi.weixin.qq.com"
+    ]
+  },
+  "secrets": [
+    "WECOM_WEBHOOK_URL"
+  ],
+  "privacy": {
+    "hosted": false,
+    "sends": []
+  },
+  "provides": {
+    "channels": [
+      {
+        "tool": "notify_send",
+        "platform": "wecom"
+      }
+    ]
+  },
+  "tools": [
+    {
+      "name": "notify_send",
+      "desc": "把一条通知（标题 + 若干行事实）发到清单 secrets 指定的企业微信群机器人；返回 ok，或失败原因与可否重试。",
+      "tags": [
+        "utility"
+      ],
+      "permissions": [
+        "net.fetch"
+      ],
+      "input": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "notice",
+          "params"
+        ],
+        "properties": {
+          "notice": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "key",
+              "level",
+              "title",
+              "lines"
+            ],
+            "properties": {
+              "key": {
+                "type": "string",
+                "minLength": 1
+              },
+              "level": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "warn",
+                  "critical"
+                ]
+              },
+              "title": {
+                "type": "string"
+              },
+              "lines": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "ts": {
+                "type": "number"
+              },
+              "topic": {
+                "type": "string"
+              }
+            }
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "markdown": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ok"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "retryable": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  ],
+  "risk": {
+    "disclosure": "这条通道会把通知标题、正文事实行发到 qyapi.weixin.qq.com 的群机器人，发送内容离开本机后不再受本机控制；webhook 地址里的 key 等同于该群的写入权限。",
+    "worstCase": "webhook 地址泄露时，任何拿到它的人都能往该群推消息；地址填错时通知会发到别的群。",
+    "builderAttribution": "off"
+  },
+  "fixtures": {
+    "offline": [],
+    "smoke": []
+  },
+  "compat": {
+    "gitrader": ">=0.1.0 <0.2.0",
+    "pluginSchema": "1"
+  }
+}

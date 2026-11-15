@@ -1,0 +1,81 @@
+/* Gitrader 工作台 r5 · 设计令牌
+ * 来源：两页视觉稿（总览、图表）实际在用的值，由 build.mjs 从 src/base.css 抽出；不新造。
+ * 用法：组件只用 var(--gr-*)；颜色字面量只许出现在本文件。
+ */
+/* ================= 令牌（颜色字面量只允许出现在这里与 [data-updown] 交换块） ================= */
+:root{
+  color-scheme:dark;
+  /* 面：纯中性近黑，三档明度分层 */
+  --gr-ink-0:#0A0A0B; --gr-card:#0F0F11; --gr-card-hi:inset 0 1px 0 rgb(255 255 255 / .04); --gr-ink-2:#18181B; --gr-ink-3:#1F1F23;
+  --gr-line:rgb(255 255 255 / .065); --gr-sep:rgb(255 255 255 / .04); --gr-line-strong:rgb(255 255 255 / .14);
+  --gr-clear:transparent; --gr-fill-1:rgb(255 255 255 / .035); --gr-fill-2:rgb(255 255 255 / .06); --gr-fill-3:rgb(255 255 255 / .09);
+  /* 字 */
+  --gr-text:#F4F1EA; --gr-text-body:#D3D0C9; --gr-text-2:#A6A49E; --gr-text-3:#8E8C87; --gr-text-dis:#55544F;
+  /* 涨跌（语义令牌，随 data-updown 互换） */
+  --gr-up:#46C68D; --gr-down:#EF6A6E;
+  /* 危险 / 警示（不随涨跌模式变） */
+  --gr-danger:#EF6A6E; --gr-danger-wash:rgb(239 106 110 / .07); --gr-kill:#C8424A; --gr-kill-hi:#D24E56; --gr-on-kill:#FFFFFF;
+  --gr-warn:#F5C451; --gr-warn-hi:#F7CF6C; --gr-warn-lo:#E6B43E;
+  /* 品牌橙 + 对冲电光青 */
+  --gr-accent:#FF7A2F; --gr-accent-hi:#FF8F4D; --gr-accent-lo:#E8661C; --gr-on-accent:#111214;
+  --gr-accent-edge:inset 0 1px 0 rgb(255 255 255 / .22), inset 0 -1px 0 rgb(0 0 0 / .12);
+  --gr-counter:#3CC8FF; --gr-focus:#3CC8FF; --gr-selection:rgb(60 200 255 / .28);
+  /* 流光：只给正在发生的事，同屏 ≤ 1 处 */
+  --gr-live:linear-gradient(90deg,#FF7A2F 0%,#FFB05C 45%,#3CC8FF 100%);
+  /* 执行方（数据角色色，只出现在执行方小标与图表标记） */
+  --gr-actor-human:#3CC8FF; --gr-actor-engine:#7D879A; --gr-actor-agent:#C597FF; --gr-actor-system:#62626A; --gr-on-actor:#111214;
+  /* 图表 */
+  --gr-grid:rgb(255 255 255 / .04); --gr-grid-major:rgb(255 255 255 / .08); --gr-crosshair:rgb(244 241 234 / .32);
+  --gr-ema1:rgb(246 243 236 / .80); --gr-ema2:rgb(246 243 236 / .40); --gr-vol-alpha:.28;
+  /* 材质：浮层玻璃（资金卡改实心卡，release-r1 P1-2） */
+  --gr-glass-fill:rgb(24 24 27 / .72); --gr-glass-fill-pop:rgb(24 24 27 / .8); --gr-glass-arrow-edge:inset 1px 1px 0 rgb(255 255 255 / .1); --gr-glass-fill-chart:rgb(24 24 27 / .86); --gr-glass-blur:blur(24px) saturate(150%);
+  --gr-glass-edge:inset 0 0 0 1px rgb(255 255 255 / .08), inset 0 1px 0 rgb(255 255 255 / .10);
+  --gr-shadow-float:0 1px 1px rgb(0 0 0 / .3), 0 8px 16px -4px rgb(0 0 0 / .45), 0 24px 48px -12px rgb(0 0 0 / .65);
+  --gr-thumb:rgb(255 255 255 / .16); --gr-scrim:rgb(0 0 0 / .3);
+  --gr-shimmer:linear-gradient(-65deg,transparent 40%,rgb(255 255 255 / .05) 50%,transparent 60%);
+  --gr-switch-on:rgb(244 241 234 / .82); --gr-switch-knob-on:#0A0A0B;
+  /* 交易所胶囊（全站唯一胶囊；统一尺寸 + 克制立体感） */
+  --venue-pill-bg:linear-gradient(180deg,#FFFFFF 0%,#F1F1F3 100%);
+  --venue-pill-shadow:inset 0 1px 0 rgb(255 255 255 / .9), inset 0 -1px 0 rgb(0 0 0 / .08), 0 1px 2px rgb(0 0 0 / .35), 0 0 0 1px rgb(255 255 255 / .06);
+  --venue-pill-w:96px; --venue-pill-h:20px; --venue-pill-logo-h:18px;
+  /* 字 */
+  --gr-font:"Geist Variable","Microsoft YaHei UI","PingFang SC","Noto Sans SC",system-ui,sans-serif;
+  --gr-font-mono:"Geist Mono Variable","Cascadia Mono",ui-monospace,monospace;
+  /* 圆角：卡 14 · 浮层 16 · 控件 6 · 标签 4 · 细条 2 */
+  --gr-r-bar:2px; --gr-r-mark:4px; --gr-r-ctl:6px; --gr-r-card:14px; --gr-r-float:16px;
+  /* 尺寸 */
+  --gr-topbar:40px; --gr-fund-h:88px; --gr-pop-w:440px; --gr-hd:40px; --gr-th:32px; --gr-grp:32px; --gr-row:48px; --gr-row-1:40px;
+  --gr-gutter:24px; --gr-gap:12px; --gr-pad:20px; --gr-rail-w:64px;
+  --gr-col-r:clamp(440px, calc(50vw - 200px), 600px);
+  /* 动效 */
+  --gr-ease-out:cubic-bezier(.22,1,.36,1); --gr-ease-std:cubic-bezier(.22,1,.36,1);
+  --gr-dur-press:90ms; --gr-dur-hover:120ms; --gr-dur-shimmer:1600ms; --gr-flow-dur:24s;
+}
+[data-updown="cn"]{ --gr-up:#EF6A6E; --gr-down:#46C68D; }
+@media (max-width:1319px){ :root{ --gr-gutter:16px; } }
+@media (prefers-contrast:more){ :root{ --gr-line:rgb(255 255 255 / .14); --gr-sep:rgb(255 255 255 / .09); --gr-text-3:var(--gr-text-2); } }
+
+
+/* 字阶白名单（行高随角色）与 4pt 间距刻度 —— 两页在用 */
+:root{
+  --gr-fs-11:11px; --gr-fs-12:12px; --gr-fs-13:13px; --gr-fs-14:14px; --gr-fs-16:16px; --gr-fs-20:20px; --gr-fs-36:36px;
+  --gr-lh-11:14px; --gr-lh-12:16px; --gr-lh-13:20px; --gr-lh-14:20px; --gr-lh-16:24px; --gr-lh-20:28px; --gr-lh-36:36px;
+  --gr-s1:4px; --gr-s2:8px; --gr-s3:12px; --gr-s4:16px; --gr-s5:20px; --gr-s6:24px; --gr-s8:32px; --gr-s10:40px; --gr-s12:48px;
+}
+/* 导航两种形态：缺省顶栏；html[data-nav="rail"] 为左侧图标栏 */
+[data-nav="rail"]{--gr-col-r:clamp(384px, calc(50vw - 256px), 600px)}
+/* ===== 2026-10-23 维护者 追加（只追加，旧胶囊令牌保留不删） ===== */
+:root{
+  /* 交易所 App Icon：圆角方块 + 官方图形标；顶部 1px 高光、底部略暗、极淡外影，无光斑、无彩色投影 */
+  --venue-icon-s:20px; --venue-icon-m:24px; --venue-icon-l:28px;
+  --venue-icon-r-s:5px; --venue-icon-r-m:6px; --venue-icon-r-l:7px;
+  --venue-icon-bg:#1F1F23;            /* 中性深底（= --gr-ink-3 值），品牌色标放其上 */
+  --venue-bg-hyperliquid:#03211C;     /* 取自官方 hyperliquid-wordmark.svg 填色 rgb(3,33,28) */
+  --venue-bg-okx:#FFFFFF;             /* OKX 官方标为黑色，白底 */
+  --venue-icon-shade:linear-gradient(180deg,rgb(255 255 255 / .10) 0%,rgb(255 255 255 / 0) 45%,rgb(0 0 0 / .14) 100%);
+  --venue-icon-edge:inset 0 1px 0 rgb(255 255 255 / .22), inset 0 -1px 0 rgb(0 0 0 / .30), inset 0 0 0 1px rgb(255 255 255 / .06), 0 1px 2px rgb(0 0 0 / .45);
+  /* 顶栏「独立模式」键文案（唯一一处常量；页面脚本与提示浮层都从这里取） */
+  --gr-mode-label:"独立模式"; --gr-mode-label-on:"回嵌";
+}
+:root{ --venue-bg-htx:#FFFFFF; } /* HTX 官方标为深蓝火焰，深底不可辨，改白底（2026-10-23 17:2x 追加） */
+:root{ --venue-bg-light:#FFFFFF; } /* 官方标只有深色 / 彩色在透明底上的（Coinbase 蓝 C、IBKR、Deribit、Twelve Data）统一白底；不改标色（2026-10-23 18:1x） */

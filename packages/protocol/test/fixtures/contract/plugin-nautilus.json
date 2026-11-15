@@ -1,0 +1,41 @@
+{
+  "schema": "gitrader-plugin/1",
+  "id": "engine.gitrader.nautilus",
+  "package": "block",
+  "kind": "engine",
+  "name": "Nautilus engine",
+  "desc": "Event-driven backtests and mode-A paper execution through Nautilus Trader, process-isolated.",
+  "version": "0.1.0",
+  "tags": ["engine", "backtest", "python"],
+  "vendor": {"id": "gitrader", "name": "Gitrader", "kind": "builtin", "verified": true, "url": null},
+  "source": {"repo": "gitrader/plugins-nautilus", "commit": "<40hex>", "sha256": "sha256:<64hex>", "fetchedAt": 1791504000000},
+  "license": {
+    "spdx": "Apache-2.0",
+    "redistribute": "bundle",
+    "notice": "Bridge code is Apache-2.0. nautilus_trader (LGPL-3.0-only) is installed unmodified into an isolated environment.",
+    "commercialUse": true,
+    "dependencies": [{"name": "nautilus_trader", "spdx": "LGPL-3.0-only", "redistribute": "user-install"}]
+  },
+  "runtime": {
+    "type": "python-sidecar",
+    "python": "3.12",
+    "native": false,
+    "diskMB": 400,
+    "download": [
+      {"name": "python-3.12", "source": "python-build-standalone", "sizeMB": 40, "sha256": "sha256:<64hex>", "consent": "required"},
+      {"name": "wheels", "source": "pypi", "sizeMB": 300, "sha256": "sha256:<64hex>", "consent": "required"}
+    ]
+  },
+  "entry": {"command": ["python", "-m", "gitrader_nautilus"], "transport": "stdio"},
+  "install": {"by": "user-consent", "lockfile": "requirements.lock", "requireHashes": true},
+  "permissions": ["market.read", "account.read", "trade.paper", "ledger.append"],
+  "net": {"hosts": []},
+  "privacy": {"hosted": false, "sends": []},
+  "provides": {"gep": {"versions": ["0.1"]}},
+  "engine": {"gep": {"versions": ["0.1"], "transports": ["stdio", "ws"], "modes": ["A"]}},
+  "instances": {"multiple": false, "ordered": false},
+  "fixtures": {"offline": ["fixtures/synthetic-2000bars.parquet"], "smoke": ["fixtures/smoke.jsonl"]},
+  "requires": [{"kind": "pypi", "name": "nautilus_trader", "version": "1.231.0", "sha256": "sha256:<64hex>"}],
+  "compat": {"gitrader": ">=0.1.0 <0.2.0", "gep": "0.1", "pluginSchema": "1"},
+  "signature": {"alg": "ed25519", "keyId": "gitrader-release-2026", "digest": "sha256:<64hex>", "sig": "<base64>"}
+}

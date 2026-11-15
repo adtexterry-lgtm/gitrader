@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:ui:0.1:RiskUsageItem",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: ui | Version: 0.1 | Status: draft",
+  "title": "RiskUsageItem",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "pattern": "^(maxLeverage|maxOrderNotional|maxPositionNotionalRatio|maxTotalNotionalRatio|maxOpenPositions|maxDailyLossRatio|maxDailyNotional|maxDailyLoss|maxOrdersPerMinute|maxDailyOrders|maxCancelsPerMinute|x-.+)$"
+    },
+    "used": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "limit": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ratio": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "window": {
+      "enum": [
+        "day",
+        "minute",
+        "now"
+      ]
+    }
+  },
+  "required": [
+    "key",
+    "used",
+    "limit",
+    "unit"
+  ]
+}

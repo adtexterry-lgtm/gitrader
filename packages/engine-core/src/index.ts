@@ -1,0 +1,18 @@
+// SPDX-License-Identifier: CPAL-1.0
+// @gitrader/engine-core：Gitrader Core 参考引擎（GEP 服务端 + 策略运行时 + 回测 + 工作流 JSON 运行器）。
+export { EngineCore } from './runtime/engine'
+export type { Conn, EngineCoreOptions } from './runtime/engine'
+export { listenWs, serveStdio } from './gep/server'
+export type { WsListening } from './gep/server'
+export { serveBacktestWorker } from './runtime/backtest-worker'
+export { ResearchJobs } from './runtime/research'
+export type { FactorComputeInput, OptimizeCheck, OptimizeComputeInput, ResearchComputeHandle, ResearchComputeHooks, ResearchComputeInput, ResearchOptions, ResearchOutcome, ResearchProvider } from './runtime/research'
+export { getStrategySource } from './strategy/loader'
+export { ENGINE_ID, ENGINE_VERSION, buildDescribe, WORKFLOW_CAP, STRATEGY_FOLDER_CAP } from './runtime/describe'
+export { StrategyRegistry, StrategyFolder, loadStrategyFile, runBacktest, evaluateStrategy, latestSignal, resolveParams } from './strategy'
+export type { StrategyDef, FileReport, LoadIssue, ParamDef, Params, SignalSeries } from './strategy'
+export { paramsSchema, validateStrictParams } from './strategy/schema'
+export { lookaheadCheck } from './strategy/bias'
+export { BLANK_WORKFLOW, validateWorkflow, backtestWorkflow, evaluateWorkflow, nodeCatalog } from './flow'
+export { synthCandles } from './util/synth'
+export type { Candle } from './types'

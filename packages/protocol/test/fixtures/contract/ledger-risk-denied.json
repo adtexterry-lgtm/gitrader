@@ -1,0 +1,22 @@
+{
+  "schema": "gitrader-ledger/1",
+  "seq": 18234,
+  "id": "led_01JAB7Z0Q4V2W8X9Y0Z1A2B3C5",
+  "ts": 1791549163644,
+  "recordedAt": 1791549163651,
+  "type": "risk.denied",
+  "origin": {"actor": "agent:ak_01JAB5", "tool": "order", "requestId": "4f6c2a7e-0d3b-4a51-9a3e-6b1f0c2d9e88", "via": "mcp"},
+  "subject": {"accountId": "acct_01JAB0QZ8W3K5M7N9P1R3T5V7X", "instrumentId": "hyperliquid:xyz:GOLD", "orderId": "ord_01JAB7Z0Q4V2W8X9Y0Z1A2B3C4", "clientOrderId": "9f1c3b5e7a2d4c6e8f0a1b2c3d4e5f60", "mandateId": "mdt_01JAB6M2T4", "precheckId": "pck_01JAB7YZ9K"},
+  "precheck": {
+    "precheckId": "pck_01JAB7YZ9K",
+    "verdict": "deny",
+    "policyVersion": 3,
+    "estimates": {"notional": "766.43", "marginRequired": "85.16", "liquidationPrice": "4380.1", "slippageBps": 3.1, "feeEstimate": "0.345"}
+  },
+  "ruleHits": [{"ruleId": "pol_01JAB1#maxLeverage", "code": "LEVERAGE", "limit": "3", "actual": "9", "unit": "x", "action": "deny", "scope": "account"}],
+  "payload": {"intent": {"side": "sell", "type": "market", "size": "0.1909", "leverage": 9, "maxSlippageBps": 50}},
+  "payloadHash": "sha256:<64hex>",
+  "attestation": "kernel-observed",
+  "prevHash": "sha256:<64hex>",
+  "hash": "sha256:<64hex>"
+}

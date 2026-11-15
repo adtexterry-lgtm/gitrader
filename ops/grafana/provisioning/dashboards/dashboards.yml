@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: CPAL-1.0
+# Adapted from QuantDinger v5.6.5 ops/grafana/provisioning/dashboards/dashboards.yml (Apache-2.0); adapted.
+apiVersion: 1
+
+providers:
+  - name: Gitrader
+    orgId: 1
+    folder: Gitrader
+    type: file
+    disableDeletion: true
+    allowUiUpdates: false
+    updateIntervalSeconds: 30
+    options:
+      # 容器里 ops/grafana/dashboards 挂到这个目录（只读）。
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Candle",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Candle",
+  "type": "object",
+  "properties": {
+    "t": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "o": {
+      "type": "number"
+    },
+    "h": {
+      "type": "number"
+    },
+    "l": {
+      "type": "number"
+    },
+    "c": {
+      "type": "number"
+    },
+    "v": {
+      "type": "number"
+    },
+    "vwap": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "t",
+    "o",
+    "h",
+    "l",
+    "c",
+    "v"
+  ]
+}

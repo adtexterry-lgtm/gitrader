@@ -1,0 +1,23 @@
+{
+  "name": "@gitrader/connector-hyperliquid",
+  "version": "0.1.0",
+  "description": "Gitrader Hyperliquid connector.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*",
+    "@nktkas/hyperliquid": "0.33.3"
+  },
+  "devDependencies": {
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0"
+  }
+}

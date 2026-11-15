@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Trade",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Trade",
+  "type": "object",
+  "properties": {
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "price": {
+      "type": "number"
+    },
+    "size": {
+      "type": "number"
+    },
+    "side": {
+      "enum": [
+        "buy",
+        "sell"
+      ]
+    }
+  },
+  "required": [
+    "instrumentId",
+    "ts",
+    "price",
+    "size",
+    "side"
+  ]
+}

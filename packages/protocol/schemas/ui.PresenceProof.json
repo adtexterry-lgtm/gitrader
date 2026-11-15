@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:ui:0.1:PresenceProof",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: ui | Version: 0.1 | Status: draft",
+  "title": "PresenceProof",
+  "type": "object",
+  "properties": {
+    "method": {
+      "enum": [
+        "pin",
+        "passkey",
+        "wallet"
+      ]
+    },
+    "pin": {
+      "type": "string",
+      "pattern": "^[0-9]{6,12}$"
+    },
+    "assertion": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "method"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "method": {
+            "const": "pin"
+          }
+        },
+        "required": [
+          "method"
+        ]
+      },
+      "then": {
+        "required": [
+          "pin"
+        ]
+      }
+    }
+  ]
+}

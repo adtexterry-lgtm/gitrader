@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ExperimentAttach",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ExperimentAttach",
+  "type": "object",
+  "properties": {
+    "run": {
+      "type": "object",
+      "properties": {
+        "executor": {
+          "$ref": "urn:gitrader:schema:model:0.1:ExperimentExecutor"
+        },
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        },
+        "from": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms",
+          "description": "旧输入字段；内核忽略"
+        },
+        "stage": {
+          "enum": [
+            "draft",
+            "backtest",
+            "paper",
+            "live_small",
+            "review",
+            "closed",
+            "hypothesis",
+            "holdout",
+            "shadow",
+            "live",
+            "retired"
+          ]
+        },
+        "to": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "executor",
+        "accountId"
+      ]
+    }
+  },
+  "required": [
+    "run"
+  ]
+}

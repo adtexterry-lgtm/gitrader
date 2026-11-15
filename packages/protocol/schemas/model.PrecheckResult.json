@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:PrecheckResult",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "PrecheckResult",
+  "type": "object",
+  "properties": {
+    "precheckId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PckId"
+    },
+    "verdict": {
+      "enum": [
+        "allow",
+        "deny",
+        "review"
+      ]
+    },
+    "policyVersion": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ruleHits": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:RuleHit"
+      }
+    },
+    "estimates": {
+      "type": "object",
+      "properties": {
+        "notional": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "marginRequired": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "liquidationPrice": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "slippageBps": {
+          "type": "number"
+        },
+        "feeEstimate": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "positionNotionalRatioAfter": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "totalNotionalRatioAfter": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "rateBudgetRemaining": {
+          "type": "integer"
+        }
+      }
+    },
+    "priceRef": {
+      "type": "object",
+      "properties": {
+        "markPrice": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "ts": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "markPrice",
+        "ts"
+      ]
+    },
+    "expiresAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    }
+  },
+  "required": [
+    "precheckId",
+    "verdict",
+    "policyVersion",
+    "ruleHits",
+    "estimates"
+  ]
+}

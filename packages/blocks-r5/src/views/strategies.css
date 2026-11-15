@@ -1,0 +1,84 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+/* 策略页（P6）页内专用样式：只引用 --gr-* 令牌；类名 g5-sx-* 是本页自己的，其余 g5-* 来自 workbench/ui/r5/components.css。间距一律 4 的倍数。 */
+
+/* .g5-sx-root 就是卡片本身：块根 .g5-card 直接是 .g5-col 的 flex 子项，外面不再套容器 */
+
+:root[data-ui="r5"] .g5-sx-root .g5-sx-tw{flex:1 1 0;min-height:0;padding:0 16px 8px}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-evs{flex:1 1 0;min-height:0;overflow-anchor:none}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-evs .g5-alist.g5-wide{padding-bottom:8px}
+
+/* 表内小件 */
+:root[data-ui="r5"] .g5-sx-root .g5-lk{cursor:pointer;text-underline-offset:3px}
+:root[data-ui="r5"] .g5-sx-root .g5-lk:hover{text-decoration:underline;text-decoration-thickness:1px}
+:root[data-ui="r5"] .g5-sx-root .g5-acct,:root[data-ui="r5"] .g5-apop .g5-acct{display:inline-flex;align-items:baseline;gap:8px}
+:root[data-ui="r5"] .g5-sx-root .g5-acct .g5-venue,:root[data-ui="r5"] .g5-apop .g5-acct .g5-venue,:root[data-ui="r5"] .g5-sx-root .g5-acct .g5-papermk,:root[data-ui="r5"] .g5-apop .g5-acct .g5-papermk{align-self:center}
+:root[data-ui="r5"] .g5-sx-root .g5-bad{display:inline-flex;align-items:baseline;gap:4px}
+:root[data-ui="r5"] .g5-sx-root .g5-bad svg{align-self:center;color:var(--gr-danger)}
+:root[data-ui="r5"] .g5-sx-root .g5-btn-ghost[aria-expanded="true"]{background:var(--gr-fill-2);color:var(--gr-text)}
+:root[data-ui="r5"] .g5-sx-root a.g5-btn{text-decoration:none}
+
+/* 展开行：参数（默认只读，右上「编辑」）+ 本策略事件 */
+:root[data-ui="r5"] .g5-sx-root .g5-tbl tr.g5-open td{background:var(--gr-fill-1);box-shadow:none}
+:root[data-ui="r5"] .g5-sx-root .g5-tbl tr.g5-open td:first-child,:root[data-ui="r5"] .g5-sx-root .g5-tbl tr.g5-open:hover td:first-child{border-radius:var(--gr-r-ctl) 0 0 0}
+:root[data-ui="r5"] .g5-sx-root .g5-tbl tr.g5-open td:last-child,:root[data-ui="r5"] .g5-sx-root .g5-tbl tr.g5-open:hover td:last-child{border-radius:0 var(--gr-r-ctl) 0 0}
+:root[data-ui="r5"] .g5-sx-root .g5-tbl tr.g5-open .g5-chev{transform:rotate(180deg)}
+:root[data-ui="r5"] .g5-sx-root .g5-tbl tr.g5-xrow td{padding:0 4px 16px;background:var(--gr-fill-1);border-radius:0 0 var(--gr-r-ctl) var(--gr-r-ctl);box-shadow:none;vertical-align:top;white-space:normal}
+:root[data-ui="r5"] .g5-sx-root .g5-xp{display:grid;grid-template-columns:288px minmax(0,1fr);column-gap:32px}
+:root[data-ui="r5"] .g5-sx-root .g5-xh{height:32px;display:flex;align-items:center;gap:8px;font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-sx-root .g5-xh .g5-r{margin-left:auto;display:flex;align-items:center;gap:8px}
+:root[data-ui="r5"] .g5-sx-root .g5-tl{height:28px;display:inline-flex;align-items:center}
+:root[data-ui="r5"] .g5-sx-root .g5-pf{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:12px;row-gap:4px;align-items:center}
+:root[data-ui="r5"] .g5-sx-root .g5-pf .g5-k{font-size:12px;line-height:16px;color:var(--gr-text-2)}
+:root[data-ui="r5"] .g5-sx-root .g5-xacts{margin-top:12px;display:flex;justify-content:flex-end;gap:8px}
+:root[data-ui="r5"] .g5-sx-root .g5-xev .g5-alist{flex:none;padding:0}
+:root[data-ui="r5"] .g5-sx-root .g5-xev .g5-ar{padding:4px 0}
+:root[data-ui="r5"] .g5-sx-root .g5-xev .g5-ar:hover{background:none}
+:root[data-ui="r5"] .g5-sx-root .g5-xev .g5-sx-quiet{height:32px;display:flex;align-items:center;font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-sx-root .g5-alist.g5-wide{grid-template-columns:80px max-content minmax(0,1fr)}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-err{margin-top:8px;font-size:12px;line-height:16px;color:var(--gr-danger);overflow-wrap:anywhere}
+
+/* 两步确认条放进表行 / 引擎行 */
+:root[data-ui="r5"] .g5-sx-root .g5-sx-armrow td{padding:8px 4px 0;vertical-align:middle;white-space:normal}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-armrow .g5-armed{margin:0 -4px}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-krow-armed{display:block;padding:8px 16px}
+:root[data-ui="r5"] .g5-sx-root .g5-armed .g5-msg{font-size:12px;line-height:16px;overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5-sx-root .g5-armed .g5-what{overflow-wrap:anywhere}
+
+/* 引擎行 */
+:root[data-ui="r5"] .g5-sx-root .g5-krow .g5-actor{font-size:13px;line-height:20px;color:var(--gr-text)}
+:root[data-ui="r5"] .g5-sx-root .g5-krow > .g5-btn{grid-row:1 / span 3;grid-column:2;align-self:start}
+:root[data-ui="r5"] .g5-sx-root .g5-krow > .g5-btn-ghost{margin-right:-8px}
+:root[data-ui="r5"] .g5-sx-root .g5-krow .g5-sub b.g5-danger{color:var(--gr-danger)}
+
+/* 卡内整块提示（空 / 读取失败 / 未接通） */
+:root[data-ui="r5"] .g5-sx-root .g5-sx-msg{padding:0 20px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-size:13px;color:var(--gr-text-body)}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-msg .g5-msg{min-width:0;font-size:12px;line-height:16px;color:var(--gr-text-3);overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-msg [data-wire="off"]{display:flex;align-items:center;gap:12px}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-cmd{height:28px;display:inline-flex;align-items:center;padding:0 8px;border-radius:var(--gr-r-ctl);background:var(--gr-fill-1);font-family:var(--gr-font-mono);font-size:12px;line-height:16px;color:var(--gr-text-body)}
+
+/* 绑定账户弹出卡：浮层玻璃，右缘对齐所在卡片，尖角对准触发钮 */
+:root[data-ui="r5"] .g5-apop{position:fixed;z-index:60;left:0;top:0;width:var(--gr-pop-w);max-width:calc(100vw - 16px);padding-bottom:16px;--arrow-x:56px}
+:root[data-ui="r5"] .g5-apop.g5-glass{background:var(--gr-glass-fill-pop)}
+:root[data-ui="r5"] .g5-apop::before{content:"";position:absolute;top:-6px;left:calc(var(--arrow-x) - 6px);width:12px;height:12px;transform:rotate(45deg);
+  border-radius:var(--gr-r-bar) 0 0 0;background:var(--gr-glass-fill-pop);-webkit-backdrop-filter:var(--gr-glass-blur);backdrop-filter:var(--gr-glass-blur);
+  box-shadow:var(--gr-glass-arrow-edge);clip-path:polygon(0 0,100% 0,0 100%)}
+@media (prefers-reduced-transparency:reduce){ :root[data-ui="r5"] .g5-apop.g5-glass,.g5-apop::before{background:var(--gr-ink-2);-webkit-backdrop-filter:none;backdrop-filter:none} }
+:root[data-ui="r5"] .g5-apop .g5-pb{padding:0 20px}
+:root[data-ui="r5"] .g5-apop .g5-opt{height:40px;display:flex;align-items:center;gap:8px;margin:0 -8px;padding:0 8px;border-radius:var(--gr-r-ctl);cursor:pointer}
+:root[data-ui="r5"] .g5-apop .g5-opt[aria-selected="true"]{background:var(--gr-fill-2)}
+:root[data-ui="r5"] .g5-apop .g5-opt .g5-r{margin-left:auto;display:flex;align-items:center;gap:8px}
+:root[data-ui="r5"] .g5-apop .g5-fact{min-height:32px;margin-top:4px;display:flex;align-items:center;gap:8px;font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-apop .g5-fact svg{flex:none}
+
+/* 可用策略 → 新建并启动：参数按格排，标签一行、控件一行；说明只放 title */
+:root[data-ui="r5"] .g5-sx-root [data-table="catalog"] td.g5-fill{max-width:0;width:100%}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-desc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(176px,1fr));column-gap:16px;row-gap:12px;padding-top:12px}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-nf{display:flex;flex-direction:column;gap:4px;min-width:0}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-nf.g5-sx-wide{grid-column:span 2}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-nf .g5-k{font-size:12px;line-height:16px;color:var(--gr-text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-nf .g5-dd{align-self:flex-start}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-nf .g5-dd[aria-invalid="true"]{box-shadow:inset 0 0 0 1px var(--gr-danger)}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-none{height:28px;display:inline-flex;align-items:center;font-size:12px;line-height:16px}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-nf .g5-swb{height:28px;display:inline-flex;align-items:center;align-self:flex-start;padding:0;border:0;background:none;cursor:pointer}
+:root[data-ui="r5"] .g5-sx-root .g5-sx-nf .g5-swb[disabled]{cursor:default;opacity:.4}

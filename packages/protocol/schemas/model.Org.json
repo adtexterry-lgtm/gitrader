@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Org",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Org",
+  "type": "object",
+  "properties": {
+    "orgId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrgId"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "enum": [
+            "local",
+            "unigit"
+          ]
+        },
+        "externalId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider"
+      ]
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/UsrId"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "admin",
+                "risk",
+                "trader",
+                "research"
+              ]
+            }
+          }
+        },
+        "required": [
+          "userId",
+          "roles"
+        ]
+      }
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "twoPersonAboveNotional": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        }
+      }
+    }
+  },
+  "required": [
+    "orgId",
+    "name",
+    "identity",
+    "members"
+  ]
+}

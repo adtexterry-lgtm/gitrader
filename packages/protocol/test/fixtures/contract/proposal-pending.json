@@ -1,0 +1,28 @@
+{
+  "proposalId": "prop_01JABC8F1",
+  "ticket": "T-20261009-0007",
+  "kind": "order",
+  "status": "pending",
+  "accountId": "acct_01JAB0QZ8W3K5M7N9P1R3T5V7X",
+  "intents": [
+    {"accountId": "acct_01JAB0QZ8W3K5M7N9P1R3T5V7X", "instrumentId": "hyperliquid:ETH", "side": "buy", "type": "limit", "size": "0.05", "price": "2410.5", "tif": "alo", "reduceOnly": false, "leverage": 2, "reason": "Funding flipped negative while price holds above the 4h EMA; small add with a resting post-only order."}
+  ],
+  "intentsDigest": "sha256:<64hex>",
+  "reason": "Funding flipped negative while price holds above the 4h EMA; small add with a resting post-only order.",
+  "evidence": [{"type": "signal", "id": "sig_01JABC7Y2"}],
+  "precheck": {
+    "precheckId": "pck_01JABC8EZ",
+    "verdict": "review",
+    "policyVersion": 3,
+    "ruleHits": [{"ruleId": "mdt_01JAB6M2T4#autoMaxOrderNotional", "code": "NEEDS_APPROVAL", "limit": "100", "actual": "120.53", "unit": "USDC", "action": "review", "scope": "mandate"}],
+    "estimates": {"notional": "120.53", "marginRequired": "60.26", "liquidationPrice": "1251", "slippageBps": 0, "feeEstimate": "0.018"},
+    "priceRef": {"markPrice": "2411", "ts": 1791549300000},
+    "expiresAt": 1791549330000
+  },
+  "priceBounds": {"referencePrice": "2411", "maxDriftBps": 30},
+  "mandateId": "mdt_01JAB6M2T4",
+  "expiresAt": 1791549900000,
+  "decision": null,
+  "execution": null,
+  "origin": {"actor": "agent:ak_01JAB5", "tool": "propose", "requestId": "9a8b7c6d-5e4f-4a3b-8c2d-1e0f9a8b7c6d", "via": "mcp"}
+}

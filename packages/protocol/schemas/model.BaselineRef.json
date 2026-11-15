@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:BaselineRef",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "BaselineRef",
+  "type": "object",
+  "properties": {
+    "baselineId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "buy_and_hold",
+        "cash"
+      ]
+    },
+    "instruments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "instrumentId": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+          },
+          "weight": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "instrumentId",
+          "weight"
+        ]
+      }
+    },
+    "window": {
+      "$ref": "urn:gitrader:schema:model:0.1:Window"
+    },
+    "prices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "instrumentId": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+          },
+          "startMark": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+          },
+          "endMark": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+          }
+        },
+        "required": [
+          "instrumentId",
+          "startMark",
+          "endMark"
+        ]
+      }
+    }
+  },
+  "required": [
+    "baselineId",
+    "kind",
+    "instruments",
+    "window",
+    "prices"
+  ]
+}

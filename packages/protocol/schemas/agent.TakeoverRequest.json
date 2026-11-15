@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:agent:0.1:TakeoverRequest",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: agent | Version: 0.1 | Status: draft",
+  "title": "TakeoverRequest",
+  "type": "object",
+  "properties": {
+    "takeoverId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/TkoId"
+    },
+    "level": {
+      "enum": [
+        "halt_new",
+        "cancel_all",
+        "flatten_all"
+      ]
+    },
+    "scope": {
+      "$ref": "urn:gitrader:schema:model:0.1:TradingScope"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "keepProtective": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "level",
+    "scope",
+    "reason"
+  ]
+}

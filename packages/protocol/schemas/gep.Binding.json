@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:Binding",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "Binding",
+  "type": "object",
+  "properties": {
+    "bindingId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/BindId"
+    },
+    "accounts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+          },
+          "mode": {
+            "enum": [
+              "A",
+              "B"
+            ]
+          },
+          "mandateId": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+          },
+          "signer": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "fingerprint": {
+                "type": "string"
+              }
+            },
+            "anyOf": [
+              {
+                "required": [
+                  "address"
+                ]
+              },
+              {
+                "required": [
+                  "fingerprint"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "accountId",
+          "mode",
+          "mandateId"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "B"
+                }
+              },
+              "required": [
+                "mode"
+              ]
+            },
+            "then": {
+              "required": [
+                "signer"
+              ]
+            }
+          }
+        ]
+      },
+      "minItems": 1
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "enum": [
+            "host",
+            "engine"
+          ]
+        },
+        "instruments": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+          }
+        }
+      },
+      "required": [
+        "source",
+        "instruments"
+      ]
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PolId"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "digest": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+          }
+        },
+        "required": [
+          "policyId",
+          "version",
+          "digest"
+        ]
+      }
+    },
+    "builder": {
+      "type": "object",
+      "properties": {
+        "attachedBy": {
+          "enum": [
+            "host",
+            "engine"
+          ]
+        }
+      },
+      "required": [
+        "attachedBy"
+      ]
+    },
+    "heartbeatMs": {
+      "type": "integer",
+      "minimum": 100
+    }
+  },
+  "required": [
+    "bindingId",
+    "accounts",
+    "data",
+    "policies",
+    "heartbeatMs"
+  ]
+}

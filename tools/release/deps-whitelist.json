@@ -1,0 +1,57 @@
+{
+  "//": "允许出现的第三方运行时依赖白名单（deps-audit.mjs 读）。新增条目必须写清 reason 与允许的版本范围；ranges 是精确的版本字符串白名单，'*' 表示任意（慎用）。范围收紧或依赖移除后，条目要删掉，否则审计会因「白名单过期」失败。",
+  "allow": {
+    "ajv": {
+      "ranges": ["^8.20.0"],
+      "reason": "JSON Schema 校验（协议 schemas 与引擎参数校验），MIT，随包发布"
+    },
+    "ajv-formats": {
+      "ranges": ["^3.0.1"],
+      "reason": "ajv 的 format 关键字扩展（date-time / uri），MIT"
+    },
+    "ws": {
+      "ranges": ["^8.22.0"],
+      "reason": "内核与引擎的 WebSocket（GEP 传输、交易所流），MIT"
+    },
+    "@types/ws": {
+      "ranges": ["^8.18.2", "^8.18.0"],
+      "reason": "@gitrader/kernel 的 dependencies 里放了类型包（历史选择，收口时可移到 devDependencies），MIT"
+    },
+    "@noble/curves": {
+      "ranges": ["^2.4.0", "2.4.0"],
+      "reason": "椭圆曲线签名（交易所 API 认证），MIT，零依赖实现"
+    },
+    "@noble/hashes": {
+      "ranges": ["^2.4.0", "2.4.0"],
+      "reason": "哈希与 HMAC（交易所 API 签名），MIT，零依赖实现"
+    },
+    "@nktkas/hyperliquid": {
+      "ranges": ["0.33.3"],
+      "reason": "Hyperliquid 官方 SDK 的社区维护实现（连接器用），MIT，锁定小版本"
+    },
+    "@modelcontextprotocol/sdk": {
+      "ranges": ["1.32.1"],
+      "reason": "MCP 服务端实现（@gitrader/mcp），MIT，锁定版本"
+    },
+    "@radix-ui/react-dialog": {
+      "ranges": ["1.1.23"],
+      "reason": "工作台无障碍对话框原语，MIT，锁定版本"
+    },
+    "@radix-ui/react-dropdown-menu": {
+      "ranges": ["2.1.24"],
+      "reason": "工作台下拉菜单原语，MIT，锁定版本"
+    },
+    "@radix-ui/react-popover": {
+      "ranges": ["1.1.23"],
+      "reason": "工作台浮层原语，MIT，锁定版本"
+    },
+    "preact": {
+      "ranges": ["^11.0.1", "^10 || ^11"],
+      "reason": "工作台与区块的 UI 运行时（peer 允许 10/11 两个大版本），MIT"
+    },
+    "klinecharts": {
+      "ranges": ["10.1.0"],
+      "reason": "区块 blocks-r5 的 K 线图渲染（工作台打包进 app.js），Apache-2.0，锁定版本；已登记在 THIRD-PARTY-NOTICES.md"
+    }
+  }
+}

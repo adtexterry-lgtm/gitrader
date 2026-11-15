@@ -1,0 +1,18 @@
+{
+  "name": "@gitrader/notify-telegram",
+  "version": "0.1.0",
+  "description": "Gitrader notification channel: Telegram MarkdownV2 rendering and a fetch-injected sendMessage client. Pure functions, no kernel wiring.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

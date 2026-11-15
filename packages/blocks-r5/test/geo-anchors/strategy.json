@@ -1,0 +1,831 @@
+{
+ "source": "reports/visual-r5/strategy/index.html",
+ "tolerancePx": 4,
+ "anchors": [
+  {
+   "name": "list-card",
+   "mock": "#strat",
+   "mine": "[data-view=\"list\"]",
+   "index": 0
+  },
+  {
+   "name": "engines-card",
+   "mock": "#eng",
+   "mine": "[data-view=\"engines\"]",
+   "index": 0
+  },
+  {
+   "name": "events-card",
+   "mock": "#engev",
+   "mine": "[data-view=\"events\"]",
+   "index": 0
+  },
+  {
+   "name": "list-title",
+   "mock": "#strat .hd h2",
+   "mine": "[data-view=\"list\"] .g5-hd h2",
+   "index": 0
+  },
+  {
+   "name": "list-tabs",
+   "mock": "#strat .tabs",
+   "mine": "[data-view=\"list\"] .g5-tabs",
+   "index": 0
+  },
+  {
+   "name": "bind-button",
+   "mock": "#bindbtn",
+   "mine": "[data-act=\"bind-open\"]",
+   "index": 0
+  },
+  {
+   "name": "th-1",
+   "mock": "#strat thead th:nth-child(1)",
+   "mine": "[data-view=\"list\"] thead th:nth-child(1)",
+   "index": 0
+  },
+  {
+   "name": "th-2",
+   "mock": "#strat thead th:nth-child(2)",
+   "mine": "[data-view=\"list\"] thead th:nth-child(2)",
+   "index": 0
+  },
+  {
+   "name": "th-3",
+   "mock": "#strat thead th:nth-child(3)",
+   "mine": "[data-view=\"list\"] thead th:nth-child(3)",
+   "index": 0
+  },
+  {
+   "name": "th-4",
+   "mock": "#strat thead th:nth-child(4)",
+   "mine": "[data-view=\"list\"] thead th:nth-child(4)",
+   "index": 0
+  },
+  {
+   "name": "th-5",
+   "mock": "#strat thead th:nth-child(5)",
+   "mine": "[data-view=\"list\"] thead th:nth-child(5)",
+   "index": 0
+  },
+  {
+   "name": "th-6",
+   "mock": "#strat thead th:nth-child(6)",
+   "mine": "[data-view=\"list\"] thead th:nth-child(6)",
+   "index": 0
+  },
+  {
+   "name": "row-1",
+   "mock": "#strat tbody tr:nth-child(1)",
+   "mine": "[data-view=\"list\"] tbody tr:nth-child(1)",
+   "index": 0
+  },
+  {
+   "name": "row-2",
+   "mock": "#strat tbody tr:nth-child(2)",
+   "mine": "[data-view=\"list\"] tbody tr:nth-child(2)",
+   "index": 0
+  },
+  {
+   "name": "row-3",
+   "mock": "#strat tbody tr:nth-child(3)",
+   "mine": "[data-view=\"list\"] tbody tr:nth-child(3)",
+   "index": 0
+  },
+  {
+   "name": "row-4",
+   "mock": "#strat tbody tr:nth-child(4)",
+   "mine": "[data-view=\"list\"] tbody tr:nth-child(4)",
+   "index": 0
+  },
+  {
+   "name": "row-5",
+   "mock": "#strat tbody tr:nth-child(5)",
+   "mine": "[data-view=\"list\"] tbody tr:nth-child(5)",
+   "index": 0
+  },
+  {
+   "name": "row-6",
+   "mock": "#strat tbody tr:nth-child(6)",
+   "mine": "[data-view=\"list\"] tbody tr:nth-child(6)",
+   "index": 0
+  },
+  {
+   "name": "row-7",
+   "mock": "#strat tbody tr:nth-child(7)",
+   "mine": "[data-view=\"list\"] tbody tr:nth-child(7)",
+   "index": 0
+  },
+  {
+   "name": "row-8",
+   "mock": "#strat tbody tr:nth-child(8)",
+   "mine": "[data-view=\"list\"] tbody tr:nth-child(8)",
+   "index": 0
+  },
+  {
+   "name": "x-params",
+   "mock": "#strat .xpar",
+   "mine": "[data-view=\"list\"] .g5-xpar",
+   "index": 0
+  },
+  {
+   "name": "x-values",
+   "mock": "#strat .pv",
+   "mine": "[data-view=\"list\"] .g5-pv",
+   "index": 0
+  },
+  {
+   "name": "x-events",
+   "mock": "#strat .xev",
+   "mine": "[data-view=\"list\"] .g5-xev",
+   "index": 0
+  },
+  {
+   "name": "krow-1",
+   "mock": "#eng .krow",
+   "mine": "[data-view=\"engines\"] .g5-krow",
+   "index": 0
+  },
+  {
+   "name": "krow-2",
+   "mock": "#eng .krow",
+   "mine": "[data-view=\"engines\"] .g5-krow",
+   "index": 1
+  },
+  {
+   "name": "event-1",
+   "mock": "#engev .ar",
+   "mine": "[data-view=\"events\"] .g5-ar",
+   "index": 0
+  },
+  {
+   "name": "event-2",
+   "mock": "#engev .ar",
+   "mine": "[data-view=\"events\"] .g5-ar",
+   "index": 1
+  },
+  {
+   "name": "event-3",
+   "mock": "#engev .ar",
+   "mine": "[data-view=\"events\"] .g5-ar",
+   "index": 2
+  },
+  {
+   "name": "event-4",
+   "mock": "#engev .ar",
+   "mine": "[data-view=\"events\"] .g5-ar",
+   "index": 3
+  },
+  {
+   "name": "event-5",
+   "mock": "#engev .ar",
+   "mine": "[data-view=\"events\"] .g5-ar",
+   "index": 4
+  },
+  {
+   "name": "event-6",
+   "mock": "#engev .ar",
+   "mine": "[data-view=\"events\"] .g5-ar",
+   "index": 5
+  },
+  {
+   "name": "event-7",
+   "mock": "#engev .ar",
+   "mine": "[data-view=\"events\"] .g5-ar",
+   "index": 6
+  },
+  {
+   "name": "event-8",
+   "mock": "#engev .ar",
+   "mine": "[data-view=\"events\"] .g5-ar",
+   "index": 7
+  },
+  {
+   "name": "event-9",
+   "mock": "#engev .ar",
+   "mine": "[data-view=\"events\"] .g5-ar",
+   "index": 8
+  }
+ ],
+ "rects": {
+  "1280": {
+   "list-card": {
+    "x": 16,
+    "y": 140,
+    "width": 796,
+    "height": 744
+   },
+   "engines-card": {
+    "x": 824,
+    "y": 140,
+    "width": 440,
+    "height": 192
+   },
+   "events-card": {
+    "x": 824,
+    "y": 344,
+    "width": 440,
+    "height": 540
+   },
+   "list-title": {
+    "x": 36,
+    "y": 150,
+    "width": 28,
+    "height": 20
+   },
+   "list-tabs": {
+    "x": 513,
+    "y": 146,
+    "width": 287,
+    "height": 28
+   },
+   "bind-button": {
+    "x": 1164,
+    "y": 146,
+    "width": 88,
+    "height": 28
+   },
+   "th-1": {
+    "x": 32,
+    "y": 180,
+    "width": 116.703125,
+    "height": 32
+   },
+   "th-2": {
+    "x": 148.703125,
+    "y": 180,
+    "width": 108.8,
+    "height": 32
+   },
+   "th-3": {
+    "x": 260.4,
+    "y": 180,
+    "width": 202.5,
+    "height": 32
+   },
+   "th-4": {
+    "x": 462.9,
+    "y": 180,
+    "width": 38,
+    "height": 32
+   },
+   "th-5": {
+    "x": 500.9,
+    "y": 180,
+    "width": 188.1,
+    "height": 32
+   },
+   "th-6": {
+    "x": 689,
+    "y": 180,
+    "width": 107,
+    "height": 32
+   },
+   "row-1": {
+    "x": 32,
+    "y": 212,
+    "width": 764,
+    "height": 51
+   },
+   "row-2": {
+    "x": 32,
+    "y": 263,
+    "width": 764,
+    "height": 51
+   },
+   "row-3": {
+    "x": 32,
+    "y": 314,
+    "width": 764,
+    "height": 240
+   },
+   "row-4": {
+    "x": 32,
+    "y": 554,
+    "width": 764,
+    "height": 51
+   },
+   "row-5": {
+    "x": 32,
+    "y": 605,
+    "width": 764,
+    "height": 51
+   },
+   "row-6": {
+    "x": 32,
+    "y": 656,
+    "width": 764,
+    "height": 51
+   },
+   "row-7": {
+    "x": 32,
+    "y": 702,
+    "width": 764,
+    "height": 51
+   },
+   "row-8": {
+    "x": 32,
+    "y": 752,
+    "width": 764,
+    "height": 51
+   },
+   "x-params": {
+    "x": 36,
+    "y": 314,
+    "width": 288,
+    "height": 224
+   },
+   "x-values": {
+    "x": 36,
+    "y": 346,
+    "width": 288,
+    "height": 192
+   },
+   "x-events": {
+    "x": 356,
+    "y": 314,
+    "width": 436,
+    "height": 224
+   },
+   "krow-1": {
+    "x": 824,
+    "y": 180,
+    "width": 440,
+    "height": 76
+   },
+   "krow-2": {
+    "x": 824,
+    "y": 256,
+    "width": 440,
+    "height": 76
+   },
+   "event-1": {
+    "x": 840,
+    "y": 384,
+    "width": 408,
+    "height": 56
+   },
+   "event-2": {
+    "x": 840,
+    "y": 440,
+    "width": 408,
+    "height": 40
+   },
+   "event-3": {
+    "x": 840,
+    "y": 480,
+    "width": 408,
+    "height": 56
+   },
+   "event-4": {
+    "x": 840,
+    "y": 536,
+    "width": 408,
+    "height": 40
+   },
+   "event-5": {
+    "x": 840,
+    "y": 576,
+    "width": 408,
+    "height": 40
+   },
+   "event-6": {
+    "x": 840,
+    "y": 616,
+    "width": 408,
+    "height": 40
+   },
+   "event-7": {
+    "x": 840,
+    "y": 656,
+    "width": 408,
+    "height": 40
+   },
+   "event-8": {
+    "x": 840,
+    "y": 696,
+    "width": 408,
+    "height": 56
+   },
+   "event-9": {
+    "x": 840,
+    "y": 752,
+    "width": 408,
+    "height": 40
+   }
+  },
+  "1440": {
+   "list-card": {
+    "x": 24,
+    "y": 140,
+    "width": 860,
+    "height": 744
+   },
+   "engines-card": {
+    "x": 896,
+    "y": 140,
+    "width": 520,
+    "height": 192
+   },
+   "events-card": {
+    "x": 896,
+    "y": 344,
+    "width": 520,
+    "height": 540
+   },
+   "list-title": {
+    "x": 44,
+    "y": 150,
+    "width": 28,
+    "height": 20
+   },
+   "list-tabs": {
+    "x": 585,
+    "y": 146,
+    "width": 287,
+    "height": 28
+   },
+   "bind-button": {
+    "x": 1316,
+    "y": 146,
+    "width": 88,
+    "height": 28
+   },
+   "th-1": {
+    "x": 40,
+    "y": 180,
+    "width": 116.703125,
+    "height": 32
+   },
+   "th-2": {
+    "x": 156.703125,
+    "y": 180,
+    "width": 116.8,
+    "height": 32
+   },
+   "th-3": {
+    "x": 276.4,
+    "y": 180,
+    "width": 210.5,
+    "height": 32
+   },
+   "th-4": {
+    "x": 486.9,
+    "y": 180,
+    "width": 46,
+    "height": 32
+   },
+   "th-5": {
+    "x": 532.9,
+    "y": 180,
+    "width": 220.1,
+    "height": 32
+   },
+   "th-6": {
+    "x": 753,
+    "y": 180,
+    "width": 115,
+    "height": 32
+   },
+   "row-1": {
+    "x": 40,
+    "y": 212,
+    "width": 828,
+    "height": 51
+   },
+   "row-2": {
+    "x": 40,
+    "y": 263,
+    "width": 828,
+    "height": 51
+   },
+   "row-3": {
+    "x": 40,
+    "y": 314,
+    "width": 828,
+    "height": 240
+   },
+   "row-4": {
+    "x": 40,
+    "y": 554,
+    "width": 828,
+    "height": 51
+   },
+   "row-5": {
+    "x": 40,
+    "y": 605,
+    "width": 828,
+    "height": 51
+   },
+   "row-6": {
+    "x": 40,
+    "y": 656,
+    "width": 828,
+    "height": 51
+   },
+   "row-7": {
+    "x": 40,
+    "y": 702,
+    "width": 828,
+    "height": 51
+   },
+   "row-8": {
+    "x": 40,
+    "y": 752,
+    "width": 828,
+    "height": 51
+   },
+   "x-params": {
+    "x": 44,
+    "y": 314,
+    "width": 288,
+    "height": 224
+   },
+   "x-values": {
+    "x": 44,
+    "y": 346,
+    "width": 288,
+    "height": 192
+   },
+   "x-events": {
+    "x": 364,
+    "y": 314,
+    "width": 500,
+    "height": 224
+   },
+   "krow-1": {
+    "x": 896,
+    "y": 180,
+    "width": 520,
+    "height": 76
+   },
+   "krow-2": {
+    "x": 896,
+    "y": 256,
+    "width": 520,
+    "height": 76
+   },
+   "event-1": {
+    "x": 912,
+    "y": 384,
+    "width": 488,
+    "height": 56
+   },
+   "event-2": {
+    "x": 912,
+    "y": 440,
+    "width": 488,
+    "height": 40
+   },
+   "event-3": {
+    "x": 912,
+    "y": 480,
+    "width": 488,
+    "height": 56
+   },
+   "event-4": {
+    "x": 912,
+    "y": 536,
+    "width": 488,
+    "height": 40
+   },
+   "event-5": {
+    "x": 912,
+    "y": 576,
+    "width": 488,
+    "height": 40
+   },
+   "event-6": {
+    "x": 912,
+    "y": 616,
+    "width": 488,
+    "height": 40
+   },
+   "event-7": {
+    "x": 912,
+    "y": 656,
+    "width": 488,
+    "height": 40
+   },
+   "event-8": {
+    "x": 912,
+    "y": 696,
+    "width": 488,
+    "height": 56
+   },
+   "event-9": {
+    "x": 912,
+    "y": 752,
+    "width": 488,
+    "height": 40
+   }
+  },
+  "1920": {
+   "list-card": {
+    "x": 24,
+    "y": 140,
+    "width": 1260,
+    "height": 744
+   },
+   "engines-card": {
+    "x": 1296,
+    "y": 140,
+    "width": 600,
+    "height": 192
+   },
+   "events-card": {
+    "x": 1296,
+    "y": 344,
+    "width": 600,
+    "height": 540
+   },
+   "list-title": {
+    "x": 44,
+    "y": 150,
+    "width": 28,
+    "height": 20
+   },
+   "list-tabs": {
+    "x": 985,
+    "y": 146,
+    "width": 287,
+    "height": 28
+   },
+   "bind-button": {
+    "x": 1796,
+    "y": 146,
+    "width": 88,
+    "height": 28
+   },
+   "th-1": {
+    "x": 40,
+    "y": 180,
+    "width": 116.703125,
+    "height": 32
+   },
+   "th-2": {
+    "x": 156.703125,
+    "y": 180,
+    "width": 128.8,
+    "height": 32
+   },
+   "th-3": {
+    "x": 288.4,
+    "y": 180,
+    "width": 222.5,
+    "height": 32
+   },
+   "th-4": {
+    "x": 510.9,
+    "y": 180,
+    "width": 58,
+    "height": 32
+   },
+   "th-5": {
+    "x": 568.9,
+    "y": 180,
+    "width": 572.1,
+    "height": 32
+   },
+   "th-6": {
+    "x": 1141,
+    "y": 180,
+    "width": 127,
+    "height": 32
+   },
+   "row-1": {
+    "x": 40,
+    "y": 212,
+    "width": 1228,
+    "height": 51
+   },
+   "row-2": {
+    "x": 40,
+    "y": 263,
+    "width": 1228,
+    "height": 51
+   },
+   "row-3": {
+    "x": 40,
+    "y": 314,
+    "width": 1228,
+    "height": 240
+   },
+   "row-4": {
+    "x": 40,
+    "y": 554,
+    "width": 1228,
+    "height": 51
+   },
+   "row-5": {
+    "x": 40,
+    "y": 605,
+    "width": 1228,
+    "height": 51
+   },
+   "row-6": {
+    "x": 40,
+    "y": 656,
+    "width": 1228,
+    "height": 51
+   },
+   "row-7": {
+    "x": 40,
+    "y": 702,
+    "width": 1228,
+    "height": 51
+   },
+   "row-8": {
+    "x": 40,
+    "y": 752,
+    "width": 1228,
+    "height": 51
+   },
+   "x-params": {
+    "x": 44,
+    "y": 314,
+    "width": 288,
+    "height": 224
+   },
+   "x-values": {
+    "x": 44,
+    "y": 346,
+    "width": 288,
+    "height": 192
+   },
+   "x-events": {
+    "x": 364,
+    "y": 314,
+    "width": 900,
+    "height": 224
+   },
+   "krow-1": {
+    "x": 1296,
+    "y": 180,
+    "width": 600,
+    "height": 76
+   },
+   "krow-2": {
+    "x": 1296,
+    "y": 256,
+    "width": 600,
+    "height": 76
+   },
+   "event-1": {
+    "x": 1312,
+    "y": 384,
+    "width": 568,
+    "height": 56
+   },
+   "event-2": {
+    "x": 1312,
+    "y": 440,
+    "width": 568,
+    "height": 40
+   },
+   "event-3": {
+    "x": 1312,
+    "y": 480,
+    "width": 568,
+    "height": 56
+   },
+   "event-4": {
+    "x": 1312,
+    "y": 536,
+    "width": 568,
+    "height": 40
+   },
+   "event-5": {
+    "x": 1312,
+    "y": 576,
+    "width": 568,
+    "height": 40
+   },
+   "event-6": {
+    "x": 1312,
+    "y": 616,
+    "width": 568,
+    "height": 40
+   },
+   "event-7": {
+    "x": 1312,
+    "y": 656,
+    "width": 568,
+    "height": 40
+   },
+   "event-8": {
+    "x": 1312,
+    "y": 696,
+    "width": 568,
+    "height": 56
+   },
+   "event-9": {
+    "x": 1312,
+    "y": 752,
+    "width": 568,
+    "height": 40
+   }
+  }
+ },
+ "note": "r7 WP-I：list-tabs 多一个「可用」页签（+56px），x/width 由视觉签字人按实测改写，稿未重画。"
+}

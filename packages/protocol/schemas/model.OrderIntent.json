@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:OrderIntent",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "OrderIntent",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "side": {
+      "enum": [
+        "buy",
+        "sell"
+      ]
+    },
+    "type": {
+      "enum": [
+        "market",
+        "limit",
+        "stop_market",
+        "stop_limit",
+        "take_market",
+        "take_limit",
+        "trailing_stop",
+        "twap"
+      ]
+    },
+    "size": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "notional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "price": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "triggerPrice": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "triggerType": {
+      "enum": [
+        "mark",
+        "last",
+        "index"
+      ]
+    },
+    "tif": {
+      "enum": [
+        "gtc",
+        "ioc",
+        "fok",
+        "alo",
+        "gtd"
+      ]
+    },
+    "reduceOnly": {
+      "type": "boolean"
+    },
+    "postOnly": {
+      "type": "boolean"
+    },
+    "leverage": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "marginMode": {
+      "enum": [
+        "cross",
+        "isolated",
+        "strictIsolated",
+        "noCross"
+      ]
+    },
+    "maxSlippageBps": {
+      "type": "number",
+      "minimum": 0
+    },
+    "tpsl": {
+      "type": "object",
+      "properties": {
+        "takeProfit": {
+          "type": "object",
+          "properties": {
+            "triggerPrice": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "price": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            }
+          },
+          "required": [
+            "triggerPrice"
+          ]
+        },
+        "stopLoss": {
+          "type": "object",
+          "properties": {
+            "triggerPrice": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "price": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            }
+          },
+          "required": [
+            "triggerPrice"
+          ]
+        },
+        "grouping": {
+          "enum": [
+            "order",
+            "position"
+          ]
+        }
+      },
+      "required": [
+        "grouping"
+      ]
+    },
+    "expiresAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "clientOrderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+    },
+    "rounding": {
+      "enum": [
+        "reject",
+        "passive"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "legId": {
+      "type": "string"
+    },
+    "exitPlanId": {
+      "type": "string"
+    },
+    "ocoGroupId": {
+      "type": "string"
+    },
+    "allowAdjust": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "size",
+          "leverage",
+          "maxSlippageBps"
+        ]
+      }
+    },
+    "trailing": {
+      "type": "object",
+      "properties": {
+        "callbackRatio": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal",
+          "pattern": "^(?!-|0$)"
+        },
+        "activationPrice": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "activationRatio": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        }
+      },
+      "required": [
+        "callbackRatio"
+      ]
+    }
+  },
+  "required": [
+    "accountId",
+    "instrumentId",
+    "side",
+    "type"
+  ],
+  "allOf": [
+    {
+      "anyOf": [
+        {
+          "required": [
+            "size"
+          ]
+        },
+        {
+          "required": [
+            "notional"
+          ]
+        }
+      ]
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "limit",
+              "stop_limit",
+              "take_limit"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "price"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "stop_market",
+              "stop_limit",
+              "take_market",
+              "take_limit"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "triggerPrice"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "_comment": "由 test/ledger-chain.ts 构造；UPDATE_VECTORS=1 重新生成。任何变动都意味着哈希链算法变了——先在 CHANGELOG 登记。",
+  "entries": [
+    {
+      "seq": 0,
+      "payloadHash": "sha256:9afb10a7c94338cc6feaf69b53a01c4070daaa9cdcefcd1a37039808dca1e747",
+      "prevHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "sha256:13c59806de8f62b9bf1d753ce7af9ad0ca982580c4c72e1536a98e4db56cb03e"
+    },
+    {
+      "seq": 1,
+      "payloadHash": "sha256:f29f83061bfa3b35a2e4c200c1ba9904491410a597651ffe7dfbc5fc58ab31de",
+      "prevHash": "sha256:13c59806de8f62b9bf1d753ce7af9ad0ca982580c4c72e1536a98e4db56cb03e",
+      "hash": "sha256:4f827959483aa8e50610b5decc83ebb6fc7bffe45ad4d2aef5b31ab6f936c79f"
+    },
+    {
+      "seq": 2,
+      "payloadHash": "sha256:07c0392c3bf74945025fe4920079170ca59251d475d7fbb0d60b06163ddc3999",
+      "prevHash": "sha256:4f827959483aa8e50610b5decc83ebb6fc7bffe45ad4d2aef5b31ab6f936c79f",
+      "hash": "sha256:363dcc8ea431af61eceeb62f7efc09eb2dd0d95b18ed13c54d743816fbb9c642"
+    }
+  ]
+}

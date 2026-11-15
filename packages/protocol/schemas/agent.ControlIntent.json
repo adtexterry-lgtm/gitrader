@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:agent:0.1:ControlIntent",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: agent | Version: 0.1 | Status: draft",
+  "title": "ControlIntent",
+  "type": "object",
+  "properties": {
+    "controlKind": {
+      "enum": [
+        "start_strategy",
+        "run_workflow",
+        "request_promotion",
+        "install_plugin"
+      ]
+    },
+    "params": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "controlKind",
+    "params"
+  ]
+}

@@ -1,0 +1,2020 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:risk-gate:1",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: risk-gate | Version: 1 | Status: draft",
+  "title": "Risk Gate Protocol",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/GateInput"
+    },
+    {
+      "$ref": "#/$defs/GateDecision"
+    },
+    {
+      "$ref": "#/$defs/GateTicket"
+    },
+    {
+      "$ref": "#/$defs/GateTarget"
+    },
+    {
+      "$ref": "#/$defs/ProtectorPreVerdict"
+    }
+  ],
+  "$defs": {
+    "GateTarget": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "order"
+            },
+            "intent": {
+              "allOf": [
+                {
+                  "$ref": "urn:gitrader:schema:model:0.1:OrderIntent"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "size": {
+                      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                    },
+                    "tif": {
+                      "enum": [
+                        "gtc",
+                        "ioc",
+                        "fok",
+                        "alo",
+                        "gtd"
+                      ]
+                    },
+                    "clientOrderId": {
+                      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+                    }
+                  },
+                  "required": [
+                    "size",
+                    "tif",
+                    "clientOrderId"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "intent"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "cancel"
+            },
+            "targets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "orderId": {
+                    "type": "string"
+                  },
+                  "clientOrderId": {
+                    "type": "string"
+                  },
+                  "tpslRole": {
+                    "enum": [
+                      "tp",
+                      "sl"
+                    ]
+                  }
+                },
+                "required": [
+                  "orderId",
+                  "clientOrderId"
+                ]
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "targets"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "cancel_all"
+            },
+            "instrumentId": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+            },
+            "keepProtective": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "kind",
+            "keepProtective"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "leverage"
+            },
+            "instrumentId": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+            },
+            "leverage": {
+              "type": "number"
+            },
+            "marginMode": {
+              "enum": [
+                "cross",
+                "isolated",
+                "strictIsolated",
+                "noCross"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "instrumentId",
+            "leverage"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "deadman"
+            },
+            "atMs": {
+              "oneOf": [
+                {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "atMs"
+          ]
+        }
+      ]
+    },
+    "GateAccountView": {
+      "type": "object",
+      "properties": {
+        "equity": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "available": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "availableDeductsOpenOrders": {
+          "type": "boolean"
+        },
+        "positions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "instrumentId": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+              },
+              "side": {
+                "enum": [
+                  "long",
+                  "short"
+                ]
+              },
+              "size": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+              },
+              "notional": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+              },
+              "leverage": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "instrumentId",
+              "side",
+              "size",
+              "notional",
+              "leverage"
+            ]
+          }
+        },
+        "openOrders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "instrumentId": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+              },
+              "side": {
+                "enum": [
+                  "buy",
+                  "sell"
+                ]
+              },
+              "notional": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "instrumentId",
+              "side",
+              "notional",
+              "count"
+            ]
+          }
+        },
+        "stopLossOrderIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "asOf": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "confirmedAt": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "stale": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "equity",
+        "available",
+        "availableDeductsOpenOrders",
+        "positions",
+        "openOrders",
+        "stopLossOrderIds",
+        "asOf",
+        "stale"
+      ]
+    },
+    "ReservedView": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "object",
+          "properties": {
+            "margin": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "notional": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "margin",
+            "notional",
+            "count"
+          ]
+        },
+        "byInstrument": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "long": {
+                "type": "object",
+                "properties": {
+                  "notional": {
+                    "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "notional",
+                  "count"
+                ]
+              },
+              "short": {
+                "type": "object",
+                "properties": {
+                  "notional": {
+                    "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "notional",
+                  "count"
+                ]
+              }
+            },
+            "required": [
+              "long",
+              "short"
+            ]
+          }
+        },
+        "today": {
+          "type": "object",
+          "properties": {
+            "notional": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "notional",
+            "count"
+          ]
+        },
+        "lastMinute": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "count"
+          ]
+        }
+      },
+      "required": [
+        "account",
+        "byInstrument",
+        "today",
+        "lastMinute"
+      ]
+    },
+    "GateAdjustment": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "ruleId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "code": {
+              "enum": [
+                "LEVERAGE",
+                "ORDER_NOTIONAL",
+                "POSITION_NOTIONAL",
+                "TOTAL_NOTIONAL",
+                "OPEN_POSITIONS",
+                "DAILY_LOSS",
+                "COOLDOWN",
+                "INSUFFICIENT_MARGIN",
+                "REDUCE_ONLY",
+                "INSTRUMENT_NOT_ALLOWED",
+                "TRADING_STATE",
+                "DAILY_NOTIONAL",
+                "VENUE_NOT_ALLOWED",
+                "SLIPPAGE",
+                "STALE_PRICE",
+                "RATE_BUDGET",
+                "MANDATE_LEVEL",
+                "MANDATE_EXPIRED",
+                "MANDATE_LIMIT",
+                "NEEDS_APPROVAL",
+                "PROTECTOR",
+                "LLM_LIVE_ENTRY",
+                "KILL_SWITCH",
+                "ACCOUNT_UNKNOWN",
+                "PROTECTOR_UNAVAILABLE",
+                "VENUE_RULE",
+                "MANDATE_INCOMPLETE",
+                "SIZE_PRECISION",
+                "REDUCE_ONLY_MISMATCH",
+                "INTENT_EXPIRED",
+                "TPSL_INVALID",
+                "STOP_REQUIRED"
+              ]
+            },
+            "field": {
+              "enum": [
+                "size",
+                "leverage",
+                "maxSlippageBps",
+                "reduceOnly"
+              ]
+            },
+            "from": {
+              "anyOf": [
+                {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "to": {
+              "anyOf": [
+                {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "unit": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "ruleId",
+            "code",
+            "field",
+            "from",
+            "to",
+            "unit"
+          ],
+          "not": {
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ruleId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "code": {
+              "const": "STALE_PRICE"
+            },
+            "field": {
+              "const": "markPrice"
+            },
+            "kind": {
+              "const": "warning"
+            },
+            "from": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "to": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "unit": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "ruleId",
+            "code",
+            "field",
+            "kind",
+            "from",
+            "to",
+            "unit"
+          ]
+        }
+      ]
+    },
+    "PrecheckStats": {
+      "type": "object",
+      "properties": {
+        "dayStartEquity": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "dailyNotional": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "mandateDailyNotional": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "ordersLastMinute": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mandateOrdersLastMinute": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ordersToday": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mandateOrdersToday": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lastOpenTs": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "duplicateOf": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "dailyNotional",
+        "mandateDailyNotional",
+        "ordersLastMinute",
+        "mandateOrdersLastMinute",
+        "ordersToday",
+        "mandateOrdersToday"
+      ]
+    },
+    "VenueRules": {
+      "type": "object",
+      "properties": {
+        "maxOpenOrders": {
+          "type": "object",
+          "properties": {
+            "cap": {
+              "type": "number",
+              "minimum": 0
+            },
+            "current": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "cap",
+            "current"
+          ]
+        },
+        "marketPriceBandBps": {
+          "type": "number",
+          "minimum": 0
+        },
+        "minOrderNotional": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        }
+      }
+    },
+    "StateReason": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "$ref": "urn:gitrader:schema:model:0.1:TradingScope"
+        },
+        "state": {
+          "$ref": "urn:gitrader:schema:model:0.1:TradingState"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "until": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "protector": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "scope",
+        "state",
+        "reason"
+      ]
+    },
+    "ProtectorPreVerdict": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "pass"
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "block"
+            },
+            "code": {
+              "enum": [
+                "LEVERAGE",
+                "ORDER_NOTIONAL",
+                "POSITION_NOTIONAL",
+                "TOTAL_NOTIONAL",
+                "OPEN_POSITIONS",
+                "DAILY_LOSS",
+                "COOLDOWN",
+                "INSUFFICIENT_MARGIN",
+                "REDUCE_ONLY",
+                "INSTRUMENT_NOT_ALLOWED",
+                "TRADING_STATE",
+                "DAILY_NOTIONAL",
+                "VENUE_NOT_ALLOWED",
+                "SLIPPAGE",
+                "STALE_PRICE",
+                "RATE_BUDGET",
+                "MANDATE_LEVEL",
+                "MANDATE_EXPIRED",
+                "MANDATE_LIMIT",
+                "NEEDS_APPROVAL",
+                "PROTECTOR",
+                "LLM_LIVE_ENTRY",
+                "KILL_SWITCH",
+                "ACCOUNT_UNKNOWN",
+                "PROTECTOR_UNAVAILABLE",
+                "VENUE_RULE",
+                "MANDATE_INCOMPLETE",
+                "SIZE_PRECISION",
+                "REDUCE_ONLY_MISMATCH",
+                "INTENT_EXPIRED",
+                "TPSL_INVALID",
+                "STOP_REQUIRED"
+              ]
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "action",
+            "message"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "limit"
+            },
+            "field": {
+              "const": "size"
+            },
+            "to": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "action",
+            "field",
+            "to",
+            "message"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "pause"
+            },
+            "scope": {
+              "enum": [
+                "account",
+                "instrument"
+              ]
+            },
+            "minutes": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1440
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "action",
+            "scope",
+            "minutes",
+            "message"
+          ]
+        }
+      ]
+    },
+    "ProtectorResult": {
+      "type": "object",
+      "properties": {
+        "pluginId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceDigest": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mode": {
+          "enum": [
+            "enforce",
+            "monitor"
+          ]
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "result": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ProtectorPreVerdict"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "const": "unavailable"
+                },
+                "reason": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "action",
+                "reason"
+              ]
+            }
+          ]
+        },
+        "durationUs": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "pluginId",
+        "version",
+        "sourceDigest",
+        "order",
+        "mode",
+        "seq",
+        "result",
+        "durationUs"
+      ]
+    },
+    "GateTicket": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "precheckId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PckId"
+        },
+        "bootId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "accountId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+        },
+        "action": {
+          "enum": [
+            "open",
+            "reduce",
+            "cancel",
+            "cancel_protective",
+            "amend",
+            "leverage",
+            "deadman_arm",
+            "deadman_disarm"
+          ]
+        },
+        "targetDigest": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        },
+        "issuedAt": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "expiresAt": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "sig": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "ticketId",
+        "precheckId",
+        "bootId",
+        "accountId",
+        "action",
+        "targetDigest",
+        "issuedAt",
+        "expiresAt",
+        "sig"
+      ]
+    },
+    "GateInput": {
+      "type": "object",
+      "properties": {
+        "precheckId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PckId"
+        },
+        "dryRun": {
+          "type": "boolean"
+        },
+        "action": {
+          "enum": [
+            "open",
+            "reduce",
+            "cancel",
+            "cancel_protective",
+            "amend",
+            "leverage",
+            "deadman_arm",
+            "deadman_disarm"
+          ]
+        },
+        "actorClass": {
+          "enum": [
+            "agent",
+            "human",
+            "system"
+          ]
+        },
+        "target": {
+          "$ref": "#/$defs/GateTarget"
+        },
+        "originalTargetDigest": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        },
+        "originActorType": {
+          "enum": [
+            "human",
+            "engine",
+            "llm-agent",
+            "system"
+          ]
+        },
+        "account": {
+          "type": "object",
+          "properties": {
+            "accountId": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+            },
+            "venue": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+            },
+            "mode": {
+              "enum": [
+                "paper",
+                "live"
+              ]
+            },
+            "groupIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "accountId",
+            "venue",
+            "mode",
+            "groupIds"
+          ]
+        },
+        "instrument": {
+          "$ref": "urn:gitrader:schema:model:0.1:Instrument"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/GateAccountView"
+        },
+        "mark": {
+          "type": "object",
+          "properties": {
+            "price": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "ts": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+            },
+            "source": {
+              "const": "venue_mark"
+            }
+          },
+          "required": [
+            "price",
+            "ts",
+            "source"
+          ]
+        },
+        "cancelPriceChecks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "instrumentId": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+              },
+              "quote": {
+                "type": "string"
+              },
+              "mark": {
+                "type": "object",
+                "properties": {
+                  "price": {
+                    "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                  },
+                  "ts": {
+                    "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+                  },
+                  "source": {
+                    "const": "venue_mark"
+                  }
+                },
+                "required": [
+                  "price",
+                  "ts",
+                  "source"
+                ]
+              }
+            },
+            "required": [
+              "instrumentId"
+            ]
+          }
+        },
+        "last": {
+          "type": "object",
+          "properties": {
+            "price": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "ts": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+            }
+          },
+          "required": [
+            "price",
+            "ts"
+          ]
+        },
+        "mandate": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:agent:0.1:Mandate"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mandateIntegrity": {
+          "type": "object",
+          "properties": {
+            "ok": {
+              "type": "boolean"
+            },
+            "problems": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "ok",
+            "problems"
+          ]
+        },
+        "policy": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:model:0.1:RiskPolicy"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "policyIntegrity": {
+          "type": "object",
+          "properties": {
+            "ok": {
+              "type": "boolean"
+            },
+            "problems": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "ok",
+            "problems"
+          ]
+        },
+        "path": {
+          "enum": [
+            "direct",
+            "proposal",
+            "approved"
+          ]
+        },
+        "now": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "stats": {
+          "$ref": "#/$defs/PrecheckStats"
+        },
+        "rate": {
+          "type": "object",
+          "properties": {
+            "used": {
+              "type": "number"
+            },
+            "limit": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "used",
+            "limit"
+          ]
+        },
+        "reserved": {
+          "$ref": "#/$defs/ReservedView"
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/StateReason"
+          }
+        },
+        "assemblyAdjustments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GateAdjustment"
+          }
+        },
+        "killSwitch": {
+          "type": "object",
+          "properties": {
+            "tripped": {
+              "type": "boolean"
+            },
+            "source": {
+              "enum": [
+                "manual",
+                "file",
+                "deadman",
+                "auto"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "tripped"
+          ]
+        },
+        "venueRules": {
+          "$ref": "#/$defs/VenueRules"
+        },
+        "protectorResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProtectorResult"
+          }
+        }
+      },
+      "required": [
+        "precheckId",
+        "dryRun",
+        "action",
+        "actorClass",
+        "target",
+        "originActorType",
+        "account",
+        "snapshot",
+        "mandate",
+        "mandateIntegrity",
+        "policy",
+        "policyIntegrity",
+        "path",
+        "now",
+        "stats",
+        "reserved",
+        "states",
+        "killSwitch",
+        "protectorResults"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "target": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "order",
+                      "leverage"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              }
+            },
+            "required": [
+              "target"
+            ]
+          },
+          "then": {
+            "required": [
+              "instrument"
+            ]
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "enum": [
+                    "open",
+                    "reduce",
+                    "amend"
+                  ]
+                },
+                "target": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "order"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                }
+              },
+              "required": [
+                "action",
+                "target"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "enum": [
+                    "cancel",
+                    "cancel_protective"
+                  ]
+                },
+                "target": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "enum": [
+                        "cancel",
+                        "cancel_all"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                }
+              },
+              "required": [
+                "action",
+                "target"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "const": "leverage"
+                },
+                "target": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "leverage"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                }
+              },
+              "required": [
+                "action",
+                "target"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "enum": [
+                    "deadman_arm",
+                    "deadman_disarm"
+                  ]
+                },
+                "target": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "deadman"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                }
+              },
+              "required": [
+                "action",
+                "target"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "GateSnapshot": {
+      "type": "object",
+      "properties": {
+        "precheckId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PckId"
+        },
+        "dryRun": {
+          "type": "boolean"
+        },
+        "action": {
+          "enum": [
+            "open",
+            "reduce",
+            "cancel",
+            "cancel_protective",
+            "amend",
+            "leverage",
+            "deadman_arm",
+            "deadman_disarm"
+          ]
+        },
+        "actorClass": {
+          "enum": [
+            "agent",
+            "human",
+            "system"
+          ]
+        },
+        "originalTargetDigest": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        },
+        "originActorType": {
+          "enum": [
+            "human",
+            "engine",
+            "llm-agent",
+            "system"
+          ]
+        },
+        "account": {
+          "type": "object",
+          "properties": {
+            "accountId": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+            },
+            "venue": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+            },
+            "mode": {
+              "enum": [
+                "paper",
+                "live"
+              ]
+            },
+            "groupIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "accountId",
+            "venue",
+            "mode",
+            "groupIds"
+          ]
+        },
+        "instrument": {
+          "$ref": "urn:gitrader:schema:model:0.1:Instrument"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/GateAccountView"
+        },
+        "mark": {
+          "type": "object",
+          "properties": {
+            "price": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "ts": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+            },
+            "source": {
+              "const": "venue_mark"
+            }
+          },
+          "required": [
+            "price",
+            "ts",
+            "source"
+          ]
+        },
+        "cancelPriceChecks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "instrumentId": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+              },
+              "quote": {
+                "type": "string"
+              },
+              "mark": {
+                "type": "object",
+                "properties": {
+                  "price": {
+                    "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                  },
+                  "ts": {
+                    "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+                  },
+                  "source": {
+                    "const": "venue_mark"
+                  }
+                },
+                "required": [
+                  "price",
+                  "ts",
+                  "source"
+                ]
+              }
+            },
+            "required": [
+              "instrumentId"
+            ]
+          }
+        },
+        "last": {
+          "type": "object",
+          "properties": {
+            "price": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "ts": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+            }
+          },
+          "required": [
+            "price",
+            "ts"
+          ]
+        },
+        "mandate": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:agent:0.1:Mandate"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mandateIntegrity": {
+          "type": "object",
+          "properties": {
+            "ok": {
+              "type": "boolean"
+            },
+            "problems": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "ok",
+            "problems"
+          ]
+        },
+        "policyIntegrity": {
+          "type": "object",
+          "properties": {
+            "ok": {
+              "type": "boolean"
+            },
+            "problems": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "ok",
+            "problems"
+          ]
+        },
+        "path": {
+          "enum": [
+            "direct",
+            "proposal",
+            "approved"
+          ]
+        },
+        "now": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "stats": {
+          "$ref": "#/$defs/PrecheckStats"
+        },
+        "rate": {
+          "type": "object",
+          "properties": {
+            "used": {
+              "type": "number"
+            },
+            "limit": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "used",
+            "limit"
+          ]
+        },
+        "reserved": {
+          "$ref": "#/$defs/ReservedView"
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/StateReason"
+          }
+        },
+        "assemblyAdjustments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GateAdjustment"
+          }
+        },
+        "killSwitch": {
+          "type": "object",
+          "properties": {
+            "tripped": {
+              "type": "boolean"
+            },
+            "source": {
+              "enum": [
+                "manual",
+                "file",
+                "deadman",
+                "auto"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "tripped"
+          ]
+        },
+        "venueRules": {
+          "$ref": "#/$defs/VenueRules"
+        },
+        "protectorResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProtectorResult"
+          }
+        },
+        "policy": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "policyId": {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PolId"
+                },
+                "version": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "digest": {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+                }
+              },
+              "required": [
+                "policyId",
+                "version",
+                "digest"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "precheckId",
+        "dryRun",
+        "action",
+        "actorClass",
+        "originActorType",
+        "account",
+        "snapshot",
+        "mandate",
+        "mandateIntegrity",
+        "policy",
+        "policyIntegrity",
+        "path",
+        "now",
+        "stats",
+        "reserved",
+        "states",
+        "killSwitch",
+        "protectorResults"
+      ]
+    },
+    "GateDecision": {
+      "allOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:PrecheckResult"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "gate": {
+              "type": "object",
+              "properties": {
+                "schema": {
+                  "const": "gitrader-risk-gate/1"
+                },
+                "rulesetVersion": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "schema",
+                "rulesetVersion"
+              ]
+            },
+            "decision": {
+              "enum": [
+                "ALLOW",
+                "LIMIT",
+                "BLOCK"
+              ]
+            },
+            "action": {
+              "enum": [
+                "open",
+                "reduce",
+                "cancel",
+                "cancel_protective",
+                "amend",
+                "leverage",
+                "deadman_arm",
+                "deadman_disarm"
+              ]
+            },
+            "targetDigest": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+            },
+            "adjustedTargetDigest": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+            },
+            "applied": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/GateAdjustment"
+              }
+            },
+            "allowedActions": {
+              "type": "object",
+              "properties": {
+                "open": {
+                  "type": "boolean"
+                },
+                "reduce": {
+                  "type": "boolean"
+                },
+                "cancel": {
+                  "type": "boolean"
+                },
+                "cancel_protective": {
+                  "type": "boolean"
+                },
+                "amend": {
+                  "type": "boolean"
+                },
+                "leverage": {
+                  "type": "boolean"
+                },
+                "deadman_arm": {
+                  "type": "boolean"
+                },
+                "deadman_disarm": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "open",
+                "reduce",
+                "cancel",
+                "cancel_protective",
+                "amend",
+                "leverage",
+                "deadman_arm",
+                "deadman_disarm"
+              ]
+            },
+            "irreversibility": {
+              "enum": [
+                "high",
+                "low"
+              ]
+            },
+            "escalation": {
+              "type": "object",
+              "properties": {
+                "to": {
+                  "const": "human_approval"
+                },
+                "reason": {
+                  "enum": [
+                    "LEVERAGE",
+                    "ORDER_NOTIONAL",
+                    "POSITION_NOTIONAL",
+                    "TOTAL_NOTIONAL",
+                    "OPEN_POSITIONS",
+                    "DAILY_LOSS",
+                    "COOLDOWN",
+                    "INSUFFICIENT_MARGIN",
+                    "REDUCE_ONLY",
+                    "INSTRUMENT_NOT_ALLOWED",
+                    "TRADING_STATE",
+                    "DAILY_NOTIONAL",
+                    "VENUE_NOT_ALLOWED",
+                    "SLIPPAGE",
+                    "STALE_PRICE",
+                    "RATE_BUDGET",
+                    "MANDATE_LEVEL",
+                    "MANDATE_EXPIRED",
+                    "MANDATE_LIMIT",
+                    "NEEDS_APPROVAL",
+                    "PROTECTOR",
+                    "LLM_LIVE_ENTRY",
+                    "KILL_SWITCH",
+                    "ACCOUNT_UNKNOWN",
+                    "PROTECTOR_UNAVAILABLE",
+                    "VENUE_RULE",
+                    "MANDATE_INCOMPLETE",
+                    "SIZE_PRECISION",
+                    "REDUCE_ONLY_MISMATCH",
+                    "INTENT_EXPIRED",
+                    "TPSL_INVALID",
+                    "STOP_REQUIRED"
+                  ]
+                }
+              },
+              "required": [
+                "to",
+                "reason"
+              ]
+            },
+            "stages": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "SYS",
+                  "KILL",
+                  "STATE",
+                  "MANDATE",
+                  "LLM",
+                  "ALLOWLIST",
+                  "CONST",
+                  "EXPOSURE",
+                  "BUYING_POWER",
+                  "LOSS",
+                  "RATE",
+                  "PROTECTOR",
+                  "APPROVAL",
+                  "PROTECTOR:skipped"
+                ]
+              }
+            },
+            "monitorHits": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:gitrader:schema:model:0.1:RuleHit"
+              }
+            },
+            "snapshotDigest": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+            },
+            "policyRef": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "policyId": {
+                      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PolId"
+                    },
+                    "version": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "digest": {
+                      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+                    }
+                  },
+                  "required": [
+                    "policyId",
+                    "version",
+                    "digest"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "mandateRef": {
+              "type": "object",
+              "properties": {
+                "mandateId": {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+                },
+                "version": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "digest": {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+                },
+                "effectiveLevel": {
+                  "enum": [
+                    "L0",
+                    "L1",
+                    "L2",
+                    "L3",
+                    "L4"
+                  ]
+                },
+                "effectiveStatus": {
+                  "enum": [
+                    "active",
+                    "suspended",
+                    "expired",
+                    "revoked",
+                    "downgraded"
+                  ]
+                }
+              },
+              "required": [
+                "mandateId",
+                "version",
+                "digest",
+                "effectiveLevel",
+                "effectiveStatus"
+              ]
+            },
+            "dryRun": {
+              "type": "boolean"
+            },
+            "attestation": {
+              "allOf": [
+                {
+                  "$ref": "urn:gitrader:schema:model:0.1:Attestation"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "const": "system"
+                    },
+                    "by": {
+                      "const": "kernel"
+                    }
+                  },
+                  "required": [
+                    "method",
+                    "by"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "gate",
+            "decision",
+            "action",
+            "targetDigest",
+            "adjustedTargetDigest",
+            "applied",
+            "allowedActions",
+            "irreversibility",
+            "stages",
+            "monitorHits",
+            "snapshotDigest",
+            "policyRef",
+            "dryRun",
+            "attestation"
+          ]
+        }
+      ]
+    },
+    "ConformanceCase": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input": {
+          "$ref": "#/$defs/GateInput"
+        },
+        "expect": {
+          "type": "object",
+          "properties": {
+            "decision": {
+              "enum": [
+                "ALLOW",
+                "LIMIT",
+                "BLOCK"
+              ]
+            },
+            "verdict": {
+              "enum": [
+                "allow",
+                "deny",
+                "review"
+              ]
+            },
+            "codes": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "LEVERAGE",
+                  "ORDER_NOTIONAL",
+                  "POSITION_NOTIONAL",
+                  "TOTAL_NOTIONAL",
+                  "OPEN_POSITIONS",
+                  "DAILY_LOSS",
+                  "COOLDOWN",
+                  "INSUFFICIENT_MARGIN",
+                  "REDUCE_ONLY",
+                  "INSTRUMENT_NOT_ALLOWED",
+                  "TRADING_STATE",
+                  "DAILY_NOTIONAL",
+                  "VENUE_NOT_ALLOWED",
+                  "SLIPPAGE",
+                  "STALE_PRICE",
+                  "RATE_BUDGET",
+                  "MANDATE_LEVEL",
+                  "MANDATE_EXPIRED",
+                  "MANDATE_LIMIT",
+                  "NEEDS_APPROVAL",
+                  "PROTECTOR",
+                  "LLM_LIVE_ENTRY",
+                  "KILL_SWITCH",
+                  "ACCOUNT_UNKNOWN",
+                  "PROTECTOR_UNAVAILABLE",
+                  "VENUE_RULE",
+                  "MANDATE_INCOMPLETE",
+                  "SIZE_PRECISION",
+                  "REDUCE_ONLY_MISMATCH",
+                  "INTENT_EXPIRED",
+                  "TPSL_INVALID",
+                  "STOP_REQUIRED"
+                ]
+              }
+            },
+            "applied": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/GateAdjustment"
+              }
+            },
+            "allowedActions": {
+              "type": "object",
+              "properties": {
+                "open": {
+                  "type": "boolean"
+                },
+                "reduce": {
+                  "type": "boolean"
+                },
+                "cancel": {
+                  "type": "boolean"
+                },
+                "cancel_protective": {
+                  "type": "boolean"
+                },
+                "amend": {
+                  "type": "boolean"
+                },
+                "leverage": {
+                  "type": "boolean"
+                },
+                "deadman_arm": {
+                  "type": "boolean"
+                },
+                "deadman_disarm": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "open",
+                "reduce",
+                "cancel",
+                "cancel_protective",
+                "amend",
+                "leverage",
+                "deadman_arm",
+                "deadman_disarm"
+              ]
+            }
+          },
+          "required": [
+            "decision",
+            "verdict",
+            "codes",
+            "applied",
+            "allowedActions"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "input",
+        "expect"
+      ]
+    }
+  }
+}

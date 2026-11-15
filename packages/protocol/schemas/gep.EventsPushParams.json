@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:EventsPushParams",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "EventsPushParams",
+  "type": "object",
+  "properties": {
+    "sessionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:gep:0.1:GepEvent"
+      }
+    }
+  },
+  "required": [
+    "sessionId",
+    "events"
+  ]
+}

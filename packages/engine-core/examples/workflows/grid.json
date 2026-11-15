@@ -1,0 +1,184 @@
+{
+  "schema": "gitrader-workflow/2",
+  "id": "tpl.grid",
+  "name": "网格·只做多（教学示例）",
+  "desc": "在「中心价 ± 区间」内等分成若干格：价格越低持仓越多、越高持仓越少，只做多。",
+  "version": 1,
+  "params": {
+    "center": 0,
+    "rangeRatio": 0.1,
+    "grids": 8,
+    "maxExposure": 1
+  },
+  "paramDefs": [
+    {
+      "key": "center",
+      "label": "中心价（0 = 取第一根收盘价）",
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    {
+      "key": "rangeRatio",
+      "label": "区间半宽（比例）",
+      "type": "number",
+      "default": 0.1,
+      "min": 0.01,
+      "max": 0.5,
+      "step": 0.005
+    },
+    {
+      "key": "grids",
+      "label": "格数",
+      "type": "integer",
+      "default": 8,
+      "min": 2,
+      "max": 50
+    },
+    {
+      "key": "maxExposure",
+      "label": "满格占用比例",
+      "type": "integer",
+      "default": 1,
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "k",
+      "type": "data.candles",
+      "params": {},
+      "position": {
+        "x": 20,
+        "y": 80
+      },
+      "label": "K 线"
+    },
+    {
+      "id": "g",
+      "type": "ind.grid",
+      "params": {
+        "center": "$center",
+        "rangeRatio": "$rangeRatio",
+        "grids": "$grids",
+        "maxExposure": "$maxExposure"
+      },
+      "position": {
+        "x": 240,
+        "y": 80
+      },
+      "label": "网格仓位"
+    },
+    {
+      "id": "out_signal",
+      "type": "act.signal",
+      "params": {},
+      "position": {
+        "x": 480,
+        "y": 20
+      },
+      "label": "输出信号"
+    },
+    {
+      "id": "size",
+      "type": "risk.size",
+      "params": {
+        "allocRatio": 0.1,
+        "allocCapNotional": 500,
+        "leverage": 1
+      },
+      "position": {
+        "x": 480,
+        "y": 140
+      },
+      "label": "仓位计算"
+    },
+    {
+      "id": "precheck",
+      "type": "risk.precheck",
+      "params": {},
+      "position": {
+        "x": 680,
+        "y": 140
+      },
+      "label": "风控预检"
+    },
+    {
+      "id": "place",
+      "type": "act.order",
+      "params": {},
+      "position": {
+        "x": 880,
+        "y": 140
+      },
+      "label": "下单"
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "node": "k",
+        "port": "close"
+      },
+      "to": {
+        "node": "g",
+        "port": "src"
+      }
+    },
+    {
+      "from": {
+        "node": "g",
+        "port": "signal"
+      },
+      "to": {
+        "node": "out_signal",
+        "port": "signal"
+      }
+    },
+    {
+      "from": {
+        "node": "g",
+        "port": "signal"
+      },
+      "to": {
+        "node": "size",
+        "port": "signal"
+      }
+    },
+    {
+      "from": {
+        "node": "size",
+        "port": "order"
+      },
+      "to": {
+        "node": "precheck",
+        "port": "order"
+      }
+    },
+    {
+      "from": {
+        "node": "precheck",
+        "port": "order"
+      },
+      "to": {
+        "node": "place",
+        "port": "order"
+      }
+    }
+  ],
+  "meta": {
+    "source": {
+      "author": "Gitrader",
+      "license": "CPAL-1.0"
+    },
+    "builtin": true,
+    "strategyId": "grid",
+    "tags": [
+      "震荡",
+      "网格",
+      "只做多"
+    ]
+  }
+}

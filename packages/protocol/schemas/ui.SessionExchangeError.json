@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:ui:0.1:SessionExchangeError",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: ui | Version: 0.1 | Status: draft",
+  "title": "SessionExchangeError",
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "message"
+      ]
+    }
+  },
+  "required": [
+    "error"
+  ]
+}

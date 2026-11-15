@@ -1,0 +1,131 @@
+{
+  "_note": "Gitrader 交易工作台（智能应用本体）：本机内核 + 工作台，默认纸面，不碰真钱。zip 由 integrations/unigit/pack.mjs 生成（根目录 = {installDir}：bin.js、engine-core.mjs、workbench/），launch 用随包 Node 执行 `bin.js serve`。source.url 是将要上传的地址；size / sha256 是本地 zip 的真实值（产物变了就重跑 pack.mjs）。图标是 维护者 的 G 字标原件；封面 / 展示图取自真实运行截图（reports/H-shots）。embed 需要内核提供一次性启动链接并放行 frame-ancestors，见 README「待定事项」。",
+  "id": "official.gitrader",
+  "kind": "app",
+  "displayName": "Gitrader 交易工作台",
+  "summary": "Agent 与交易场所之间的接口与工作台：行情、纸面交易、风控、账本与 Agent 授权，真实下单需用户批准",
+  "tagline": "Agent 的交易工作台",
+  "category": "其它",
+  "highlights": [
+    "默认纸面，实盘开仓需用户批准",
+    "每笔操作带来源记录，可追溯",
+    "额度、接管、杀开关在你手里"
+  ],
+  "icon": "official.gitrader/icon.svg",
+  "cover": "official.gitrader/cover.png",
+  "intents": [
+    "gitrader",
+    "交易",
+    "行情",
+    "纸面交易",
+    "永续合约",
+    "hyperliquid",
+    "风控",
+    "Agent 授权"
+  ],
+  "schema": "unigit-recipe/1",
+  "upstream": "https://gitrader.ai",
+  "license": "CPAL-1.0",
+  "trust": "official-catalog",
+  "version": "0.1.0",
+  "platform": "win32-x64",
+  "source": {
+    "url": "https://unigit.ai/store/gitrader/gitrader-app-0.1.0.zip",
+    "size": 569042,
+    "sha256": "23cbad42183054ed0efdc37433fe4f30c7a016f7270109d03e2b61c220f75827"
+  },
+  "install": {
+    "method": "zip"
+  },
+  "dependencies": [
+    "official.gitrader-mcp"
+  ],
+  "runtime": {
+    "requires": [
+      "node-bundled"
+    ],
+    "diskMB": 40
+  },
+  "launch": {
+    "exec": "{node}",
+    "args": [
+      "{installDir}/bin.js",
+      "serve",
+      "--port",
+      "{port:http}",
+      "--home",
+      "{dataDir}",
+      "--static",
+      "{installDir}/workbench"
+    ],
+    "cwd": "{dataDir}",
+    "ports": [
+      "http"
+    ]
+  },
+  "health": {
+    "url": "http://127.0.0.1:{port:http}/api/health",
+    "expect": 200,
+    "timeoutMs": 30000
+  },
+  "embed": {
+    "kind": "iframe",
+    "url": "http://127.0.0.1:{port:http}/"
+  },
+  "skill": "official.gitrader/SKILL.md",
+  "showcase": {
+    "subtitle": "Agent 的交易工作台",
+    "hero": "official.gitrader/hero.png",
+    "screens": [
+      {
+        "file": "official.gitrader/screens/paper-fill.png",
+        "title": "纸面成交与活动"
+      },
+      {
+        "file": "official.gitrader/screens/takeover.png",
+        "title": "一键接管与风控"
+      },
+      {
+        "file": "official.gitrader/screens/first-open.png",
+        "title": "开箱即用"
+      },
+      {
+        "file": "official.gitrader/screens/palette.png",
+        "title": "命令面板"
+      }
+    ],
+    "highlights": [
+      {
+        "glyph": "lock",
+        "title": "人来批准",
+        "text": "实盘开仓需你批准，Agent 只能提案"
+      },
+      {
+        "glyph": "data",
+        "title": "全程留痕",
+        "text": "每笔操作带来源，账本可核对"
+      },
+      {
+        "glyph": "bolt",
+        "title": "一键接管",
+        "text": "停止新开仓、撤单、全平随时可用"
+      },
+      {
+        "glyph": "layers",
+        "title": "限额在你手",
+        "text": "额度、杠杆、白名单由你设定"
+      }
+    ],
+    "scenarios": [
+      {
+        "ask": "看看 BTC 的资金费，纸面试一单",
+        "does": "Agent 查行情，纸面下单并记入账本"
+      },
+      {
+        "ask": "我想开实盘，先给个方案",
+        "does": "Agent 提交提案，等你批准后才执行"
+      }
+    ],
+    "runs": "local-online"
+  }
+}

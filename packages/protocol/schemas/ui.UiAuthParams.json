@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:ui:0.1:UiAuthParams",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: ui | Version: 0.1 | Status: draft",
+  "title": "UiAuthParams",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "minLength": 1
+    },
+    "client": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instanceId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  },
+  "required": [
+    "token",
+    "client"
+  ]
+}

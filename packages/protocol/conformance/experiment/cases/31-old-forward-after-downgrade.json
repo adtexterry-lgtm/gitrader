@@ -1,0 +1,182 @@
+{
+    "input":  {
+                  "to":  "live_small",
+                  "evidence":  {
+                                   "actor":  {
+                                                 "via":  "ui",
+                                                 "actorType":  "human"
+                                             },
+                                   "packs":  [
+                                                 {
+                                                     "subjectKey":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                                     "at":  50,
+                                                     "experimentId":  "exp_000000000000000000000001",
+                                                     "provenance":  {
+                                                                        "protocolVersion":  "0.1.12",
+                                                                        "kernelVersion":  "sample"
+                                                                    },
+                                                     "window":  {
+                                                                    "to":  1000,
+                                                                    "from":  0
+                                                                },
+                                                     "tier":  "forward_paper",
+                                                     "schema":  "gitrader-experiment/1",
+                                                     "forward":  {
+                                                                     "funding":  "0",
+                                                                     "tier":  "forward_paper",
+                                                                     "runIds":  [
+                                                                                    "run-paper"
+                                                                                ],
+                                                                     "unrealizedPnlEnd":  "0",
+                                                                     "ledgerRange":  {
+                                                                                         "fromSeq":  0,
+                                                                                         "toSeq":  0
+                                                                                     },
+                                                                     "sample":  {
+                                                                                    "trades":  30,
+                                                                                    "snapshotDays":  0,
+                                                                                    "spanDays":  30,
+                                                                                    "fills":  30,
+                                                                                    "activeDays":  10,
+                                                                                    "roundTrips":  30
+                                                                                },
+                                                                     "sharpe":  null,
+                                                                     "vsBaseline":  {
+                                                                                        "excessReturnRatio":  0,
+                                                                                        "baselineId":  "baseline-sample"
+                                                                                    },
+                                                                     "digest":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                                                     "provisional":  false,
+                                                                     "fees":  "0",
+                                                                     "periodsPerYear":  365,
+                                                                     "valuationCcy":  "USD",
+                                                                     "computedAt":  50,
+                                                                     "realizedPnl":  "0",
+                                                                     "sortino":  null,
+                                                                     "maxDrawdownRatio":  0,
+                                                                     "returnRatio":  0,
+                                                                     "window":  {
+                                                                                    "to":  1000,
+                                                                                    "from":  0
+                                                                                },
+                                                                     "computedBy":  "kernel",
+                                                                     "accountIds":  [
+                                                                                        "acct_000000000000000000000001"
+                                                                                    ],
+                                                                     "includesUnrealized":  true,
+                                                                     "winRatio":  null
+                                                                 },
+                                                     "trialCount":  1,
+                                                     "attestation":  {
+                                                                         "keyId":  "sample",
+                                                                         "alg":  "ed25519",
+                                                                         "sig":  "sample-signature",
+                                                                         "digest":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                                                     },
+                                                     "runId":  "run-forward",
+                                                     "kind":  "forward",
+                                                     "packId":  "pack-forward-50",
+                                                     "trialStats":  [
+                                                                        {
+                                                                            "nObs":  0,
+                                                                            "sharpe":  null,
+                                                                            "runId":  "run-paper",
+                                                                            "specDigest":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                                                        }
+                                                                    ]
+                                                 }
+                                             ],
+                                   "presence":  {
+                                                    "forwardPackDigest":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                                    "verified":  true
+                                                },
+                                   "accounts":  [
+                                                    {
+                                                        "accountId":  "acct_000000000000000000000001",
+                                                        "mode":  "paper"
+                                                    }
+                                                ],
+                                   "labRuns":  [
+
+                                               ]
+                               },
+                  "experiment":  {
+                                     "experimentId":  "exp_000000000000000000000001",
+                                     "title":  "Sample experiment",
+                                     "hypothesis":  "A synthetic hypothesis",
+                                     "stage":  "shadow",
+                                     "subject":  {
+                                                     "params":  {
+
+                                                                }
+                                                 },
+                                     "assumptions":  {
+                                                         "slippageBps":  0,
+                                                         "fillModel":  "next-bar-open",
+                                                         "liquidation":  false,
+                                                         "fees":  "venue",
+                                                         "funding":  false
+                                                     },
+                                     "origin":  {
+                                                    "actor":  "user:usr_000000000000000000000001",
+                                                    "actorType":  "human",
+                                                    "tool":  "experiment",
+                                                    "via":  "ui",
+                                                    "requestId":  "00000000-0000-4000-8000-000000000001"
+                                                },
+                                     "createdAt":  0,
+                                     "updatedAt":  0,
+                                     "stageEnteredAt":  100,
+                                     "subjectKey":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                     "baseline":  {
+                                                      "instruments":  [
+
+                                                                      ],
+                                                      "prices":  [
+
+                                                                 ],
+                                                      "window":  {
+                                                                     "to":  1000,
+                                                                     "from":  0
+                                                                 },
+                                                      "baselineId":  "baseline-sample",
+                                                      "kind":  "cash"
+                                                  },
+                                     "runs":  [
+                                                  {
+                                                      "accountId":  "acct_000000000000000000000001",
+                                                      "stage":  "backtest",
+                                                      "runId":  "run-paper",
+                                                      "from":  0,
+                                                      "to":  null,
+                                                      "executor":  {
+                                                                       "codeDigest":  null,
+                                                                       "instanceId":  "inst_000000000000000000000001",
+                                                                       "engineId":  "engine-sample",
+                                                                       "kind":  "engine"
+                                                                   },
+                                                      "attachedAt":  0
+                                                  }
+                                              ],
+                                     "packs":  [
+                                                   {
+                                                       "at":  50,
+                                                       "runId":  "run-forward",
+                                                       "tier":  "forward_paper",
+                                                       "packId":  "pack-forward-50",
+                                                       "kind":  "forward",
+                                                       "digest":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                                   }
+                                               ]
+                                 },
+                  "now":  1000
+              },
+    "expect":  {
+                   "missing":  [
+                                   "forward.pack"
+                               ],
+                   "ok":  false
+               },
+    "id":  "31-old-forward-after-downgrade",
+    "kind":  "transition"
+}

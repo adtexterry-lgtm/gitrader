@@ -1,0 +1,59 @@
+{
+    "rule":  "frozen",
+    "id":  "21-frozen-fields",
+    "steps":  [
+                  {
+                      "given":  {
+                                    "frozen":  {
+                                                   "subject":  true
+                                               },
+                                    "patch":  {
+                                                  "subject":  {
+                                                                  "params":  {
+                                                                                 "version":  1
+                                                                             }
+                                                              }
+                                              }
+                                },
+                      "operation":  "frozen subject edit",
+                      "expect":  {
+                                     "code":  1012,
+                                     "rejected":  true
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "frozen":  {
+                                                   "hypothesis":  true
+                                               },
+                                    "patch":  {
+                                                  "hypothesis":  "changed"
+                                              }
+                                },
+                      "operation":  "frozen hypothesis edit",
+                      "expect":  {
+                                     "code":  1012,
+                                     "rejected":  true
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "frozen":  {
+                                                   "holdout":  true
+                                               },
+                                    "patch":  {
+                                                  "holdoutWindow":  {
+                                                                        "to":  2,
+                                                                        "from":  1
+                                                                    }
+                                              }
+                                },
+                      "operation":  "frozen holdout window edit",
+                      "expect":  {
+                                     "code":  1012,
+                                     "rejected":  true
+                                 }
+                  }
+              ],
+    "kind":  "kernel-contract"
+}

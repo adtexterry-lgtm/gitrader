@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ReconcileEvidence",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ReconcileEvidence",
+  "type": "object",
+  "properties": {
+    "report": {
+      "type": "string",
+      "minLength": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "field": {
+      "type": "string",
+      "minLength": 1
+    },
+    "value": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "report",
+    "id",
+    "field",
+    "value"
+  ]
+}

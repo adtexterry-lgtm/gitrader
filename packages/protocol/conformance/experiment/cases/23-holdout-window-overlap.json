@@ -1,0 +1,61 @@
+{
+    "rule":  "holdout",
+    "id":  "23-holdout-window-overlap",
+    "steps":  [
+                  {
+                      "given":  {
+                                    "next":  {
+                                                 "to":  20,
+                                                 "from":  9
+                                             },
+                                    "previous":  {
+                                                     "to":  10,
+                                                     "from":  0
+                                                 }
+                                },
+                      "operation":  "overlap rejects",
+                      "expect":  {
+                                     "allowed":  false
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "next":  {
+                                                 "to":  20,
+                                                 "from":  10
+                                             },
+                                    "previous":  {
+                                                     "to":  10,
+                                                     "from":  0
+                                                 }
+                                },
+                      "operation":  "adjacent allowed",
+                      "expect":  {
+                                     "allowed":  true
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "frozen":  true,
+                                    "holdoutRun":  true,
+                                    "priorRun":  false
+                                },
+                      "operation":  "first frozen touch",
+                      "expect":  {
+                                     "allowed":  true
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "frozen":  true,
+                                    "holdoutRun":  true,
+                                    "priorRun":  true
+                                },
+                      "operation":  "later run rejects",
+                      "expect":  {
+                                     "allowed":  false
+                                 }
+                  }
+              ],
+    "kind":  "kernel-contract"
+}

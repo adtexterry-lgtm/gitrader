@@ -1,0 +1,7 @@
+// SPDX-License-Identifier: Apache-2.0
+// Workspace file: it lets `go test ./packages/protocol/examples/go-engine/...`
+// run from the repository root, which has no go.mod of its own. Delete it if the
+// repository ever gets a root module instead.
+go 1.22
+
+use ./packages/protocol/examples/go-engine

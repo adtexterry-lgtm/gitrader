@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: CPAL-1.0
+# BuildKit 的「与 Dockerfile 同名」忽略文件：docker build -f docker/Dockerfile . 与 compose 构建都会用它（需要 BuildKit，Docker 23+ 默认开启）。
+.git
+**/node_modules
+**/dist
+dist-portable
+dist-store
+reports
+before-r1
+**/before-r1
+coverage
+**/test-out
+**/*.tgz
+**/.env
+**/.env.*
+docker/secrets

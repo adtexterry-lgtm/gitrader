@@ -1,0 +1,107 @@
+{
+  "suite": "gitrader-engine-bench",
+  "generatedAt": "2026-10-09T18:00:08.439Z",
+  "engine": {
+    "id": "gitrader-core",
+    "version": "0.1.0"
+  },
+  "env": {
+    "node": "v22.23.2",
+    "platform": "win32 10.0.26200",
+    "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+    "cores": 24
+  },
+  "params": {
+    "bars": 525600,
+    "runs": 3,
+    "decisions": 3000,
+    "interval": "1m",
+    "data": "synthetic seeded random walk (packages/engine-core/src/util/synth.ts), seed 1"
+  },
+  "dataGenMs": 503,
+  "backtestThroughput": {
+    "ema-trend": {
+      "barsPerSec": 2230364,
+      "medianMs": 236,
+      "minMs": 232,
+      "maxMs": 448,
+      "fills": 41729,
+      "roundTrips": 21020
+    },
+    "mean-reversion": {
+      "barsPerSec": 3304191,
+      "medianMs": 159,
+      "minMs": 153,
+      "maxMs": 160,
+      "fills": 38406,
+      "roundTrips": 18929
+    },
+    "breakout": {
+      "barsPerSec": 1922479,
+      "medianMs": 273,
+      "minMs": 222,
+      "maxMs": 524,
+      "fills": 28873,
+      "roundTrips": 14436
+    },
+    "grid": {
+      "barsPerSec": 4481456,
+      "medianMs": 117,
+      "minMs": 96,
+      "maxMs": 127,
+      "fills": 2407,
+      "roundTrips": 72
+    },
+    "dca": {
+      "barsPerSec": 4216251,
+      "medianMs": 125,
+      "minMs": 110,
+      "maxMs": 167,
+      "fills": 10,
+      "roundTrips": 0
+    },
+    "workflow:mean-reversion": {
+      "barsPerSec": 1006965,
+      "medianMs": 522
+    }
+  },
+  "lookaheadCheck": {
+    "result": "pass",
+    "checkedBars": 3000,
+    "ms": 5
+  },
+  "memoryRssMb": {
+    "afterBacktests": 1142,
+    "final": 1188
+  },
+  "endToEndBacktest": {
+    "state": "done",
+    "bars": 525600,
+    "wallMs": 1088,
+    "barsPerSec": 483136,
+    "resultInlineEquityPoints": 0,
+    "artifacts": [
+      "equity",
+      "trades"
+    ],
+    "stats": {
+      "fills": 41729,
+      "totalReturnRatio": -1,
+      "maxDrawdownRatio": 1
+    },
+    "lookahead": "pass",
+    "warnings": [
+      "equity and trades were delivered as artifacts (host.artifact.put); the inline arrays are empty"
+    ],
+    "rssGrowthMb": 68
+  },
+  "decisionLatencyMs": {
+    "samples": 2850,
+    "noOrderForBar": 150,
+    "p50": 0.233,
+    "p95": 0.533,
+    "p99": 1.499,
+    "max": 3.692,
+    "note": "market event in -> host.order.place out, in-process memory transport, zero-latency fake host"
+  }
+}

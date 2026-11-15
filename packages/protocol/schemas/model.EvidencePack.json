@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:EvidencePack",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "EvidencePack",
+  "oneOf": [
+    {
+      "$ref": "urn:gitrader:schema:model:0.1:BacktestEvidencePack"
+    },
+    {
+      "$ref": "urn:gitrader:schema:model:0.1:ForwardEvidencePack"
+    }
+  ]
+}

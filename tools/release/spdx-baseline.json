@@ -1,0 +1,101 @@
+{
+  "//": "历史例外基线（首行 SPDX 审计）：只准缩小，不准新增。每条的 reason 写清为什么现在不能修；修好后必须删掉本条，否则 audit-headers.mjs 会因「基线过期」失败。批次 5 的 P5.7 只被允许新建 tools/release/，因此这些文件留给主会话决定。",
+  "//kind": "missing = 第 1 行没有 SPDX；mismatch = 首行 SPDX 与所属包 package.json 的 license 不一致",
+  "entries": [
+    {
+      "path": "assets/marketing/poster-v1/render-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料渲染脚本（assets 树，不进 npm 包、不属任何包），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/poster-v1/verify-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料校验脚本（assets 树，不进 npm 包、不属任何包），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/poster-v2/render-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料渲染脚本（assets 树，不进 npm 包、不属任何包），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/poster-v2/verify-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料校验脚本（assets 树，不进 npm 包、不属任何包），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/poster-v3/render-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料渲染脚本（assets 树，不进 npm 包、不属任何包），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/poster-v3/verify-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料校验脚本（assets 树，不进 npm 包、不属任何包），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/series-v1/01-stocks/render-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料渲染脚本（assets 树），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/series-v1/02-crypto/render-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料渲染脚本（assets 树），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/series-v1/03-metals/render-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料渲染脚本（assets 树），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/series-v1/04-diy/render-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料渲染脚本（assets 树），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/series-v1/05-pro/render-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料渲染脚本（assets 树），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/series-v1/06-paper/render-poster.mjs",
+      "kind": "missing",
+      "reason": "营销物料渲染脚本（assets 树），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/series-v1/render-overview.mjs",
+      "kind": "missing",
+      "reason": "营销物料渲染脚本（assets 树），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "assets/marketing/series-v1/verify-series.mjs",
+      "kind": "missing",
+      "reason": "营销物料校验脚本（assets 树），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "integrations/unigit/_assets/render.mjs",
+      "kind": "missing",
+      "reason": "集成演示物料渲染脚本（_assets 树，不进 npm 包），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "packages/blocks-default/verify/.tmp/scenarios.mjs",
+      "kind": "missing",
+      "reason": "verify 目录下的临时产物（.tmp），本该被 .gitignore；删或补首行由主会话决定"
+    },
+    {
+      "path": "packages/cli/src/bin.ts",
+      "kind": "missing",
+      "reason": "产品源码缺首行 SPDX（真问题）；packages/cli/src 不是 P5.7 的可改面，需主会话补一行"
+    },
+    {
+      "path": "packages/plugin-template/example/ema-reading/block.js",
+      "kind": "missing",
+      "reason": "插件示例的前端产物（example/ 树，不进 npm 包），批次 5 P5.7 只许新建文件"
+    },
+    {
+      "path": "packages/protocol/test/p3.test.ts",
+      "kind": "mismatch",
+      "reason": "首行写 CPAL-1.0，但 packages/protocol 是 Apache-2.0（真问题）；该包本批次禁碰，需主会话改成 Apache-2.0"
+    }
+  ]
+}

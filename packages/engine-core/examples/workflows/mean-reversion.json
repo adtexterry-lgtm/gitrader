@@ -1,0 +1,352 @@
+{
+  "schema": "gitrader-workflow/2",
+  "id": "tpl.mean-reversion",
+  "name": "均值回归·布林带（教学示例）",
+  "desc": "价格跌破布林带下轨做多、突破上轨做空，回到中轨平仓。",
+  "version": 1,
+  "params": {
+    "period": 20,
+    "k": 2,
+    "allowShort": true
+  },
+  "paramDefs": [
+    {
+      "key": "period",
+      "label": "布林周期",
+      "type": "integer",
+      "default": 20,
+      "min": 5,
+      "max": 200
+    },
+    {
+      "key": "k",
+      "label": "带宽 k",
+      "type": "integer",
+      "default": 2,
+      "min": 0.5,
+      "max": 5,
+      "step": 0.1
+    },
+    {
+      "key": "allowShort",
+      "label": "允许做空",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "nodes": [
+    {
+      "id": "k_",
+      "type": "data.candles",
+      "params": {},
+      "position": {
+        "x": 20,
+        "y": 140
+      },
+      "label": "K 线"
+    },
+    {
+      "id": "bb",
+      "type": "ind.bollinger",
+      "params": {
+        "period": "$period",
+        "k": "$k"
+      },
+      "position": {
+        "x": 240,
+        "y": 120
+      },
+      "label": "布林带"
+    },
+    {
+      "id": "c_lt_lo",
+      "type": "cond.compare",
+      "params": {
+        "op": "<"
+      },
+      "position": {
+        "x": 460,
+        "y": 40
+      },
+      "label": "价 < 下轨"
+    },
+    {
+      "id": "c_gt_up",
+      "type": "cond.compare",
+      "params": {
+        "op": ">"
+      },
+      "position": {
+        "x": 460,
+        "y": 140
+      },
+      "label": "价 > 上轨"
+    },
+    {
+      "id": "c_ge_mid",
+      "type": "cond.compare",
+      "params": {
+        "op": ">="
+      },
+      "position": {
+        "x": 460,
+        "y": 240
+      },
+      "label": "价 ≥ 中轨"
+    },
+    {
+      "id": "c_le_mid",
+      "type": "cond.compare",
+      "params": {
+        "op": "<="
+      },
+      "position": {
+        "x": 460,
+        "y": 340
+      },
+      "label": "价 ≤ 中轨"
+    },
+    {
+      "id": "sig",
+      "type": "sig.state",
+      "params": {
+        "mode": "latch",
+        "allowShort": "$allowShort"
+      },
+      "position": {
+        "x": 700,
+        "y": 180
+      },
+      "label": "均值回归"
+    },
+    {
+      "id": "out_signal",
+      "type": "act.signal",
+      "params": {},
+      "position": {
+        "x": 760,
+        "y": 260
+      },
+      "label": "输出信号"
+    },
+    {
+      "id": "size",
+      "type": "risk.size",
+      "params": {
+        "allocRatio": 0.1,
+        "allocCapNotional": 500,
+        "leverage": 1
+      },
+      "position": {
+        "x": 760,
+        "y": 380
+      },
+      "label": "仓位计算"
+    },
+    {
+      "id": "precheck",
+      "type": "risk.precheck",
+      "params": {},
+      "position": {
+        "x": 960,
+        "y": 380
+      },
+      "label": "风控预检"
+    },
+    {
+      "id": "place",
+      "type": "act.order",
+      "params": {},
+      "position": {
+        "x": 1160,
+        "y": 380
+      },
+      "label": "下单"
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "node": "k_",
+        "port": "close"
+      },
+      "to": {
+        "node": "bb",
+        "port": "src"
+      }
+    },
+    {
+      "from": {
+        "node": "k_",
+        "port": "close"
+      },
+      "to": {
+        "node": "c_lt_lo",
+        "port": "a"
+      }
+    },
+    {
+      "from": {
+        "node": "bb",
+        "port": "lower"
+      },
+      "to": {
+        "node": "c_lt_lo",
+        "port": "b"
+      }
+    },
+    {
+      "from": {
+        "node": "k_",
+        "port": "close"
+      },
+      "to": {
+        "node": "c_gt_up",
+        "port": "a"
+      }
+    },
+    {
+      "from": {
+        "node": "bb",
+        "port": "upper"
+      },
+      "to": {
+        "node": "c_gt_up",
+        "port": "b"
+      }
+    },
+    {
+      "from": {
+        "node": "k_",
+        "port": "close"
+      },
+      "to": {
+        "node": "c_ge_mid",
+        "port": "a"
+      }
+    },
+    {
+      "from": {
+        "node": "bb",
+        "port": "mid"
+      },
+      "to": {
+        "node": "c_ge_mid",
+        "port": "b"
+      }
+    },
+    {
+      "from": {
+        "node": "k_",
+        "port": "close"
+      },
+      "to": {
+        "node": "c_le_mid",
+        "port": "a"
+      }
+    },
+    {
+      "from": {
+        "node": "bb",
+        "port": "mid"
+      },
+      "to": {
+        "node": "c_le_mid",
+        "port": "b"
+      }
+    },
+    {
+      "from": {
+        "node": "c_lt_lo",
+        "port": "out"
+      },
+      "to": {
+        "node": "sig",
+        "port": "enterLong"
+      }
+    },
+    {
+      "from": {
+        "node": "c_gt_up",
+        "port": "out"
+      },
+      "to": {
+        "node": "sig",
+        "port": "enterShort"
+      }
+    },
+    {
+      "from": {
+        "node": "c_ge_mid",
+        "port": "out"
+      },
+      "to": {
+        "node": "sig",
+        "port": "exitLong"
+      }
+    },
+    {
+      "from": {
+        "node": "c_le_mid",
+        "port": "out"
+      },
+      "to": {
+        "node": "sig",
+        "port": "exitShort"
+      }
+    },
+    {
+      "from": {
+        "node": "sig",
+        "port": "signal"
+      },
+      "to": {
+        "node": "out_signal",
+        "port": "signal"
+      }
+    },
+    {
+      "from": {
+        "node": "sig",
+        "port": "signal"
+      },
+      "to": {
+        "node": "size",
+        "port": "signal"
+      }
+    },
+    {
+      "from": {
+        "node": "size",
+        "port": "order"
+      },
+      "to": {
+        "node": "precheck",
+        "port": "order"
+      }
+    },
+    {
+      "from": {
+        "node": "precheck",
+        "port": "order"
+      },
+      "to": {
+        "node": "place",
+        "port": "order"
+      }
+    }
+  ],
+  "meta": {
+    "source": {
+      "author": "Gitrader",
+      "license": "CPAL-1.0"
+    },
+    "builtin": true,
+    "strategyId": "mean-reversion",
+    "tags": [
+      "震荡",
+      "反转",
+      "布林带"
+    ]
+  }
+}

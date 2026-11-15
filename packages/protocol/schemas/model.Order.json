@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Order",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Order",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+    },
+    "clientOrderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+    },
+    "venueOrderId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "side": {
+      "enum": [
+        "buy",
+        "sell"
+      ]
+    },
+    "type": {
+      "enum": [
+        "market",
+        "limit",
+        "stop_market",
+        "stop_limit",
+        "take_market",
+        "take_limit",
+        "trailing_stop",
+        "twap"
+      ]
+    },
+    "tif": {
+      "enum": [
+        "gtc",
+        "ioc",
+        "fok",
+        "alo",
+        "gtd"
+      ]
+    },
+    "size": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "filledSize": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "price": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "triggerPrice": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "avgFillPrice": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reduceOnly": {
+      "type": "boolean"
+    },
+    "postOnly": {
+      "type": "boolean"
+    },
+    "leverage": {
+      "type": "number"
+    },
+    "status": {
+      "enum": [
+        "new",
+        "submitted",
+        "open",
+        "untriggered",
+        "partially_filled",
+        "filled",
+        "cancelled",
+        "expired",
+        "rejected",
+        "denied"
+      ]
+    },
+    "problem": {
+      "$ref": "urn:gitrader:schema:model:0.1:Problem"
+    },
+    "fee": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "builder": {
+      "type": "object",
+      "properties": {
+        "attached": {
+          "type": "boolean"
+        },
+        "feeTenthBps": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "attached"
+      ]
+    },
+    "parentOrderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+    },
+    "tpslRole": {
+      "enum": [
+        "tp",
+        "sl"
+      ]
+    },
+    "proposalId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PropId"
+    },
+    "mandateId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+    },
+    "precheckId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PckId"
+    },
+    "legId": {
+      "type": "string"
+    },
+    "exitPlanId": {
+      "type": "string"
+    },
+    "ocoGroupId": {
+      "type": "string"
+    },
+    "origin": {
+      "$ref": "urn:gitrader:schema:model:0.1:Origin"
+    },
+    "createdAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "updatedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "submittedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "closedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "trailing": {
+      "type": "object",
+      "properties": {
+        "callbackRatio": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal",
+          "pattern": "^(?!-|0$)"
+        },
+        "activationPrice": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "activationRatio": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        }
+      },
+      "required": [
+        "callbackRatio"
+      ],
+      "readOnly": true
+    }
+  },
+  "required": [
+    "orderId",
+    "clientOrderId",
+    "accountId",
+    "instrumentId",
+    "side",
+    "type",
+    "tif",
+    "size",
+    "filledSize",
+    "status",
+    "fee",
+    "origin",
+    "createdAt",
+    "updatedAt"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "denied",
+              "rejected"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "problem"
+        ]
+      }
+    }
+  ]
+}

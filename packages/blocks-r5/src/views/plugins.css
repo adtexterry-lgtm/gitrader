@@ -1,0 +1,69 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+/* 插件页的页内样式：只许 var(--gr-*)。卡 / 表 / 页签 / 开关 / 武装行 / 骨架等通用规则在 workbench/src/ui/r5/components.css（g5-*）。
+   规则逐条取自 reports/visual-r5/plugins/index.html 的「插件」段与相关通用规则，类名加 g5- 前缀。 */
+:root[data-ui="r5"] .g5-plg{flex:1 1 0}
+:root[data-ui="r5"] .g5-plg > .g5-off{flex:1 1 0;min-height:0;display:flex;flex-direction:column}
+:root[data-ui="r5"] .g5-plg .g5-htabs{margin-left:-8px}
+:root[data-ui="r5"] .g5-plg .g5-htabs .g5-tab{font-size:14px;line-height:20px;font-weight:500;gap:8px}
+:root[data-ui="r5"] .g5-plg .g5-htabs .g5-tab .g5-c{font-size:13px;font-weight:400}
+:root[data-ui="r5"] .g5-plg .g5-tw.g5-scroll{flex:1 1 0;min-height:0}
+:root[data-ui="r5"] .g5-plg .g5-tw.g5-scroll .g5-tbl thead th{position:sticky;top:0;z-index:1;background:var(--gr-card)}
+
+/* 行：名称两行（名称 / id），其余列顶对齐 */
+:root[data-ui="r5"] .g5-plg .g5-tbl tr.g5-pr td{vertical-align:top;line-height:20px;padding-bottom:8px}
+:root[data-ui="r5"] .g5-plg .g5-tbl tr.g5-pr td.g5-sx{padding-top:4px;padding-bottom:0}
+:root[data-ui="r5"] .g5-plg .g5-swc{display:flex;align-items:center;gap:8px}
+:root[data-ui="r5"] .g5-plg .g5-tbl td.g5-x .g5-btn-icon{color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-plg .g5-tbl tr.g5-open td.g5-x svg{transform:rotate(180deg)}
+:root[data-ui="r5"] .g5-plg .g5-pn{display:block}
+:root[data-ui="r5"] .g5-plg .g5-pn .g5-ln1{height:20px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+:root[data-ui="r5"] .g5-plg .g5-pn .g5-nm{font-size:13px;line-height:20px;font-weight:500;color:var(--gr-text)}
+:root[data-ui="r5"] .g5-plg .g5-ml{display:block}
+:root[data-ui="r5"] .g5-plg .g5-ml > span{display:block;font-size:12px;line-height:20px;color:var(--gr-text-body);white-space:nowrap}
+:root[data-ui="r5"] .g5-plg .g5-ml > span + span{line-height:16px}
+:root[data-ui="r5"] .g5-plg .g5-ml > span.g5-t3{color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-plg .g5-ib{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+:root[data-ui="r5"] .g5-plg .g5-tbl .g5-l2.g5-ib{display:flex}
+:root[data-ui="r5"] .g5-plg svg.g5-i{width:14px;height:14px;flex:none}
+:root[data-ui="r5"] .g5-plg svg.g5-i12{width:12px;height:12px}
+
+/* 展开行：与上一行连成一块中性底 */
+:root[data-ui="r5"] .g5-plg .g5-tbl tr.g5-open td{background:var(--gr-fill-1);box-shadow:none}
+:root[data-ui="r5"] .g5-plg .g5-tbl tr.g5-open td:first-child{border-radius:var(--gr-r-ctl) 0 0 0}
+:root[data-ui="r5"] .g5-plg .g5-tbl tr.g5-open td:last-child{border-radius:0 var(--gr-r-ctl) 0 0}
+:root[data-ui="r5"] .g5-plg .g5-tbl tr.g5-open:hover td:first-child{border-radius:var(--gr-r-ctl) 0 0 0}
+:root[data-ui="r5"] .g5-plg .g5-tbl tr.g5-open:hover td:last-child{border-radius:0 var(--gr-r-ctl) 0 0}
+:root[data-ui="r5"] .g5-plg .g5-tbl tr.g5-xrow td{background:var(--gr-fill-1);padding:0 4px 8px;border-radius:0 0 var(--gr-r-ctl) var(--gr-r-ctl);vertical-align:top;line-height:20px;white-space:normal}
+:root[data-ui="r5"] .g5-plg .g5-xd{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:16px;padding:4px 0 4px}
+:root[data-ui="r5"] .g5-plg .g5-xd > *{min-height:24px;display:flex;align-items:center;white-space:nowrap}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-k{font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-v{font-size:13px;line-height:20px;color:var(--gr-text-body);gap:16px}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-v .g5-ib{gap:4px}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-v .g5-ib svg{color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-v .g5-ib.g5-warn svg{color:var(--gr-warn)}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-v .g5-ib.g5-danger svg{color:var(--gr-danger)}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-src{font-size:12px;line-height:16px;color:var(--gr-text-3);gap:4px}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-src svg{color:var(--gr-warn)}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-src.g5-danger svg{color:var(--gr-danger)}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-xacts{margin-left:auto;display:inline-flex;align-items:center;gap:8px}
+:root[data-ui="r5"] .g5-plg .g5-xd .g5-btn{height:24px}
+
+/* 开关按钮（命中区 28 高） */
+:root[data-ui="r5"] .g5-plg .g5-swb{height:28px;display:inline-flex;align-items:center;gap:8px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-plg .g5-swb[disabled]{cursor:default}
+:root[data-ui="r5"] .g5-plg .g5-swb[disabled] .g5-sw{background:var(--gr-fill-1)}
+:root[data-ui="r5"] .g5-plg .g5-swb[disabled] .g5-sw::after{background:var(--gr-text-dis)}
+:root[data-ui="r5"] .g5-plg .g5-off .g5-sw.g5-on{background:var(--gr-fill-3)}
+:root[data-ui="r5"] .g5-plg .g5-off .g5-sw.g5-on::after{background:var(--gr-text-dis)}
+:root[data-ui="r5"] .g5-plg .g5-off .g5-tbl td .g5-unv{color:var(--gr-warn)}
+:root[data-ui="r5"] .g5-plg .g5-armed .g5-btn-kill svg{width:14px;height:14px}
+:root[data-ui="r5"] .g5-plg .g5-btn-kill[disabled]{background:var(--gr-fill-2);color:var(--gr-text-dis);cursor:default}
+
+:root[data-ui="r5"] .g5-plg .g5-tbl td.g5-armtd{padding:0 4px 8px;white-space:normal;box-shadow:none}
+
+/* 无行 / 读取失败 / 发现页签：一行事实 + 至多一个去处 */
+:root[data-ui="r5"] .g5-plg .g5-pmsg{padding:0 20px 20px;display:flex;align-items:center;gap:12px;font-size:13px;line-height:20px;color:var(--gr-text-body)}
+:root[data-ui="r5"] .g5-plg .g5-pmsg .g5-src{font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-plg .g5-pmsg .g5-src[data-wire="off"]{display:inline-flex;gap:8px}
+:root[data-ui="r5"] .g5-plg .g5-hd .g5-r .g5-s12{font-size:12px;line-height:16px}
+:root[data-ui="r5"] .g5-plg .g5-tbl .g5-sk{height:12px}

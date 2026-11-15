@@ -1,0 +1,22 @@
+{
+  "name": "@gitrader/optimizer",
+  "version": "0.1.0",
+  "description": "Parameter optimization on top of the engine-core backtest public API: grid, seeded random and evolutionary search, with forced overfitting metrics (trial count, CSCV PBO, deflated Sharpe) and a mandatory walk-forward or holdout validation.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/engine-core": "*",
+    "@gitrader/stats": "*"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

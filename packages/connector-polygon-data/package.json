@@ -1,0 +1,21 @@
+{
+  "name": "@gitrader/connector-polygon-data",
+  "version": "0.1.0",
+  "description": "Gitrader Polygon US-equity market-data connector (read-only: tickers, aggregates, snapshots).",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

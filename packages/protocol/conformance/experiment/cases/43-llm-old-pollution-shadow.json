@@ -1,0 +1,545 @@
+{
+  "input": {
+    "to": "shadow",
+    "evidence": {
+      "actor": {
+        "via": "ui",
+        "actorType": "human"
+      },
+      "packs": [
+        {
+          "runId": "run-old",
+          "tier": "hypothetical",
+          "specDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "trialStats": [
+            {
+              "nObs": 0,
+              "sharpe": null,
+              "runId": "run-backtest",
+              "specDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          ],
+          "attestation": {
+            "keyId": "sample",
+            "alg": "ed25519",
+            "sig": "sample-signature",
+            "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "at": 50,
+          "data": {
+            "alignment": "open-time",
+            "candlesDigests": [
+              {
+                "instrumentId": "sample:PAIR",
+                "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            ],
+            "source": "host",
+            "pointInTime": true,
+            "candlesDigestMethod": "gitrader-candles/1",
+            "timezone": "UTC"
+          },
+          "llm": {
+            "leakFreeFrom": null,
+            "derivedFrom": "declared",
+            "involved": false,
+            "models": [],
+            "contaminated": "possible"
+          },
+          "assumptions": {
+            "slippageBps": 0,
+            "fillModel": "next-bar-open",
+            "liquidation": false,
+            "fees": "venue",
+            "funding": false
+          },
+          "instrumentMeta": [],
+          "schema": "gitrader-experiment/1",
+          "stats": {
+            "spanDays": 30,
+            "avgHoldBars": 1,
+            "maxDrawdownRatio": 0,
+            "trades": 10,
+            "sharpe": 0,
+            "annualizedRatio": 0,
+            "sortino": 0,
+            "fills": 10,
+            "winRatio": 0,
+            "profitFactor": 1,
+            "finalEquity": 100,
+            "totalReturnRatio": 0
+          },
+          "experimentId": "exp_000000000000000000000001",
+          "biasChecks": {
+            "lookahead": "pass",
+            "recursive": "pass"
+          },
+          "kind": "backtest",
+          "artifacts": [
+            {
+              "sizeBytes": 1,
+              "sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "mediaType": "application/json",
+              "artifactId": "trades-run-backtest",
+              "kind": "trades"
+            },
+            {
+              "sizeBytes": 1,
+              "sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "mediaType": "application/json",
+              "artifactId": "equity-run-backtest",
+              "kind": "equity"
+            }
+          ],
+          "provenance": {
+            "protocolVersion": "0.1.12",
+            "kernelVersion": "sample"
+          },
+          "window": {
+            "to": 1000,
+            "from": 0
+          },
+          "trialCount": 1,
+          "subjectKey": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "packId": "pack-old",
+          "spec": {
+            "seed": 1,
+            "data": {
+              "source": "host"
+            },
+            "assumptions": {
+              "slippageBps": 0,
+              "fillModel": "next-bar-open",
+              "liquidation": false,
+              "fees": "venue",
+              "funding": false
+            },
+            "interval": "1d",
+            "instruments": [
+              "sample:PAIR"
+            ],
+            "subject": {
+              "strategy": {
+                "params": {},
+                "id": "sample-strategy",
+                "version": "1"
+              }
+            },
+            "from": 0,
+            "account": {
+              "ccy": "USD",
+              "leverage": 1,
+              "initialBalance": "100"
+            },
+            "to": 1000
+          },
+          "seed": 1
+        },
+        {
+          "runId": "run-backtest",
+          "tier": "hypothetical",
+          "specDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "trialStats": [
+            {
+              "nObs": 0,
+              "sharpe": null,
+              "runId": "run-backtest",
+              "specDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          ],
+          "attestation": {
+            "keyId": "sample",
+            "alg": "ed25519",
+            "sig": "sample-signature",
+            "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "at": 200,
+          "data": {
+            "alignment": "open-time",
+            "candlesDigests": [
+              {
+                "instrumentId": "sample:PAIR",
+                "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            ],
+            "source": "host",
+            "pointInTime": true,
+            "candlesDigestMethod": "gitrader-candles/1",
+            "timezone": "UTC"
+          },
+          "llm": {
+            "leakFreeFrom": null,
+            "derivedFrom": "declared",
+            "involved": false,
+            "models": [],
+            "contaminated": "no"
+          },
+          "assumptions": {
+            "slippageBps": 0,
+            "fillModel": "next-bar-open",
+            "liquidation": false,
+            "fees": "venue",
+            "funding": false
+          },
+          "instrumentMeta": [],
+          "schema": "gitrader-experiment/1",
+          "stats": {
+            "spanDays": 30,
+            "avgHoldBars": 1,
+            "maxDrawdownRatio": 0,
+            "trades": 10,
+            "sharpe": 0,
+            "annualizedRatio": 0,
+            "sortino": 0,
+            "fills": 10,
+            "winRatio": 0,
+            "profitFactor": 1,
+            "finalEquity": 100,
+            "totalReturnRatio": 0
+          },
+          "experimentId": "exp_000000000000000000000001",
+          "biasChecks": {
+            "lookahead": "pass",
+            "recursive": "pass"
+          },
+          "kind": "backtest",
+          "artifacts": [
+            {
+              "sizeBytes": 1,
+              "sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "mediaType": "application/json",
+              "artifactId": "trades-run-backtest",
+              "kind": "trades"
+            },
+            {
+              "sizeBytes": 1,
+              "sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "mediaType": "application/json",
+              "artifactId": "equity-run-backtest",
+              "kind": "equity"
+            }
+          ],
+          "provenance": {
+            "protocolVersion": "0.1.12",
+            "kernelVersion": "sample"
+          },
+          "window": {
+            "to": 1000,
+            "from": 0
+          },
+          "trialCount": 1,
+          "subjectKey": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "packId": "pack-run-backtest",
+          "spec": {
+            "seed": 1,
+            "data": {
+              "source": "host"
+            },
+            "assumptions": {
+              "slippageBps": 0,
+              "fillModel": "next-bar-open",
+              "liquidation": false,
+              "fees": "venue",
+              "funding": false
+            },
+            "interval": "1d",
+            "instruments": [
+              "sample:PAIR"
+            ],
+            "subject": {
+              "strategy": {
+                "params": {},
+                "id": "sample-strategy",
+                "version": "1"
+              }
+            },
+            "from": 0,
+            "account": {
+              "ccy": "USD",
+              "leverage": 1,
+              "initialBalance": "100"
+            },
+            "to": 1000
+          },
+          "seed": 1
+        },
+        {
+          "runId": "run-holdout",
+          "tier": "hypothetical",
+          "specDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "trialStats": [
+            {
+              "nObs": 0,
+              "sharpe": null,
+              "runId": "run-holdout",
+              "specDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          ],
+          "attestation": {
+            "keyId": "sample",
+            "alg": "ed25519",
+            "sig": "sample-signature",
+            "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "at": 300,
+          "data": {
+            "alignment": "open-time",
+            "candlesDigests": [
+              {
+                "instrumentId": "sample:PAIR",
+                "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            ],
+            "source": "host",
+            "pointInTime": true,
+            "candlesDigestMethod": "gitrader-candles/1",
+            "timezone": "UTC"
+          },
+          "llm": {
+            "leakFreeFrom": null,
+            "derivedFrom": "declared",
+            "involved": false,
+            "models": [],
+            "contaminated": "no"
+          },
+          "assumptions": {
+            "slippageBps": 0,
+            "fillModel": "next-bar-open",
+            "liquidation": false,
+            "fees": "venue",
+            "funding": false
+          },
+          "instrumentMeta": [],
+          "schema": "gitrader-experiment/1",
+          "stats": {
+            "spanDays": 30,
+            "avgHoldBars": 1,
+            "maxDrawdownRatio": 0,
+            "trades": 10,
+            "sharpe": 0,
+            "annualizedRatio": 0,
+            "sortino": 0,
+            "fills": 10,
+            "winRatio": 0,
+            "profitFactor": 1,
+            "finalEquity": 100,
+            "totalReturnRatio": 0
+          },
+          "experimentId": "exp_000000000000000000000001",
+          "biasChecks": {
+            "lookahead": "pass",
+            "recursive": "pass"
+          },
+          "kind": "holdout",
+          "artifacts": [
+            {
+              "sizeBytes": 1,
+              "sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "mediaType": "application/json",
+              "artifactId": "trades-run-holdout",
+              "kind": "trades"
+            },
+            {
+              "sizeBytes": 1,
+              "sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "mediaType": "application/json",
+              "artifactId": "equity-run-holdout",
+              "kind": "equity"
+            }
+          ],
+          "provenance": {
+            "protocolVersion": "0.1.12",
+            "kernelVersion": "sample"
+          },
+          "window": {
+            "to": 1000,
+            "from": 0
+          },
+          "trialCount": 1,
+          "subjectKey": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "packId": "pack-run-holdout",
+          "spec": {
+            "seed": 1,
+            "data": {
+              "source": "host"
+            },
+            "assumptions": {
+              "slippageBps": 0,
+              "fillModel": "next-bar-open",
+              "liquidation": false,
+              "fees": "venue",
+              "funding": false
+            },
+            "interval": "1d",
+            "instruments": [
+              "sample:PAIR"
+            ],
+            "subject": {
+              "strategy": {
+                "params": {},
+                "id": "sample-strategy",
+                "version": "1"
+              }
+            },
+            "from": 0,
+            "account": {
+              "ccy": "USD",
+              "leverage": 1,
+              "initialBalance": "100"
+            },
+            "to": 1000
+          },
+          "seed": 1
+        }
+      ],
+      "accounts": [
+        {
+          "accountId": "acct_000000000000000000000001",
+          "mode": "paper"
+        }
+      ],
+      "labRuns": [
+        {
+          "startedAt": 0,
+          "runId": "run-backtest",
+          "kind": "backtest",
+          "executor": {
+            "codeDigest": null,
+            "instanceId": "inst_000000000000000000000001",
+            "engineId": "engine-sample",
+            "kind": "engine"
+          },
+          "packId": "pack-run-backtest",
+          "subjectKey": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "instruments": [
+            "sample:PAIR"
+          ],
+          "experimentId": "exp_000000000000000000000001",
+          "window": {
+            "to": 1000,
+            "from": 0
+          },
+          "status": "done",
+          "specDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "startedAt": 0,
+          "runId": "run-holdout",
+          "kind": "backtest",
+          "executor": {
+            "codeDigest": null,
+            "instanceId": "inst_000000000000000000000001",
+            "engineId": "engine-sample",
+            "kind": "engine"
+          },
+          "packId": "pack-run-holdout",
+          "subjectKey": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "instruments": [
+            "sample:PAIR"
+          ],
+          "experimentId": "exp_000000000000000000000001",
+          "window": {
+            "to": 1000,
+            "from": 0
+          },
+          "status": "done",
+          "specDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "backtestEnteredAt": 100
+    },
+    "experiment": {
+      "experimentId": "exp_000000000000000000000001",
+      "title": "Sample experiment",
+      "hypothesis": "A synthetic hypothesis",
+      "stage": "backtest",
+      "subject": {
+        "params": {}
+      },
+      "assumptions": {
+        "slippageBps": 0,
+        "fillModel": "next-bar-open",
+        "liquidation": false,
+        "fees": "venue",
+        "funding": false
+      },
+      "origin": {
+        "actor": "user:usr_000000000000000000000001",
+        "actorType": "human",
+        "tool": "experiment",
+        "via": "ui",
+        "requestId": "00000000-0000-4000-8000-000000000001"
+      },
+      "createdAt": 0,
+      "updatedAt": 0,
+      "stageEnteredAt": 100,
+      "subjectKey": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "holdoutWindow": {
+        "to": 1000,
+        "from": 0
+      },
+      "frozen": {
+        "hypothesis": true,
+        "holdout": true,
+        "subject": true
+      },
+      "runs": [
+        {
+          "accountId": "acct_000000000000000000000001",
+          "stage": "backtest",
+          "runId": "run-paper",
+          "from": 0,
+          "to": null,
+          "executor": {
+            "codeDigest": null,
+            "instanceId": "inst_000000000000000000000001",
+            "engineId": "engine-sample",
+            "kind": "engine"
+          },
+          "attachedAt": 0
+        }
+      ],
+      "holdoutRunId": "run-holdout",
+      "packs": [
+        {
+          "packId": "pack-old",
+          "runId": "run-old",
+          "kind": "backtest",
+          "tier": "hypothetical",
+          "at": 50,
+          "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "at": 200,
+          "runId": "run-backtest",
+          "tier": "hypothetical",
+          "packId": "pack-run-backtest",
+          "kind": "backtest",
+          "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "at": 300,
+          "runId": "run-holdout",
+          "tier": "hypothetical",
+          "packId": "pack-run-holdout",
+          "kind": "holdout",
+          "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "llm": {
+        "involved": true,
+        "derivedFrom": "declared",
+        "models": []
+      }
+    },
+    "now": 1000
+  },
+  "expect": {
+    "ok": false,
+    "missing": [
+      "llm.contaminated"
+    ]
+  },
+  "id": "43-llm-old-pollution-shadow",
+  "kind": "transition"
+}

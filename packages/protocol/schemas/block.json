@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:block:1",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: block | Version: 1 | Status: draft",
+  "title": "BlockManifest",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "gitrader-block/1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^block\\.[a-z0-9-]+\\.[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "vendor": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entry": {
+      "type": "object",
+      "properties": {
+        "module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "element": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "module",
+        "element"
+      ]
+    },
+    "isolation": {
+      "enum": [
+        "inline",
+        "iframe"
+      ]
+    },
+    "size": {
+      "type": "object",
+      "properties": {
+        "minW": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minH": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "defaultW": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "defaultH": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maxW": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maxH": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "minW",
+        "minH",
+        "defaultW",
+        "defaultH"
+      ]
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "minLength": 1
+              },
+              "filter": {
+                "type": "object"
+              },
+              "maxHz": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "topic"
+            ]
+          }
+        },
+        "queries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "market.read",
+          "account.read",
+          "ledger.read",
+          "takeover.trigger",
+          "workspace.control",
+          "net.fetch"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "linkGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "enum": [
+              "symbol",
+              "account",
+              "timeRange",
+              "strategy",
+              "experiment"
+            ]
+          },
+          "mode": {
+            "enum": [
+              "read",
+              "readwrite"
+            ]
+          }
+        },
+        "required": [
+          "group",
+          "mode"
+        ]
+      }
+    },
+    "pinned": {
+      "type": "boolean"
+    },
+    "fixtures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema",
+    "id",
+    "name",
+    "version",
+    "vendor",
+    "license",
+    "entry",
+    "isolation",
+    "size",
+    "permissions",
+    "fixtures"
+  ]
+}

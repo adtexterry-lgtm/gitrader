@@ -1,0 +1,48 @@
+{
+  "_note": "Gitrader 交易工具（17 个工具，模型侧 mcp__gitrader__<工具>）。zip 由 integrations/unigit/pack.mjs 生成（根目录 = {installDir}：gitrader-mcp.js）。GITRADER_HOME 指向兄弟目录 apps-data/official.gitrader（{dataDir} = <appsRoot>/apps-data/<配方id>），MCP 每次调用时读那里的 service.json 找端口，内核后起也能连上；令牌从同目录的 agent-unigit.token 读（用户在 Gitrader 里创建钥匙后保存，令牌不写进配方）。下单类调用最长等 90 秒，所以 toolCallTimeoutMs 取 120000，避免宿主先掐断、Agent 看不到\"结果未知\"的提示。size / sha256 是本地 zip 的真实值。",
+  "id": "official.gitrader-mcp",
+  "kind": "mcp-tool",
+  "displayName": "Gitrader 交易工具",
+  "summary": "让 AI 查行情、看账户、做纸面交易、提交需要你批准的实盘提案（需配合 Gitrader 交易工作台）",
+  "intents": [
+    "gitrader",
+    "交易工具",
+    "纸面交易",
+    "行情",
+    "下单"
+  ],
+  "schema": "unigit-recipe/1",
+  "upstream": "https://gitrader.ai",
+  "license": "CPAL-1.0",
+  "trust": "official-catalog",
+  "version": "0.1.0",
+  "platform": "win32-x64",
+  "source": {
+    "url": "https://unigit.ai/store/gitrader/gitrader-mcp-0.1.0.zip",
+    "size": 163881,
+    "sha256": "cad967ceacfd94475ee26c72d5e8dfbd8d09d971e9bc0c95076effdc94721786"
+  },
+  "install": {
+    "method": "zip"
+  },
+  "runtime": {
+    "requires": [
+      "node-bundled"
+    ],
+    "diskMB": 2
+  },
+  "mcp": {
+    "serverName": "gitrader",
+    "command": "{node}",
+    "args": [
+      "{installDir}/gitrader-mcp.js"
+    ],
+    "env": {
+      "GITRADER_HOME": "{dataDir}/../official.gitrader",
+      "GITRADER_AGENT_TOKEN_FILE": "{dataDir}/../official.gitrader/agent-unigit.token"
+    },
+    "cwd": "{dataDir}",
+    "toolCallTimeoutMs": 120000
+  },
+  "autostart": true
+}

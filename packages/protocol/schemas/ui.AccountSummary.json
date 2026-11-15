@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:ui:0.1:AccountSummary",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: ui | Version: 0.1 | Status: draft",
+  "title": "AccountSummary",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "equity": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "available": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "positions": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "openOrders": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "dayStartEquity": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    }
+  },
+  "required": [
+    "accountId",
+    "ts",
+    "equity",
+    "available"
+  ]
+}

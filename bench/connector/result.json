@@ -1,0 +1,1107 @@
+{
+  "generatedAt": "2026-10-10T03:06:05.606Z",
+  "node": "v22.23.2",
+  "platform": "win32-x64",
+  "fixtures": {
+    "allMidsKeys": 1239,
+    "xyzMidsKeys": 114,
+    "bookLevels": 40,
+    "candles": 50
+  },
+  "parse": {
+    "allMids": {
+      "n": 20000,
+      "opsPerSec": 4296,
+      "p50Us": 209.848,
+      "p95Us": 310.048,
+      "p99Us": 448.609
+    },
+    "allMidsXyz": {
+      "n": 20000,
+      "opsPerSec": 44632,
+      "p50Us": 21.49,
+      "p95Us": 29.218,
+      "p99Us": 39.347
+    },
+    "l2Book": {
+      "n": 50000,
+      "opsPerSec": 218881,
+      "p50Us": 4.331,
+      "p95Us": 5.851,
+      "p99Us": 7.315
+    },
+    "candles": {
+      "n": 20000,
+      "opsPerSec": 87485,
+      "p50Us": 11.092,
+      "p95Us": 13.717,
+      "p99Us": 16.06
+    }
+  },
+  "wsPath": {
+    "allMidsMessage": {
+      "n": 20000,
+      "opsPerSec": 1689,
+      "p50Us": 601.698,
+      "p95Us": 682.875,
+      "p99Us": 764.45
+    },
+    "bboToQuoteEvent": {
+      "n": 100000,
+      "opsPerSec": 442503,
+      "p50Us": 2.342,
+      "p95Us": 2.971,
+      "p99Us": 3.283
+    },
+    "l2BookToBookEvent": {
+      "n": 50000,
+      "opsPerSec": 74839,
+      "p50Us": 13.189,
+      "p95Us": 15.614,
+      "p99Us": 22.622
+    },
+    "eventsDelivered": 154053
+  },
+  "paperMatch": {
+    "marketOrderFill": {
+      "n": 20000,
+      "opsPerSec": 32880,
+      "p50Us": 25.1,
+      "p95Us": 48.9,
+      "p99Us": 115.9
+    },
+    "restingLimitOrder": {
+      "n": 20000,
+      "opsPerSec": 16181,
+      "p50Us": 49.6,
+      "p95Us": 132.2,
+      "p99Us": 182
+    }
+  },
+  "weightCurve": {
+    "scenario": "1 live account + workbench (account view every 1 s, book every 2 s, candles every 30 s, context every 5 s) + 10 limit orders per minute, 10 virtual minutes",
+    "limitPerMin": 1200,
+    "targetPerMin": 720,
+    "stream": {
+      "mode": "stream",
+      "durationSec": 600,
+      "ordersPlanned": 100,
+      "ordersSent": 100,
+      "restCalls": 449,
+      "maxRatio": 0.2342,
+      "avgRatio": 0.146,
+      "samples": [
+        {
+          "tSec": 0,
+          "used": 163,
+          "ratio": 0.1358,
+          "trade": 1,
+          "query": 22,
+          "background": 140
+        },
+        {
+          "tSec": 10,
+          "used": 174,
+          "ratio": 0.145,
+          "trade": 2,
+          "query": 32,
+          "background": 140
+        },
+        {
+          "tSec": 20,
+          "used": 206,
+          "ratio": 0.1717,
+          "trade": 4,
+          "query": 62,
+          "background": 140
+        },
+        {
+          "tSec": 30,
+          "used": 238,
+          "ratio": 0.1983,
+          "trade": 6,
+          "query": 92,
+          "background": 140
+        },
+        {
+          "tSec": 40,
+          "used": 269,
+          "ratio": 0.2242,
+          "trade": 7,
+          "query": 122,
+          "background": 140
+        },
+        {
+          "tSec": 50,
+          "used": 281,
+          "ratio": 0.2342,
+          "trade": 9,
+          "query": 132,
+          "background": 140
+        },
+        {
+          "tSec": 60,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 70,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 80,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 90,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 100,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 110,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 120,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 130,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 140,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 150,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 160,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 170,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 180,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 190,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 200,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 210,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 220,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 230,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 240,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 250,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 260,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 270,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 280,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 290,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 300,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 310,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 320,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 330,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 340,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 350,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 360,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 370,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 380,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 390,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 400,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 410,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 420,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 430,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 440,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 450,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 460,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 470,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 480,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 490,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 500,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 510,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 520,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 530,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 540,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 550,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 560,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 570,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 580,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        },
+        {
+          "tSec": 590,
+          "used": 170,
+          "ratio": 0.1417,
+          "trade": 10,
+          "query": 160,
+          "background": 0
+        }
+      ]
+    },
+    "legacy": {
+      "mode": "legacy",
+      "durationSec": 600,
+      "ordersPlanned": 100,
+      "ordersSent": 100,
+      "restCalls": 7049,
+      "maxRatio": 5.7417,
+      "avgRatio": 5.4287,
+      "samples": [
+        {
+          "tSec": 0,
+          "used": 275,
+          "ratio": 0.2292,
+          "trade": 1,
+          "query": 134,
+          "background": 140
+        },
+        {
+          "tSec": 10,
+          "used": 1406,
+          "ratio": 1.1717,
+          "trade": 2,
+          "query": 1264,
+          "background": 140
+        },
+        {
+          "tSec": 20,
+          "used": 2558,
+          "ratio": 2.1317,
+          "trade": 4,
+          "query": 2414,
+          "background": 140
+        },
+        {
+          "tSec": 30,
+          "used": 3710,
+          "ratio": 3.0917,
+          "trade": 6,
+          "query": 3564,
+          "background": 140
+        },
+        {
+          "tSec": 40,
+          "used": 4861,
+          "ratio": 4.0508,
+          "trade": 7,
+          "query": 4714,
+          "background": 140
+        },
+        {
+          "tSec": 50,
+          "used": 5993,
+          "ratio": 4.9942,
+          "trade": 9,
+          "query": 5844,
+          "background": 140
+        },
+        {
+          "tSec": 60,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 70,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 80,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 90,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 100,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 110,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 120,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 130,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 140,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 150,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 160,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 170,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 180,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 190,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 200,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 210,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 220,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 230,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 240,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 250,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 260,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 270,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 280,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 290,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 300,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 310,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 320,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 330,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 340,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 350,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 360,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 370,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 380,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 390,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 400,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 410,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 420,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 430,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 440,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 450,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 460,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 470,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 480,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 490,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 500,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 510,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 520,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 530,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 540,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 550,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 560,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 570,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 580,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        },
+        {
+          "tSec": 590,
+          "used": 6890,
+          "ratio": 5.7417,
+          "trade": 10,
+          "query": 6880,
+          "background": 0
+        }
+      ]
+    }
+  },
+  "paperBurst": {
+    "scenario": "500 paper market orders in a row against the HL connector (offline fixtures, virtual clock)",
+    "snapshot": {
+      "mode": "snapshot",
+      "orders": 500,
+      "filled": 500,
+      "rejected": 0,
+      "realMs": 23,
+      "blockedMs": 0,
+      "restCalls": 1,
+      "weightTotal": 2,
+      "l2BookRequests": 1,
+      "peakWindowRatio": 0
+    },
+    "snapshotConcurrent": {
+      "mode": "snapshot-concurrent",
+      "orders": 500,
+      "filled": 500,
+      "rejected": 0,
+      "realMs": 19,
+      "blockedMs": 0,
+      "restCalls": 1,
+      "weightTotal": 2,
+      "l2BookRequests": 1,
+      "peakWindowRatio": 0
+    },
+    "legacy": {
+      "mode": "legacy",
+      "orders": 500,
+      "filled": 500,
+      "rejected": 0,
+      "realMs": 145,
+      "blockedMs": 156503,
+      "restCalls": 500,
+      "weightTotal": 1000,
+      "l2BookRequests": 500,
+      "peakWindowRatio": 0.2667
+    }
+  }
+}

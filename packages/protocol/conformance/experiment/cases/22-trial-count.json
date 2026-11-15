@@ -1,0 +1,52 @@
+{
+  "rule": "trial-count",
+  "id": "22-trial-count",
+  "steps": [
+    {
+      "given": {
+        "replay": false,
+        "priorCount": 2,
+        "specDigest": "sha256:sample"
+      },
+      "operation": "same spec rerun",
+      "expect": {
+        "trialCount": 2
+      }
+    },
+    {
+      "given": {
+        "replay": false,
+        "priorCount": 2,
+        "specDigest": "sha256:other"
+      },
+      "operation": "new spec",
+      "expect": {
+        "trialCount": 3
+      }
+    },
+    {
+      "given": {
+        "replay": true,
+        "priorCount": 2
+      },
+      "operation": "replay row",
+      "expect": {
+        "trialCount": 2,
+        "recorded": true
+      }
+    },
+    {
+      "given": {
+        "executor": "engine",
+        "windowDays": 30,
+        "completedBacktestsInWindow": 7
+      },
+      "operation": "executor minimum",
+      "expect": {
+        "minimumTrials": 7,
+        "windowDays": 30
+      }
+    }
+  ],
+  "kind": "kernel-contract"
+}

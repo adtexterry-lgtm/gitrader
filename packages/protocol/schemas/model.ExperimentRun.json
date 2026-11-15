@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ExperimentRun",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ExperimentRun",
+  "type": "object",
+  "properties": {
+    "stage": {
+      "enum": [
+        "draft",
+        "backtest",
+        "paper",
+        "live_small",
+        "review",
+        "closed",
+        "hypothesis",
+        "holdout",
+        "shadow",
+        "live",
+        "retired"
+      ]
+    },
+    "jobId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/JobId"
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "mandateId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+    },
+    "runId": {
+      "type": "string"
+    },
+    "attachedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "executor": {
+      "$ref": "urn:gitrader:schema:model:0.1:ExperimentExecutor"
+    },
+    "from": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "to": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ledgerRange": {
+      "type": "object",
+      "properties": {
+        "fromSeq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "toSeq": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "fromSeq",
+        "toSeq"
+      ]
+    }
+  },
+  "required": [
+    "stage",
+    "from",
+    "to"
+  ]
+}

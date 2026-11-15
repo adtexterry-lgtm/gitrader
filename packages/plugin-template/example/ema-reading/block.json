@@ -1,0 +1,44 @@
+{
+  "schema": "gitrader-block/1",
+  "id": "block.example.ema-reading",
+  "name": "EMA 读数",
+  "version": "0.1.0",
+  "vendor": {
+    "name": "example"
+  },
+  "license": "Apache-2.0",
+  "entry": {
+    "module": "./block.js",
+    "element": "gr-ema-reading"
+  },
+  "isolation": "iframe",
+  "size": {
+    "minW": 5,
+    "minH": 3,
+    "defaultW": 6,
+    "defaultH": 4
+  },
+  "inputs": {
+    "events": [
+      {
+        "topic": "market.candles",
+        "maxHz": 1
+      }
+    ],
+    "queries": [
+      "market.candles"
+    ]
+  },
+  "permissions": [
+    "market.read"
+  ],
+  "linkGroups": [
+    {
+      "group": "symbol",
+      "mode": "read"
+    }
+  ],
+  "fixtures": [
+    "./fixtures/candles.json"
+  ]
+}

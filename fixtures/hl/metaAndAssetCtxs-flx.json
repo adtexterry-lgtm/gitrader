@@ -1,0 +1,53 @@
+[
+ {
+  "universe": [
+   {
+    "szDecimals": 3,
+    "name": "flx:TSLA",
+    "maxLeverage": 10,
+    "isDelisted": true
+   },
+   {
+    "szDecimals": 3,
+    "name": "flx:NVDA",
+    "maxLeverage": 10,
+    "isDelisted": true
+   },
+   {
+    "szDecimals": 3,
+    "name": "flx:GOLD",
+    "maxLeverage": 10,
+    "isDelisted": true
+   }
+  ]
+ },
+ [
+  {
+   "funding": "0",
+   "openInterest": "0",
+   "prevDayPx": "1",
+   "dayNtlVlm": "0",
+   "oraclePx": "1",
+   "markPx": "1",
+   "midPx": "1"
+  },
+  {
+   "funding": "0",
+   "openInterest": "0",
+   "prevDayPx": "1",
+   "dayNtlVlm": "0",
+   "oraclePx": "1",
+   "markPx": "1",
+   "midPx": "1"
+  },
+  {
+   "funding": "0",
+   "openInterest": "0",
+   "prevDayPx": "1",
+   "dayNtlVlm": "0",
+   "oraclePx": "1",
+   "markPx": "1",
+   "midPx": "1"
+  }
+ ]
+]

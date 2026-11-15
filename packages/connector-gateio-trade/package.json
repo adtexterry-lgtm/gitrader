@@ -1,0 +1,22 @@
+{
+  "name": "@gitrader/connector-gateio-trade",
+  "version": "0.1.0",
+  "description": "Gitrader Gate.io USDT perpetual trading connector (offline-tested, not registered with the kernel).",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/connector-gateio-data": "*",
+    "@gitrader/protocol": "*"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

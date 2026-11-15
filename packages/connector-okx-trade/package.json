@@ -1,0 +1,19 @@
+{
+  "name": "@gitrader/connector-okx-trade",
+  "version": "0.1.0",
+  "description": "Gitrader OKX USDT/USDC perpetual trading connector (offline-tested, not registered with the kernel).",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/connector-okx-data": "*",
+    "@gitrader/protocol": "*"
+  }
+}

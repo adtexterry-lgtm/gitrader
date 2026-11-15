@@ -1,0 +1,21 @@
+{
+  "name": "@gitrader/data-files",
+  "version": "0.1.0",
+  "description": "Gitrader local history data files: inspect / normalize / manifest for candle and funding files. Pure functions plus an importable CLI runner; no third-party dependencies.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@gitrader/strategy-ai",
+  "version": "0.1.0",
+  "description": "Gitrader strategy generation pipeline: prompt assembly, static validation, smoke backtest on generated candles, a bounded repair loop and a plain-language explanation. The model is reached only through an injected client; every test runs offline.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/engine-core": "*",
+    "@gitrader/protocol": "*"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

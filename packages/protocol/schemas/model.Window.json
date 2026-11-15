@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Window",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Window",
+  "type": "object",
+  "properties": {
+    "from": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "to": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    }
+  },
+  "required": [
+    "from",
+    "to"
+  ]
+}

@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: CPAL-1.0
+# Adapted from QuantDinger v5.6.5 ops/prometheus/prometheus.yml (Apache-2.0); adapted.
+#
+# 抓取 Gitrader 内核的 /api/metrics（由 packages/kernel/src/metrics.ts 渲染成 Prometheus 0.0.4 文本格式）。
+# 该接口与其它接口一样要求 `Authorization: Bearer <主体令牌>`（packages/kernel/src/http/server.ts），
+# 所以令牌用 authorization.credentials_file 从文件读：本文件不写任何令牌值，也不要提交带令牌的版本。
+# 规则文件沿用仓库里已有的 ops/prometheus/alerts.yml（7 条规则），这里只引用，不复制不改写。
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    deployment: gitrader-local
+
+rule_files:
+  # 容器里由 compose 把 ops/prometheus/alerts.yml 挂到这里；不用容器时改成实际路径。
+  - /etc/prometheus/alerts.yml
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+scrape_configs:
+  - job_name: gitrader-kernel
+    scheme: http
+    metrics_path: /api/metrics
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    authorization:
+      type: Bearer
+      # 占位：把主体令牌写进这个文件（权限 0600），容器里只读挂载。
+      # 不要把令牌写进本文件、不要写进 docker compose、不要提交进仓库。
+      credentials_file: /etc/prometheus/secrets/gitrader-metrics-token
+    static_configs:
+      # 内核只绑 127.0.0.1（packages/kernel/src/http/server.ts），默认端口 47900
+      # （packages/kernel/src/config.ts 的 DEFAULT_PORT_START，被占用时会顺延到后续端口）。
+      # 容器里的 Prometheus 抓宿主机上的内核时，把地址换成 host.docker.internal:47900。
+      - targets:
+          - 127.0.0.1:47900
+        labels:
+          service: gitrader-kernel
+          env: local
+
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - 127.0.0.1:9090

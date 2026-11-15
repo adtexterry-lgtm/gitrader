@@ -1,0 +1,424 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:VenueCapabilities",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "VenueCapabilities",
+  "type": "object",
+  "properties": {
+    "venue": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+    },
+    "environments": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "mainnet",
+          "testnet"
+        ]
+      },
+      "minItems": 1
+    },
+    "instrumentKinds": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "perp",
+          "spot",
+          "future",
+          "option",
+          "outcome"
+        ]
+      }
+    },
+    "orderTypes": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "enum": [
+            "native",
+            "emulated",
+            "none"
+          ]
+        },
+        "limit": {
+          "enum": [
+            "native",
+            "emulated",
+            "none"
+          ]
+        },
+        "stop_market": {
+          "enum": [
+            "native",
+            "emulated",
+            "none"
+          ]
+        },
+        "stop_limit": {
+          "enum": [
+            "native",
+            "emulated",
+            "none"
+          ]
+        },
+        "take_market": {
+          "enum": [
+            "native",
+            "emulated",
+            "none"
+          ]
+        },
+        "take_limit": {
+          "enum": [
+            "native",
+            "emulated",
+            "none"
+          ]
+        },
+        "trailing_stop": {
+          "enum": [
+            "native",
+            "emulated",
+            "none"
+          ]
+        },
+        "twap": {
+          "enum": [
+            "native",
+            "emulated",
+            "none"
+          ]
+        }
+      }
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "maxOpenOrders": {
+          "type": "object",
+          "properties": {
+            "cap": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "cap"
+          ]
+        },
+        "marketPriceBandBps": {
+          "type": "number",
+          "minimum": 0
+        },
+        "minOrderNotional": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        }
+      }
+    },
+    "marketEmulation": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "method"
+      ]
+    },
+    "tif": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "gtc",
+          "ioc",
+          "fok",
+          "alo",
+          "gtd"
+        ]
+      }
+    },
+    "triggerPriceTypes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "mark",
+          "last",
+          "index"
+        ]
+      }
+    },
+    "tpsl": {
+      "type": "object",
+      "properties": {
+        "attachToOrder": {
+          "type": "boolean"
+        },
+        "positionLevel": {
+          "type": "boolean"
+        },
+        "parentPartialCancel": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "attachToOrder",
+        "positionLevel",
+        "parentPartialCancel"
+      ]
+    },
+    "batch": {
+      "type": "object",
+      "properties": {
+        "maxOrders": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "atomic": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "maxOrders",
+        "atomic"
+      ]
+    },
+    "amend": {
+      "enum": [
+        "native",
+        "emulated",
+        "none"
+      ]
+    },
+    "cancelAll": {
+      "enum": [
+        "native",
+        "emulated",
+        "none"
+      ]
+    },
+    "deadman": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minDelaySec": {
+          "type": "number"
+        },
+        "maxTriggersPerDay": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "method",
+        "minDelaySec",
+        "maxTriggersPerDay"
+      ]
+    },
+    "positionMode": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "oneWay",
+          "hedge"
+        ]
+      }
+    },
+    "marginModes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "cross",
+          "isolated",
+          "strictIsolated",
+          "noCross"
+        ]
+      }
+    },
+    "accountModels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "signers": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "perAccount": {
+          "type": "object",
+          "properties": {
+            "unnamed": {
+              "type": "integer"
+            },
+            "named": {
+              "type": "integer"
+            }
+          }
+        },
+        "perSubaccountNamed": {
+          "type": "integer"
+        },
+        "maxValidityDays": {
+          "type": "integer"
+        },
+        "withdrawCapable": {
+          "type": "boolean"
+        },
+        "noncePerSigner": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "type",
+        "withdrawCapable"
+      ]
+    },
+    "rateLimits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "model": {
+            "type": "string",
+            "minLength": 1
+          },
+          "limit": {
+            "type": "number"
+          },
+          "windowMs": {
+            "type": "integer"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "scope",
+          "model"
+        ]
+      }
+    },
+    "wsLimits": {
+      "type": "object",
+      "properties": {
+        "maxConnections": {
+          "type": "integer"
+        },
+        "newPerMinute": {
+          "type": "integer"
+        },
+        "maxSubscriptions": {
+          "type": "integer"
+        },
+        "maxDistinctUsersInUserSubs": {
+          "type": "integer"
+        }
+      }
+    },
+    "clientOrderId": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "format"
+      ]
+    },
+    "builderFee": {
+      "type": "object",
+      "properties": {
+        "supported": {
+          "type": "boolean"
+        },
+        "perpMaxTenthBps": {
+          "type": "integer"
+        },
+        "spotMaxTenthBps": {
+          "type": "integer"
+        },
+        "spotChargedSide": {
+          "enum": [
+            "buy",
+            "sell"
+          ]
+        },
+        "maxApprovalsPerUser": {
+          "type": "integer"
+        },
+        "collectorAccountModel": {
+          "type": "string"
+        },
+        "collectorMinValue": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        }
+      },
+      "required": [
+        "supported"
+      ]
+    },
+    "history": {
+      "type": "object",
+      "properties": {
+        "maxCandles": {
+          "type": "integer"
+        },
+        "pageLimit": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "maxCandles",
+        "pageLimit"
+      ]
+    },
+    "withdrawPermissionCheck": {
+      "enum": [
+        "not_applicable",
+        "supported",
+        "unknown"
+      ]
+    },
+    "bookSnapshot": {
+      "type": "object",
+      "properties": {
+        "snapshot": {
+          "type": "boolean"
+        },
+        "refresh": {
+          "type": "boolean"
+        },
+        "staleAfterMs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "snapshot",
+        "refresh"
+      ]
+    }
+  },
+  "required": [
+    "venue",
+    "environments",
+    "instrumentKinds",
+    "orderTypes",
+    "tif",
+    "triggerPriceTypes"
+  ]
+}

@@ -1,0 +1,63 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+
+/* 表格列距（设计稿 :root --tbl-gap；components.css 只有 .g5-one 版本，缺缺省值 → 先在页内补，S0c 落地后可删） */
+:root[data-ui="r5"]{--tbl-gap:12px}
+@media (min-width:1400px){:root[data-ui="r5"]{--tbl-gap:20px}}
+@media (min-width:1760px){:root[data-ui="r5"]{--tbl-gap:32px}}
+:root[data-ui="r5"][data-nav="rail"]{--tbl-gap:8px}
+@media (min-width:1400px){:root[data-ui="r5"][data-nav="rail"]{--tbl-gap:16px}}
+@media (min-width:1760px){:root[data-ui="r5"][data-nav="rail"]{--tbl-gap:32px}}
+
+/* 设置页表格与表单（交易所 / 通知两页共用；类名只在 .g5-pgcard 内生效） */
+:root[data-ui="r5"] .g5-pgcard .g5-tbl.g5-mid td{vertical-align:middle;padding-top:0}
+:root[data-ui="r5"] .g5-pgcard .g5-tbl tr[aria-selected="true"] td{background:var(--gr-fill-2)}
+:root[data-ui="r5"] .g5-pgcard .g5-tbl tr[aria-selected="true"] td:first-child{border-radius:var(--gr-r-ctl) 0 0 var(--gr-r-ctl)}
+:root[data-ui="r5"] .g5-pgcard .g5-tbl tr[aria-selected="true"] td:last-child{border-radius:0 var(--gr-r-ctl) var(--gr-r-ctl) 0}
+:root[data-ui="r5"] .g5-pgcard .g5-tbl th.g5-e,.g5-pgcard .g5-tbl td.g5-e{text-align:right}
+:root[data-ui="r5"] .g5-pgcard .g5-tbl .g5-acts{align-items:center}
+:root[data-ui="r5"] .g5-pgcard .g5-tbl tr.g5-row{cursor:pointer}
+:root[data-ui="r5"] .g5-pgcard .g5-tbl tr.g5-row:focus-visible{outline:2px solid var(--gr-focus);outline-offset:-2px}
+:root[data-ui="r5"] .g5-pgcard .g5-sw{border:0;padding:0;cursor:pointer}
+:root[data-ui="r5"] .g5-pgcard .g5-sw:focus-visible{outline:2px solid var(--gr-focus);outline-offset:2px}
+:root[data-ui="r5"] .g5-pgcard .g5-sw:disabled{cursor:default}
+:root[data-ui="r5"] .g5-stack{display:inline-flex;flex-direction:column;gap:4px;vertical-align:middle}
+:root[data-ui="r5"] .g5-stack > span{display:inline-flex;align-items:center;gap:8px}
+:root[data-ui="r5"] .g5-pgcard .g5-fg{padding:0 20px}
+:root[data-ui="r5"] .g5-pgcard .g5-fg > .g5-v.g5-ge{margin-right:-8px}
+:root[data-ui="r5"] .g5-pgcard .g5-fg .g5-end{margin-left:auto}
+:root[data-ui="r5"] .g5-pgcard .g5-fg > .g5-why .g5-hdl{white-space:normal;overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5-pgcard .g5-fg > .g5-why{white-space:normal}
+:root[data-ui="r5"] .g5-pgcard .g5-seg.g5-s3{grid-template-columns:repeat(3,1fr)}
+:root[data-ui="r5"] .g5-pgcard .g5-seg button[disabled]:hover{color:var(--gr-text-dis)}
+:root[data-ui="r5"] .g5-pgcard .g5-seg button .g5-papermk{width:12px;height:12px}
+:root[data-ui="r5"] .g5-pgcard .g5-sec{height:32px;margin-top:8px;display:flex;align-items:center;gap:8px;padding:0 20px;box-shadow:inset 0 1px 0 var(--gr-sep);font-size:12px;line-height:16px;color:var(--gr-text-3);white-space:nowrap}
+:root[data-ui="r5"] .g5-pgcard .g5-sec .g5-tb{font-size:13px;line-height:20px}
+:root[data-ui="r5"] .g5-pgcard .g5-ffoot{padding:12px 20px 20px}
+:root[data-ui="r5"] .g5-pgcard .g5-ffoot .g5-lead{margin-right:auto}
+:root[data-ui="r5"] .g5-pgcard > .g5-ffoot.g5-pin-b{margin-top:auto;padding-top:16px;box-shadow:inset 0 1px 0 var(--gr-sep)}
+:root[data-ui="r5"] .g5-pgcard .g5-armwrap{padding:8px 16px}
+:root[data-ui="r5"] .g5-pgcard .g5-armwrap .g5-why{margin:4px 4px 0;display:flex;align-items:center;gap:8px;font-size:12px;line-height:16px;color:var(--gr-text-3);white-space:normal}
+:root[data-ui="r5"] .g5-pgcard .g5-armed .g5-btn-kill,.g5-pgcard .g5-armed .g5-btn-loosen{display:inline-flex;align-items:center;gap:8px}
+:root[data-ui="r5"] .g5-pgcard .g5-armed .g5-btn{height:28px}
+:root[data-ui="r5"] .g5-pgcard .g5-pn{padding:0 20px}
+:root[data-ui="r5"] .g5-pgcard > .g5-why.g5-rcpt{margin:0 20px;display:flex;align-items:center;gap:8px;font-size:12px;line-height:16px;color:var(--gr-text-3);white-space:normal}
+:root[data-ui="r5"] .g5-pgcard .g5-menu-open{background:var(--gr-fill-3)}
+
+/* 卡内一行消息（读取失败 / 空 / 未接通）：与设计稿 .msg 同一排版 */
+:root[data-ui="r5"] .g5-pgcard .g5-pmsg{padding:0 20px 20px;display:flex;align-items:center;gap:12px;font-size:13px;line-height:20px;color:var(--gr-text-body);flex-wrap:wrap}
+:root[data-ui="r5"] .g5-pgcard .g5-pmsg .g5-src,.g5-pgcard .g5-pmsg .g5-msg{font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-pgcard .g5-pmsg [data-wire="off"]{display:inline-flex;align-items:center;gap:12px}
+:root[data-ui="r5"] .g5-pgcard .g5-pmsg + .g5-pmsg{padding-top:0}
+
+@media (max-width:599px){
+  :root[data-ui="r5"] .g5-settings,:root[data-ui="r5"] .g5-pgcard{min-width:0;max-width:100%}
+  :root[data-ui="r5"] .g5-snav{overflow-x:auto;min-width:0;gap:8px;height:auto;min-height:36px}
+  :root[data-ui="r5"] .g5-snav .g5-tab{flex:none}
+  :root[data-ui="r5"] .g5-pgcard .g5-tw{min-width:0;max-width:100%;overflow-x:auto}
+  :root[data-ui="r5"] .g5-pgcard .g5-hd{height:auto;min-height:40px;flex-wrap:wrap;padding:12px}
+  :root[data-ui="r5"] .g5-pgcard .g5-fg{grid-template-columns:minmax(0,1fr);gap:8px;padding:8px 12px}
+  :root[data-ui="r5"] .g5-pgcard .g5-fg > *{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+  :root[data-ui="r5"] .g5-pgcard .g5-v,:root[data-ui="r5"] .g5-pgcard .g5-ffoot,:root[data-ui="r5"] .g5-pgcard .g5-armed{height:auto;min-height:32px;flex-wrap:wrap;white-space:normal}
+  :root[data-ui="r5"] .g5-pgcard .g5-inp{max-width:100%}
+}
+

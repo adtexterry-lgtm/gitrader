@@ -1,0 +1,82 @@
+{
+  "schema": "gitrader-plugin/1",
+  "id": "block.example.ema-reading",
+  "package": "block",
+  "kind": "block",
+  "name": "EMA 读数",
+  "desc": "指标块示例：订阅 K 线，显示一条 EMA 读数和收盘价相对它的偏离。",
+  "tags": [
+    "block",
+    "indicator",
+    "example"
+  ],
+  "version": "0.1.0",
+  "vendor": {
+    "id": "example",
+    "name": "Example",
+    "kind": "self",
+    "verified": false,
+    "url": null
+  },
+  "source": {
+    "repo": "local/ema-reading",
+    "commit": "0000000000000000000000000000000000000000",
+    "sha256": "sha256:a29d071ee780d6defe6e6fbf1f4541a689d202aaa5d6de93825415a79e1b4916",
+    "fetchedAt": 1791540000000
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "redistribute": "bundle",
+    "notice": "Apache-2.0。示例代码，随便改。",
+    "commercialUse": true
+  },
+  "runtime": {
+    "type": "browser",
+    "native": false,
+    "diskMB": 1
+  },
+  "entry": {
+    "module": "./block.js",
+    "element": "gr-ema-reading"
+  },
+  "install": {
+    "by": "user-install",
+    "requireHashes": true
+  },
+  "permissions": [
+    "market.read",
+    "ui.block"
+  ],
+  "privacy": {
+    "hosted": false,
+    "sends": []
+  },
+  "provides": {
+    "blocks": [
+      "block.example.ema-reading"
+    ]
+  },
+  "ui": {
+    "blocks": [
+      {
+        "id": "block.example.ema-reading",
+        "name": "EMA 读数",
+        "manifest": "./block.json",
+        "entry": {
+          "module": "./block.js",
+          "element": "gr-ema-reading"
+        }
+      }
+    ]
+  },
+  "fixtures": {
+    "offline": [
+      "fixtures/candles.json"
+    ],
+    "smoke": []
+  },
+  "compat": {
+    "gitrader": ">=0.1.0 <0.2.0",
+    "pluginSchema": "1"
+  }
+}

@@ -1,0 +1,453 @@
+/* Gitrader 默认块样式（blocks-default，视觉轮 r4）。只引用 theme.css 的令牌，不写颜色字面量；中文字重 400 / 600，轻体 300 只经 --gr-fw-light 给 ≥ 14 px 的标题与大数字；
+   中文最小 12 px，11 px 只给拉丁 / 数字（计数、LLM 标、单位）。整份进 @layer gr-legacy（Tailwind 工具类与 .gr-up 等语义色压得过它；块的离线预览不走 build.mjs，所以自己包上）。
+   容器规则（r4）：卡面由壳给（--gr-card + 一根内线，圆角 10），块内不再起第二层面，只有行底色（3.5% 静止 / 6% 悬停 / 9% 按下）；不卡套卡（体检 nestDepth3）。
+   橙只给：唯一实心主按钮「批准」、待批卡引信、总览条待批计数、焦点环。
+   窄档（视口宽 < 600 或高 < 480，IXD F1-8）：吸底动作条（含倒计时，两钮等宽 44 高）、所有可点件 ≥ 44。 */
+@layer gr-legacy {
+
+.gb { container-type: inline-size; container-name: gb; flex: 1 1 auto; display: flex; flex-direction: column; min-width: 0; min-height: 0; width: 100%; height: 100%; gap: 0; color: var(--gr-text); }
+.gb b { font-weight: 400; }
+.gb-lab { display: flex; align-items: center; gap: var(--gr-s2); min-height: 24px; font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+/* 撞了哪条规则：⊘ 12 down + 原文 12 text-3（形状带语义，不只靠颜色） */
+.gb-rule { display: flex; align-items: flex-start; gap: 6px; font-size: var(--gr-fs-sm); line-height: 18px; color: var(--gr-text-3); overflow-wrap: anywhere; }
+.gb-rule .gr-icon { flex: none; margin-top: 3px; color: var(--gr-down); }
+/* 卡头（CardHead）：壳里计数 / 右侧状态 portal 进 .gr-tile-p__slot；没有壳（预览 / 舞台）时就地渲染「标题 计数 右侧」 */
+.gb-head { flex: none; display: flex; align-items: center; gap: 8px; height: var(--gr-hd); padding: 0 var(--gr-pad); }
+.gb-head__t { font-size: var(--gr-fs-lg); font-weight: var(--gr-fw-light); color: var(--gr-text); white-space: nowrap; }
+.gb-head__n { font-size: var(--gr-fs-md); color: var(--gr-text-3); }
+.gb-head__r { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
+.gb-tone-ok { color: var(--gr-up); }
+.gb-tone-warn { color: var(--gr-warn); }
+.gb-tone-err { color: var(--gr-down); }
+.gb-tone-flat { color: var(--gr-text-2); }
+.gb-pos__skel, .gb-feed__skel, .gb-risk__skel { display: flex; flex-direction: column; gap: var(--gr-s3); padding: var(--gr-s3) var(--gr-pad); }
+.gb-offline { display: inline-flex; align-items: center; min-height: 20px; font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+/* 读取失败：内核原文 Mono 12、两行截断、悬停看全文（不改写上游） */
+.gb-err .gr-empty__d { font-family: var(--gr-font-num); font-size: var(--gr-fs-sm); }
+
+/* 来源小标的 LLM 标（r4 = A 的 ActorMark 规格）：名字后「LLM」Geist 11、+.04em、text-3、无框（PLAN ⑧）。前缀「LLM · 」字号为 0：视觉上不出现，文本与读屏仍是「LLM · 名字」 */
+/* .gb-who 必须是行内排版（不是 flex）：flex 子项会被 innerText 断成两行，「LLM · 名字」就不连着了 */
+.gb-who { display: inline; white-space: nowrap; }
+.gb-who__pre { font-size: 0; }
+.gb-who[data-llm]::after { content: "LLM"; margin-left: 6px; color: var(--gr-text-3); font-family: var(--gr-font); font-size: var(--gr-fs-xs); letter-spacing: var(--gr-track-caps); }
+
+/* ── 持仓卡（r4）：按账户分组的表 + 行内动作 + 展开区。行与展开区是同一块 3.5% 底（行的首末格只做上圆角、展开格只做下圆角），不套卡（nestDepth3 = 0） ── */
+.gb-pos { gap: 0; }
+.gb-pos__table { flex: 0 1 auto; min-height: 0; padding: 0 4px 6px; }
+.gb-pos__empty { display: flex; align-items: center; gap: var(--gr-s2); padding: 12px var(--gr-pad); font-size: var(--gr-fs-md); color: var(--gr-text-2); }
+.gb-pos .gb-table th { height: var(--gr-th); padding: 0 10px; background: var(--gr-card); box-shadow: inset 0 -1px 0 var(--gr-line); font-size: var(--gr-fs-sm); font-weight: 400; color: var(--gr-text-3); }
+.gb-pos .gb-table td { height: var(--gr-row); padding: 0 10px; color: var(--gr-text-body); border-bottom: 1px solid var(--gr-sep); font-size: var(--gr-fs-md); }
+.gb-pos .gb-table th:first-child, .gb-pos .gb-table td:first-child { padding-left: calc(var(--gr-pad) - 4px); }
+.gb-pos .gb-table th:last-child, .gb-pos .gb-table td:last-child { padding-right: 8px; }
+.gb-pos .gb-table tr[data-row] > td:not(.gr-td-l) { font-family: var(--gr-font-num); font-variant-numeric: tabular-nums; }
+.gb-pos .gb-table td.gr-up { color: var(--gr-up); }
+.gb-pos .gb-table td.gr-down { color: var(--gr-down); }
+.gb-pos .gb-table td.gr-flat { color: var(--gr-text-2); }
+.gb-pos__v { display: block; line-height: 18px; }
+.gb-pos__s { display: block; font-size: var(--gr-fs-xs); line-height: 14px; color: var(--gr-text-3); }
+/* 第二行里的中文（「距」）用 12：中文最小 12（体检 cjk11），数字段留 11 */
+.gb-pos__cjk { font-size: var(--gr-fs-sm); }
+/* 分组行：账户名 12 text-2 +「实盘 3」text-3；小计对齐未实现列；无底、无框 */
+.gb-pos .gb-table tr.gb-grp td { height: var(--gr-grp); padding-top: 0; padding-bottom: 6px; vertical-align: bottom; border-bottom: 0; background: none; font-size: var(--gr-fs-sm); color: var(--gr-text-2); }
+.gb-pos .gb-table tr.gb-grp td.gr-up { color: var(--gr-up); }
+.gb-pos .gb-table tr.gb-grp td.gr-down { color: var(--gr-down); }
+.gb-grp__n { margin-left: 8px; color: var(--gr-text-3); }
+/* 行：悬停 / 展开 = 整行 3.5% 底，首末格圆角 6；武装 = down 7% 底 */
+.gb-pos .gb-table tbody tr[data-row] > td { transition: background-color var(--gr-dur-focus) var(--gr-ease-out); }
+.gb-pos .gb-table tbody tr[data-row]:hover > td, .gb-pos .gb-table tbody tr.is-open > td, .gb-pos .gb-table tbody tr.gb-detail > td { background: var(--gr-sel-fill); }
+.gb-pos .gb-table tbody tr[data-row]:hover > td:first-child { border-radius: var(--gr-r-ctl) 0 0 var(--gr-r-ctl); }
+.gb-pos .gb-table tbody tr[data-row]:hover > td:last-child { border-radius: 0 var(--gr-r-ctl) var(--gr-r-ctl) 0; }
+.gb-pos .gb-table tbody tr.is-open > td { border-bottom-color: transparent; }
+.gb-pos .gb-table tbody tr.is-open > td:first-child { border-radius: var(--gr-r-ctl) 0 0 0; }
+.gb-pos .gb-table tbody tr.is-open > td:last-child { border-radius: 0 var(--gr-r-ctl) 0 0; }
+.gb-pos .gb-table tbody tr[data-state="armed"] > td, .gb-pos .gb-table tbody tr[data-state="closing"] > td { background: var(--gr-down-wash); }
+.gb-pos .gb-table tbody tr[data-state="armed"] > td:first-child, .gb-pos .gb-table tbody tr[data-state="closing"] > td:first-child { border-radius: var(--gr-r-ctl) 0 0 var(--gr-r-ctl); }
+.gb-pos .gb-table tbody tr[data-state="armed"] > td:last-child, .gb-pos .gb-table tbody tr[data-state="closing"] > td:last-child { border-radius: 0 var(--gr-r-ctl) var(--gr-r-ctl) 0; }
+.gb-pos .gb-table tbody tr:has([data-flag="new"]) > td:first-child { box-shadow: inset 2px 0 0 var(--gr-text-2); }
+/* 标的格：代码 Geist 560 + 「多 4×」12 text-2（方向不着色）；纸面行代码降 text-2 */
+.gb-sym { display: inline-flex; align-items: baseline; gap: 6px; }
+.gb-sym__code { font-weight: 560; color: var(--gr-text); }
+tr.is-paper .gb-sym__code { color: var(--gr-text-2); }
+.gb-sym__d { font-size: var(--gr-fs-sm); color: var(--gr-text-2); }
+.gb-sym__flag { margin-left: 2px; font-size: var(--gr-fs-sm); color: var(--gr-text-2); }
+.gb-sym__flag.gr-warn { color: var(--gr-warn); }
+.gb-sym__pend { margin-left: 2px; padding: 0; border: 0; border-radius: var(--gr-r-mark); background: none; font: inherit; font-size: var(--gr-fs-sm); color: var(--gr-warn); cursor: pointer; text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--gr-warn) 40%, transparent); text-underline-offset: 3px; }
+.gb-sym__pend:hover { text-decoration-color: currentColor; }
+.gb-pos .gb-table td[data-col="sl"] { font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+.gb-stop__v { font-family: var(--gr-font-num); font-variant-numeric: tabular-nums; font-size: var(--gr-fs-md); color: var(--gr-text-body); }
+.gb-pos .gb-table td[data-col="opener"] { font-size: var(--gr-fs-sm); color: var(--gr-text-2); }
+/* 行内动作：常显无底文字钮；武装时让位给「市价平掉 30 SOL　[取消] [确认平仓]」 */
+.gb-pos .gb-table td[data-col="act"] { position: relative; width: 1%; text-align: right; }
+.gb-pos__acts { display: inline-flex; align-items: center; justify-content: flex-end; gap: 2px; }
+/* 武装 / 平仓中：确认组浮在行右侧、盖住止损与开仓方两格（两格内容藏起），列宽不跟着变（不把表撑出卡） */
+.gb-pos .gb-table tr[data-state="armed"] .gb-pos__acts, .gb-pos .gb-table tr[data-state="closing"] .gb-pos__acts { position: absolute; top: 0; right: 8px; bottom: 0; gap: 8px; }
+.gb-pos .gb-table tr[data-state="armed"] td[data-col="sl"], .gb-pos .gb-table tr[data-state="closing"] td[data-col="sl"] { color: transparent; }
+.gb-pos .gb-table tr[data-state="armed"] td[data-col="sl"] > *, .gb-pos .gb-table tr[data-state="closing"] td[data-col="sl"] > *,
+.gb-pos .gb-table tr[data-state="armed"] td[data-col="opener"] > *, .gb-pos .gb-table tr[data-state="closing"] td[data-col="opener"] > * { visibility: hidden; }
+.gb-pos__what { margin-right: 4px; font-size: var(--gr-fs-sm); color: var(--gr-text-body); white-space: nowrap; }
+.gb-pos__acts:has(.gr-iconfirm__err) .gb-pos__what { display: none; }
+.gb-pos__off, .gb-pos__done { padding: 0 8px; font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+.gb-pos td[data-col="act"] .gr-iconfirm { display: inline-flex; flex-wrap: nowrap; align-items: center; justify-content: flex-end; gap: 8px; max-width: none; }
+/* 平仓失败原文：确认组左侧两行截断、悬停全文（title） */
+.gb-pos .gr-iconfirm__err { order: -1; flex: none; width: 200px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; white-space: normal; text-align: left; font-size: var(--gr-fs-sm); line-height: 14px; color: var(--gr-down); overflow-wrap: anywhere; }
+.gb-pos__err { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--gr-fs-sm); line-height: 16px; color: var(--gr-down); overflow-wrap: anywhere; }
+/* 展开区：行高 0fr → 1fr（240 ms），内容晚 80 ms 淡入 + 下落 4 px；三栏 232 / 自适应 / 300，栏距 32 */
+.gb-pos .gb-table tbody tr.gb-detail > td { height: auto; padding: 0 16px 20px; white-space: normal; text-align: left; border-bottom: 0; border-radius: 0 0 var(--gr-r-ctl) var(--gr-r-ctl); }
+.gb-detail__in { display: grid; grid-template-rows: 1fr; animation: gb-rows-open var(--gr-dur-row) var(--gr-ease-out); }
+.gb-detail__in > div { min-height: 0; overflow: hidden; }
+@keyframes gb-rows-open { from { grid-template-rows: 0fr; opacity: 0; } to { grid-template-rows: 1fr; opacity: 1; } }
+@keyframes gb-detail-in { from { opacity: 0; transform: translateY(-4px); } }
+/* 三栏：明细 160 · 事件链自适应（不小于 340）· 表单 280，栏距 16（主会话按 comps 定：862 宽卡里中栏 ≈ 350） */
+.gb-detail__grid { display: grid; grid-template-columns: 160px minmax(340px, 1fr) 280px; gap: 16px; padding-top: 12px; border-top: 1px solid var(--gr-sep); animation: gb-detail-in var(--gr-dur-row) var(--gr-ease-out) 80ms both; }
+.gb-detail__kv { display: grid; grid-template-columns: 48px minmax(0, 1fr); align-content: start; gap: 6px 8px; margin: 0; font-size: var(--gr-fs-sm); line-height: 18px; }
+.gb-detail__kv dt { color: var(--gr-text-3); }
+.gb-detail__kv dd { min-width: 0; margin: 0; text-align: right; color: var(--gr-text-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gb-detail__kv dd.gr-up { color: var(--gr-up); }
+.gb-detail__kv dd.gr-down { color: var(--gr-down); }
+.gb-detail__entry { display: none; }
+.gb-chain { min-width: 0; margin: 0; padding: 0; list-style: none; font-size: var(--gr-fs-sm); line-height: 18px; }
+.gb-chain--wait { display: flex; flex-direction: column; gap: var(--gr-s2); }
+.gb-chain__step { position: relative; display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 8px; padding: 0 0 8px 14px; }
+/* 链里执行方只要 ◆ + 名字，不带「LLM」后缀（表格行的开仓方列已有）；读屏 / 文本里的「LLM · 」前缀不动 */
+.gb-chain .gb-who[data-llm]::after { display: none; }
+.gb-chain__step::before { content: ""; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: var(--gr-r-bar); box-shadow: inset 0 0 0 1.25px var(--gr-text-3); }
+.gb-chain__step:not(:last-child)::after { content: ""; position: absolute; left: 2px; top: 15px; bottom: 1px; width: 1px; background: var(--gr-line); }
+.gb-chain__t { color: var(--gr-text-3); font-variant-numeric: tabular-nums; }
+/* 每条单行：超长省略，悬停 title 看全文（「来源 Claude Code LLM 经 MCP」也在一行） */
+.gb-chain__v { min-width: 0; color: var(--gr-text-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gb-chain__v > * + * { margin-left: 6px; }
+.gb-chain__k { color: var(--gr-text-3); }
+.gb-chain__v > .gb-chain__r { margin-left: 12px; color: var(--gr-text-3); }
+.gb-chain__step.is-origin .gb-chain__v > .gb-chain__r { margin-left: 6px; }
+.gb-chain__step--down .gb-chain__v { color: var(--gr-down); }
+.gb-detail__form { display: flex; flex-direction: column; gap: 10px; min-width: 0; font-size: var(--gr-fs-sm); }
+.gb-detail__row { display: flex; align-items: center; gap: 4px; min-height: 28px; }
+.gb-detail__lab { flex: none; width: 60px; color: var(--gr-text-3); }
+.gb-detail__inp { flex: 0 1 96px; width: 96px; min-width: 72px; }
+.gb-detail__pct { display: inline-flex; gap: 0; }
+.gb-detail__pct .is-on { color: var(--gr-text); background: var(--gr-hover-fill); }
+.gb-stop__hint { color: var(--gr-text-3); }
+.gb-stop__hint[data-bad] { color: var(--gr-warn); }
+@media (prefers-reduced-motion: reduce) {
+  .gb-detail__in { animation: none; }
+  .gb-detail__grid { animation: gb-fade 120ms linear both; }
+}
+@keyframes gb-fade { from { opacity: 0; } }
+/* 1200 档（断点 1319 px，与令牌同一断点）：开仓价列收起，展开区里能看到开仓价；明细 200 / 事件链自适应，表单换到下方整行 */
+@media (max-width: 1319px) {
+  .gb-pos .gb-table [data-col="entry"] { display: none; }
+  .gb-detail__entry { display: block; }
+  .gb-detail__grid { grid-template-columns: 160px minmax(0, 1fr); row-gap: 16px; }
+  .gb-detail__form { grid-column: 1 / -1; }
+}
+/* 窄块（600–1099 两列时的左列约 520、手机视图）：按块宽逐级收列，展开区改单栏；1200 档左列约 718，不进这里 */
+@container gb (max-width: 600px) {
+  .gb-pos .gb-table [data-col="entry"], .gb-pos .gb-table [data-col="opener"] { display: none; }
+  .gb-detail__entry { display: block; }
+  .gb-detail__grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
+@container gb (max-width: 460px) {
+  .gb-pos .gb-table [data-col="mark"], .gb-pos .gb-table [data-col="sl"] { display: none; }
+}
+
+/* ── Agent 三张卡（r4：config.view = pending 待批 / keys Agent / feed 活动；缺省 = 全量视图三段叠放）──────────────────
+   卡面由壳给（--gr-card + 内线，圆角 10）；块内不再起第二层面，只有行底色（3.5% / 6% / 9%）。左右内边距 --gr-pad（1440 20 / 1200 16）。 */
+.gb-agent { gap: 0; }
+.gb-agent:not([data-view]) { gap: var(--gr-s3); padding-bottom: var(--gr-s3); }
+.gb-agent__none { display: flex; align-items: center; min-height: var(--gr-row-1); padding: 0 var(--gr-pad); font-size: var(--gr-fs-md); color: var(--gr-text-2); }
+
+/* Agent 卡：每把钥匙一行 40（1200：36）；形状 + 名字 13 + LLM · 最后活动 12 text-3 · 右侧档位件（填充家族 6% → 9%，28 高、左 10 右 8、字 12） */
+.gb-agent__keys { flex: none; display: flex; flex-direction: column; padding: 0 4px 4px; }
+.gb-agent__keys > .gb-offline { padding: 0 calc(var(--gr-pad) - 4px); }
+.gb-tiers { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.gb-tier { display: flex; flex-direction: column; min-width: 0; }
+.gb-tier__row { display: flex; align-items: center; gap: 12px; min-width: 0; height: var(--gr-row-1); padding: 0 calc(var(--gr-pad) - 4px); border-radius: var(--gr-r-ctl); transition: background-color var(--gr-dur-hover) var(--gr-ease-out); }
+.gb-tier__row:hover { background: var(--gr-sel-fill); }
+.gb-tier__who { flex: 0 1 auto; min-width: 0; overflow: hidden; font-size: var(--gr-fs-md); color: var(--gr-text); }
+.gb-tier__ago { flex: none; font-size: var(--gr-fs-sm); color: var(--gr-text-3); white-space: nowrap; }
+.gb-tierbtn { flex: none; margin-left: auto; display: inline-flex; align-items: center; gap: 6px; height: var(--gr-ctl-sm); padding: 0 8px 0 10px; border: 0; border-radius: var(--gr-r-ctl); background: var(--gr-hover-fill); color: var(--gr-text-body); font-size: var(--gr-fs-sm); font-weight: 400; white-space: nowrap; cursor: pointer; transition: background-color var(--gr-dur-hover) var(--gr-ease-out), color var(--gr-dur-hover) var(--gr-ease-out), transform var(--gr-dur-press) var(--gr-ease-out); }
+.gb-tierbtn .gr-icon { color: var(--gr-text-3); transition: transform var(--gr-dur-open) var(--gr-ease-out); }
+.gb-tierbtn:hover:not([aria-disabled="true"]), .gb-tierbtn[data-state="open"] { background: var(--gr-press-fill); color: var(--gr-text); }
+.gb-tierbtn:active:not([aria-disabled="true"]) { transform: scale(.98); }
+.gb-tierbtn[data-state="open"] .gr-icon { transform: rotate(180deg); }
+.gb-tierbtn[aria-disabled="true"] { background: var(--gr-sel-fill); color: var(--gr-text-dis); cursor: not-allowed; }
+.gb-tierbtn.is-busy { cursor: progress; }
+.gb-tierbtn.is-busy::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: var(--gr-r-mark); border: 1.5px solid currentColor; border-right-color: transparent; animation: gr-spin .7s linear infinite; }
+.gb-tier__err { margin: 0 calc(var(--gr-pad) - 4px) 6px; font-size: var(--gr-fs-sm); color: var(--gr-down); overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* 待批卡：卡头下 1 px 引信（轨 = 4% 分隔线，点亮段 = 流光橙，长度 = 剩余 / 时限，换卡时从 0 重新点亮 400 ms）+ 当前一张 + 卡底队列 */
+.gb-agent__pend { flex: none; display: flex; flex-direction: column; min-height: 0; }
+.gb-fuse { flex: none; height: 1px; margin: 0 var(--gr-pad); border-radius: var(--gr-r-bar); background: var(--gr-sep); overflow: hidden; }
+.gb-fuse i { display: block; height: 1px; border-radius: var(--gr-r-bar); transform-origin: left center; transform: scaleX(var(--fuse, 0)); background-image: var(--gr-flow); background-size: 200% 100%;
+  transition: transform 1s linear; animation: gb-fuse-in var(--gr-dur-fuse) var(--gr-ease-out), gr-flow 24s ease-in-out infinite alternate; }
+@keyframes gb-fuse-in { from { transform: scaleX(0); } }
+.gb-pend__wrap { flex: none; }
+.gb-pend { position: relative; display: flex; flex-direction: column; padding: 12px var(--gr-pad) 14px; }
+.gb-pend__top { display: flex; align-items: center; gap: 16px; min-width: 0; font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+.gb-pend__ticket { flex: none; font-size: var(--gr-fs-sm); color: var(--gr-text-3); white-space: nowrap; }
+/* 执行方（含 LLM 标）不被挤：截断只发生在「做什么」上——大模型来源永远带标记 */
+.gb-pend__top .gr-actor, .gb-ev__who .gr-actor { flex: none; }
+.gb-pend__top .gr-actor { font-size: var(--gr-fs-sm); color: var(--gr-text-2); }
+.gb-pend__t { flex: none; margin-left: auto; font-size: var(--gr-fs-xl); line-height: 20px; color: var(--gr-text); letter-spacing: var(--gr-track-num); }
+.gb-pend__t.gr-warn { color: var(--gr-warn); }
+.gb-pend__t.gr-down { color: var(--gr-down); }
+.gb-pend__t.gr-muted { color: var(--gr-text-3); }
+.gb-pend__what { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; font-size: var(--gr-fs-2xl); line-height: 28px; font-weight: var(--gr-fw-light); color: var(--gr-text); }
+.gb-pend__acct { margin-top: 2px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: var(--gr-fs-sm); line-height: 20px; color: var(--gr-text-2); }
+/* 实盘 / 纸面：字，不加框（实盘 text 色、纸面 text-2） */
+.gb-mode { font-size: var(--gr-fs-sm); color: var(--gr-text-2); }
+.gb-mode[data-mode="live"] { color: var(--gr-text); }
+.gb-pend__after { margin-top: 12px; display: flex; align-items: center; gap: 10px; font-size: var(--gr-fs-md); line-height: 20px; color: var(--gr-text-2); }
+.gb-pend__after .gr-icon { color: var(--gr-text-3); }
+.gb-pend__to { color: var(--gr-text); }
+.gb-pend > .gb-rule { margin-top: 6px; }
+/* 理由：两行截断，是按钮（点开全文） */
+.gb-pend__why { margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; width: 100%; padding: 0; border: 0; border-radius: var(--gr-r-mark); background: transparent; color: var(--gr-text-body); font-size: var(--gr-fs-md); line-height: 20px; text-align: left; cursor: pointer; }
+.gb-pend__why:hover { text-decoration: underline dotted var(--gr-text-3); text-underline-offset: 3px; }
+.gb-pend__why.is-open { display: block; -webkit-line-clamp: unset; line-clamp: none; }
+/* 单号：窄块写短号（T-…0008），悬停整行看全号 */
+.gb-tk-s { display: none; }
+/* 预演一行定义式（标签 12 text-3 · 值 13 body），上沿 4% 分隔线，紧贴动作行上方 */
+.gb-pend__pre { margin: 14px 0 0; padding-top: 12px; display: flex; flex-wrap: wrap; gap: 4px 24px; box-shadow: inset 0 1px 0 var(--gr-sep); font-size: var(--gr-fs-sm); line-height: 20px; color: var(--gr-text-3); }
+.gb-pend__pre > div { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.gb-pend__pre dt { white-space: nowrap; }
+.gb-pend__pre dd { margin: 0; font-size: var(--gr-fs-md); color: var(--gr-text-body); white-space: nowrap; }
+.gb-pend__err { min-width: 0; margin-top: 8px; font-size: var(--gr-fs-sm); color: var(--gr-down); overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+/* 动作行：右对齐，[拒绝] 无底 [批准] 全屏唯一实心橙；有结果时换成结果行 */
+.gb-pend__act { margin-top: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--gr-s2); }
+.gb-pend__act > .gb-offline { margin-right: auto; }
+.gb-pend__act .gr-btn[aria-disabled="true"]:not(:disabled), .gb-pend__bar .gr-btn[aria-disabled="true"]:not(:disabled) { background: var(--gr-sel-fill); background-image: none; color: var(--gr-text-dis); box-shadow: none; animation: none; cursor: not-allowed; }
+.gb-pend__act > .gb-pend__err { flex: 1 1 100%; order: 2; margin-top: 0; }
+.gb-pend__res { display: inline-flex; align-items: center; gap: 6px; margin-right: auto; min-height: 32px; font-size: var(--gr-fs-md); color: var(--gr-text); }
+.gb-pend__res[data-tone="ok"] .gr-icon { color: var(--gr-up); animation: gb-check var(--gr-dur-check) var(--gr-ease-out); }
+.gb-pend__res[data-tone="err"] { color: var(--gr-down); }
+@keyframes gb-check { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+/* 队列：卡底一行一张（40 高，1200 36；圆角 6、上沿 4% 线、悬停 3.5%）：短单号 · 做什么 · 规则（1200 隐藏）· 倒计时；长文本省略号在内层 span，按钮本身不溢出 */
+.gb-queue { list-style: none; margin: 0; padding: 0 4px 4px; box-shadow: inset 0 1px 0 var(--gr-sep); }
+.gb-queue > li { margin: 2px 0 0; }
+.gb-queue__btn { display: flex; align-items: center; gap: 12px; width: 100%; height: var(--gr-row-1); padding: 0 calc(var(--gr-pad) - 4px); border: 0; border-radius: var(--gr-r-ctl); background: transparent; color: var(--gr-text-3); font-size: var(--gr-fs-sm); text-align: left; overflow: hidden; cursor: pointer; transition: background-color var(--gr-dur-hover) var(--gr-ease-out); }
+.gb-queue__btn:hover { background: var(--gr-sel-fill); }
+.gb-queue__btn:active { background: var(--gr-hover-fill); }
+.gb-queue__btn:focus-visible { outline-offset: calc(var(--gr-focus-w) * -1); }
+.gb-queue__tk { flex: none; white-space: nowrap; }
+.gb-queue__w, .gb-queue__r { min-width: 0; overflow: hidden; }
+.gb-queue__w { flex: 0 1 auto; font-size: var(--gr-fs-md); color: var(--gr-text-body); }
+.gb-queue__r { flex: 1 1 0; }
+.gb-queue__w > span, .gb-queue__r > span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gb-queue__t { flex: none; margin-left: auto; color: var(--gr-text-2); white-space: nowrap; }
+.gb-queue__more { display: flex; align-items: center; height: var(--gr-row-1); padding: 0 calc(var(--gr-pad) - 4px); font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+@media (max-width: 1319px) { .gb-queue__r { display: none; } .gb-queue__w { flex: 1 1 0; } }
+/* 1200 档（comps/r4.css body.w1200 .prop）：只收间距，不收字号 */
+@media (max-width: 1319px) {
+  .gb-pend { padding: 10px var(--gr-pad) 12px; }
+  .gb-pend__what { margin-top: 6px; }
+  .gb-pend__after { margin-top: 10px; }
+  .gb-pend__pre { margin-top: 12px; padding-top: 10px; }
+  .gb-pend__act { margin-top: 10px; }
+}
+/* 窄块（900 宽视口的右列 340）：单号换短号、预演换行 */
+@container gb (max-width: 420px) {
+  .gb-tk { display: none; }
+  .gb-tk-s { display: inline; }
+  .gb-pend__pre { gap: 4px 16px; }
+}
+
+/* 活动卡：页签（A 换皮后的 Segmented，计数 12 text-3）+ 条目网格 64 / 168 / 1fr（1200：60 / 136 / 1fr）；结果字跟在做什么后（不成列） */
+.gb-agent__filter { flex: none; display: flex; align-items: center; min-width: 0; padding: 0 calc(var(--gr-pad) - 8px) 8px; }
+.gb-agent__filter .gr-seg { flex-wrap: wrap; max-width: 100%; }
+.gb-fchip { display: inline-flex; align-items: baseline; gap: 6px; }
+.gb-fchip__n { font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+.gb-feed { position: relative; flex: 1 1 0; min-height: 96px; display: flex; flex-direction: column; overflow: hidden; }
+.gb-agent__feed { flex: 1 1 auto; min-height: 0; }
+/* 静止态整行裁切：不用遮罩（ScrollArea 自带的边缘渐隐在这里关掉） */
+.gb-feed .gb-agent__feed.gr-scrollarea > .gr-scrollarea__in { -webkit-mask-image: none; mask-image: none; }
+.gb-feed__new { position: absolute; top: 0; left: 4px; right: 4px; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 4px; height: 28px; padding: 0; border: 0; border-radius: var(--gr-r-ctl); background: var(--gr-card); box-shadow: inset 0 -1px 0 var(--gr-sep); color: var(--gr-text-2); font-size: var(--gr-fs-sm); cursor: pointer; }
+.gb-feed__new:hover { color: var(--gr-text); }
+.gb-feed__list { list-style: none; margin: 0; padding: 0 4px; box-shadow: inset 0 1px 0 var(--gr-sep); overflow-anchor: auto; }
+.gb-ev { --gb-ev-c1: 64px; --gb-ev-c2: 168px; --gb-ev-gap: 12px; position: relative; display: flex; flex-direction: column; box-shadow: inset 0 -1px 0 var(--gr-sep); }
+.gb-ev:last-child, .gb-ev[data-cut] { box-shadow: none; }
+.gb-ev__head { display: grid; grid-template-columns: var(--gb-ev-c1) var(--gb-ev-c2) minmax(0, 1fr); column-gap: var(--gb-ev-gap); align-items: center; min-width: 0; width: 100%; min-height: 36px; padding: 8px calc(var(--gr-pad) - 4px); border: 0; border-radius: var(--gr-r-ctl); background: transparent; color: var(--gr-text-body); text-align: left; font-size: var(--gr-fs-md); }
+button.gb-ev__head { cursor: pointer; transition: background-color var(--gr-dur-hover) var(--gr-ease-out); }
+button.gb-ev__head:hover { background: var(--gr-sel-fill); }
+button.gb-ev__head:active { background: var(--gr-hover-fill); }
+button.gb-ev__head:focus-visible { outline-offset: calc(var(--gr-focus-w) * -1); }
+.gb-ev.is-open > .gb-ev__head { background: var(--gr-sel-fill); }
+.gb-ev__time { font-size: var(--gr-fs-sm); color: var(--gr-text-3); white-space: nowrap; }
+.gb-ev__who { min-width: 0; overflow: hidden; font-size: var(--gr-fs-sm); color: var(--gr-text-2); white-space: nowrap; }
+.gb-ev__wc { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+.gb-ev__what { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* 结果字：12 text-3；只两类上色——被拦截 / 失败 down、待批 / 已发出 warn（不加底色） */
+.gb-ev__res { flex: none; font-size: var(--gr-fs-sm); color: var(--gr-text-3); white-space: nowrap; }
+.gb-ev__res.gb-tone-ok, .gb-ev__res.gb-tone-flat, .gb-ev__res.gb-tone-warn { color: var(--gr-text-3); }
+.gb-ev__res[data-pend] { color: var(--gr-warn); }
+.gb-ev__res.gb-tone-err { color: var(--gr-down); }
+.gb-ev > .gb-rule, .gb-ev__more { padding-left: calc(var(--gr-pad) - 4px + var(--gb-ev-c1) + var(--gb-ev-c2) + var(--gb-ev-gap) * 2); padding-right: calc(var(--gr-pad) - 4px); }
+.gb-ev > .gb-rule { margin-top: -6px; padding-bottom: 8px; }
+@media (max-width: 1319px) { .gb-ev { --gb-ev-c1: 60px; --gb-ev-c2: 136px; --gb-ev-gap: 10px; } .gb-ev__head { min-height: 34px; padding-top: 7px; padding-bottom: 7px; } }
+/* 窄块（右列 340–440 里的全量视图 / 手机）：执行方与做什么换到第二行 */
+@container gb (max-width: 440px) {
+  .gb-ev { --gb-ev-c2: 0px; }
+  .gb-ev__head { grid-template-columns: var(--gb-ev-c1) minmax(0, 1fr); row-gap: 2px; }
+  .gb-ev__wc { grid-column: 1 / -1; }
+  .gb-ev > .gb-rule, .gb-ev__more { padding-left: calc(var(--gr-pad) - 4px); }
+}
+.gb-ev__more { display: grid; grid-template-rows: 1fr; animation: gb-ev-open var(--gr-dur-row) var(--gr-ease-out); }
+@keyframes gb-ev-open { from { grid-template-rows: 0fr; opacity: 0; } }
+.gb-ev__morein { min-height: 0; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 0 0 var(--gr-s2); }
+.gb-ev__why { font-size: var(--gr-fs-md); color: var(--gr-text-2); overflow-wrap: anywhere; }
+.gb-ev__up { font-family: var(--gr-font-mono); font-size: var(--gr-fs-sm); color: var(--gr-text-3); overflow-wrap: anywhere; }
+/* 新到的动作：上移淡入（只播一次）；不画左缘流光（橙只给批准 / 引信 / 待批计数 / 焦点环） */
+.gb-ev.is-new { animation: gb-ev-in var(--gr-dur-enter) var(--gr-ease-out); }
+@keyframes gb-ev-in { from { opacity: 0; transform: translateY(-6px); } }
+
+/* ── 风险卡：卡头右侧状态字 · 状态行（非正常时 7% 底）· 接管三钮一排 · 限额五行 · 保护器行 · 开关 ───────── */
+.gb-risk { gap: 0; }
+.gb-state { font-size: var(--gr-fs-md); color: var(--gr-text-body); white-space: nowrap; transition: color var(--gr-dur-swap) var(--gr-ease-out); }
+.gb-state--REDUCING { color: var(--gr-warn); }
+.gb-state--HALTED { color: var(--gr-down); }
+.gb-state--UNKNOWN { color: var(--gr-text-3); }
+.gb-risk__head { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 2px var(--gr-pad) 10px; }
+.gb-risk__status { flex: 1 1 100%; display: flex; align-items: center; gap: 8px; min-width: 0; min-height: 36px; margin: 0 calc(4px - var(--gr-pad)); padding: 0 4px 0 calc(var(--gr-pad) - 4px); border-radius: var(--gr-r-ctl); background: var(--gr-down-wash); }
+.gb-risk__reason { flex: 1 1 auto; min-width: 0; font-size: var(--gr-fs-sm); color: var(--gr-text-2); }
+.gb-takeover { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; }
+.gb-takeover__it { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
+.gb-takeover .gr-iconfirm { flex-wrap: nowrap; }
+.gb-takeover [data-act="takeover-flatten_all"]:not(:disabled) { color: var(--gr-down); }
+.gb-takeover__hint { font-size: var(--gr-fs-sm); color: var(--gr-text-body); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.gb-takeover__err { flex: 1 1 100%; font-size: var(--gr-fs-sm); color: var(--gr-down); overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+/* 没平完：常驻红条（down 7% 底 + down 字），平完后消失 */
+.gb-risk__alert { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 4px var(--gr-s2); margin: 0 4px 8px; padding: 6px 4px 6px calc(var(--gr-pad) - 4px); border-radius: var(--gr-r-ctl); background: var(--gr-down-wash); color: var(--gr-down); font-size: var(--gr-fs-md); }
+.gb-risk__alert > .gr-icon { flex: none; }
+.gb-risk__alert-l { flex: 1 1 auto; min-width: 0; font-size: var(--gr-fs-sm); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gb-risk__alert .gr-iconfirm { margin-left: auto; }
+.gb-risk__alert-err { flex: 1 1 100%; font-size: var(--gr-fs-sm); overflow-wrap: anywhere; }
+.gb-risk__bad, .gb-risk__none { flex: none; padding: 4px var(--gr-pad); font-size: var(--gr-fs-sm); color: var(--gr-text-2); }
+.gb-risk__bad { color: var(--gr-down); }
+.gb-risk__skelrow { display: flex; flex-direction: column; gap: var(--gr-s3); }
+/* 限额五行：标签 56 · 条（2 px 已用段 text-2，≥ 85% warn、≥ 100% down；轨 = 1 px 6.5% 线，垂直居中）· 值 112（已用 body + 「/ 上限」text-3） */
+.gb-limits { flex: none; list-style: none; margin: 0; padding: 4px var(--gr-pad) 8px; }
+.gb-limit { display: grid; grid-template-columns: 56px minmax(0, 1fr) 112px; align-items: center; gap: 16px; height: var(--gr-lim); font-size: var(--gr-fs-sm); }
+.gb-limit__k { color: var(--gr-text-3); white-space: nowrap; }
+.gb-limit__bar { position: relative; height: 2px; }
+.gb-limit__bar::before { content: ""; position: absolute; left: 0; right: 0; top: .5px; height: 1px; background: var(--gr-line); }
+.gb-limit__bar > i { position: absolute; inset: 0; border-radius: var(--gr-r-bar); background: var(--gr-text-2); transform-origin: left center; transform: scaleX(var(--lim, 0)); transition: transform var(--gr-dur-bar) var(--gr-ease-out), background-color 200ms var(--gr-ease-out); }
+.gb-limit[data-tone="warn"] .gb-limit__bar > i { background: var(--gr-warn); }
+.gb-limit[data-tone="down"] .gb-limit__bar > i { background: var(--gr-down); }
+.gb-limit__v { display: inline-flex; align-items: center; justify-content: flex-end; gap: 4px; color: var(--gr-text-body); white-space: nowrap; }
+.gb-limit__max { color: var(--gr-text-3); }
+/* 保护器行 36「保护器 3　触发 1 次 ⌄」+ 开关行（1200 并一行）；列表展开在下面（待批 0 张时自动展开） */
+.gb-risk__rows { flex: none; display: flex; flex-direction: column; padding: 2px 4px; box-shadow: inset 0 1px 0 var(--gr-sep); }
+.gb-risk__prot, .gb-guard { display: flex; align-items: center; gap: 12px; min-height: 36px; padding: 0 calc(var(--gr-pad) - 4px); border-radius: var(--gr-r-ctl); font-size: var(--gr-fs-md); color: var(--gr-text-body); }
+.gb-risk__prot { width: 100%; border: 0; background: transparent; text-align: left; cursor: pointer; transition: background-color var(--gr-dur-hover) var(--gr-ease-out); }
+.gb-risk__prot:hover { background: var(--gr-sel-fill); }
+.gb-risk__prot:focus-visible { outline-offset: calc(var(--gr-focus-w) * -1); }
+.gb-risk__trig { font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+.gb-risk__chev { margin-left: auto; color: var(--gr-text-3); transition: transform var(--gr-dur-open) var(--gr-ease-out); }
+.gb-risk__prot[aria-expanded="true"] .gb-risk__chev { transform: rotate(180deg); }
+.gb-guard .gr-switchwrap { flex: 1 1 auto; flex-direction: row-reverse; justify-content: space-between; }
+.gb-guard .gr-switchwrap__l { font-size: var(--gr-fs-md); color: var(--gr-text-body); }
+@media (max-width: 1319px) {
+  .gb-risk__rows { flex-direction: row; align-items: center; }
+  .gb-risk__prot { flex: 1 1 auto; width: auto; min-width: 0; }
+  .gb-guard { flex: none; min-height: 34px; }
+  .gb-guard .gr-switchwrap__l { font-size: var(--gr-fs-sm); color: var(--gr-text-2); }
+}
+.gb-risk__scroll { flex: 1 1 auto; min-height: 0; }
+.gb-plist { list-style: none; margin: 0; padding: 0 var(--gr-pad) 8px; }
+.gb-plist li { display: flex; align-items: baseline; gap: 10px; min-height: 32px; padding: 7px 0; font-size: var(--gr-fs-md); box-shadow: inset 0 -1px 0 var(--gr-sep); }
+.gb-plist li:last-child { box-shadow: none; }
+.gb-plist b { color: var(--gr-text); white-space: nowrap; }
+.gb-plist__t { flex: 1 1 auto; font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+.gb-plist time { flex: none; margin-left: auto; font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+.gb-plist__none { color: var(--gr-text-2); }
+
+/* ── 总览条（壳顶部槽里，落在画布上；排版照 comps/r4.css .strip）：全条一条基线；数字组（权益 36 + 今日 16）组内 --gr-ov-lead、组尾 +--gr-ov-tail；条内 --gr-ov-gap ── */
+.gb-sb { flex: 1 1 auto; min-width: 0; height: 100%; display: flex; align-items: baseline; gap: var(--gr-ov-gap); padding-top: calc((var(--gr-overview) - 40px) / 2); color: var(--gr-text-body); font-size: var(--gr-fs-md); white-space: nowrap; }
+.gb-sb__lead { display: flex; align-items: baseline; gap: var(--gr-ov-lead); margin-right: var(--gr-ov-tail); }
+.gb-sb__g { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.gb-sb__lab { font-size: var(--gr-fs-sm); color: var(--gr-text-3); }
+.gb-sb__hero { font-size: var(--gr-fs-hero); line-height: 40px; font-weight: var(--gr-fw-light); letter-spacing: var(--gr-track-hero); color: var(--gr-text); }
+.gb-sb__dec { color: var(--gr-text-3); }
+.gb-sb__unit { margin-left: -2px; font-size: var(--gr-fs-xs); letter-spacing: var(--gr-track-caps); color: var(--gr-text-3); }
+.gb-sb__mid { font-size: var(--gr-fs-xl); line-height: 24px; font-weight: var(--gr-fw-light); letter-spacing: var(--gr-track-num); color: var(--gr-text); }
+.gb-sb__lo { font-size: var(--gr-fs-md); line-height: 20px; color: var(--gr-text-body); }
+.gb-sb__aux { font-size: var(--gr-fs-sm); color: var(--gr-text-2); }
+.gb-sb .gr-up { color: var(--gr-up); }
+.gb-sb .gr-down { color: var(--gr-down); }
+.gb-sb__risk, .gb-sb__pend { border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.gb-sb__risk { padding: 0; border-radius: var(--gr-r-mark); }
+.gb-sb__risk:hover .gb-sb__state { color: var(--gr-text); }
+.gb-sb__state { color: var(--gr-text-body); }
+.gb-sb__state[data-state="REDUCING"] { color: var(--gr-warn); }
+.gb-sb__state[data-state="HALTED"] { color: var(--gr-down); }
+.gb-sb__pend { align-self: center; display: inline-flex; align-items: center; gap: 8px; height: 32px; margin-left: -10px; padding: 0 10px; border-radius: var(--gr-r-ctl); color: var(--gr-text-body); transition: background-color var(--gr-dur-hover) var(--gr-ease-out); }
+.gb-sb__pend:hover { background: var(--gr-hover-fill); }
+.gb-sb__pend:active { background: var(--gr-press-fill); }
+.gb-sb__pn { color: var(--gr-orange-text); font-weight: 600; }
+.gb-sb__budget b { font-weight: 400; }
+.gb-sb__right { margin-left: auto; align-self: center; display: flex; align-items: center; gap: 16px; min-width: 0; }
+.gb-sb__net { display: inline-flex; align-items: center; gap: 8px; min-width: 0; max-width: 360px; height: 28px; padding: 0 8px; border: 0; border-radius: var(--gr-r-ctl); background: transparent; color: var(--gr-text-3); font-size: var(--gr-fs-sm); cursor: pointer; transition: background-color var(--gr-dur-hover) var(--gr-ease-out); }
+.gb-sb__net:hover, .gb-sb__net[data-state="open"] { background: var(--gr-hover-fill); }
+.gb-sb__netn { min-width: 0; overflow: hidden; text-overflow: ellipsis; font-weight: 400; color: var(--gr-text-2); }
+.gb-sb__net[data-net="mainnet"] .gb-sb__netn { color: var(--gr-text); }
+.gb-sb__net[data-down] .gb-sb__netn { color: var(--gr-down); }
+.gb-sb__errfull { overflow-wrap: anywhere; }
+.gb-sb__tkoff { display: inline-flex; }
+@media (max-width: 1319px) { .gb-sb__netx { display: none; } }
+/* 600–1099（两列窄档）：条内再收一级——纸面只留数、今日百分比与「最急」收起 */
+@media (max-width: 1099px) { .gb-sb__eq[data-mode="paper"] .gb-sb__today, .gb-sb__pend .gb-sb__aux, .gb-sb__today .gb-sb__aux { display: none; } }
+/* 离线：整条降 text-3、去涨跌色（JSX 已不给 .gr-up / .gr-down）、正负号保留（工单裁决 1 / IXD F9-1） */
+.gb-sb[data-online="0"], .gb-sb[data-online="0"] .gb-sb__hero, .gb-sb[data-online="0"] .gb-sb__mid, .gb-sb[data-online="0"] .gb-sb__lo, .gb-sb[data-online="0"] .gb-sb__aux, .gb-sb[data-online="0"] .gb-sb__state, .gb-sb[data-online="0"] .gb-sb__pend, .gb-sb[data-online="0"] .gb-sb__pn { color: var(--gr-text-3); }
+/* 弹出卡（Radix Popover 的内容元素上：.gr-popcard.material-glass + 这里的钩子） */
+.gb-float { color: var(--gr-text); font-size: var(--gr-fs-md); white-space: normal; }
+.gb-netcard, .gb-tkcard { display: flex; flex-direction: column; gap: var(--gr-s3); padding: var(--gr-s4); }
+.gb-kv { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.gb-kv > div { display: flex; justify-content: space-between; gap: var(--gr-s3); font-size: var(--gr-fs-md); }
+.gb-kv dt { color: var(--gr-text-3); }
+.gb-kv dd { margin: 0; text-align: right; }
+.gb-venues { list-style: none; margin: 0; padding: var(--gr-s2) 0 0; display: flex; flex-direction: column; gap: var(--gr-s1); box-shadow: inset 0 1px 0 var(--gr-sep); }
+.gb-venue { display: flex; align-items: center; gap: var(--gr-s2); min-height: 28px; font-size: var(--gr-fs-md); }
+.gb-venue__lat { margin-left: auto; }
+.gb-tkcard .gb-lab { min-height: 20px; }
+.gb-tkcard .gb-takeover { flex-direction: column; align-items: stretch; }
+.gb-tkcard .gb-takeover__it { display: flex; flex-direction: column; align-items: stretch; }
+.gb-tkcard .gb-takeover .gr-iconfirm { display: flex; }
+.gb-tkcard .gb-takeover .gr-btn { flex: 1 1 auto; justify-content: flex-start; }
+.gb-tkcard .gb-takeover .gr-iconfirm__group { flex: 1 1 auto; }
+
+/* 吸底动作条（只在手机待批视图里渲染，在卡外）：倒计时 + [拒绝][批准] 两钮等宽 44 高，含底部安全区；主次用样式区分，不用大小 */
+.gb-pend__bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--gr-z-top); display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: var(--gr-s2); padding: var(--gr-s2) var(--gr-s4) calc(var(--gr-s2) + env(safe-area-inset-bottom)); background: var(--gr-card); box-shadow: inset 0 1px 0 var(--gr-line); }
+.gb-pend__bar .gr-btn { height: 44px; font-size: var(--gr-fs-lg); }
+.gb-pend__bt { min-width: 48px; font-size: var(--gr-fs-md); }
+.gb-pend__bar > .gb-pend__res, .gb-pend__bar > .gb-pend__err { grid-column: 1 / -1; }
+.gb-pend__bar > .gb-pend__res { margin: 0; }
+
+/* ── 窄档（手机视图，IXD F1-8）：视口宽 < 600 或高 < 480 ───────────── */
+@media (max-width: 599px), (max-height: 479px) {
+  .gb-agent:not([data-view]) .gb-agent__pend { order: -1; }
+  .gb-agent:not([data-view]) .gb-agent__filter, .gb-agent:not([data-view]) .gb-feed { display: none; }
+  .gb-agent__pend > .gb-offline { padding: 0 var(--gr-pad) 8px; }
+  .gb-pend__why { min-height: 44px; }
+  .gb-queue__btn, .gb-queue__more { height: 44px; }
+  .gb-tier__row { height: 44px; }
+  .gb-tierbtn { min-width: 44px; height: 44px; }
+  .gb-takeover .gr-btn, .gb-risk__alert .gr-btn, .gb .gr-empty .gr-btn { min-height: 44px; }
+  .gb-risk__prot, .gb-guard { min-height: 44px; }
+  .gb-sb__net, .gb-sb__pend, .gb-sb .gr-btn { min-height: 44px; min-width: 44px; }
+  /* 总览条在手机上只留 主数 · 今日 · 待批 · 网络 · 接管（纸面 / 风险在各自的卡里） */
+  .gb-sb { flex-wrap: wrap; gap: 0 12px; padding-top: 0; align-items: center; }
+  .gb-sb__hero { font-size: var(--gr-fs-2xl); line-height: 28px; }
+  .gb-sb > .gb-sb__eq[data-mode="paper"], .gb-sb__risk, .gb-sb__today .gb-sb__aux, .gb-sb__netx { display: none; }
+  .gb-sb__lead { gap: 12px; margin-right: 0; }
+  button.gb-ev__head { min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gb-fuse i { animation: none; transition: none; }
+  .gb-limit__bar > i { transition: none; }
+}
+}
+
+/* Freshness is separate from kernel availability; preserve signs while removing market tones. */
+.gb-feed-age { display: block; color: var(--gr-text-3); font-size: var(--gr-fs-sm); line-height: 1.5; white-space: nowrap; }
+.gb-rule[data-approval] svg { color: var(--gr-warn); }
+.gb-sb[data-feed="down"] .gb-sb__hero, .gb-sb[data-feed="stale"] .gb-sb__hero { color: var(--gr-text-3); }

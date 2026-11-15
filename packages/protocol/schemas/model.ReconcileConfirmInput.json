@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ReconcileConfirmInput",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ReconcileConfirmInput",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "offerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reportId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suggestionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fee": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "feeCcy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "liquidity": {
+      "enum": [
+        "maker",
+        "taker"
+      ]
+    },
+    "realizedPnl": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    }
+  },
+  "required": [
+    "accountId",
+    "offerId",
+    "reportId",
+    "suggestionId",
+    "fee",
+    "feeCcy",
+    "liquidity",
+    "realizedPnl"
+  ]
+}

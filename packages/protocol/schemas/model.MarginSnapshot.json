@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:MarginSnapshot",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "MarginSnapshot",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "valuationCcy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "equity": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "initialMargin": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maintenanceMargin": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "available": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "marginRatio": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "leverage": {
+      "type": "number"
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    }
+  },
+  "required": [
+    "accountId",
+    "model",
+    "valuationCcy",
+    "equity",
+    "initialMargin",
+    "maintenanceMargin",
+    "available",
+    "marginRatio",
+    "leverage",
+    "ts"
+  ]
+}

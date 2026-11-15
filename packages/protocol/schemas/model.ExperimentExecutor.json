@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ExperimentExecutor",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ExperimentExecutor",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "engine"
+        },
+        "engineId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        },
+        "codeDigest": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "engineId",
+        "instanceId",
+        "codeDigest"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "agent"
+        },
+        "mandateId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+        }
+      },
+      "required": [
+        "kind",
+        "mandateId"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+    "input":  {
+                  "patch":  {
+                                "llm":  {
+                                            "involved":  false
+                                        },
+                                "metrics":  {
+                                                "nested":  {
+                                                               "value":  1
+                                                           }
+                                            },
+                                "stage":  "shadow"
+                            }
+              },
+    "expect":  {
+                   "paths":  [
+                                 "llm.involved",
+                                 "metrics",
+                                 "stage"
+                             ]
+               },
+    "id":  "19-readonly-roots-and-nested-llm",
+    "kind":  "readonly"
+}

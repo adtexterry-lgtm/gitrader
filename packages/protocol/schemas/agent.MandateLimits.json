@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:agent:0.1:MandateLimits",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: agent | Version: 0.1 | Status: draft",
+  "title": "MandateLimits",
+  "type": "object",
+  "properties": {
+    "maxOrderNotional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxDailyNotional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxDailyLoss": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxPositionNotional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxOpenPositions": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "maxLeverage": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "autoMaxOrderNotional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maxOrdersPerMinute": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maxDailyOrders": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maxCancelsPerMinute": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "duplicateIntentWindowSec": {
+      "type": "number",
+      "minimum": 0
+    }
+  }
+}

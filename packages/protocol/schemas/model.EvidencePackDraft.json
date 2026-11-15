@@ -1,0 +1,387 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:EvidencePackDraft",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "EvidencePackDraft",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "gitrader-experiment/1"
+    },
+    "subjectKey": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "window": {
+      "$ref": "urn:gitrader:schema:model:0.1:Window"
+    },
+    "kind": {
+      "enum": [
+        "backtest",
+        "holdout"
+      ]
+    },
+    "tier": {
+      "const": "hypothetical"
+    },
+    "spec": {
+      "$ref": "urn:gitrader:schema:gep:0.1:BacktestSpec"
+    },
+    "specDigest": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "assumptions": {
+      "$ref": "urn:gitrader:schema:model:0.1:BacktestAssumptions"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "enum": [
+            "host",
+            "engine",
+            "files"
+          ]
+        },
+        "pointInTime": {
+          "enum": [
+            true,
+            false,
+            "unknown"
+          ]
+        },
+        "candlesDigest": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256",
+          "deprecated": true
+        },
+        "candlesDigests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "instrumentId": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+              },
+              "digest": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+              }
+            },
+            "required": [
+              "instrumentId",
+              "digest"
+            ]
+          },
+          "minItems": 1
+        },
+        "candlesDigestMethod": {
+          "const": "gitrader-candles/1"
+        },
+        "timezone": {
+          "const": "UTC"
+        },
+        "alignment": {
+          "const": "open-time"
+        }
+      },
+      "required": [
+        "source",
+        "pointInTime",
+        "candlesDigests",
+        "candlesDigestMethod",
+        "timezone",
+        "alignment"
+      ]
+    },
+    "instrumentMeta": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Instrument"
+      }
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "totalReturnRatio": {
+          "type": "number"
+        },
+        "annualizedRatio": {
+          "type": "number"
+        },
+        "maxDrawdownRatio": {
+          "type": "number"
+        },
+        "sharpe": {
+          "type": "number"
+        },
+        "sortino": {
+          "type": "number"
+        },
+        "winRatio": {
+          "type": "number"
+        },
+        "profitFactor": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "trades": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fills": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "avgHoldBars": {
+          "type": "number"
+        },
+        "spanDays": {
+          "type": "number"
+        },
+        "finalEquity": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "totalReturnRatio",
+        "annualizedRatio",
+        "maxDrawdownRatio",
+        "sharpe",
+        "winRatio",
+        "profitFactor",
+        "trades",
+        "fills",
+        "avgHoldBars",
+        "spanDays",
+        "finalEquity"
+      ]
+    },
+    "biasChecks": {
+      "type": "object",
+      "properties": {
+        "lookahead": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_run"
+          ]
+        },
+        "recursive": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_run"
+          ]
+        }
+      },
+      "required": [
+        "lookahead",
+        "recursive"
+      ]
+    },
+    "partitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "enum": [
+              "train",
+              "validation",
+              "holdout"
+            ]
+          },
+          "window": {
+            "$ref": "urn:gitrader:schema:model:0.1:Window"
+          },
+          "embargoMs": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          },
+          "purgeMs": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          }
+        },
+        "required": [
+          "kind",
+          "window"
+        ]
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "artifactId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+          },
+          "kind": {
+            "enum": [
+              "trades",
+              "equity"
+            ]
+          },
+          "sizeBytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "mediaType": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "artifactId",
+          "sha256",
+          "kind",
+          "sizeBytes",
+          "mediaType"
+        ]
+      },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "trades"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "equity"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        }
+      ]
+    },
+    "returnsArtifact": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        }
+      },
+      "required": [
+        "artifactId",
+        "sha256"
+      ]
+    },
+    "llm": {
+      "type": "object",
+      "properties": {
+        "involved": {
+          "type": "boolean"
+        },
+        "derivedFrom": {
+          "enum": [
+            "creator",
+            "workflow",
+            "declared"
+          ]
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "trainingCutoff": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+              },
+              "source": {
+                "enum": [
+                  "kernel-table",
+                  "declared"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "source"
+            ]
+          }
+        },
+        "contaminated": {
+          "enum": [
+            "no",
+            "possible",
+            "unknown"
+          ]
+        },
+        "leakFreeFrom": {
+          "oneOf": [
+            {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "involved",
+        "derivedFrom",
+        "models",
+        "contaminated",
+        "leakFreeFrom"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "subjectKey",
+    "window",
+    "kind",
+    "tier",
+    "spec",
+    "specDigest",
+    "assumptions",
+    "seed",
+    "data",
+    "instrumentMeta",
+    "stats",
+    "biasChecks",
+    "artifacts",
+    "llm"
+  ],
+  "additionalProperties": false
+}

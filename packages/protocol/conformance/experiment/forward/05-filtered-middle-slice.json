@@ -1,0 +1,311 @@
+{
+  "id": "05-filtered-middle-slice",
+  "input": {
+    "tier": "forward_paper",
+    "window": {
+      "from": 0,
+      "to": 172800000
+    },
+    "stageEnteredAt": 0,
+    "runs": [
+      {
+        "runId": "run-acct_one",
+        "accountId": "acct_one",
+        "executor": {
+          "kind": "engine",
+          "engineId": "engine-fixture",
+          "instanceId": "inst_fixture",
+          "codeDigest": null
+        },
+        "attachedAt": 0,
+        "to": null
+      }
+    ],
+    "initialEquity": [
+      {
+        "accountId": "acct_one",
+        "at": 0,
+        "equity": "100",
+        "unrealizedPnl": "0"
+      }
+    ],
+    "fills": [
+      {
+        "sliceId": "slice-1",
+        "fillId": "fill_001",
+        "orderId": "ord_001",
+        "runId": "run-acct_one",
+        "accountId": "acct_one",
+        "instrumentId": "fixture:ASSET",
+        "positionKey": "a",
+        "seq": 1,
+        "ts": 1000,
+        "recordedAt": 1000,
+        "attestation": "kernel-observed",
+        "origin": {
+          "actor": "engine:fixture",
+          "actorType": "engine",
+          "tool": "fixture",
+          "requestId": "4f6c2a7e-0d3b-4a51-9a3e-6b1f0c2d9e88",
+          "via": "internal",
+          "causation": {
+            "engineId": "engine-fixture",
+            "instanceId": "inst_fixture"
+          }
+        },
+        "positionBefore": "0",
+        "positionAfter": "1",
+        "realizedPnl": "0",
+        "fee": "1",
+        "valuationCcy": "USD"
+      },
+      {
+        "sliceId": "slice-manual",
+        "fillId": "fill_manual",
+        "orderId": "ord_manual",
+        "runId": "run-acct_one",
+        "accountId": "acct_one",
+        "instrumentId": "fixture:ASSET",
+        "positionKey": "a",
+        "seq": 8,
+        "ts": 1500,
+        "recordedAt": 1500,
+        "attestation": "kernel-observed",
+        "origin": {
+          "actor": "user:fixture",
+          "actorType": "human",
+          "tool": "fixture",
+          "requestId": "4f6c2a7e-0d3b-4a51-9a3e-6b1f0c2d9e88",
+          "via": "internal"
+        },
+        "positionBefore": "1",
+        "positionAfter": "2",
+        "realizedPnl": "999",
+        "fee": "999",
+        "valuationCcy": "USD"
+      },
+      {
+        "sliceId": "slice-2",
+        "fillId": "fill_002",
+        "orderId": "ord_002",
+        "runId": "run-acct_one",
+        "accountId": "acct_one",
+        "instrumentId": "fixture:ASSET",
+        "positionKey": "a",
+        "seq": 2,
+        "ts": 2000,
+        "recordedAt": 2000,
+        "attestation": "kernel-observed",
+        "origin": {
+          "actor": "engine:fixture",
+          "actorType": "engine",
+          "tool": "fixture",
+          "requestId": "4f6c2a7e-0d3b-4a51-9a3e-6b1f0c2d9e88",
+          "via": "internal",
+          "causation": {
+            "engineId": "engine-fixture",
+            "instanceId": "inst_fixture"
+          }
+        },
+        "positionBefore": "2",
+        "positionAfter": "0",
+        "realizedPnl": "5",
+        "fee": "1",
+        "valuationCcy": "USD"
+      },
+      {
+        "sliceId": "slice-3",
+        "fillId": "fill_003",
+        "orderId": "ord_003",
+        "runId": "run-acct_one",
+        "accountId": "acct_one",
+        "instrumentId": "fixture:ASSET",
+        "positionKey": "b",
+        "seq": 3,
+        "ts": 86403000,
+        "recordedAt": 86403000,
+        "attestation": "kernel-observed",
+        "origin": {
+          "actor": "engine:fixture",
+          "actorType": "engine",
+          "tool": "fixture",
+          "requestId": "4f6c2a7e-0d3b-4a51-9a3e-6b1f0c2d9e88",
+          "via": "internal",
+          "causation": {
+            "engineId": "engine-fixture",
+            "instanceId": "inst_fixture"
+          }
+        },
+        "positionBefore": "0",
+        "positionAfter": "1",
+        "realizedPnl": "0",
+        "fee": "1",
+        "valuationCcy": "USD"
+      },
+      {
+        "sliceId": "slice-4",
+        "fillId": "fill_004",
+        "orderId": "ord_004",
+        "runId": "run-acct_one",
+        "accountId": "acct_one",
+        "instrumentId": "fixture:ASSET",
+        "positionKey": "b",
+        "seq": 4,
+        "ts": 86404000,
+        "recordedAt": 86404000,
+        "attestation": "kernel-observed",
+        "origin": {
+          "actor": "engine:fixture",
+          "actorType": "engine",
+          "tool": "fixture",
+          "requestId": "4f6c2a7e-0d3b-4a51-9a3e-6b1f0c2d9e88",
+          "via": "internal",
+          "causation": {
+            "engineId": "engine-fixture",
+            "instanceId": "inst_fixture"
+          }
+        },
+        "positionBefore": "1",
+        "positionAfter": "0",
+        "realizedPnl": "2",
+        "fee": "1",
+        "valuationCcy": "USD"
+      },
+      {
+        "sliceId": "slice-5",
+        "fillId": "fill_005",
+        "orderId": "ord_005",
+        "runId": "run-acct_one",
+        "accountId": "acct_one",
+        "instrumentId": "fixture:ASSET",
+        "positionKey": "c",
+        "seq": 5,
+        "ts": 86405000,
+        "recordedAt": 86405000,
+        "attestation": "kernel-observed",
+        "origin": {
+          "actor": "engine:fixture",
+          "actorType": "engine",
+          "tool": "fixture",
+          "requestId": "4f6c2a7e-0d3b-4a51-9a3e-6b1f0c2d9e88",
+          "via": "internal",
+          "causation": {
+            "engineId": "engine-fixture",
+            "instanceId": "inst_fixture"
+          }
+        },
+        "positionBefore": "0",
+        "positionAfter": "1",
+        "realizedPnl": "0",
+        "fee": "1",
+        "valuationCcy": "USD"
+      },
+      {
+        "sliceId": "slice-6",
+        "fillId": "fill_006",
+        "orderId": "ord_006",
+        "runId": "run-acct_one",
+        "accountId": "acct_one",
+        "instrumentId": "fixture:ASSET",
+        "positionKey": "c",
+        "seq": 6,
+        "ts": 86406000,
+        "recordedAt": 86406000,
+        "attestation": "kernel-observed",
+        "origin": {
+          "actor": "engine:fixture",
+          "actorType": "engine",
+          "tool": "fixture",
+          "requestId": "4f6c2a7e-0d3b-4a51-9a3e-6b1f0c2d9e88",
+          "via": "internal",
+          "causation": {
+            "engineId": "engine-fixture",
+            "instanceId": "inst_fixture"
+          }
+        },
+        "positionBefore": "1",
+        "positionAfter": "0",
+        "realizedPnl": "-1",
+        "fee": "1",
+        "valuationCcy": "USD"
+      },
+      {
+        "sliceId": "slice-7",
+        "fillId": "fill_007",
+        "orderId": "ord_007",
+        "runId": "run-acct_one",
+        "accountId": "acct_one",
+        "instrumentId": "fixture:ASSET",
+        "positionKey": "d",
+        "seq": 7,
+        "ts": 86407000,
+        "recordedAt": 86407000,
+        "attestation": "kernel-observed",
+        "origin": {
+          "actor": "engine:fixture",
+          "actorType": "engine",
+          "tool": "fixture",
+          "requestId": "4f6c2a7e-0d3b-4a51-9a3e-6b1f0c2d9e88",
+          "via": "internal",
+          "causation": {
+            "engineId": "engine-fixture",
+            "instanceId": "inst_fixture"
+          }
+        },
+        "positionBefore": "0",
+        "positionAfter": "1",
+        "realizedPnl": "0",
+        "fee": "1",
+        "valuationCcy": "USD"
+      }
+    ],
+    "snapshots": [
+      {
+        "seq": 1,
+        "accountId": "acct_one",
+        "at": 86400000,
+        "recordedAt": 86400000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "100",
+        "unrealizedPnl": "0",
+        "valuationCcy": "USD"
+      },
+      {
+        "seq": 2,
+        "accountId": "acct_one",
+        "at": 172800000,
+        "recordedAt": 172800000,
+        "attestation": "kernel-observed",
+        "kind": "daily",
+        "equity": "104",
+        "unrealizedPnl": "5",
+        "valuationCcy": "USD"
+      }
+    ],
+    "valuationCcy": "USD",
+    "periodsPerYear": 365,
+    "finalized": true,
+    "computedAt": 172800000
+  },
+  "expect": {
+    "sample": {
+      "trades": 7,
+      "fills": 7,
+      "roundTrips": 2,
+      "spanDays": 2,
+      "activeDays": 2,
+      "snapshotDays": 2
+    },
+    "realizedPnl": "6",
+    "unrealizedPnlEnd": "5",
+    "fees": "7",
+    "funding": "0",
+    "returnRatio": 0.04,
+    "maxDrawdownRatio": 0,
+    "sharpe": null,
+    "sortino": null,
+    "winRatio": 0
+  },
+  "tolerance": 1e-9
+}

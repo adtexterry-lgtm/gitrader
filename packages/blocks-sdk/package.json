@@ -1,0 +1,33 @@
+{
+  "name": "@gitrader/blocks-sdk",
+  "version": "0.1.0",
+  "description": "Gitrader block SDK: block manifest, bridge, kernel WS client, link groups, fixture harness.",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./preact": "./src/preact.ts",
+    "./testing": "./src/testing/fake-kernel.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "peerDependencies": {
+    "preact": "^10 || ^11"
+  },
+  "peerDependenciesMeta": {
+    "preact": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "ws": "^8.22.0",
+    "@types/ws": "^8.18.0",
+    "vitest": "^5.0.3"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*"
+  }
+}

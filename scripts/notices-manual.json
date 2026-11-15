@@ -1,0 +1,70 @@
+{
+  "note": "不经 npm 打进产物的第三方材料（gen-notices.mjs 读；删掉本文件 = 回到只列 node_modules 包）。licenseFile 相对仓库根。",
+  "entries": [
+    {
+      "name": "Tailwind CSS（构建期生成的 CSS）",
+      "version": "4.3.3",
+      "license": "MIT",
+      "copyright": [
+        "Copyright (c) Tailwind Labs, Inc."
+      ],
+      "repo": "https://github.com/tailwindlabs/tailwindcss",
+      "products": [
+        "workbench"
+      ],
+      "licenseFile": "node_modules/tailwindcss/LICENSE"
+    },
+    {
+      "name": "Geist / Geist Mono（字体，拉丁子集可变字重，原字节）",
+      "version": "5.3.0（@fontsource-variable）",
+      "license": "OFL-1.1",
+      "copyright": [
+        "Copyright 2024 The Geist Project Authors"
+      ],
+      "repo": "https://github.com/vercel/geist-font",
+      "products": [
+        "workbench"
+      ],
+      "licenseFile": "packages/workbench/src/ui/fonts/OFL.txt"
+    },
+    {
+      "name": "shadcn/ui（组件配方改写，Mira 风格）",
+      "version": "—",
+      "license": "MIT",
+      "copyright": [
+        "Copyright (c) 2023 shadcn"
+      ],
+      "repo": "https://github.com/shadcn-ui/ui",
+      "products": [
+        "workbench"
+      ],
+      "licenseText": "MIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+    },
+    {
+      "name": "Beautiful UI（组件结构与交互改写）",
+      "version": "—",
+      "license": "MIT",
+      "copyright": [
+        "Copyright (c) 2026 Shane Levine"
+      ],
+      "repo": "https://www.beautifului.dev/license",
+      "products": [
+        "workbench"
+      ],
+      "licenseText": "MIT License\n\nCopyright (c) 2026 Shane Levine\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+    },
+    {
+      "name": "beUI（组件状态机与结构改写）",
+      "version": "—",
+      "license": "MIT",
+      "copyright": [
+        "Copyright (c) 2026 Saurabh Chauhan"
+      ],
+      "repo": "https://github.com/starc007/ui-components",
+      "products": [
+        "workbench"
+      ],
+      "licenseText": "MIT License\n\nCopyright (c) 2026 Saurabh Chauhan\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+    }
+  ]
+}

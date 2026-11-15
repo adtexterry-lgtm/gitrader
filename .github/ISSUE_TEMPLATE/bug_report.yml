@@ -1,0 +1,59 @@
+name: Bug report
+description: Something does not work as documented.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do **not** paste private keys, API wallet keys, tokens, PINs or ledger exports with real addresses here.
+        Security problems go to the private report (see SECURITY.md), not to an issue.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what you got. Quote error messages exactly.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Prefer paper trading or `serve --offline`. Include the commands you ran.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Gitrader version
+      placeholder: "output of: npx gitrader status"
+    validations:
+      required: true
+  - type: input
+    id: node
+    attributes:
+      label: Node.js and OS
+      placeholder: "Node 22.13, Windows 11"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - kernel / risk gate
+        - ledger
+        - workbench
+        - MCP / Agent tools
+        - engine protocol (GEP)
+        - connector (Hyperliquid)
+        - paper venue
+        - CLI / install
+        - docs
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (redacted)
+      render: shell

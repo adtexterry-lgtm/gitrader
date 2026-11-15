@@ -1,0 +1,138 @@
+# SPDX-License-Identifier: CPAL-1.0
+# 结构对齐 QuantDinger v5.6.5 的 docker-compose.yml / docker-compose.observability.yml：
+# 主服务 + 具名卷 + 健康检查；观测三件套挂在 profiles: [observability] 下，默认不启动。
+#
+#   起：  cp .env.example .env && docker compose up -d --build
+#   观测：docker compose --profile observability up -d
+#   停：  docker compose down（卷保留） / docker compose down -v（连数据一起删）
+#
+# 本文件只读 ../ops/** 与 ./secrets/**，不写任何令牌值。
+
+name: gitrader
+
+x-runtime: &runtime
+  init: true
+  restart: unless-stopped
+  security_opt:
+    - no-new-privileges:true
+  logging:
+    driver: json-file
+    options:
+      max-size: ${CONTAINER_LOG_MAX_SIZE:-20m}
+      max-file: ${CONTAINER_LOG_MAX_FILES:-5}
+
+services:
+  # ========================
+  # 内核 + 工作台（gitrader serve）
+  # ========================
+  gitrader:
+    <<: *runtime
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: ${GITRADER_IMAGE:-gitrader:local}
+    container_name: gitrader
+    environment:
+      TZ: ${TZ:-Asia/Shanghai}
+      GITRADER_HOME: /data
+      GITRADER_PORT: ${GITRADER_PORT:-47900}
+      GITRADER_BIND: ${GITRADER_BIND:-127.0.0.1}
+      GITRADER_LOG_LEVEL: ${GITRADER_LOG_LEVEL:-info}
+      GITRADER_LOG_FORMAT: ${GITRADER_LOG_FORMAT:-text}
+    ports:
+      # GITRADER_BIND 是**宿主侧**发布地址，缺省只发布到回环；容器进程显式监听容器接口。
+      # 请求仍受内核既有 Host 白名单约束，见 README「网络可达性」。
+      - "${GITRADER_BIND:-127.0.0.1}:${GITRADER_PORT:-47900}:${GITRADER_PORT:-47900}"
+    volumes:
+      # 账本、配置、密钥库、service.json 全在 /data；备份见 README。
+      - gitrader-data:/data
+    cap_drop:
+      - ALL
+    pids_limit: ${GITRADER_PIDS_LIMIT:-512}
+    stop_grace_period: 20s
+    # 健康检查由镜像的 HEALTHCHECK 提供（GET /api/ready，令牌从 /data/service.json 读），
+    # 这里不重复写，避免两处漂移。
+    networks:
+      - gitrader-net
+
+  # ========================
+  # 观测（profile: observability）
+  # ========================
+  prometheus:
+    <<: *runtime
+    profiles: [observability]
+    image: prom/prometheus:v3.12.0
+    container_name: gitrader-prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=${PROMETHEUS_RETENTION:-30d}
+      - --web.enable-lifecycle
+    volumes:
+      - ../ops/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ../ops/prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
+      # prometheus.yml 用 authorization.credentials_file 指向这里；文件内容由用户自己写，镜像与仓库里都没有。
+      - ./secrets:/etc/prometheus/secrets:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "127.0.0.1:${PROMETHEUS_PORT:-9090}:9090"
+    depends_on:
+      gitrader:
+        condition: service_healthy
+    networks:
+      - gitrader-net
+
+  alertmanager:
+    <<: *runtime
+    profiles: [observability]
+    image: prom/alertmanager:v0.32.1
+    container_name: gitrader-alertmanager
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+      - --storage.path=/alertmanager
+    volumes:
+      - ../ops/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      # alertmanager.yml 里的 bot_token_file / credentials_file / auth_password_file 都落在这个目录。
+      - ./secrets:/etc/alertmanager/secrets:ro
+      - alertmanager-data:/alertmanager
+    ports:
+      - "127.0.0.1:${ALERTMANAGER_PORT:-9093}:9093"
+    networks:
+      - gitrader-net
+
+  grafana:
+    <<: *runtime
+    profiles: [observability]
+    image: grafana/grafana:13.0.2
+    container_name: gitrader-grafana
+    environment:
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      # 管理员密码走文件（_FILE 后缀），compose 里不出现密码值。缺文件时 Grafana 起不来，README 有说明。
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/grafana-admin
+    volumes:
+      - ../ops/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ../ops/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - ./secrets:/run/secrets:ro
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "127.0.0.1:${GRAFANA_PORT:-3000}:3000"
+    depends_on:
+      prometheus:
+        condition: service_started
+    networks:
+      - gitrader-net
+
+volumes:
+  gitrader-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  alertmanager-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+networks:
+  gitrader-net:
+    driver: bridge

@@ -1,0 +1,25 @@
+{
+  "name": "@gitrader/blocks-default",
+  "version": "0.1.0",
+  "description": "Gitrader default blocks: positions & PnL, agent activity & approvals, risk state, status bar.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./src/*": "./src/*"
+  },
+  "scripts": {
+    "test": "vitest run --config ./vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit",
+    "verify": "node verify/shots.mjs"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*",
+    "@gitrader/blocks-sdk": "*",
+    "@gitrader/workbench": "*"
+  },
+  "peerDependencies": {
+    "preact": "^10 || ^11"
+  }
+}

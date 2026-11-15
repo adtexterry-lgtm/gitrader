@@ -1,0 +1,260 @@
+{
+  "contract": {
+    "source": "BLUEPRINT.md",
+    "canvas": {
+      "width": 1664,
+      "height": 1792,
+      "background": "#0A0A0B",
+      "columns": 3,
+      "rows": 2,
+      "thumbnailWidth": 496,
+      "thumbnailHeight": 744,
+      "xs": [
+        48,
+        584,
+        1120
+      ],
+      "ys": [
+        48,
+        936
+      ],
+      "labelYs": [
+        832,
+        1720
+      ],
+      "labelFontSize": 24,
+      "labelFontWeight": 400,
+      "labelFill": "#A9A6A0",
+      "order": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06"
+      ]
+    },
+    "background": "#0A0A0B",
+    "order": [
+      "01-stocks",
+      "02-crypto",
+      "03-metals",
+      "04-diy",
+      "05-pro",
+      "06-paper"
+    ],
+    "labels": [
+      "01 美股",
+      "02 加密",
+      "03 贵金属",
+      "04 DIY",
+      "05 专业开放",
+      "06 模拟起步"
+    ],
+    "thumbnailPositions": {
+      "xs": [
+        48,
+        584,
+        1120
+      ],
+      "ys": [
+        48,
+        936
+      ]
+    },
+    "labelBaselines": {
+      "xs": [
+        48,
+        584,
+        1120
+      ],
+      "ys": [
+        832,
+        1720
+      ]
+    },
+    "labelStyle": {
+      "family": "Microsoft YaHei",
+      "size": 24,
+      "weight": 400,
+      "fill": "#A9A6A0"
+    }
+  },
+  "typography": {
+    "isolatedFontconfig": true,
+    "fontFiles": [
+      {
+        "file": "msyh.ttc",
+        "bytes": 19704352,
+        "sha256": "D79C55E68B1131EEA0CC1C47BE4F572D964F28C682E143DB2AD09C1E4CB07A3F"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "bytes": 16883552,
+        "sha256": "4508821B3DFFE01F0EF5E5326A3E60DF705A44633858811F67B6982DCE3F6EE6"
+      }
+    ],
+    "renderEvidence": [
+      {
+        "file": "msyh.ttc",
+        "loaded": true,
+        "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+        "style": "style: \"Regular\"(s) \"Normal\"(s) \"obyčejné\"(s) \"Standard\"(s) \"Κανονικά\"(s) \"Normaali\"(s) \"Normál\"(s) \"Normale\"(s) \"Standaard\"(s) \"Normalny\"(s) \"Обычный\"(s) \"Normálne\"(s) \"Navadno\"(s) \"Arrunta\"(s)",
+        "weight": "weight: 80(f)(s)"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "loaded": true,
+        "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+        "style": "style: \"Bold\"(s) \"Negreta\"(s) \"tučné\"(s) \"fed\"(s) \"Fett\"(s) \"Έντονα\"(s) \"Negrita\"(s) \"Lihavoitu\"(s) \"Gras\"(s) \"Félkövér\"(s) \"Grassetto\"(s) \"Vet\"(s) \"Halvfet\"(s) \"Pogrubiony\"(s) \"Negrito\"(s) \"Полужирный\"(s) \"Fet\"(s) \"Kalın\"(s) \"Krepko\"(s) \"Lodia\"(s)",
+        "weight": "weight: 200(f)(s)"
+      }
+    ]
+  },
+  "posters": [
+    {
+      "id": "01",
+      "directory": "01-stocks",
+      "label": "01 美股",
+      "poster": {
+        "file": "01-stocks/poster.png",
+        "bytes": 2520497,
+        "sha256": "CCB25C116F83972AAF8419EEC263F35A7AC773B651986505036A43AC4F54DFE6",
+        "width": 2048,
+        "height": 3072
+      },
+      "preview": {
+        "file": "01-stocks/poster-preview.png",
+        "bytes": 1039742,
+        "sha256": "2BEA497DE6F32D4AA15FBE4DE94488375FB396192D4076B346DD031902FB5816",
+        "width": 1024,
+        "height": 1536
+      },
+      "sourceScene": {
+        "file": "scene.png",
+        "width": 1024,
+        "height": 1536,
+        "sha256": "28C0BB517D03DB58EC2438DD9621E845C06053F6749FE6B7D113FC132EEF7784",
+        "generatedNative2k": false
+      }
+    },
+    {
+      "id": "02",
+      "directory": "02-crypto",
+      "label": "02 加密",
+      "poster": {
+        "file": "02-crypto/poster.png",
+        "bytes": 2500041,
+        "sha256": "3EDDC56283ACAC0A1404F4A09CCE6E6C2C4D6D907DB194E37DEAFF06EE869D56",
+        "width": 2048,
+        "height": 3072
+      },
+      "preview": {
+        "file": "02-crypto/poster-preview.png",
+        "bytes": 981916,
+        "sha256": "78B752676E058AFAB05CE6C5BB63DB340E78FE61099131F937A4AA850FE04C86",
+        "width": 1024,
+        "height": 1536
+      },
+      "sourceScene": {
+        "file": "scene.png",
+        "width": 1024,
+        "height": 1536,
+        "sha256": "0AB530E1952C5A587569B506CB40FCF9C9E5D5603BD3BF77BCB6EE58CC8804C8",
+        "generatedNative2k": false
+      }
+    },
+    {
+      "id": "03",
+      "directory": "03-metals",
+      "label": "03 贵金属",
+      "poster": {
+        "file": "03-metals/poster.png",
+        "bytes": 3040183,
+        "sha256": "76F8DA2550C7D6689C50C963A841C92A17AD86B8941FB1F67EEEE82937322BDE",
+        "width": 2048,
+        "height": 3072
+      },
+      "preview": {
+        "file": "03-metals/poster-preview.png",
+        "bytes": 1115044,
+        "sha256": "FE0A711D0015BEE27843F23ACDED763DB697C85241F74B4AE37CBF69B343AA90",
+        "width": 1024,
+        "height": 1536
+      },
+      "sourceScene": {
+        "file": "scene.png",
+        "width": 1024,
+        "height": 1536,
+        "sha256": "33948D8EDBE3E58AC4536F0F657897E03C80F376243D0ED259EA069F470FCB60",
+        "generatedNative2k": false
+      }
+    },
+    {
+      "id": "04",
+      "directory": "04-diy",
+      "label": "04 DIY",
+      "poster": {
+        "file": "04-diy/poster.png",
+        "bytes": 2318789,
+        "sha256": "4AB51C93D9D9D8C7E8AA5FD3388C2F541F51FA59359CA3A12749F220374544FC",
+        "width": 2048,
+        "height": 3072
+      },
+      "preview": {
+        "file": "04-diy/poster-preview.png",
+        "bytes": 981533,
+        "sha256": "92EA829FDE66A8A4D2B1C1FC357F2274A40B44BB6F17286552DEFEB9F6355135",
+        "width": 1024,
+        "height": 1536
+      }
+    },
+    {
+      "id": "05",
+      "directory": "05-pro",
+      "label": "05 专业开放",
+      "poster": {
+        "file": "05-pro/poster.png",
+        "bytes": 2134027,
+        "sha256": "50D179F73F169D6E9C4A02177A148AC7DD958517C1F21070FDE367A5756A1654",
+        "width": 2048,
+        "height": 3072
+      },
+      "preview": {
+        "file": "05-pro/poster-preview.png",
+        "bytes": 897316,
+        "sha256": "5BC7D2EAB7F1B4D7D7D9400C729B3610FA7399D624FBADD30DBDA7AB80050138",
+        "width": 1024,
+        "height": 1536
+      }
+    },
+    {
+      "id": "06",
+      "directory": "06-paper",
+      "label": "06 模拟起步",
+      "poster": {
+        "file": "06-paper/poster.png",
+        "bytes": 2244259,
+        "sha256": "63A9589A5228852F88FC56418436767CB3E2351875715AB33D68C8BADBBBB364",
+        "width": 2048,
+        "height": 3072
+      },
+      "preview": {
+        "file": "06-paper/poster-preview.png",
+        "bytes": 989979,
+        "sha256": "251F123529BF5AF8042801DD542534A4026CD20E6D83FA43E23F656EF2F0DB49",
+        "width": 1024,
+        "height": 1536
+      }
+    }
+  ],
+  "output": {
+    "file": "overview.png",
+    "bytes": 1829907,
+    "sha256": "032AA75C5D57C55A939DE5F655F1227A32F3373F538BD4137129901C988CA51F",
+    "width": 1664,
+    "height": 1792
+  },
+  "sharp": "0.35.5",
+  "renderExitCode": 0
+}

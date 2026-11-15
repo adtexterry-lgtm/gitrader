@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:BindResult",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "BindResult",
+  "type": "object",
+  "properties": {
+    "bindingId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/BindId"
+    },
+    "effective": {
+      "$ref": "urn:gitrader:schema:gep:0.1:Binding"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "bindingId",
+    "effective",
+    "warnings"
+  ]
+}

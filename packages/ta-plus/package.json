@@ -1,0 +1,18 @@
+{
+  "name": "@gitrader/ta-plus",
+  "version": "0.1.0",
+  "description": "Gitrader extended technical-indicator library: pure causal functions (fundamental ratios, risk/volatility, momentum, liquidity, span statistics) that fill the gap against the reference indicator catalog. No third-party dependencies.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

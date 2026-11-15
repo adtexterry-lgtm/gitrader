@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:PaperReplayStatus",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "PaperReplayStatus",
+  "type": "object",
+  "properties": {
+    "state": {
+      "enum": [
+        "idle",
+        "running",
+        "stopping",
+        "completed",
+        "cancelled",
+        "failed"
+      ]
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "frameIndex": {
+      "type": "integer",
+      "minimum": -1
+    },
+    "totalFrames": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "clock": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "startedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "finishedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "artifact": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!\\.{1,2}$)[^/\\\\:]+$"
+    },
+    "problem": {
+      "$ref": "urn:gitrader:schema:model:0.1:Problem"
+    },
+    "provenance": {
+      "$ref": "urn:gitrader:schema:model:0.1:PaperReplayProvenance"
+    }
+  },
+  "required": [
+    "state",
+    "frameIndex",
+    "totalFrames",
+    "clock"
+  ]
+}

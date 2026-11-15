@@ -1,0 +1,40 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+/* 实验页页内专用样式：只用 var(--gr-*) 令牌；通用件（卡、表、页签、下拉、流光、执行方）在 workbench/src/ui/r5/components.css。 */
+:root[data-ui="r5"] [data-g5-page="lab"] .lab-tw { flex: 1 1 0; min-height: 0; }
+:root[data-ui="r5"] [data-g5-page="lab"] > .g5-off { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; }
+:root[data-ui="r5"] [data-g5-page="lab"] .g5-gh .g5-dd { margin-right: 8px; }
+:root[data-ui="r5"] [data-g5-page="lab"] .g5-gh .g5-dd svg { color: var(--gr-text-3); }
+
+/* 行：整行可点；名称是真链接，键盘可达 */
+:root[data-ui="r5"] [data-g5-page="lab"] tr.g5-row { cursor: pointer; }
+:root[data-ui="r5"] [data-g5-page="lab"] .lab-link { cursor: pointer; text-underline-offset: 3px; color: var(--gr-text-body); }
+:root[data-ui="r5"] [data-g5-page="lab"] .lab-link:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+:root[data-ui="r5"] [data-g5-page="lab"] .lab-go { visibility: hidden; color: var(--gr-text-3); vertical-align: -2px; transform: rotate(-90deg); }
+:root[data-ui="r5"] [data-g5-page="lab"] tr.g5-row:hover .lab-go,
+:root[data-ui="r5"] [data-g5-page="lab"] tr.g5-row:focus-within .lab-go { visibility: visible; }
+
+/* 最近动作列的「运行中」：80 宽引信 + 间距 12（本页全屏唯一流光） */
+:root[data-ui="r5"] [data-g5-page="lab"] .g5-runc { gap: 12px; }
+:root[data-ui="r5"] [data-g5-page="lab"] .g5-runc .g5-fuse { width: 80px; align-self: center; }
+
+/* 创建方是「你」：执行方名字提亮 */
+:root[data-ui="r5"] [data-g5-page="lab"] .lab-me .g5-actor { color: var(--gr-text); font-weight: 500; }
+
+/* 偏差检查：随表格字号（13），图标本身居中 */
+:root[data-ui="r5"] [data-g5-page="lab"] .g5-bad,
+:root[data-ui="r5"] [data-g5-page="lab"] .g5-miss { font-size: 13px; line-height: 20px; align-items: baseline; }
+:root[data-ui="r5"] [data-g5-page="lab"] .g5-bad svg,
+:root[data-ui="r5"] [data-g5-page="lab"] .g5-miss svg { align-self: center; }
+
+/* 空 / 错误 / 未接通：一行事实 + 内核原文 */
+:root[data-ui="r5"] [data-g5-page="lab"] .lab-msg { padding: 0 20px 20px; display: flex; align-items: center; gap: 12px; font-size: 13px; line-height: 20px; color: var(--gr-text-body); }
+:root[data-ui="r5"] [data-g5-page="lab"] .lab-msg [data-wire="off"] { display: flex; align-items: center; gap: 12px; }
+:root[data-ui="r5"] [data-g5-page="lab"] .lab-msg .g5-msg { font-size: 12px; line-height: 16px; color: var(--gr-text-3); }
+
+/* 表格列距：本页稿的档位（< 1400 为 12，≥ 1400 为 20，≥ 1760 为 32；图标栏导航下 8 / 16 / 32） */
+:root[data-ui="r5"] [data-g5-page="lab"] { --tbl-gap: 12px; }
+@media (min-width: 1400px) { :root[data-ui="r5"] [data-g5-page="lab"] { --tbl-gap: 20px; } }
+@media (min-width: 1760px) { :root[data-ui="r5"] [data-g5-page="lab"] { --tbl-gap: 32px; } }
+:root[data-ui="r5"][data-nav="rail"] [data-g5-page="lab"] { --tbl-gap: 8px; }
+@media (min-width: 1400px) { :root[data-ui="r5"][data-nav="rail"] [data-g5-page="lab"] { --tbl-gap: 16px; } }
+@media (min-width: 1760px) { :root[data-ui="r5"][data-nav="rail"] [data-g5-page="lab"] { --tbl-gap: 32px; } }

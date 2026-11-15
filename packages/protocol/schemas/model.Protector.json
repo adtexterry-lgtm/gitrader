@@ -1,0 +1,361 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Protector",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Protector",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "cooldown"
+        },
+        "protectorId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ProtId"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mode": {
+          "enum": [
+            "enforce",
+            "monitor"
+          ]
+        },
+        "source": {
+          "oneOf": [
+            {
+              "const": "builtin"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "pluginId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "pluginId",
+                "version"
+              ]
+            }
+          ]
+        },
+        "afterOpenSec": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "kind",
+        "afterOpenSec"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "stoploss_guard"
+        },
+        "protectorId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ProtId"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mode": {
+          "enum": [
+            "enforce",
+            "monitor"
+          ]
+        },
+        "source": {
+          "oneOf": [
+            {
+              "const": "builtin"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "pluginId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "pluginId",
+                "version"
+              ]
+            }
+          ]
+        },
+        "windowMin": {
+          "type": "number"
+        },
+        "maxStoplosses": {
+          "type": "integer"
+        },
+        "pauseMin": {
+          "type": "number"
+        },
+        "scope": {
+          "enum": [
+            "instrument",
+            "account"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "windowMin",
+        "maxStoplosses",
+        "pauseMin",
+        "scope"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "drawdown_pause"
+        },
+        "protectorId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ProtId"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mode": {
+          "enum": [
+            "enforce",
+            "monitor"
+          ]
+        },
+        "source": {
+          "oneOf": [
+            {
+              "const": "builtin"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "pluginId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "pluginId",
+                "version"
+              ]
+            }
+          ]
+        },
+        "windowHours": {
+          "type": "number"
+        },
+        "maxDrawdownRatio": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "pauseMin": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "kind",
+        "windowHours",
+        "maxDrawdownRatio",
+        "pauseMin"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "low_profit_lock"
+        },
+        "protectorId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ProtId"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mode": {
+          "enum": [
+            "enforce",
+            "monitor"
+          ]
+        },
+        "source": {
+          "oneOf": [
+            {
+              "const": "builtin"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "pluginId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "pluginId",
+                "version"
+              ]
+            }
+          ]
+        },
+        "windowHours": {
+          "type": "number"
+        },
+        "minProfitRatio": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "lockMin": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "kind",
+        "windowHours",
+        "minProfitRatio",
+        "lockMin"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "max_consecutive_failures"
+        },
+        "protectorId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ProtId"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mode": {
+          "enum": [
+            "enforce",
+            "monitor"
+          ]
+        },
+        "source": {
+          "oneOf": [
+            {
+              "const": "builtin"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "pluginId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "pluginId",
+                "version"
+              ]
+            }
+          ]
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pauseMin": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "kind",
+        "count",
+        "pauseMin"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "plugin"
+        },
+        "protectorId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ProtId"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mode": {
+          "enum": [
+            "enforce",
+            "monitor"
+          ]
+        },
+        "source": {
+          "oneOf": [
+            {
+              "const": "builtin"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "pluginId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "pluginId",
+                "version"
+              ]
+            }
+          ]
+        },
+        "pluginId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "params": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "pluginId"
+      ]
+    }
+  ]
+}

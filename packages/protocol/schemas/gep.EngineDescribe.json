@@ -1,0 +1,319 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:EngineDescribe",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "EngineDescribe",
+  "type": "object",
+  "properties": {
+    "engine": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "kind": {
+              "enum": [
+                "builtin",
+                "partner",
+                "community",
+                "self"
+              ]
+            },
+            "verified": {
+              "type": "boolean"
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "kind",
+            "verified"
+          ]
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtime": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "version",
+        "vendor",
+        "license",
+        "runtime"
+      ]
+    },
+    "protocol": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "transports": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "stdio",
+              "ws",
+              "wss"
+            ]
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "version",
+        "transports"
+      ]
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "execution.modeA": {
+          "type": "boolean"
+        },
+        "execution.modeB": {
+          "type": "boolean"
+        },
+        "market.useHost": {
+          "type": "boolean"
+        },
+        "market.own": {
+          "type": "boolean"
+        },
+        "strategy": {
+          "type": "boolean"
+        },
+        "strategy.hotUpdate": {
+          "type": "boolean"
+        },
+        "backtest": {
+          "type": "boolean"
+        },
+        "replay": {
+          "type": "boolean"
+        },
+        "events.resume": {
+          "type": "boolean"
+        },
+        "risk.cooperative": {
+          "type": "boolean"
+        },
+        "builder.attach": {
+          "type": "boolean"
+        },
+        "decision.log": {
+          "type": "boolean"
+        },
+        "backtest.fillModels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "events.retention": {
+          "type": "object",
+          "properties": {
+            "minEvents": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minMs": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "minEvents",
+            "minMs"
+          ]
+        },
+        "halt.levels": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "halt_new",
+              "cancel_all",
+              "flatten_all"
+            ]
+          },
+          "contains": {
+            "const": "halt_new"
+          }
+        }
+      },
+      "propertyNames": {
+        "anyOf": [
+          {
+            "enum": [
+              "execution.modeA",
+              "execution.modeB",
+              "market.useHost",
+              "market.own",
+              "strategy",
+              "strategy.hotUpdate",
+              "backtest",
+              "backtest.fillModels",
+              "replay",
+              "events.resume",
+              "events.retention",
+              "risk.cooperative",
+              "halt.levels",
+              "builder.attach",
+              "decision.log"
+            ]
+          },
+          {
+            "pattern": "^x-"
+          }
+        ]
+      },
+      "anyOf": [
+        {
+          "required": [
+            "market.useHost"
+          ],
+          "properties": {
+            "market.useHost": {
+              "const": true
+            }
+          }
+        },
+        {
+          "required": [
+            "market.own"
+          ],
+          "properties": {
+            "market.own": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "venues": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:VenueCapabilities"
+      }
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "intervals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "maxHistoryBars": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "intervals",
+        "maxHistoryBars"
+      ]
+    },
+    "strategies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "paramsSchemaRef": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "version",
+          "kind"
+        ]
+      }
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "maxConcurrentBacktests": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxStrategyInstances": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "assumptions": {
+      "type": "object",
+      "properties": {
+        "backtest": {
+          "type": "object"
+        }
+      }
+    },
+    "deprecated": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "engine",
+    "protocol",
+    "capabilities"
+  ]
+}

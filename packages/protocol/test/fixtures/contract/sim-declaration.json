@@ -1,0 +1,18 @@
+{
+  "connector": "kernel-sim",
+  "modes": ["paper", "shadow"],
+  "mirrors": ["hyperliquid"],
+  "fillModel": {
+    "market": "walk-l2-book",
+    "bookShortfall": "last-level-plus-0.1pct",
+    "noBook": "mid-plus-5bps",
+    "limit": "touch-fill-at-limit",
+    "queuePosition": false,
+    "latencyMs": 0,
+    "funding": "hourly-accrual",
+    "liquidation": "approx-at-mark",
+    "positionMode": "oneWay",
+    "marginMode": "cross-only"
+  },
+  "knownGaps": ["no-queue-position", "no-latency-model", "isolated-only-markets-simulated-as-cross"]
+}

@@ -1,0 +1,115 @@
+{
+  "canvas": {
+    "width": 2048,
+    "height": 3072,
+    "colorSpace": "sRGB",
+    "background": "#0A0A0B"
+  },
+  "typography": {
+    "family": "Microsoft YaHei",
+    "isolatedFontconfig": true,
+    "isolatedFontFiles": [
+      {
+        "file": "msyh.ttc",
+        "bytes": 19704352,
+        "sha256": "D79C55E68B1131EEA0CC1C47BE4F572D964F28C682E143DB2AD09C1E4CB07A3F"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "bytes": 16883552,
+        "sha256": "4508821B3DFFE01F0EF5E5326A3E60DF705A44633858811F67B6982DCE3F6EE6"
+      }
+    ],
+    "regularWeight": 400,
+    "boldWeight": 700,
+    "fcDebug": "1060",
+    "isolatedSampleEvidence": {
+      "result": {
+        "mode": "--font-test",
+        "renderedBytes": 14555,
+        "sharp": "0.35.5"
+      },
+      "matchedFaces": [
+        {
+          "file": "msyh.ttc",
+          "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+          "style": "style: \"Regular\"(s) \"Normal\"(s) \"obyčejné\"(s) \"Standard\"(s) \"Κανονικά\"(s) \"Normaali\"(s) \"Normál\"(s) \"Normale\"(s) \"Standaard\"(s) \"Normalny\"(s) \"Обычный\"(s) \"Normálne\"(s) \"Navadno\"(s) \"Arrunta\"(s)",
+          "weight": "weight: 80(f)(s)",
+          "fileEvidence": "file: \"<isolated-font-dir>/fonts/msyh.ttc\"(s)"
+        },
+        {
+          "file": "msyhbd.ttc",
+          "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+          "style": "style: \"Bold\"(s) \"Negreta\"(s) \"tučné\"(s) \"fed\"(s) \"Fett\"(s) \"Έντονα\"(s) \"Negrita\"(s) \"Lihavoitu\"(s) \"Gras\"(s) \"Félkövér\"(s) \"Grassetto\"(s) \"Vet\"(s) \"Halvfet\"(s) \"Pogrubiony\"(s) \"Negrito\"(s) \"Полужирный\"(s) \"Fet\"(s) \"Kalın\"(s) \"Krepko\"(s) \"Lodia\"(s)",
+          "weight": "weight: 200(f)(s)",
+          "fileEvidence": "file: \"<isolated-font-dir>/fonts/msyhbd.ttc\"(s)"
+        }
+      ],
+      "regularFaceFound": true,
+      "boldFaceFound": true
+    },
+    "posterRenderEvidence": {
+      "matchedFaces": [
+        {
+          "file": "msyh.ttc",
+          "family": null,
+          "style": null,
+          "weight": "weight: 80(f)(s)",
+          "fileEvidence": "file: \"<isolated-font-dir>/fonts/msyh.ttc\"(s)"
+        },
+        {
+          "file": "msyhbd.ttc",
+          "family": null,
+          "style": null,
+          "weight": "weight: 200(f)(s)",
+          "fileEvidence": "file: \"<isolated-font-dir>/fonts/msyhbd.ttc\"(s)"
+        }
+      ],
+      "regularFaceFound": true,
+      "boldFaceFound": true,
+      "interpretation": "The isolated child process loaded only these two TTCs; FC_DEBUG reports Microsoft YaHei normal weight 80 and bold weight 200 in the sample, and the same two files/weights in the poster render."
+    }
+  },
+  "composition": {
+    "logo": {
+      "x": 147.2,
+      "y": 147.2,
+      "width": 670.045676654,
+      "height": 153.6
+    },
+    "hero": {
+      "x": 0,
+      "y": 1192,
+      "width": 2048,
+      "height": 1365.333333,
+      "preserveAspectRatio": "xMidYMid meet"
+    }
+  },
+  "sources": {
+    "hero": {
+      "file": "hero-v2-alpha.png",
+      "sha256": "E0A4CA7EBE67D6D4F1F30DBFBA5F9935F24B943FC6F1A5EB978FBB4915394962"
+    },
+    "logo": {
+      "file": "../../brand/gitrader-wordmark.svg",
+      "sha256": "7BD5526F8C439C17BCA10A8C37193A6B231884EA0CBDACEF05CC2E9A511A1B05"
+    }
+  },
+  "outputs": {
+    "poster.svg": {
+      "sha256": "03F1CB2BBFA846D2377C031311F8FA51A109959CE2813A665D1B1CE28C8FD49F"
+    },
+    "poster.png": {
+      "bytes": 1711801,
+      "sha256": "DD81EF2AD20A46F25219CAF2CDCBCC097EDD7F5857136110BF8017931F9C3BB6",
+      "width": 2048,
+      "height": 3072
+    },
+    "poster-preview.png": {
+      "bytes": 567795,
+      "sha256": "E32DA2A6BB191D8D850C0DBA9AEA98A3B81783DDC5B5FDA81B18EB135D603C71",
+      "width": 1024,
+      "height": 1536
+    }
+  }
+}

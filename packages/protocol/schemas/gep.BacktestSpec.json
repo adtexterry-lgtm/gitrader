@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:BacktestSpec",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "BacktestSpec",
+  "type": "object",
+  "properties": {
+    "subject": {
+      "type": "object",
+      "properties": {
+        "strategy": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": {
+                "type": [
+                  "number",
+                  "boolean",
+                  "string"
+                ]
+              }
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "params"
+          ]
+        },
+        "workflow": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": [
+                "integer",
+                "string"
+              ]
+            },
+            "json": {}
+          },
+          "required": [
+            "id",
+            "version"
+          ]
+        }
+      },
+      "minProperties": 1
+    },
+    "instruments": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+      },
+      "minItems": 1
+    },
+    "interval": {
+      "type": "string",
+      "minLength": 1
+    },
+    "from": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "to": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "enum": [
+            "host",
+            "engine",
+            "files"
+          ]
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+              },
+              "format": {
+                "enum": [
+                  "parquet",
+                  "csv",
+                  "json"
+                ]
+              },
+              "kind": {
+                "enum": [
+                  "candles",
+                  "funding"
+                ]
+              }
+            },
+            "required": [
+              "path",
+              "sha256",
+              "format"
+            ]
+          }
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
+    "account": {
+      "type": "object",
+      "properties": {
+        "initialBalance": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "ccy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "leverage": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "maintenanceMarginRatio": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "initialBalance",
+        "ccy"
+      ]
+    },
+    "assumptions": {
+      "$ref": "urn:gitrader:schema:model:0.1:BacktestAssumptions"
+    },
+    "seed": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "subject",
+    "instruments",
+    "interval",
+    "from",
+    "to",
+    "data",
+    "account",
+    "assumptions",
+    "seed"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@gitrader/bots",
+  "version": "0.1.0",
+  "description": "Gitrader bot templates (grid / DCA / martingale / trend): parameter declarations in the engine-core strategy convention, deterministic paper execution, safety caps enforced in parameter validation. Never sends orders.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/engine-core": "*"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

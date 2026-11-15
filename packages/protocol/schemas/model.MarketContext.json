@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:MarketContext",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "MarketContext",
+  "type": "object",
+  "properties": {
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "markPrice": {
+      "type": "number"
+    },
+    "oraclePrice": {
+      "type": "number"
+    },
+    "midPrice": {
+      "type": "number"
+    },
+    "fundingRate": {
+      "type": "number"
+    },
+    "fundingIntervalMs": {
+      "type": "integer"
+    },
+    "openInterest": {
+      "type": "number"
+    },
+    "dayNotionalVolume": {
+      "type": "number"
+    },
+    "prevDayPrice": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "instrumentId",
+    "ts",
+    "markPrice"
+  ]
+}

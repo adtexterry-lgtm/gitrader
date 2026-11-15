@@ -1,0 +1,115 @@
+{
+    "input":  {
+                  "next":  {
+                               "experimentId":  "exp_000000000000000000000001",
+                               "title":  "Sample experiment",
+                               "hypothesis":  "A synthetic hypothesis",
+                               "stage":  "hypothesis",
+                               "subject":  {
+                                               "params":  {
+
+                                                          }
+                                           },
+                               "assumptions":  {
+                                                   "slippageBps":  0,
+                                                   "fillModel":  "next-bar-open",
+                                                   "liquidation":  false,
+                                                   "fees":  "venue",
+                                                   "funding":  false
+                                               },
+                               "origin":  {
+                                              "actor":  "user:usr_000000000000000000000001",
+                                              "actorType":  "human",
+                                              "tool":  "experiment",
+                                              "via":  "ui",
+                                              "requestId":  "00000000-0000-4000-8000-000000000001"
+                                          },
+                               "createdAt":  0,
+                               "updatedAt":  0,
+                               "stageEnteredAt":  0,
+                               "subjectKey":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                               "runs":  [
+
+                                        ],
+                               "notes":  [
+                                             {
+                                                 "origin":  {
+                                                                "actor":  "user:usr_000000000000000000000001",
+                                                                "actorType":  "human",
+                                                                "tool":  "experiment",
+                                                                "via":  "ui",
+                                                                "requestId":  "00000000-0000-4000-8000-000000000020"
+                                                            },
+                                                 "text":  "changed",
+                                                 "at":  0
+                                             }
+                                         ]
+                           },
+                  "current":  {
+                                  "experimentId":  "exp_000000000000000000000001",
+                                  "title":  "Sample experiment",
+                                  "hypothesis":  "A synthetic hypothesis",
+                                  "stage":  "hypothesis",
+                                  "subject":  {
+                                                  "params":  {
+
+                                                             }
+                                              },
+                                  "assumptions":  {
+                                                      "slippageBps":  0,
+                                                      "fillModel":  "next-bar-open",
+                                                      "liquidation":  false,
+                                                      "fees":  "venue",
+                                                      "funding":  false
+                                                  },
+                                  "origin":  {
+                                                 "actor":  "user:usr_000000000000000000000001",
+                                                 "actorType":  "human",
+                                                 "tool":  "experiment",
+                                                 "via":  "ui",
+                                                 "requestId":  "00000000-0000-4000-8000-000000000001"
+                                             },
+                                  "createdAt":  0,
+                                  "updatedAt":  0,
+                                  "stageEnteredAt":  0,
+                                  "subjectKey":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                  "runs":  [
+                                               {
+                                                   "accountId":  "acct_000000000000000000000001",
+                                                   "runId":  "run-old",
+                                                   "stage":  "backtest",
+                                                   "to":  1000,
+                                                   "from":  0,
+                                                   "executor":  {
+                                                                    "codeDigest":  null,
+                                                                    "instanceId":  "inst_000000000000000000000001",
+                                                                    "engineId":  "engine-sample",
+                                                                    "kind":  "engine"
+                                                                },
+                                                   "attachedAt":  0
+                                               }
+                                           ],
+                                  "notes":  [
+                                                {
+                                                    "origin":  {
+                                                                   "actor":  "user:usr_000000000000000000000001",
+                                                                   "actorType":  "human",
+                                                                   "tool":  "experiment",
+                                                                   "via":  "ui",
+                                                                   "requestId":  "00000000-0000-4000-8000-000000000020"
+                                                               },
+                                                    "text":  "old",
+                                                    "at":  0
+                                                }
+                                            ]
+                              }
+              },
+    "expect":  {
+                   "paths":  [
+                                 "notes",
+                                 "runs"
+                             ]
+               },
+    "id":  "20-append-only-prefix",
+    "kind":  "append-only"
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@gitrader/notify-wecom",
+  "version": "0.1.0",
+  "description": "Gitrader notification channel: WeCom (企业微信) group-robot markdown rendering with UTF-8 byte chunking, and a fetch-injected webhook client. Pure functions, no kernel wiring.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

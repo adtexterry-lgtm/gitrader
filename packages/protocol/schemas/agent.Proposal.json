@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:agent:0.1:Proposal",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: agent | Version: 0.1 | Status: draft",
+  "title": "Proposal",
+  "type": "object",
+  "properties": {
+    "proposalId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PropId"
+    },
+    "ticket": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ticket"
+    },
+    "kind": {
+      "enum": [
+        "order",
+        "control"
+      ]
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "pending",
+        "approved",
+        "executing",
+        "executed",
+        "failed",
+        "rejected",
+        "expired",
+        "withdrawn",
+        "denied"
+      ]
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "intents": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "urn:gitrader:schema:model:0.1:OrderIntent"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        },
+        {
+          "$ref": "urn:gitrader:schema:agent:0.1:ControlIntent"
+        }
+      ]
+    },
+    "intentsDigest": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:EvidenceRef"
+      }
+    },
+    "precheck": {
+      "$ref": "urn:gitrader:schema:model:0.1:PrecheckResult"
+    },
+    "priceBounds": {
+      "type": "object",
+      "properties": {
+        "referencePrice": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "maxDriftBps": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "referencePrice",
+        "maxDriftBps"
+      ]
+    },
+    "mandateId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+    },
+    "expiresAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "decision": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "by": {
+              "type": "string",
+              "pattern": "^(user|mandate):.+$"
+            },
+            "at": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+            },
+            "attestation": {
+              "$ref": "urn:gitrader:schema:model:0.1:Attestation"
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "by",
+            "at"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "execution": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "orderIds": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+              }
+            },
+            "at": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+            },
+            "result": {
+              "type": "string",
+              "minLength": 1
+            },
+            "problem": {
+              "$ref": "urn:gitrader:schema:model:0.1:Problem"
+            }
+          },
+          "required": [
+            "orderIds",
+            "at",
+            "result"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "origin": {
+      "$ref": "urn:gitrader:schema:model:0.1:Origin"
+    }
+  },
+  "required": [
+    "proposalId",
+    "ticket",
+    "kind",
+    "status",
+    "intents",
+    "intentsDigest",
+    "reason",
+    "precheck",
+    "mandateId",
+    "expiresAt",
+    "origin"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "order"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "accountId",
+          "priceBounds"
+        ],
+        "properties": {
+          "intents": {
+            "type": "array"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "control"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "intents": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "approved",
+              "executing",
+              "executed",
+              "failed",
+              "rejected"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "decision"
+        ],
+        "properties": {
+          "decision": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "executed",
+              "failed"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "execution"
+        ],
+        "properties": {
+          "execution": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ]
+}

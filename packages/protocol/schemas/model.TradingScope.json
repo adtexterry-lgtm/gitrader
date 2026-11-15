@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:TradingScope",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "TradingScope",
+  "type": "object",
+  "properties": {
+    "type": {
+      "enum": [
+        "org",
+        "group",
+        "account",
+        "mandate",
+        "instrument"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "type",
+    "id"
+  ]
+}

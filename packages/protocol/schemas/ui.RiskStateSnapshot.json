@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:ui:0.1:RiskStateSnapshot",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: ui | Version: 0.1 | Status: draft",
+  "title": "RiskStateSnapshot",
+  "type": "object",
+  "properties": {
+    "tradingState": {
+      "enum": [
+        "ACTIVE",
+        "REDUCING",
+        "HALTED"
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {}
+    },
+    "policyVersion": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "denyLlmLiveEntries": {
+      "type": "boolean"
+    },
+    "usage": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:ui:0.1:RiskUsageItem"
+      }
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    }
+  },
+  "required": [
+    "tradingState"
+  ]
+}

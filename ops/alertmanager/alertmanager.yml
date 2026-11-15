@@ -1,0 +1,99 @@
+# SPDX-License-Identifier: CPAL-1.0
+# Adapted from QuantDinger v5.6.5 ops/alertmanager/alertmanager.yml (Apache-2.0); adapted.
+#
+# 路由按 severity（critical / warning / info）分流，三个通知通道都是**占位模板**：
+#   telegram-critical  → Telegram（机器人令牌用 bot_token_file 文件引用）
+#   webhook-oncall     → 通用 webhook（Bearer 令牌用 credentials_file 文件引用）
+#   email-digest       → SMTP 邮件（密码用 auth_password_file 文件引用）
+# 本文件不含任何真实令牌 / 密码 / chat id。Alertmanager **不会**展开 ${ENV}，
+# 所以密钥一律用 *_file 文件引用（容器里只读挂载 /etc/alertmanager/secrets/*）；
+# 若坚持用环境变量，必须在启动前用 envsubst 之类渲染成本文件再挂进去（见 ops/README.md）。
+
+global:
+  resolve_timeout: 5m
+
+route:
+  # 兜底接收器：不发送任何东西，只做分组，避免未标注 severity 的告警乱投。
+  receiver: blackhole
+  group_by:
+    - alertname
+    - severity
+    - service
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  routes:
+    # 停机 / 账本停滞一类：立即发 Telegram，并且继续往下匹配 webhook（continue）。
+    - matchers:
+        - severity="critical"
+      receiver: telegram-critical
+      group_wait: 0s
+      group_interval: 1m
+      repeat_interval: 1h
+      continue: true
+
+    - matchers:
+        - severity="critical"
+      receiver: webhook-oncall
+      group_wait: 0s
+      group_interval: 1m
+      repeat_interval: 1h
+
+    - matchers:
+        - severity="warning"
+      receiver: webhook-oncall
+      repeat_interval: 4h
+
+    - matchers:
+        - severity="info"
+      receiver: email-digest
+      repeat_interval: 24h
+
+# critical 已经在响了，同一条告警的 warning 就不再单独发。
+inhibit_rules:
+  - source_matchers:
+      - severity="critical"
+    target_matchers:
+      - severity="warning"
+    equal:
+      - alertname
+      - service
+
+receivers:
+  - name: blackhole
+
+  - name: telegram-critical
+    telegram_configs:
+      # bot_token_file 占位：文件内容就是机器人令牌；
+      # 或改成 ${ALERTMANAGER_TELEGRAM_BOT_TOKEN} 并在启动前渲染（见 ops/README.md）。
+      - bot_token_file: /etc/alertmanager/secrets/telegram_bot_token
+        # 占位：改成实际 chat id（数字或 @channelname），不要把真值提交进仓库。
+        chat_id: 0
+        parse_mode: MarkdownV2
+        send_resolved: true
+        api_url: https://api.telegram.org
+
+  - name: webhook-oncall
+    webhook_configs:
+      # 占位：换成你自己的通知网关地址（本机示例），不要直接暴露到公网。
+      - url: http://127.0.0.1:9099/gitrader/alerts
+        send_resolved: true
+        max_alerts: 0
+        http_config:
+          authorization:
+            type: Bearer
+            credentials_file: /etc/alertmanager/secrets/gitrader_webhook_token
+
+  - name: email-digest
+    email_configs:
+      # 占位地址：example.com 一类保留域名，换成自己的收件箱。
+      - to: ops@example.com
+        from: gitrader@example.com
+        smarthost: smtp.example.com:587
+        auth_username: gitrader@example.com
+        # 占位：文件内容是 SMTP 密码；或改成 ${ALERTMANAGER_SMTP_PASSWORD} 并在启动前渲染。
+        auth_password_file: /etc/alertmanager/secrets/smtp_password
+        require_tls: true
+        send_resolved: true
+        headers:
+          subject: '[Gitrader] {{ .GroupLabels.alertname }}'

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ReconcileSuggestion",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ReconcileSuggestion",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "orderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+    },
+    "venueOrderId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "clientOrderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+    },
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "side": {
+      "enum": [
+        "buy",
+        "sell"
+      ]
+    },
+    "size": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "price": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "priceSource": {
+      "enum": [
+        "venue_avg_fill_price",
+        "local_last_fill_price"
+      ]
+    },
+    "basis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "inferred": {
+      "const": true
+    }
+  },
+  "required": [
+    "id",
+    "orderId",
+    "venueOrderId",
+    "clientOrderId",
+    "instrumentId",
+    "side",
+    "size",
+    "price",
+    "ts",
+    "priceSource",
+    "basis",
+    "inferred"
+  ]
+}

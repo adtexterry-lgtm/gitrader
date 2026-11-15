@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:RuleHit",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "RuleHit",
+  "type": "object",
+  "properties": {
+    "ruleId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "code": {
+      "enum": [
+        "LEVERAGE",
+        "ORDER_NOTIONAL",
+        "POSITION_NOTIONAL",
+        "TOTAL_NOTIONAL",
+        "OPEN_POSITIONS",
+        "DAILY_LOSS",
+        "COOLDOWN",
+        "INSUFFICIENT_MARGIN",
+        "REDUCE_ONLY",
+        "INSTRUMENT_NOT_ALLOWED",
+        "TRADING_STATE",
+        "DAILY_NOTIONAL",
+        "VENUE_NOT_ALLOWED",
+        "SLIPPAGE",
+        "STALE_PRICE",
+        "RATE_BUDGET",
+        "MANDATE_LEVEL",
+        "MANDATE_EXPIRED",
+        "MANDATE_LIMIT",
+        "NEEDS_APPROVAL",
+        "PROTECTOR",
+        "LLM_LIVE_ENTRY",
+        "KILL_SWITCH",
+        "ACCOUNT_UNKNOWN",
+        "PROTECTOR_UNAVAILABLE",
+        "VENUE_RULE",
+        "MANDATE_INCOMPLETE",
+        "SIZE_PRECISION",
+        "REDUCE_ONLY_MISMATCH",
+        "INTENT_EXPIRED",
+        "TPSL_INVALID",
+        "STOP_REQUIRED"
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "limit": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "actual": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "action": {
+      "enum": [
+        "deny",
+        "warn",
+        "review",
+        "limit"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "ruleId",
+    "code",
+    "limit",
+    "actual",
+    "unit",
+    "action",
+    "scope"
+  ]
+}

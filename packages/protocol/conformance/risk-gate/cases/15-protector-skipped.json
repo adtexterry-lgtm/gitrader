@@ -1,0 +1,239 @@
+{
+  "name": "15-protector-skipped",
+  "input": {
+    "precheckId": "pck_case015",
+    "dryRun": false,
+    "action": "open",
+    "actorClass": "agent",
+    "target": {
+      "kind": "order",
+      "intent": {
+        "accountId": "acct_fixture",
+        "instrumentId": "fixture:ASSET",
+        "side": "buy",
+        "type": "limit",
+        "size": "1",
+        "price": "100",
+        "tif": "gtc",
+        "leverage": 2,
+        "marginMode": "cross",
+        "reduceOnly": false,
+        "postOnly": false,
+        "clientOrderId": "0000000000000000000000000000000f"
+      }
+    },
+    "account": {
+      "accountId": "acct_fixture",
+      "venue": "fixture",
+      "mode": "paper",
+      "groupIds": []
+    },
+    "instrument": {
+      "instrumentId": "fixture:ASSET",
+      "venue": "fixture",
+      "symbol": "ASSET",
+      "displaySymbol": "ASSET",
+      "kind": "perp",
+      "base": "ASSET",
+      "quote": "USD",
+      "settle": "USD",
+      "settlement": "linear",
+      "contractSize": "1",
+      "venueSizeUnit": "base",
+      "assetClass": "crypto",
+      "status": "trading",
+      "price": {
+        "tick": "1"
+      },
+      "size": {
+        "step": "1",
+        "decimals": 0,
+        "min": "1"
+      },
+      "minNotional": "1",
+      "maxLeverage": 10,
+      "marginModes": [
+        "cross"
+      ],
+      "orderTypes": [
+        "limit",
+        "market"
+      ],
+      "tif": [
+        "gtc",
+        "ioc"
+      ],
+      "triggerPriceTypes": [
+        "mark"
+      ],
+      "fundingIntervalMs": 28800000,
+      "fees": {
+        "maker": "0",
+        "taker": "0",
+        "source": "assumed"
+      },
+      "updatedAt": 1000000
+    },
+    "snapshot": {
+      "equity": "10000",
+      "available": "10000",
+      "availableDeductsOpenOrders": true,
+      "positions": [],
+      "openOrders": [],
+      "stopLossOrderIds": [],
+      "asOf": 900000,
+      "confirmedAt": 1000000,
+      "stale": false
+    },
+    "mark": {
+      "price": "100",
+      "ts": 1000000,
+      "source": "venue_mark"
+    },
+    "mandate": {
+      "mandateId": "mdt_fixture",
+      "version": 1,
+      "subject": {
+        "type": "agentKey",
+        "id": "ak_fixture"
+      },
+      "level": "L3",
+      "accounts": [
+        "acct_fixture"
+      ],
+      "venueAllowlist": [
+        "fixture"
+      ],
+      "instrumentAllowlist": [
+        "fixture:ASSET"
+      ],
+      "limits": {
+        "maxOrderNotional": "10000",
+        "maxDailyNotional": "100000",
+        "maxDailyLoss": "1000",
+        "autoMaxOrderNotional": "10000"
+      },
+      "notBefore": 0,
+      "notAfter": 2000000,
+      "heartbeat": {
+        "intervalSec": 30,
+        "timeoutSec": 60,
+        "onTimeout": {
+          "downgradeTo": "L0",
+          "takeover": "halt_new"
+        }
+      },
+      "status": "active",
+      "issuedBy": "user:fixture",
+      "attestation": {
+        "method": "system",
+        "by": "kernel",
+        "at": 1000000,
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sig": "Zml4dHVyZQ=="
+      }
+    },
+    "mandateIntegrity": {
+      "ok": true,
+      "problems": []
+    },
+    "policy": {
+      "policyId": "pol_fixture",
+      "version": 1,
+      "scope": {
+        "type": "account",
+        "id": "acct_fixture"
+      },
+      "limits": {
+        "maxOrderNotional": "1000",
+        "maxLeverage": 10,
+        "maxSlippageBps": 100,
+        "instrumentAllowlist": [
+          "fixture:ASSET"
+        ],
+        "venueAllowlist": [
+          "fixture"
+        ]
+      },
+      "protectors": [
+        {
+          "kind": "plugin",
+          "pluginId": "protector-fixture",
+          "mode": "enforce",
+          "order": 1,
+          "params": {}
+        }
+      ],
+      "failClosed": {
+        "stalePriceMs": 30000,
+        "staleAccountMs": 30000,
+        "onMissingPrice": "deny"
+      },
+      "dailyResetAt": "00:00Z",
+      "valuationCcy": "USD",
+      "attestation": {
+        "method": "system",
+        "by": "kernel",
+        "at": 1000000,
+        "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sig": "Zml4dHVyZQ=="
+      }
+    },
+    "policyIntegrity": {
+      "ok": true,
+      "problems": []
+    },
+    "path": "direct",
+    "now": 1000000,
+    "stats": {
+      "dayStartEquity": "10000",
+      "dailyNotional": "0",
+      "mandateDailyNotional": "0",
+      "ordersLastMinute": 0,
+      "mandateOrdersLastMinute": 0,
+      "ordersToday": 0,
+      "mandateOrdersToday": 0
+    },
+    "reserved": {
+      "account": {
+        "margin": "0",
+        "notional": "0",
+        "count": 0
+      },
+      "byInstrument": {},
+      "today": {
+        "notional": "0",
+        "count": 0
+      },
+      "lastMinute": {
+        "count": 0
+      }
+    },
+    "states": [],
+    "killSwitch": {
+      "tripped": true,
+      "source": "file",
+      "reason": "fixture"
+    },
+    "protectorResults": [],
+    "originActorType": "engine"
+  },
+  "expect": {
+    "decision": "BLOCK",
+    "verdict": "deny",
+    "codes": [
+      "KILL_SWITCH"
+    ],
+    "applied": [],
+    "allowedActions": {
+      "open": false,
+      "reduce": false,
+      "cancel": true,
+      "cancel_protective": false,
+      "amend": false,
+      "leverage": false,
+      "deadman_arm": true,
+      "deadman_disarm": false
+    }
+  }
+}

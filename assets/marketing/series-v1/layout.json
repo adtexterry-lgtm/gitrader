@@ -1,0 +1,86 @@
+{
+  "version": "series-v1-design-1",
+  "status": "approved-copy-design-contract",
+  "canvas": { "width": 2048, "height": 3072, "colorSpace": "sRGB", "background": "#0A0A0B" },
+  "preview": { "width": 1024, "height": 1536 },
+  "sourceScene": { "filename": "scene.png", "aspectRatio": "2:3", "typicalWidth": 1024, "typicalHeight": 1536, "x": 0, "y": 0, "width": 2048, "height": 3072, "opacity": 1, "embedOriginalBytes": true },
+  "brand": { "source": "../../brand/gitrader-wordmark.svg", "x": 153.2, "y": 133.2, "width": 355.961765722, "height": 81.6, "embedOriginalBytes": true },
+  "font": { "family": "Microsoft YaHei", "weights": [400, 700], "reuseIsolatedFontRendering": true, "distributeFonts": false },
+  "colors": { "background": "#0A0A0B", "primary": "#F6F3EC", "secondary": "#A9A6A0", "cta": "#FFB13B", "orangeMid": "#FF7816", "orangeEnd": "#FF3D00" },
+  "blackOverlay": { "x": 0, "y": 0, "width": 2048, "height": 3072, "color": "#0A0A0B", "interpolation": "linear", "stops": [{ "y": 0, "opacity": 1 }, { "y": 960, "opacity": 1 }, { "y": 1104, "opacity": 0 }, { "y": 2048, "opacity": 0 }, { "y": 2240, "opacity": 1 }, { "y": 3072, "opacity": 1 }] },
+  "textDefaults": { "baseline": "alphabetic", "anchor": "start", "letterSpacing": 0, "maxRight": 1888, "autoWrap": false, "autoShrink": false },
+  "slots": {
+    "eyebrow": { "x": 160, "y": 310, "fontSize": 26, "fontWeight": 400, "letterSpacing": 2, "fillToken": "secondary", "maxWidth": 1728 },
+    "title": { "x": 160, "ys": [502, 706], "fontSize": 176, "fontWeight": 700, "fillToken": "primary", "maxWidth": 1728 },
+    "support": { "x": 164, "ys": [842, 916], "fontSize": 44, "fontWeight": 400, "fillToken": "secondary", "maxWidth": 1724 },
+    "sceneLabel": { "x": 160, "y": 1080, "fontSize": 30, "fontWeight": 400, "fillToken": "secondary", "maxWidth": 1728 },
+    "shortTag": { "x": 160, "y": 2148, "fontSize": 28, "fontWeight": 400, "fillToken": "secondary", "maxWidth": 1728 },
+    "benefits": { "xs": [160, 736, 1312], "y": 2392, "fontSize": 50, "fontWeight": 700, "fillToken": "primary", "maxWidthEach": 448 },
+    "cta": { "x": 160, "y": 2672, "fontSize": 40, "fontWeight": 700, "fillToken": "cta", "maxWidth": 1728 },
+    "footer": { "x": 160, "y": 2864, "fontSize": 30, "fontWeight": 400, "fillToken": "secondary", "maxWidth": 1728 }
+  },
+  "footer": "开源底座 · M1 开发中",
+  "posters": [
+    {
+      "id": "01", "directory": "01-stocks", "overviewLabel": "01 美股",
+      "eyebrow": "AGENT TRADING / U.S. EQUITIES",
+      "title": ["把美股灵感", "写成交易规则"],
+      "support": ["围绕你关注的美股，组合自己的智能体、数据与引擎。", "把研究与执行接成你的工作流，标的随连接场所扩展。"],
+      "sceneLabel": "美股研究 · 行情观察",
+      "shortTag": "接入构想 · 标的依场所",
+      "benefits": ["自选数据", "自有引擎", "规则自定"],
+      "cta": "了解美股接入"
+    },
+    {
+      "id": "02", "directory": "02-crypto", "overviewLabel": "02 加密",
+      "eyebrow": "AGENT TRADING / CRYPTO",
+      "title": ["让你的 AI", "接入链上市场"],
+      "support": ["面向 DEX 链上交易，在你的环境运行自己的策略。", "从只读到限额自动，权限边界由你设定，行动有据可查。"],
+      "sceneLabel": "交易提案 · 授权边界 · 场所连接",
+      "shortTag": "场景构想 · 接入以当前能力为准",
+      "benefits": ["私有运行", "分级授权", "资金不托管"],
+      "cta": "了解连接方式"
+    },
+    {
+      "id": "03", "directory": "03-metals", "overviewLabel": "03 贵金属",
+      "eyebrow": "AGENT TRADING / PRECIOUS METALS",
+      "title": ["黄金与白银", "也有你的交易方式"],
+      "support": ["把黄金、白银相关场景纳入你自己的 AI 交易工作流。", "自带数据与策略，按已接入场所选择标的，保留你的判断。"],
+      "sceneLabel": "黄金 · 白银 · 贵金属相关场景",
+      "shortTag": "接入构想 · 标的依场所",
+      "benefits": ["自带策略", "自选场所", "操作可查"],
+      "cta": "探索贵金属接入"
+    },
+    {
+      "id": "04", "directory": "04-diy", "overviewLabel": "04 DIY",
+      "eyebrow": "AGENT TRADING / BUILT YOUR WAY",
+      "title": ["你的交易引擎", "就该与众不同"],
+      "support": ["选自己的智能体、引擎和场所，把想法组合成专属工作流。", "从策略到授权按你的方法配置，让工具适应你自己的交易习惯。"],
+      "sceneLabel": "智能体 · 策略引擎 · 交易场所",
+      "shortTag": "配置概念示意",
+      "benefits": ["模块组合", "私有运行", "规则自定"],
+      "cta": "规划你的第一套组合"
+    },
+    {
+      "id": "05", "directory": "05-pro", "overviewLabel": "05 专业开放",
+      "eyebrow": "AGENT TRADING / OPEN ENGINEERING",
+      "title": ["保留你的专业", "定制引擎性能"],
+      "support": ["用 MCP 接入智能体，用开放协议连接任意语言的自有引擎。", "按你的策略优化执行；DEX 与交易所 API 沿接入路线逐步扩展。"],
+      "sceneLabel": "自有代码 · 开放协议 · 接入路线",
+      "shortTag": "交易所 API 为扩展方向",
+      "benefits": ["核心开源", "协议开放", "自主优化"],
+      "cta": "查看开发接入说明"
+    },
+    {
+      "id": "06", "directory": "06-paper", "overviewLabel": "06 模拟起步",
+      "eyebrow": "AGENT TRADING / PAPER FIRST",
+      "title": ["先在模拟盘", "跑通第一笔交易"],
+      "support": ["先让自己的策略跑纸面，看看智能体做了什么、为何执行。", "在工作台检阅持仓、活动与风险，再按理解逐步配置权限。"],
+      "sceneLabel": "纸面运行 · 动作检阅 · 权限配置",
+      "shortTag": "入门路径示意",
+      "benefits": ["模拟起步", "工作台检阅", "分级授权"],
+      "cta": "了解纸面起步"
+    }
+  ],
+  "overview": { "width": 1664, "height": 1792, "background": "#0A0A0B", "columns": 3, "rows": 2, "thumbnailWidth": 496, "thumbnailHeight": 744, "xs": [48, 584, 1120], "ys": [48, 936], "labelYs": [832, 1720], "labelFontSize": 24, "labelFontWeight": 400, "labelFill": "#A9A6A0", "order": ["01", "02", "03", "04", "05", "06"] }
+}

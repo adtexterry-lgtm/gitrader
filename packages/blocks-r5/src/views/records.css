@@ -1,0 +1,103 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+/* 记录页专用样式：components.css 里没有的页内规则（来自 visual-r5/records/index.html 的「记录 / 资金 / 插件 共用」段），类名 g5-，只许 var(--gr-*)。 */
+:root[data-ui="r5"] [data-g5-page="records"]{--tbl-gap:20px}
+@media (min-width:1400px){ :root[data-ui="r5"] [data-g5-page="records"]{--tbl-gap:32px} }
+:root[data-ui="r5"] [data-g5-page="records"] [data-state="offline"]{display:flex;flex-direction:column;flex:1 1 0;min-height:0}
+
+/* 卡头：页签读数 + 导出 */
+:root[data-ui="r5"] [data-g5-page="records"] .g5-rd{display:inline-flex;align-items:baseline;gap:8px;white-space:nowrap}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-rd .g5-k{font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-rd .g5-v{font-size:13px;line-height:20px;color:var(--gr-text-body)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-rd .g5-v + .g5-k{margin-left:12px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-rd + .g5-btn{margin-left:12px}
+
+/* 筛选条 */
+:root[data-ui="r5"] [data-g5-page="records"] .g5-fbar{height:40px;flex:none;display:flex;align-items:center;gap:8px;padding:0 20px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-dd .g5-k{color:var(--gr-text-3);margin-right:4px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-dd .g5-venue,:root[data-ui="r5"] [data-g5-page="records"] .g5-dd .g5-papermk{margin:0 4px}
+
+/* 卡内滚动表：表头固定，表体卡内滚 */
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tw.g5-scroll{flex:1 1 0;min-height:0}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tw.g5-scroll .g5-tbl thead th{position:sticky;top:0;z-index:1;background:var(--gr-card)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-h40 td{line-height:24px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl td.g5-x{vertical-align:middle;padding-top:0}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl td.g5-x .g5-btn-icon{color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-open td.g5-x svg{transform:rotate(180deg)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl .g5-l2.g5-ib{display:flex;align-items:center;gap:4px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl .g5-l2.g5-ib svg{color:var(--gr-danger)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-ib{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl td.g5-vm{vertical-align:middle;padding-top:0}
+
+/* 方向：8px 三角 + 字，不着色 */
+:root[data-ui="r5"] [data-g5-page="records"] .g5-dir{display:inline-flex;align-items:baseline;gap:4px;color:var(--gr-text-body)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-dir svg{width:8px;height:8px;align-self:center;fill:var(--gr-text-3)}
+
+/* 展开行：与上一行连成一块中性底；事件链 */
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-open td{background:var(--gr-fill-1);box-shadow:none}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-open td:first-child{border-radius:var(--gr-r-ctl) 0 0 0}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-open td:last-child{border-radius:0 var(--gr-r-ctl) 0 0}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-open:hover td:first-child{border-radius:var(--gr-r-ctl) 0 0 0}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-open:hover td:last-child{border-radius:0 var(--gr-r-ctl) 0 0}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-xrow td{background:var(--gr-fill-1);padding:0 4px 8px;border-radius:0 0 var(--gr-r-ctl) var(--gr-r-ctl);vertical-align:top;line-height:20px;white-space:normal}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-chain{height:32px;display:flex;align-items:center;gap:8px;font-size:12px;line-height:16px;color:var(--gr-text-body);white-space:nowrap;overflow:hidden}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-chain .g5-nd{display:inline-flex;align-items:center;gap:8px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-chain .g5-nd::before{content:"";width:4px;height:4px;flex:none;background:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-chain .g5-nd > .g5-actor{margin-right:-4px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-chain .g5-ln{width:24px;height:1px;flex:none;background:var(--gr-line-strong)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-chain .g5-tm{color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-chain [data-tone="danger"]{color:var(--gr-danger)}
+
+/* 执行方：「你」用正文色加粗；未知用三级灰 */
+:root[data-ui="r5"] [data-g5-page="records"] .g5-me .g5-actor{color:var(--gr-text);font-weight:500}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-actor.g5-unknown{color:var(--gr-text-3)}
+
+/* 卡内一行事实：读取失败 / 未接通 / 空 */
+:root[data-ui="r5"] [data-g5-page="records"] .g5-pstate{padding:0 20px 20px;display:flex;align-items:center;gap:12px;font-size:13px;line-height:20px;color:var(--gr-text-body)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-pstate [data-wire="off"]{display:flex;align-items:baseline;gap:12px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-pstate .g5-msg{font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-more td{height:var(--gr-row-1);padding-top:0;vertical-align:middle;font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="records"] [data-wire="off"] .g5-t3{font-size:12px;line-height:16px}
+
+/* 窄屏收列：1280 以下先收名义，再收来源 */
+@media (max-width:1279px){ :root[data-ui="r5"] [data-g5-page="records"] .g5-c-ntl{display:none} }
+@media (max-width:1179px){ :root[data-ui="r5"] [data-g5-page="records"] .g5-c-src{display:none} }
+
+/* 骨架与事件链的定宽 / 容器，原先是行内样式 */
+:root[data-ui="r5"] [data-g5-page="records"] .g5-chain .g5-sk{width:240px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-cn{display:contents}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(1) .g5-sk{width:96px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(2) .g5-sk{width:64px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(3) .g5-sk{width:32px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(4) .g5-sk{width:56px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(5) .g5-sk{width:32px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(6) .g5-sk{width:56px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(7) .g5-sk{width:32px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(8) .g5-sk{width:48px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(9) .g5-sk{width:88px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(10) .g5-sk{width:40px}
+:root[data-ui="r5"] [data-g5-page="records"] .g5-skrow td:nth-child(11) .g5-sk{width:28px}
+
+@media (max-width: 599px) {
+  :root[data-ui="r5"] [data-g5-page="records"] { --tbl-gap: 8px; }
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl,
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl thead,
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tbody { display: contents; }
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .7fr) minmax(0, 1fr) 28px; }
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl th,
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl td { width: auto; min-width: 0; white-space: normal; overflow-wrap: anywhere; }
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl:has(th[data-n="pnl"]) thead th:not(:nth-child(2), :nth-child(3), :nth-child(8), :nth-child(11)),
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl:has(th[data-n="pnl"]) .g5-row > td:not(:nth-child(2), :nth-child(3), :nth-child(8), :nth-child(11)),
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl:has(th[data-n="oq"]) thead th:not(:nth-child(2), :nth-child(4), :nth-child(8), :nth-child(11)),
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl:has(th[data-n="oq"]) .g5-row > td:not(:nth-child(2), :nth-child(4), :nth-child(8), :nth-child(11)),
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl:has(th[data-n="fr"]) thead th:is(:nth-child(4), :nth-child(6)),
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl:has(th[data-n="fr"]) .g5-row > td:is(:nth-child(4), :nth-child(6)) { display: none; }
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl:has(th[data-n="fr"]) tr { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-grp { display: flex; justify-content: space-between; gap: 8px; }
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-grp td:empty { display: none; }
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-xrow,
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl tr.g5-more { grid-template-columns: minmax(0, 1fr); }
+  /* 窄屏表头不吸顶：thead 被拆成 contents 后吸顶的 th 会盖住筛选行（含「已按 X 筛选 ×」） */
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-tbl th { position: static; }
+  /* 筛选行在窄屏换行，高度随内容，不压到表格上 */
+  :root[data-ui="r5"] [data-g5-page="records"] .g5-fbar { height: auto; min-height: 40px; flex-wrap: wrap; padding: 6px 16px; }
+}

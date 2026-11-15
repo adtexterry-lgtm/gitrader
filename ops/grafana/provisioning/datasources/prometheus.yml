@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: CPAL-1.0
+# Adapted from QuantDinger v5.6.5 ops/grafana/provisioning/datasources/prometheus.yml (Apache-2.0); adapted.
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    uid: prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: false
+    jsonData:
+      timeInterval: 15s
+      httpMethod: POST

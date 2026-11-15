@@ -1,0 +1,327 @@
+{
+  "__comment": "Adapted from QuantDinger v5.6.5 ops/grafana/dashboards/runtime-overview.json (Apache-2.0); panel layout adapted to the metrics rendered by packages/kernel/src/metrics.ts. 指标名 / 标签名由 ops/verify-ops.mjs 与内核源码对账。",
+  "annotations": { "list": [] },
+  "editable": true,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "内核运行状态（gitrader_up）",
+      "description": "1 = 内核进程在跑；0 = 抓不到在跑的内核。对应 ops/prometheus/alerts.yml 的 GitraderDown。",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 6, "w": 4, "x": 0, "y": 0 },
+      "targets": [
+        { "refId": "A", "expr": "gitrader_up", "legendFormat": "up", "instant": true, "range": false }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "textMode": "value",
+        "orientation": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": { "text": "DOWN", "index": 0, "color": "red" },
+                "1": { "text": "UP", "index": 1, "color": "green" }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "运行时长（gitrader_uptime_seconds）",
+      "description": "内核自启动以来的秒数；小于 120 秒会触发 GitraderRestarted。",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 6, "w": 4, "x": 4, "y": 0 },
+      "targets": [
+        { "refId": "A", "expr": "gitrader_uptime_seconds", "legendFormat": "uptime", "instant": true, "range": false }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "textMode": "value",
+        "orientation": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "orange", "value": null },
+              { "color": "green", "value": 600 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "交易状态（gitrader_trading_state）",
+      "description": "每个状态一列，1 表示当前生效状态。HALTED 会立即触发 GitraderHalted。",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 6, "w": 8, "x": 8, "y": 0 },
+      "targets": [
+        { "refId": "A", "expr": "gitrader_trading_state{state=\"ACTIVE\"}", "legendFormat": "ACTIVE", "instant": true, "range": false },
+        { "refId": "B", "expr": "gitrader_trading_state{state=\"REDUCING\"}", "legendFormat": "REDUCING", "instant": true, "range": false },
+        { "refId": "C", "expr": "gitrader_trading_state{state=\"HALTED\"}", "legendFormat": "HALTED", "instant": true, "range": false }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value_and_name",
+        "orientation": "horizontal"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": { "text": "—", "index": 0, "color": "text" },
+                "1": { "text": "生效", "index": 1, "color": "blue" }
+              }
+            }
+          ]
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "HALTED" },
+            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "REDUCING" },
+            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "ACTIVE" },
+            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "账本条数（gitrader_ledger_entries）",
+      "description": "账本当前条数。有成交但 30 分钟不增长会触发 GitraderLedgerStalled。",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 6, "w": 4, "x": 16, "y": 0 },
+      "targets": [
+        { "refId": "A", "expr": "gitrader_ledger_entries", "legendFormat": "entries", "instant": true, "range": false }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "textMode": "value",
+        "orientation": "auto"
+      },
+      "fieldConfig": { "defaults": { "unit": "short", "decimals": 0 }, "overrides": [] }
+    },
+    {
+      "id": 5,
+      "type": "stat",
+      "title": "常驻内存（gitrader_process_rss_bytes）",
+      "description": "process.memoryUsage().rss。超过 1.5e9 字节并持续 10 分钟会触发 GitraderHighMemory。",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 6, "w": 4, "x": 20, "y": 0 },
+      "targets": [
+        { "refId": "A", "expr": "gitrader_process_rss_bytes", "legendFormat": "rss", "instant": true, "range": false }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "textMode": "value",
+        "orientation": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "decimals": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 1000000000 },
+              { "color": "red", "value": 1500000000 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "事件速率（按 topic，rate 5m）",
+      "description": "gitrader_events_total 是计数器，每个 EVENT_TOPICS 主题一条时间线；断流由 GitraderNoMarketData 负责。",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 6 },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum by (topic) (rate(gitrader_events_total[5m]))",
+          "legendFormat": "{{topic}}",
+          "range": true,
+          "instant": false
+        }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": ["lastNotNull"] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "custom": { "drawStyle": "line", "lineWidth": 1, "fillOpacity": 8, "showPoints": "never", "spanNulls": false }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "账本增长（条数与 5 分钟增量）",
+      "description": "gitrader_ledger_entries 是 gauge：绝对值 + delta(5m)，用来区分「记账在长」和「记账停滞」。",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 6 },
+      "targets": [
+        { "refId": "A", "expr": "gitrader_ledger_entries", "legendFormat": "条数", "range": true, "instant": false },
+        { "refId": "B", "expr": "delta(gitrader_ledger_entries[5m])", "legendFormat": "5m 增量", "range": true, "instant": false }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": ["lastNotNull", "max"] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 5, "showPoints": "never", "spanNulls": false }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "5m 增量" },
+            "properties": [{ "id": "custom.axisPlacement", "value": "right" }]
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "内存（RSS 与 V8 heap used）",
+      "description": "gitrader_process_rss_bytes / gitrader_process_heap_used_bytes，都来自 process.memoryUsage()。",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 15 },
+      "targets": [
+        { "refId": "A", "expr": "gitrader_process_rss_bytes", "legendFormat": "rss", "range": true, "instant": false },
+        { "refId": "B", "expr": "gitrader_process_heap_used_bytes", "legendFormat": "heap used", "range": true, "instant": false }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": ["lastNotNull", "max"] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "custom": { "drawStyle": "line", "lineWidth": 1, "fillOpacity": 10, "showPoints": "never", "spanNulls": false }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 9,
+      "type": "state-timeline",
+      "title": "交易状态时间线（gitrader_trading_state）",
+      "description": "同一时刻只有一个 state 为 1；用来看 HALTED / REDUCING 从什么时候开始。",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 15 },
+      "targets": [
+        { "refId": "A", "expr": "gitrader_trading_state", "legendFormat": "{{state}}", "range": true, "instant": false }
+      ],
+      "options": {
+        "showValue": "never",
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true },
+        "tooltip": { "mode": "single", "sort": "none" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": { "text": "—", "index": 0, "color": "transparent" },
+                "1": { "text": "生效", "index": 1, "color": "blue" }
+              }
+            }
+          ]
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "被限流的调用（按身份，rate 5m）",
+      "description": "gitrader_op_rate_limited_total 是计数器：操作限流拒绝的调用次数，按身份（principal）分线；持续上升说明某个 Agent 或页面在刷接口。",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 24 },
+      "targets": [
+        { "refId": "A", "expr": "sum by (principal) (rate(gitrader_op_rate_limited_total[5m]))", "legendFormat": "{{principal}}", "range": true, "instant": false }
+      ],
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true, "calcs": ["lastNotNull"] },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "custom": { "drawStyle": "line", "lineWidth": 1, "fillOpacity": 8, "showPoints": "never", "spanNulls": false }
+        },
+        "overrides": []
+      }
+    }
+  ],
+  "refresh": "15s",
+  "schemaVersion": 39,
+  "tags": ["gitrader", "runtime"],
+  "templating": { "list": [] },
+  "time": { "from": "now-6h", "to": "now" },
+  "timezone": "browser",
+  "title": "Gitrader Overview",
+  "uid": "gitrader-overview",
+  "version": 1
+}

@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:LabRun",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "LabRun",
+  "type": "object",
+  "properties": {
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "backtest",
+        "replay"
+      ]
+    },
+    "experimentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ExpId"
+    },
+    "executor": {
+      "$ref": "urn:gitrader:schema:model:0.1:ExperimentExecutor"
+    },
+    "subjectKey": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "specDigest": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "instruments": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+      }
+    },
+    "window": {
+      "$ref": "urn:gitrader:schema:model:0.1:Window"
+    },
+    "partitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "enum": [
+              "train",
+              "validation",
+              "holdout"
+            ]
+          },
+          "window": {
+            "$ref": "urn:gitrader:schema:model:0.1:Window"
+          },
+          "embargoMs": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          },
+          "purgeMs": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          }
+        },
+        "required": [
+          "kind",
+          "window"
+        ]
+      }
+    },
+    "startedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "status": {
+      "enum": [
+        "queued",
+        "running",
+        "done",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "resultDigest": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "sharpe": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nObs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "sharpe",
+        "nObs"
+      ]
+    },
+    "returnsArtifact": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        }
+      },
+      "required": [
+        "artifactId",
+        "sha256"
+      ]
+    },
+    "packId": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "runId",
+    "kind",
+    "executor",
+    "subjectKey",
+    "specDigest",
+    "instruments",
+    "window",
+    "startedAt",
+    "status"
+  ]
+}

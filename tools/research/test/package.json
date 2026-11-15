@@ -1,0 +1,6 @@
+{
+  "//": "只为让 `node --test tools/research/test/`（目录参数）在本机 Node 22.23.2 上可跑：该版本测试运行器只吃 glob、不展开目录，会把目录当模块解析；main 指到 index.mjs 聚合入口。不影响单个测试文件直接跑。",
+  "private": true,
+  "type": "module",
+  "main": "index.mjs"
+}

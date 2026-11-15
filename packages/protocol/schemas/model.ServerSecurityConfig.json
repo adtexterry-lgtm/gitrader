@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ServerSecurityConfig",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ServerSecurityConfig",
+  "type": "object",
+  "properties": {
+    "operationRateLimit": {
+      "$ref": "urn:gitrader:schema:model:0.1:OperationRateLimitConfig"
+    },
+    "maxWsSubscriptions": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1024
+    }
+  }
+}

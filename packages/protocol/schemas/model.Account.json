@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Account",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Account",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "alias": {
+      "type": "string",
+      "minLength": 1
+    },
+    "orgId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrgId"
+    },
+    "groupIds": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/GrpId"
+      }
+    },
+    "venue": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+    },
+    "environment": {
+      "enum": [
+        "mainnet",
+        "testnet"
+      ]
+    },
+    "mode": {
+      "enum": [
+        "live",
+        "paper",
+        "shadow"
+      ]
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "accountRef": {
+          "type": "string"
+        }
+      }
+    },
+    "subaccount": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "vault": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "accountModel": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signer": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "api-wallet",
+            "api-key",
+            "none",
+            "gateway-session"
+          ]
+        },
+        "credentialRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "address": {
+          "type": "string"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "notAfter": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "permissions": {
+          "type": "object",
+          "properties": {
+            "trade": {
+              "type": "boolean"
+            },
+            "withdraw": {
+              "enum": [
+                false,
+                "unknown"
+              ]
+            }
+          },
+          "required": [
+            "trade",
+            "withdraw"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "credentialRef",
+        "permissions"
+      ]
+    },
+    "builder": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "approved",
+            "not_approved",
+            "unknown"
+          ]
+        },
+        "maxFeeTenthBps": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "paper": {
+      "type": "object",
+      "properties": {
+        "initialBalance": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "ccy": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Currency"
+        }
+      },
+      "required": [
+        "initialBalance",
+        "ccy"
+      ]
+    },
+    "status": {
+      "enum": [
+        "active",
+        "read_only",
+        "disabled"
+      ]
+    }
+  },
+  "required": [
+    "accountId",
+    "alias",
+    "orgId",
+    "groupIds",
+    "venue",
+    "environment",
+    "mode",
+    "owner",
+    "accountModel",
+    "signer",
+    "status"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "paper"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "paper"
+        ]
+      }
+    }
+  ]
+}

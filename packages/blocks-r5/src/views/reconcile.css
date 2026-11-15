@@ -1,0 +1,21 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+:root[data-ui="r5"] .g5-rec-card{display:flex;flex-direction:column;min-height:180px}
+:root[data-ui="r5"] .g5-rec-card>.g5-hd{flex:none}
+:root[data-ui="r5"] .g5-rec-body{padding-top:0}
+:root[data-ui="r5"] .g5-rec-row{display:flex;flex-direction:column;gap:8px;padding:16px 20px;border-bottom:1px solid var(--gr-line)}
+:root[data-ui="r5"] .g5-rec-title{font-size:14px;line-height:20px;font-weight:500;color:var(--gr-text)}
+:root[data-ui="r5"] .g5-rec-evidence{font-size:12px;line-height:16px;color:var(--gr-text-3);overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5-rec-controls{display:flex;align-items:center;gap:8px;min-width:0}
+:root[data-ui="r5"] .g5-rec-controls>.g5-inp{flex:1 1 0;min-width:120px}
+:root[data-ui="r5"] .g5-rec-controls>.g5-inp input{text-align:left}
+:root[data-ui="r5"] .g5-rec-action,:root[data-ui="r5"] .g5-rec-readonly{flex:none;font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-rec-error{font-size:12px;line-height:16px;color:var(--gr-danger)}
+:root[data-ui="r5"] .g5-rec-empty{align-items:center;justify-content:center;gap:12px;padding:28px 20px;color:var(--gr-text-body)}
+:root[data-ui="r5"] .g5-rec-skel{display:flex;gap:8px;align-items:center}
+:root[data-ui="r5"] .g5-rec-skel>.g5-sk:first-child{flex:1}
+@media(max-width:600px){
+  :root[data-ui="r5"] .g5-rec-controls{align-items:stretch;flex-direction:column}
+  :root[data-ui="r5"] .g5-rec-controls>.g5-inp,:root[data-ui="r5"] .g5-rec-controls>.g5-btn{width:100%;min-width:0}
+  :root[data-ui="r5"] .g5-rec-controls>.g5-btn{justify-content:center}
+  :root[data-ui="r5"] .g5-rec-action{align-self:flex-start}
+}

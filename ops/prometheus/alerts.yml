@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: CPAL-1.0
+# Adapted from QuantDinger v5.6.5 ops/prometheus/alerts.yml (Apache-2.0)
+#
+# 规则只引用内核实际渲染的指标与标签（packages/kernel/src/metrics.ts）：
+#   gitrader_up / gitrader_uptime_seconds / gitrader_process_rss_bytes /
+#   gitrader_process_heap_used_bytes / gitrader_ledger_entries /
+#   gitrader_trading_state{state} / gitrader_events_total{topic}
+# topic 取值取自 packages/kernel/src/events.ts 的 EVENT_TOPICS；
+# state 取值取自 packages/protocol/src/model/risk.ts 的 TRADING_STATES（ACTIVE / REDUCING / HALTED）。
+# 每条规则的阈值只在注释里写初始取值与出处，不表示对数值合理性的判断。
+
+groups:
+  - name: gitrader-runtime
+    rules:
+      # 阈值出处：gitrader_up 是常量 1 的存活 gauge（metrics.ts），0 表示抓不到在跑的内核；
+      # 1m 用于跨过一次重启 / 一次抓取抖动。
+      - alert: GitraderDown
+        expr: gitrader_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Gitrader kernel does not report gitrader_up
+          description: "No kernel instance has been reachable for more than one minute."
+
+      # 阈值出处：gitrader_trading_state{state} 对当前状态输出 1（metrics.ts）；
+      # 停机态要立即通知，所以 for 取 0m。
+      - alert: GitraderHalted
+        expr: gitrader_trading_state{state="HALTED"} == 1
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: Gitrader kernel is HALTED
+          description: "Trading state HALTED is in effect; humans must clear it."
+
+      # 阈值出处：risk.denials 主题计数（events.ts 的 EVENT_TOPICS）；20 次 / 5m 是本机部署的初始取值。
+      - alert: GitraderRiskDenialsSpike
+        expr: increase(gitrader_events_total{topic="risk.denials"}[5m]) > 20
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: Risk gate denied an unusual number of orders
+          description: "More than 20 risk.denials events in five minutes."
+
+      # 阈值出处：market.candles 主题计数（EVENT_TOPICS）；10 分钟内一条都没有且进程活着，视为行情断流。
+      # 进程下线由 GitraderDown 负责，所以这里再要求 gitrader_up == 1。
+      - alert: GitraderNoMarketData
+        expr: increase(gitrader_events_total{topic="market.candles"}[10m]) == 0 and gitrader_up == 1
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: No market candles have arrived for ten minutes
+          description: "gitrader_events_total{topic=\"market.candles\"} did not move while the kernel is up."
+
+      # 阈值出处：gitrader_process_rss_bytes 是 process.memoryUsage().rss（metrics.ts）；
+      # 1.5e9 字节 = 1.5 GiB，本机部署的初始取值，持续 10m 才报。
+      - alert: GitraderHighMemory
+        expr: gitrader_process_rss_bytes > 1.5e9
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: Gitrader kernel resident memory above 1.5 GiB
+          description: "Resident set size stayed above 1.5e9 bytes for ten minutes."
+
+      # 阈值出处：gitrader_ledger_entries 是账本条数 gauge（metrics.ts），account.fills 是成交主题计数（EVENT_TOPICS）；
+      # 有成交但 30 分钟内账本条数没变化，说明记账链路停滞。
+      - alert: GitraderLedgerStalled
+        expr: delta(gitrader_ledger_entries[30m]) == 0 and increase(gitrader_events_total{topic="account.fills"}[30m]) > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: Ledger entries stopped growing while fills keep arriving
+          description: "gitrader_ledger_entries unchanged for 30 minutes with fresh account.fills events."
+
+      # 阈值出处：gitrader_uptime_seconds 由内核 uptimeMs / 1000 得到（metrics.ts）；
+      # 小于 120 秒表示刚启动过，用来发现非预期重启，重启后 for 0m 立即报。
+      - alert: GitraderRestarted
+        expr: gitrader_uptime_seconds < 120
+        for: 0m
+        labels:
+          severity: info
+        annotations:
+          summary: Gitrader kernel uptime is under two minutes
+          description: "The kernel has been up for less than 120 seconds."

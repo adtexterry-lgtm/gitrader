@@ -1,0 +1,18 @@
+{
+  "kind": "schema",
+  "input": {
+    "schema": "ExperimentToolInput",
+    "value": {
+      "action": "pack",
+      "experimentId": "exp_000000000000000000000001",
+      "pack": {
+        "runId": "run-backtest",
+        "note": "Use the recorded run"
+      }
+    }
+  },
+  "expect": {
+    "ok": true
+  },
+  "id": "40-pack-reference"
+}

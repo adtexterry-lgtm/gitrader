@@ -1,0 +1,21 @@
+{
+  "jsonrpc": "2.0",
+  "method": "events.push",
+  "params": {
+    "sessionId": "ses_01JAB9",
+    "events": [
+      {
+        "seq": 1042,
+        "eventId": "evt_01JAB9QK2",
+        "stream": "order",
+        "type": "order.accepted",
+        "ts": 1791549157661,
+        "accountId": "acct_01JAB0QZ8W3K5M7N9P1R3T5V7X",
+        "instrumentId": "hyperliquid:BTC",
+        "data": {"orderId": "ord_01JAB9QK0", "clientOrderId": "0a1b2c3d4e5f60718293a4b5c6d7e8f9", "status": "open"},
+        "origin": {"actor": "engine:gitrader-core", "tool": "strategy:ema-trend", "requestId": "1d2e3f40-5a6b-4c7d-8e9f-0a1b2c3d4e5f", "via": "gep"},
+        "causation": {"instanceId": "inst_01JAB9", "precheckId": "pck_01JAB9QJ8"}
+      }
+    ]
+  }
+}

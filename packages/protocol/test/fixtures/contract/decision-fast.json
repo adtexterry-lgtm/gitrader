@@ -1,0 +1,14 @@
+{
+  "decisionId": "dec_01JABD2K7",
+  "ts": 1791549360000,
+  "plugin": {"id": "decision.local.ollaya-compat", "version": "0.1.0", "sha256": "sha256:<64hex>"},
+  "endpoint": {"configId": "cfg_local_decider", "host": "localhost"},
+  "primitive": "choice",
+  "input": {"digest": "sha256:<64hex>", "refs": ["candles:hyperliquid:BTC:1m:1791549300000"]},
+  "output": {"choice": "long", "probabilities": {"long": 0.58, "flat": 0.31, "short": 0.11}, "confidence": 0.58},
+  "latencyMs": 142,
+  "latencyBudgetMs": 300,
+  "withinBudget": true,
+  "status": "ok",
+  "origin": {"actor": "workflow:wf-mine", "tool": "node:model.decision", "requestId": "0b1c2d3e-4f50-4617-8293-a4b5c6d7e8f9", "via": "internal"}
+}

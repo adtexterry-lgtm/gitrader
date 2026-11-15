@@ -1,0 +1,77 @@
+{
+    "input":  {
+                  "to":  "shadow",
+                  "evidence":  {
+                                   "actor":  {
+                                                 "via":  "ui",
+                                                 "actorType":  "human"
+                                             },
+                                   "packs":  [
+
+                                             ],
+                                   "accounts":  [
+                                                    {
+                                                        "accountId":  "acct_000000000000000000000001",
+                                                        "mode":  "paper"
+                                                    }
+                                                ],
+                                   "labRuns":  [
+
+                                               ]
+                               },
+                  "experiment":  {
+                                     "experimentId":  "exp_000000000000000000000001",
+                                     "title":  "Sample experiment",
+                                     "hypothesis":  "A synthetic hypothesis",
+                                     "stage":  "hypothesis",
+                                     "subject":  {
+                                                     "params":  {
+
+                                                                }
+                                                 },
+                                     "assumptions":  {
+                                                         "slippageBps":  0,
+                                                         "fillModel":  "next-bar-open",
+                                                         "liquidation":  false,
+                                                         "fees":  "venue",
+                                                         "funding":  false
+                                                     },
+                                     "origin":  {
+                                                    "actor":  "user:usr_000000000000000000000001",
+                                                    "actorType":  "human",
+                                                    "tool":  "experiment",
+                                                    "via":  "ui",
+                                                    "requestId":  "00000000-0000-4000-8000-000000000001"
+                                                },
+                                     "createdAt":  0,
+                                     "updatedAt":  0,
+                                     "stageEnteredAt":  0,
+                                     "subjectKey":  null,
+                                     "runs":  [
+                                                  {
+                                                      "accountId":  "acct_000000000000000000000001",
+                                                      "stage":  "backtest",
+                                                      "runId":  "run-paper",
+                                                      "from":  0,
+                                                      "to":  null,
+                                                      "executor":  {
+                                                                       "codeDigest":  null,
+                                                                       "instanceId":  "inst_000000000000000000000001",
+                                                                       "engineId":  "engine-sample",
+                                                                       "kind":  "engine"
+                                                                   },
+                                                      "attachedAt":  0
+                                                  }
+                                              ]
+                                 },
+                  "now":  1000
+              },
+    "expect":  {
+                   "missing":  [
+
+                               ],
+                   "ok":  true
+               },
+    "id":  "03-null-subject-direct-shadow",
+    "kind":  "transition"
+}

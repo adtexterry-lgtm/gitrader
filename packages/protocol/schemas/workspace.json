@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:workspace:1",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: workspace | Version: 1 | Status: draft",
+  "title": "Workspace",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "gitrader-workspace/1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "grid": {
+      "type": "object",
+      "properties": {
+        "cols": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "rowHeight": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "cols",
+        "rowHeight"
+      ]
+    },
+    "channels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+          },
+          "account": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+          },
+          "timeRange": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+              },
+              "to": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+              }
+            },
+            "required": [
+              "from",
+              "to"
+            ]
+          },
+          "strategy": {
+            "type": "string"
+          },
+          "experiment": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "instanceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "block": {
+            "type": "string",
+            "pattern": "^block\\.[a-z0-9-]+\\.[a-z0-9-]+@\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$"
+          },
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "w": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "h": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "channel": {
+            "type": "string"
+          },
+          "stack": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "pinned": {
+            "type": "boolean"
+          },
+          "config": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "instanceId",
+          "block",
+          "x",
+          "y",
+          "w",
+          "h",
+          "config"
+        ]
+      }
+    },
+    "statusBar": {
+      "type": "object",
+      "properties": {
+        "block": {
+          "type": "string",
+          "pattern": "^block\\.[a-z0-9-]+\\.[a-z0-9-]+@\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$"
+        },
+        "pinned": {
+          "const": true
+        },
+        "takeover": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "halt_new",
+              "cancel_all",
+              "flatten_all"
+            ]
+          }
+        }
+      },
+      "required": [
+        "block",
+        "pinned",
+        "takeover"
+      ]
+    },
+    "popouts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "instanceId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "instanceId"
+        ]
+      }
+    },
+    "savedBy": {
+      "type": "object",
+      "properties": {
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "at": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "actor",
+        "at"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "id",
+    "name",
+    "grid",
+    "channels",
+    "items",
+    "statusBar",
+    "popouts",
+    "savedBy"
+  ]
+}

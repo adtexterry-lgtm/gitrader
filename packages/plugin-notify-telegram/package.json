@@ -1,0 +1,20 @@
+{
+  "name": "@gitrader/plugin-notify-telegram",
+  "version": "0.1.0",
+  "description": "Gitrader notification channel plugin: Telegram sendMessage over GSP stdio, plain .mjs, no build step. Token from the environment only.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "main": "./gsp.mjs",
+  "exports": {
+    ".": "./gsp.mjs",
+    "./handler": "./index.mjs",
+    "./telegram": "./telegram.mjs",
+    "./format": "./format.mjs"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit",
+    "conformance": "node run-conformance.mjs"
+  }
+}

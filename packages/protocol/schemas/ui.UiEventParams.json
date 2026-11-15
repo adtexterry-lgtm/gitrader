@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:ui:0.1:UiEventParams",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: ui | Version: 0.1 | Status: draft",
+  "title": "UiEventParams",
+  "type": "object",
+  "properties": {
+    "subscriptionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "topic": {
+      "type": "string",
+      "minLength": 1
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "seq": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "ts": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          },
+          "data": {}
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "data": {}
+  },
+  "required": [
+    "subscriptionId",
+    "topic"
+  ]
+}

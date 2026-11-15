@@ -1,0 +1,23 @@
+{
+  "schema": "gitrader-workspace/1",
+  "id": "ws_default",
+  "name": "Default",
+  "grid": {"cols": 24, "rowHeight": 24},
+  "channels": {
+    "A": {"symbol": "hyperliquid:BTC", "account": "acct_01JAB0QZ8W3K5M7N9P1R3T5V7X"}
+  },
+  "items": [
+    {"instanceId": "bi_chart_1", "block": "block.gitrader.chart@0.1.0", "x": 0, "y": 0, "w": 15, "h": 17, "channel": "A", "config": {"interval": "15m"}},
+    {"instanceId": "bi_positions_1", "block": "block.gitrader.positions@0.1.0", "x": 0, "y": 17, "w": 15, "h": 9, "channel": "A", "stack": "bottom", "active": true, "config": {}},
+    {"instanceId": "bi_book_1", "block": "block.gitrader.orderbook@0.1.0", "x": 0, "y": 17, "w": 15, "h": 9, "channel": "A", "stack": "bottom", "config": {}},
+    {"instanceId": "bi_audit_1", "block": "block.gitrader.audit@0.1.0", "x": 0, "y": 17, "w": 15, "h": 9, "channel": "A", "stack": "bottom", "config": {}},
+    {"instanceId": "bi_equity_1", "block": "block.gitrader.equity@0.1.0", "x": 0, "y": 17, "w": 15, "h": 9, "channel": "A", "stack": "bottom", "config": {}},
+    {"instanceId": "bi_agent_1", "block": "block.gitrader.agent-activity@0.1.0", "x": 15, "y": 0, "w": 9, "h": 10, "channel": "A", "pinned": true, "config": {}},
+    {"instanceId": "bi_risk_1", "block": "block.gitrader.risk@0.1.0", "x": 15, "y": 10, "w": 9, "h": 7, "channel": "A", "pinned": true, "config": {}},
+    {"instanceId": "bi_symbols_1", "block": "block.gitrader.symbols@0.1.0", "x": 15, "y": 17, "w": 9, "h": 9, "channel": "A", "stack": "right", "active": true, "config": {}},
+    {"instanceId": "bi_auth_1", "block": "block.gitrader.authorizations@0.1.0", "x": 15, "y": 17, "w": 9, "h": 9, "channel": "A", "stack": "right", "config": {}}
+  ],
+  "statusBar": {"block": "block.gitrader.statusbar@0.1.0", "pinned": true, "takeover": ["halt_new", "cancel_all", "flatten_all"]},
+  "popouts": [],
+  "savedBy": {"actor": "user:usr_local", "at": 1791549000000}
+}

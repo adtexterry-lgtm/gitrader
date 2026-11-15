@@ -1,0 +1,32 @@
+{
+  "orderId": "ord_01JAB7Z0Q4V2W8X9Y0Z1A2B3C4",
+  "clientOrderId": "9f1c3b5e7a2d4c6e8f0a1b2c3d4e5f60",
+  "venueOrderId": null,
+  "accountId": "acct_01JAB0QZ8W3K5M7N9P1R3T5V7X",
+  "instrumentId": "hyperliquid:xyz:GOLD",
+  "side": "sell",
+  "type": "market",
+  "tif": "ioc",
+  "size": "0.1909",
+  "filledSize": "0",
+  "price": null,
+  "avgFillPrice": null,
+  "reduceOnly": false,
+  "leverage": 9,
+  "status": "denied",
+  "problem": {
+    "code": 2001,
+    "name": "RULE_DENIED",
+    "category": "RISK",
+    "message": "leverage 9x exceeds maxLeverage 3x",
+    "retryable": false,
+    "ruleHits": [{"ruleId": "pol_01JAB1#maxLeverage", "code": "LEVERAGE", "limit": "3", "actual": "9", "unit": "x", "action": "deny", "scope": "account"}],
+    "precheckId": "pck_01JAB7YZ9K"
+  },
+  "fee": "0",
+  "precheckId": "pck_01JAB7YZ9K",
+  "mandateId": "mdt_01JAB6M2T4",
+  "origin": {"actor": "agent:ak_01JAB5", "tool": "order", "requestId": "4f6c2a7e-0d3b-4a51-9a3e-6b1f0c2d9e88", "via": "mcp"},
+  "createdAt": 1791549163644,
+  "updatedAt": 1791549163644
+}

@@ -1,0 +1,31 @@
+{
+  "mandateId": "mdt_01JAB6M2T4",
+  "version": 2,
+  "subject": {"type": "agentKey", "id": "ak_01JAB5"},
+  "level": "L3",
+  "accounts": ["acct_01JAB0QZ8W3K5M7N9P1R3T5V7X", "acct_01JABAPAPER000000000000001"],
+  "venueAllowlist": ["hyperliquid"],
+  "instrumentAllowlist": ["hyperliquid:BTC", "hyperliquid:ETH"],
+  "limits": {
+    "maxOrderNotional": "500",
+    "maxDailyNotional": "1000",
+    "maxDailyLoss": "50",
+    "maxOpenPositions": 2,
+    "maxLeverage": 3,
+    "autoMaxOrderNotional": "100",
+    "maxOrdersPerMinute": 6
+  },
+  "notBefore": 1791549000000,
+  "notAfter": 1794141000000,
+  "heartbeat": {"intervalSec": 60, "timeoutSec": 180, "onTimeout": {"downgradeTo": "L0", "takeover": "halt_new"}},
+  "approval": {"pendingTtlSec": 600, "executeWithinSec": 30, "presenceAboveNotional": "1000"},
+  "promotion": {
+    "next": "L4",
+    "criteria": {"minDays": 30, "minSamples": 50, "maxDrawdownRatio": "0.08", "maxHeartbeatTimeouts": 0},
+    "progress": {"days": 3, "samples": 7, "drawdownRatio": "0.012", "heartbeatTimeouts": 0, "eligible": false}
+  },
+  "temporaryRelax": null,
+  "status": "active",
+  "issuedBy": "user:usr_local",
+  "attestation": {"method": "passkey", "by": "usr_local", "at": 1791549000000, "digest": "sha256:<64hex>", "sig": "<base64>"}
+}

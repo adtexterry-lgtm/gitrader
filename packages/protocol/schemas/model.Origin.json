@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Origin",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Origin",
+  "type": "object",
+  "properties": {
+    "actor": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Actor"
+    },
+    "actorType": {
+      "enum": [
+        "human",
+        "engine",
+        "llm-agent",
+        "system"
+      ]
+    },
+    "tool": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requestId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "via": {
+      "enum": [
+        "mcp",
+        "ui",
+        "gep",
+        "gsp",
+        "cli",
+        "api",
+        "internal"
+      ]
+    },
+    "onBehalfOf": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/UserActor"
+    },
+    "causation": {
+      "type": "object",
+      "properties": {
+        "proposalId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PropId"
+        },
+        "signalId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/SigId"
+        },
+        "decisionId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/DecId"
+        },
+        "workflowId": {
+          "type": "string"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "strategyId": {
+          "type": "string"
+        },
+        "instanceId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstanceId"
+        },
+        "engineId": {
+          "type": "string"
+        },
+        "mandateId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+        },
+        "precheckId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PckId"
+        },
+        "parentEventId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/EventId"
+        },
+        "legId": {
+          "type": "string"
+        },
+        "exitPlanId": {
+          "type": "string"
+        }
+      }
+    },
+    "inferred": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "actor",
+    "actorType",
+    "tool",
+    "requestId",
+    "via"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "actor": {
+            "type": "string",
+            "pattern": "^user:"
+          }
+        },
+        "required": [
+          "actor"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actorType": {
+            "const": "human"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actor": {
+            "type": "string",
+            "pattern": "^agent:"
+          }
+        },
+        "required": [
+          "actor"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actorType": {
+            "const": "llm-agent"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actor": {
+            "type": "string",
+            "pattern": "^engine:"
+          }
+        },
+        "required": [
+          "actor"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actorType": {
+            "const": "engine"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actor": {
+            "type": "string",
+            "pattern": "^workflow:"
+          }
+        },
+        "required": [
+          "actor"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actorType": {
+            "const": "engine"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actor": {
+            "type": "string",
+            "pattern": "^strategy:"
+          }
+        },
+        "required": [
+          "actor"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actorType": {
+            "const": "engine"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actor": {
+            "type": "string",
+            "pattern": "^plugin:"
+          }
+        },
+        "required": [
+          "actor"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actorType": {
+            "const": "engine"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actor": {
+            "type": "string",
+            "pattern": "^mandate:"
+          }
+        },
+        "required": [
+          "actor"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actorType": {
+            "const": "system"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actor": {
+            "type": "string",
+            "pattern": "^system:"
+          }
+        },
+        "required": [
+          "actor"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actorType": {
+            "const": "system"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actor": {
+            "type": "string",
+            "pattern": "^venue:"
+          }
+        },
+        "required": [
+          "actor"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actorType": {
+            "const": "system"
+          }
+        }
+      }
+    }
+  ]
+}

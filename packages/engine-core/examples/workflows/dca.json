@@ -1,0 +1,176 @@
+{
+  "schema": "gitrader-workflow/2",
+  "id": "tpl.dca",
+  "name": "定投（教学示例）",
+  "desc": "每隔固定根数买入一份，最多买满若干份；可设止盈线，到价整笔卖出后重新开始。只做多。",
+  "version": 1,
+  "params": {
+    "everyBars": 24,
+    "orders": 10,
+    "takeProfitRatio": 0,
+    "startTs": 0
+  },
+  "paramDefs": [
+    {
+      "key": "everyBars",
+      "label": "每隔多少根买一次",
+      "type": "integer",
+      "default": 24,
+      "min": 1,
+      "max": 1000
+    },
+    {
+      "key": "orders",
+      "label": "最多买几次",
+      "type": "integer",
+      "default": 10,
+      "min": 1,
+      "max": 100
+    },
+    {
+      "key": "takeProfitRatio",
+      "label": "止盈线（比例，0 = 不止盈）",
+      "type": "integer",
+      "default": 0,
+      "min": 0,
+      "max": 2,
+      "step": 0.005
+    }
+  ],
+  "nodes": [
+    {
+      "id": "k",
+      "type": "data.candles",
+      "params": {},
+      "position": {
+        "x": 20,
+        "y": 80
+      },
+      "label": "K 线"
+    },
+    {
+      "id": "d",
+      "type": "ind.dca",
+      "params": {
+        "everyBars": "$everyBars",
+        "orders": "$orders",
+        "takeProfitRatio": "$takeProfitRatio",
+        "startTs": "$startTs"
+      },
+      "position": {
+        "x": 240,
+        "y": 80
+      },
+      "label": "定投仓位"
+    },
+    {
+      "id": "out_signal",
+      "type": "act.signal",
+      "params": {},
+      "position": {
+        "x": 480,
+        "y": 20
+      },
+      "label": "输出信号"
+    },
+    {
+      "id": "size",
+      "type": "risk.size",
+      "params": {
+        "allocRatio": 0.1,
+        "allocCapNotional": 500,
+        "leverage": 1
+      },
+      "position": {
+        "x": 480,
+        "y": 140
+      },
+      "label": "仓位计算"
+    },
+    {
+      "id": "precheck",
+      "type": "risk.precheck",
+      "params": {},
+      "position": {
+        "x": 680,
+        "y": 140
+      },
+      "label": "风控预检"
+    },
+    {
+      "id": "place",
+      "type": "act.order",
+      "params": {},
+      "position": {
+        "x": 880,
+        "y": 140
+      },
+      "label": "下单"
+    }
+  ],
+  "edges": [
+    {
+      "from": {
+        "node": "k",
+        "port": "close"
+      },
+      "to": {
+        "node": "d",
+        "port": "src"
+      }
+    },
+    {
+      "from": {
+        "node": "d",
+        "port": "signal"
+      },
+      "to": {
+        "node": "out_signal",
+        "port": "signal"
+      }
+    },
+    {
+      "from": {
+        "node": "d",
+        "port": "signal"
+      },
+      "to": {
+        "node": "size",
+        "port": "signal"
+      }
+    },
+    {
+      "from": {
+        "node": "size",
+        "port": "order"
+      },
+      "to": {
+        "node": "precheck",
+        "port": "order"
+      }
+    },
+    {
+      "from": {
+        "node": "precheck",
+        "port": "order"
+      },
+      "to": {
+        "node": "place",
+        "port": "order"
+      }
+    }
+  ],
+  "meta": {
+    "source": {
+      "author": "Gitrader",
+      "license": "CPAL-1.0"
+    },
+    "builtin": true,
+    "strategyId": "dca",
+    "tags": [
+      "长期",
+      "只做多",
+      "定投"
+    ]
+  }
+}

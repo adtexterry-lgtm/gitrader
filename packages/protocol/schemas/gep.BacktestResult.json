@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:BacktestResult",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "BacktestResult",
+  "type": "object",
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "specDigest": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "assumptions": {
+      "$ref": "urn:gitrader:schema:model:0.1:BacktestAssumptions"
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "totalReturnRatio": {
+          "type": "number"
+        },
+        "annualizedRatio": {
+          "type": "number"
+        },
+        "maxDrawdownRatio": {
+          "type": "number"
+        },
+        "sharpe": {
+          "type": "number"
+        },
+        "sortino": {
+          "type": "number"
+        },
+        "winRatio": {
+          "type": "number"
+        },
+        "profitFactor": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "trades": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fills": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "avgHoldBars": {
+          "type": "number"
+        },
+        "spanDays": {
+          "type": "number"
+        },
+        "finalEquity": {
+          "type": "number"
+        },
+        "fundingPaid": {
+          "type": "number"
+        },
+        "feesPaid": {
+          "type": "number"
+        },
+        "liquidations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unfilledShare": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "totalReturnRatio",
+        "annualizedRatio",
+        "maxDrawdownRatio",
+        "sharpe",
+        "winRatio",
+        "profitFactor",
+        "trades",
+        "fills",
+        "avgHoldBars",
+        "spanDays",
+        "finalEquity"
+      ]
+    },
+    "equity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "t": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          },
+          "v": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "t",
+          "v"
+        ]
+      }
+    },
+    "trades": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "t": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          },
+          "side": {
+            "enum": [
+              "buy",
+              "sell"
+            ]
+          },
+          "price": {
+            "type": "number"
+          },
+          "size": {
+            "type": "number"
+          },
+          "pnl": {
+            "type": "number"
+          },
+          "fee": {
+            "type": "number"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "t",
+          "side",
+          "price",
+          "size",
+          "pnl",
+          "fee",
+          "reason"
+        ]
+      }
+    },
+    "openPosition": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "biasChecks": {
+      "type": "object",
+      "properties": {
+        "lookahead": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_run"
+          ]
+        },
+        "recursive": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_run"
+          ]
+        },
+        "trialCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "lookahead",
+        "recursive",
+        "trialCount"
+      ]
+    },
+    "trialCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "artifactId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "artifactId",
+          "kind"
+        ]
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "engine": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ]
+    },
+    "dataDigest": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "pack": {
+      "$ref": "urn:gitrader:schema:model:0.1:EvidencePackDraft"
+    },
+    "strategySha256": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "funding": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "t": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          },
+          "rate": {
+            "type": "number"
+          },
+          "notional": {
+            "type": "number"
+          },
+          "paid": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "t",
+          "rate",
+          "notional",
+          "paid"
+        ]
+      }
+    }
+  },
+  "required": [
+    "jobId",
+    "specDigest",
+    "assumptions",
+    "stats",
+    "equity",
+    "trades",
+    "openPosition",
+    "artifacts",
+    "warnings",
+    "engine",
+    "dataDigest"
+  ]
+}

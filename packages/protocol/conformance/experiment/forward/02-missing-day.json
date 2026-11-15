@@ -1,0 +1,84 @@
+{
+    "id":  "02-missing-day",
+    "input":  {
+                  "tier":  "forward_paper",
+                  "window":  {
+                                 "from":  0,
+                                 "to":  259200000
+                             },
+                  "stageEnteredAt":  0,
+                  "runs":  [
+                               {
+                                   "runId":  "run-acct_one",
+                                   "accountId":  "acct_one",
+                                   "executor":  {
+                                                    "kind":  "engine",
+                                                    "engineId":  "engine-fixture",
+                                                    "instanceId":  "inst_fixture",
+                                                    "codeDigest":  null
+                                                },
+                                   "attachedAt":  0,
+                                   "to":  null
+                               }
+                           ],
+                  "initialEquity":  [
+                                        {
+                                            "accountId":  "acct_one",
+                                            "at":  0,
+                                            "equity":  "100",
+                                            "unrealizedPnl":  "0"
+                                        }
+                                    ],
+                  "fills":  [
+
+                            ],
+                  "snapshots":  [
+                                    {
+                                        "seq":  1,
+                                        "accountId":  "acct_one",
+                                        "at":  86400000,
+                                        "recordedAt":  86400000,
+                                        "attestation":  "kernel-observed",
+                                        "kind":  "daily",
+                                        "equity":  "110",
+                                        "unrealizedPnl":  "10",
+                                        "valuationCcy":  "USD"
+                                    },
+                                    {
+                                        "seq":  2,
+                                        "accountId":  "acct_one",
+                                        "at":  259200000,
+                                        "recordedAt":  259200000,
+                                        "attestation":  "kernel-observed",
+                                        "kind":  "daily",
+                                        "equity":  "99",
+                                        "unrealizedPnl":  "-1",
+                                        "valuationCcy":  "USD"
+                                    }
+                                ],
+                  "valuationCcy":  "USD",
+                  "periodsPerYear":  365,
+                  "finalized":  true,
+                  "computedAt":  259200000
+              },
+    "expect":  {
+                   "sample":  {
+                                  "trades":  0,
+                                  "fills":  0,
+                                  "roundTrips":  0,
+                                  "spanDays":  3,
+                                  "activeDays":  0,
+                                  "snapshotDays":  2
+                              },
+                   "realizedPnl":  "0",
+                   "unrealizedPnlEnd":  "-1",
+                   "fees":  "0",
+                   "funding":  "0",
+                   "returnRatio":  -0.01,
+                   "maxDrawdownRatio":  0.1,
+                   "sharpe":  null,
+                   "sortino":  null,
+                   "winRatio":  null
+               },
+    "tolerance":  1E-09
+}

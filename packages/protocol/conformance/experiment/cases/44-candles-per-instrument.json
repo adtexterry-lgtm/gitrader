@@ -1,0 +1,74 @@
+{
+  "kind": "candles-digest",
+  "streams": [
+    {
+      "instrumentId": "sample:PAIR",
+      "candles": [
+        {
+          "t": 0,
+          "o": 100,
+          "h": 110,
+          "l": 90,
+          "c": 105,
+          "v": 0
+        },
+        {
+          "t": 60000,
+          "o": 105,
+          "h": 120,
+          "l": 100,
+          "c": 115,
+          "v": 2
+        }
+      ],
+      "variants": [
+        [
+          {
+            "v": 2,
+            "c": 115,
+            "l": 100,
+            "h": 120,
+            "o": 105,
+            "t": 60000
+          },
+          {
+            "v": 0,
+            "c": 105,
+            "l": 90,
+            "h": 110,
+            "o": 100,
+            "t": 0
+          }
+        ]
+      ],
+      "digest": "sha256:56a9359f95c69b3a01ec1e46f49d9b961f2490f28247baf1a115e0f326d6d258"
+    },
+    {
+      "instrumentId": "sample:OTHER",
+      "candles": [
+        {
+          "t": 0,
+          "o": 50,
+          "h": 60,
+          "l": 40,
+          "c": 55,
+          "v": 3
+        }
+      ],
+      "variants": [
+        [
+          {
+            "t": 0,
+            "o": 50,
+            "h": 60,
+            "l": 40,
+            "c": 55,
+            "v": 3
+          }
+        ]
+      ],
+      "digest": "sha256:5aad393eb89255211830f6bc2de4690c0cef8485916db8a6e2bea2ee61d5437b"
+    }
+  ],
+  "id": "44-candles-per-instrument"
+}

@@ -1,0 +1,62 @@
+{
+    "rule":  "lifecycle",
+    "id":  "33-lifecycle-export",
+    "steps":  [
+                  {
+                      "given":  {
+                                    "patch":  {
+                                                  "hypothesis":  "y",
+                                                  "title":  "x",
+                                                  "stage":  "live"
+                                              }
+                                },
+                      "operation":  "create ignores live stage",
+                      "expect":  {
+                                     "stage":  "hypothesis"
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "actorType":  "engine",
+                                    "owner":  {
+                                                  "actorType":  "human"
+                                              }
+                                },
+                      "operation":  "foreign owner update",
+                      "expect":  {
+                                     "code":  1016,
+                                     "rejected":  true
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "runOrigin":  "same",
+                                    "attachedAt":  10,
+                                    "accountId":  "acct_000000000000000000000001",
+                                    "recordedAt":  9
+                                },
+                      "operation":  "late recorded fill",
+                      "expect":  {
+                                     "pnl":  "0",
+                                     "activeDays":  0,
+                                     "fills":  0
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "forward":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                    "pack":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                    "artifact":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                    "versionChain":  [
+                                                         "v1",
+                                                         "v2"
+                                                     ]
+                                },
+                      "operation":  "export verify",
+                      "expect":  {
+                                     "verify":  "identical"
+                                 }
+                  }
+              ],
+    "kind":  "kernel-contract"
+}

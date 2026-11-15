@@ -1,0 +1,91 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+/* 资金页页内专用样式（类名 g5f-*，只引用令牌；通用组件样式在 workbench/src/ui/r5/components.css）。值取自 reports/visual-r5/funds/index.html 的页内段。 */
+
+/* 表：单行行 40，文字竖向居中；选中行 */
+:root[data-ui="r5"] .g5-tbl tr.g5f-r40{height:var(--gr-row-1)}
+:root[data-ui="r5"] .g5-tbl tr.g5f-r40 td{line-height:24px}
+:root[data-ui="r5"] .g5-tbl td.g5f-vm{vertical-align:middle;padding-top:0}
+:root[data-ui="r5"] .g5-tbl td.g5f-vm > .g5f-ib{display:flex}
+:root[data-ui="r5"] .g5-tbl tr.g5f-sel td{background:var(--gr-fill-1)}
+:root[data-ui="r5"] .g5-tbl tr.g5-grp.g5f-sel td{border-radius:var(--gr-r-ctl) var(--gr-r-ctl) 0 0;box-shadow:none}
+:root[data-ui="r5"] .g5-tbl tr.g5-row.g5f-sel td:first-child{border-radius:0 0 0 var(--gr-r-ctl)}
+:root[data-ui="r5"] .g5-tbl tr.g5-row.g5f-sel td:last-child{border-radius:0 0 var(--gr-r-ctl) 0}
+:root[data-ui="r5"] .g5-tbl tr.g5-row[data-acct]{cursor:pointer}
+:root[data-ui="r5"] .g5-tbl tr.g5f-xrow td{padding:0 0 8px;box-shadow:none}
+:root[data-ui="r5"] .g5f-ib{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+:root[data-ui="r5"] .g5f-ib .g5-vchip{margin-right:4px}
+:root[data-ui="r5"] .g5-tbl td.g5-n > .g5f-ib{justify-content:flex-end}
+/* 离线：保证金率条与数字降灰（组件库已有同类规则，这里补页内的小字） */
+:root[data-ui="r5"] .g5-off .g5-tbl td .g5-mr .g5-v{color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5-tbl .g5-mr .g5-v.g5-warn{color:var(--gr-warn)}
+:root[data-ui="r5"] .g5-tbl td.g5-n > .g5-sk{display:inline-block}
+
+/* 卡内一行消息（空 / 错误 / 未接通）：左缘 20，与卡头标题共线 */
+:root[data-ui="r5"] .g5f-msg{padding:0 20px 20px;display:flex;align-items:center;gap:12px;font-size:13px;line-height:20px;color:var(--gr-text-body)}
+:root[data-ui="r5"] .g5f-msg .g5-msg{font-size:12px;line-height:16px;color:var(--gr-text-3);min-width:0;overflow-wrap:anywhere}
+:root[data-ui="r5"] .g5f-msg [data-wire]{display:flex;align-items:center;gap:12px;min-width:0}
+
+/* 卡头：标题 + 账户别名 + 页签 + 右侧读数共用一条文字基线 */
+:root[data-ui="r5"] .g5f-hrow{flex:1;min-width:0;display:flex;align-items:baseline;gap:8px}
+:root[data-ui="r5"] .g5f-hrow .g5-tabs{margin-left:12px;align-self:center}
+:root[data-ui="r5"] .g5f-hrow .g5-r{margin-left:auto;display:flex;align-items:baseline;gap:8px;align-self:center}
+:root[data-ui="r5"] .g5f-last{font-size:20px;line-height:20px;font-weight:350;letter-spacing:-.01em;color:var(--gr-text)}
+:root[data-ui="r5"] .g5-off .g5f-last{color:var(--gr-text-3)}
+
+/* 权益曲线：SVG 按容器像素尺寸画，文字不被拉伸 */
+:root[data-ui="r5"] .g5f-eqc{position:relative;flex:1 1 auto;min-height:0;margin:8px 20px 12px}
+:root[data-ui="r5"] .g5f-eqc > svg{position:absolute;inset:0;display:block;width:100%;height:100%;overflow:visible}
+:root[data-ui="r5"] .g5f-eqc text{font-size:11px;font-weight:500;letter-spacing:.04em;fill:var(--gr-text-3)}
+:root[data-ui="r5"] .g5f-eqc text.g5f-t2{fill:var(--gr-text-2)}
+:root[data-ui="r5"] .g5f-eqc text.g5f-t1{fill:var(--gr-text)}
+:root[data-ui="r5"] .g5f-eqc .g5f-base{stroke-dasharray:4 4}
+:root[data-ui="r5"] .g5f-eqc .g5-eq-line{stroke:var(--gr-text);stroke-width:1.5}
+:root[data-ui="r5"] .g5-off .g5f-eqc .g5-eq-line{stroke:var(--gr-text-dis)}
+:root[data-ui="r5"] .g5f-eqc .g5f-end{fill:var(--gr-text-2);stroke:var(--gr-card);stroke-width:2}
+:root[data-ui="r5"] .g5-off .g5f-eqc .g5f-end{fill:var(--gr-text-dis)}
+:root[data-ui="r5"] .g5f-eqc .g5f-area-top{stop-color:var(--gr-text);stop-opacity:.06}
+:root[data-ui="r5"] .g5f-eqc .g5f-area-bot{stop-color:var(--gr-text);stop-opacity:0}
+
+/* 保证金卡 */
+:root[data-ui="r5"] .g5f-mb{padding:0 20px 12px}
+:root[data-ui="r5"] .g5f-kv2{margin-top:8px;padding-top:8px;box-shadow:inset 0 1px 0 var(--gr-sep);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:32px}
+:root[data-ui="r5"] .g5f-kv2 > div{height:24px;display:flex;align-items:baseline;justify-content:space-between;gap:8px;white-space:nowrap}
+:root[data-ui="r5"] .g5f-kv2 .g5-k{font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5f-kv2 .g5-v{font-size:13px;line-height:20px;color:var(--gr-text-body)}
+:root[data-ui="r5"] .g5-off .g5f-kv2 .g5-v{color:var(--gr-text-3)}
+
+/* 权益变动卡：每行 48 = 名称 / 数值 + 说明 */
+:root[data-ui="r5"] .g5f-chg{padding:0 20px 8px}
+:root[data-ui="r5"] .g5f-cr{height:48px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-content:center;white-space:nowrap;box-shadow:inset 0 -1px 0 var(--gr-sep)}
+:root[data-ui="r5"] .g5f-cr:last-child{box-shadow:none}
+:root[data-ui="r5"] .g5f-cr .g5-k{font-size:13px;line-height:20px;color:var(--gr-text-2)}
+:root[data-ui="r5"] .g5f-cr .g5-v{font-size:13px;line-height:20px;color:var(--gr-text-body);text-align:right}
+:root[data-ui="r5"] .g5f-cr .g5-d{grid-column:1 / -1;font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] .g5f-cr.g5f-total .g5-k,:root[data-ui="r5"] .g5f-cr.g5f-total .g5-v{color:var(--gr-text);font-weight:500}
+:root[data-ui="r5"] .g5-off .g5f-cr .g5-v{color:var(--gr-text-3)}
+
+@media (max-width:599px){
+  :root[data-ui="r5"] [data-g5-page="funds"]{min-width:0;max-width:100%}
+  :root[data-ui="r5"] [data-g5-page="funds"] .g5-tw{min-width:0;max-width:100%;overflow-x:auto}
+  :root[data-ui="r5"] [data-g5-page="funds"] .g5-hd{height:auto;min-height:40px;flex-wrap:wrap;padding:12px}
+  :root[data-ui="r5"] .g5f-hrow,:root[data-ui="r5"] .g5f-hrow .g5-r{flex-wrap:wrap;min-width:0}
+  :root[data-ui="r5"] .g5f-hrow .g5-tabs{margin-left:0}
+  :root[data-ui="r5"] .g5f-kv2{grid-template-columns:minmax(0,1fr);column-gap:12px}
+  :root[data-ui="r5"] .g5f-cr{white-space:normal;height:auto;min-height:48px;column-gap:8px;overflow-wrap:anywhere}
+  :root[data-ui="r5"] .g5f-msg{flex-wrap:wrap}
+  :root[data-ui="r5"] .g5f-eqc{flex:none;height:200px}
+}
+
+/* 组合（GQ-65）：三节两列定义表，节间一行分隔词；金额三级灰在前、份额在后 */
+:root[data-ui="r5"] [data-g5-page="funds"] .g5f-port{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:8px;padding-bottom:4px}
+:root[data-ui="r5"] [data-g5-page="funds"] .g5f-pcol{min-width:0}
+:root[data-ui="r5"] [data-g5-page="funds"] .g5f-pcol + .g5f-pcol .g5f-pxh,:root[data-ui="r5"] [data-g5-page="funds"] .g5f-pcol + .g5f-pcol .g5f-pdefs{padding-left:12px}
+:root[data-ui="r5"] [data-g5-page="funds"] .g5f-pxh{height:32px;padding:0 20px;display:flex;align-items:center;gap:8px;font-size:12px;line-height:16px;color:var(--gr-text-3)}
+:root[data-ui="r5"] [data-g5-page="funds"] .g5f-pdefs .g5-v{gap:8px}
+:root[data-ui="r5"] [data-g5-page="funds"] .g5f-pdefs [data-n="vs"],:root[data-ui="r5"] [data-g5-page="funds"] .g5f-pdefs [data-n="is"]{min-width:7ch;text-align:right}
+:root[data-ui="r5"] [data-g5-page="funds"] .g5f-pna{flex-wrap:wrap;row-gap:4px}
+:root[data-ui="r5"] [data-g5-page="funds"] .g5f-pna .g5-msg{flex-basis:100%;font-size:12px;line-height:16px;color:var(--gr-text-3);overflow-wrap:anywhere}
+@media (max-width:599px){
+  :root[data-ui="r5"] [data-g5-page="funds"] .g5f-port{grid-template-columns:minmax(0,1fr)}
+  :root[data-ui="r5"] [data-g5-page="funds"] .g5f-pcol + .g5f-pcol .g5f-pxh,:root[data-ui="r5"] [data-g5-page="funds"] .g5f-pcol + .g5f-pcol .g5f-pdefs{padding-left:20px}
+}

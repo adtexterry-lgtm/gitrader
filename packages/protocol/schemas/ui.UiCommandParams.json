@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:ui:0.1:UiCommandParams",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: ui | Version: 0.1 | Status: draft",
+  "title": "UiCommandParams",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "params": {
+      "type": "object"
+    },
+    "origin": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "type": "string",
+          "minLength": 1
+        },
+        "via": {
+          "const": "ui"
+        }
+      },
+      "required": [
+        "tool",
+        "via"
+      ]
+    },
+    "attestation": {
+      "$ref": "urn:gitrader:schema:ui:0.1:PresenceProof"
+    }
+  },
+  "required": [
+    "action",
+    "origin"
+  ]
+}

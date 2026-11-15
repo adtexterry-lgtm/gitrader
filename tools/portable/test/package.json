@@ -1,0 +1,7 @@
+{
+  "name": "gitrader-portable-tests",
+  "private": true,
+  "type": "module",
+  "description": "让 `node --test tools/portable/test/` 这种目录写法能用：Node 22 起 --test 把裸目录当模块解析，这里用 main 汇总四个测试文件。",
+  "main": "all.mjs"
+}

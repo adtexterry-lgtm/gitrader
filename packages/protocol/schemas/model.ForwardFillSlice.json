@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ForwardFillSlice",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ForwardFillSlice",
+  "type": "object",
+  "properties": {
+    "sliceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fillId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/FillId"
+    },
+    "orderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "positionKey": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "recordedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "attestation": {
+      "enum": [
+        "kernel-observed",
+        "venue-confirmed",
+        "engine-reported",
+        "user-asserted"
+      ]
+    },
+    "origin": {
+      "$ref": "urn:gitrader:schema:model:0.1:Origin"
+    },
+    "positionBefore": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "positionAfter": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "realizedPnl": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "fee": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "valuationCcy": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "sliceId",
+    "fillId",
+    "orderId",
+    "runId",
+    "accountId",
+    "instrumentId",
+    "positionKey",
+    "seq",
+    "ts",
+    "recordedAt",
+    "attestation",
+    "origin",
+    "positionBefore",
+    "positionAfter",
+    "realizedPnl",
+    "fee",
+    "valuationCcy"
+  ]
+}

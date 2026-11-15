@@ -1,0 +1,104 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+/* 实验详情页内专用样式：只用 var(--gr-*) 令牌；通用件（卡、表、页签、下拉、定义表、曲线线型）在 workbench/src/ui/r5/components.css。 */
+
+/* 通栏头：全页唯一 56 高的卡头 */
+:root[data-ui="r5"] [data-g5-page="lab-detail"].lab-idc .g5-hd { height: 56px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-hrow { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-hrow .g5-r { align-items: baseline; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-hrow .g5-papermk,
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-hrow .g5-dd,
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-hrow .g5-btn,
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-hrow .g5-tabs { align-self: center; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-back { margin-left: -8px; align-self: baseline; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-back svg { margin-right: -4px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-eid { margin-left: 8px; font-size: 13px; line-height: 20px; color: var(--gr-text-2); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-ttl { margin: 0; font-size: 16px; line-height: 24px; font-weight: 400; color: var(--gr-text); letter-spacing: -.01em; white-space: nowrap; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-ladder { display: inline-flex; align-items: baseline; gap: 4px; margin: 0 16px; white-space: nowrap; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-step { display: inline-flex; align-items: baseline; gap: 4px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-step i { width: 8px; height: 1px; align-self: center; background: var(--gr-line-strong); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-cur { font-weight: 500; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"].lab-idc .g5-r { margin-left: auto; gap: 8px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-req { margin-left: auto; display: inline-flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-req + .g5-r { margin-left: 24px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-req .g5-actor { align-self: center; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-reqlink { font-size: 13px; line-height: 20px; color: var(--gr-text-2); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-hmsg { font-size: 12px; line-height: 16px; color: var(--gr-text-3); white-space: normal; }
+
+/* 文字链接（按钮外观的链接 / 真链接共用） */
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-lk { padding: 0; border: 0; background: none; font: inherit; color: var(--gr-accent); cursor: pointer; text-underline-offset: 3px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-lk[disabled] { color: var(--gr-text-dis); cursor: default; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] a.lab-lk { color: inherit; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-lk:hover:not([disabled]) { text-decoration: underline; text-decoration-thickness: 1px; }
+
+/* 三口径卡 */
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-acct { display: inline-flex; align-items: baseline; gap: 8px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-ret { font-size: 20px; line-height: 20px; font-weight: 350; letter-spacing: -.01em; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-tb3 { flex: 1 1 0; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 160px 160px; column-gap: 32px; padding: 0 20px 12px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-plot { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 40px; grid-template-rows: minmax(0, 1fr) 16px; column-gap: 8px; row-gap: 4px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-ya { position: relative; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-ya span { position: absolute; right: 0; transform: translateY(-50%); font-size: 11px; line-height: 14px; color: var(--gr-text-3); white-space: nowrap; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-xa { display: flex; justify-content: space-between; font-size: 11px; line-height: 16px; color: var(--gr-text-3); white-space: nowrap; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-vx { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1px dashed var(--gr-crosshair); pointer-events: none; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-tip { top: 0; z-index: 5; pointer-events: none; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-tv { font-size: 13px; line-height: 20px; color: var(--gr-text); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-mx { align-self: start; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .g5-off .lab-mx dd { color: var(--gr-text-3); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-tw { flex: 1 1 0; min-height: 0; --tbl-gap: 20px; }
+
+/* 指标列表（卡内与弹出卡共用） */
+:root[data-ui="r5"] .lab-dl { margin: 0; }
+:root[data-ui="r5"] .lab-dl > div { height: 24px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-top: 4px; }
+:root[data-ui="r5"] .lab-dl dt { margin: 0; font-size: 12px; line-height: 16px; color: var(--gr-text-3); }
+:root[data-ui="r5"] .lab-dl dd { margin: 0; font-size: 13px; line-height: 20px; color: var(--gr-text-body); white-space: nowrap; }
+
+/* 右列：假设 / 偏差检查 / 数据与来历 */
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .g5-defs .g5-v.lab-warn svg { color: var(--gr-warn); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .g5-defs .g5-v.lab-bad svg { color: var(--gr-danger); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .g5-defs .g5-v.lab-muted { color: var(--gr-text-3); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .g5-off .g5-defs .g5-v { color: var(--gr-text-3); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-cp { margin-left: 4px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-xh { height: 32px; margin-top: 4px; padding: 0 20px; display: flex; align-items: center; gap: 8px; font-size: 12px; line-height: 16px; color: var(--gr-text-3); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-notes { grid-template-columns: 80px max-content minmax(0, 1fr); align-content: start; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-me .g5-actor { color: var(--gr-text); font-weight: 500; }
+
+/* 空 / 错误 / 未接通：一行事实 + 内核原文 */
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-msg { padding: 0 20px 20px; display: flex; align-items: center; gap: 12px; font-size: 13px; line-height: 20px; color: var(--gr-text-body); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-msg [data-wire="off"] { display: flex; align-items: center; gap: 12px; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-msg .g5-msg,
+:root[data-ui="r5"] [data-g5-page="lab-detail"] [data-wire="off"] .g5-msg { font-size: 12px; line-height: 16px; color: var(--gr-text-3); }
+
+/* 晋级弹出卡（Radix 挂在 body 下，不在页面容器里） */
+:root[data-ui="r5"] .lab-apop { width: var(--gr-pop-w); max-width: none; padding: 0 0 16px; }
+:root[data-ui="r5"] .lab-apop .g5-hd { height: var(--gr-hd); }
+:root[data-ui="r5"] .lab-pb { padding: 0 20px; }
+:root[data-ui="r5"] .lab-apop .g5-armed { margin: 16px -4px 0; }
+:root[data-ui="r5"] .lab-deny { margin-top: 16px; display: flex; align-items: flex-start; gap: 4px; font-size: 12px; line-height: 16px; color: var(--gr-text-body); }
+:root[data-ui="r5"] .lab-deny svg { color: var(--gr-danger); margin-top: 2px; }
+
+/* 页面整栈（lab {view:'detail'} 一块出全页时的竖排；真壳里是分区摆放） */
+:root[data-ui="r5"] .lab-stack { display: flex; flex-direction: column; gap: var(--gr-gap); overflow-y: auto; }
+:root[data-ui="r5"] .lab-stack > [data-g5-page="lab-detail"] { flex: none; min-height: 240px; }
+
+/* 通栏头离线：已暂停更新小标与按钮同在一条线上，不把整行基线顶高 */
+:root[data-ui="r5"] [data-g5-page="lab-detail"].lab-idc .g5-r .g5-s12 { align-self: center; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-hrow > .g5-sk { align-self: center; }
+
+/* 数据与来历（GQ-34）：可见 5 整行，多出的在区内滚动；行样式同 .g5-defs > div */
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .g5-defs > .lab-dsc { height: auto; display: block; max-height: 160px; box-shadow: none; }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-dsc > div { height: 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: inset 0 -1px 0 var(--gr-sep); }
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-dsc > div:last-child { box-shadow: none; }
+
+/* 附加纸面运行 / 出证据包（GQ-09 人面入口）：候选单选行 32；留出起止两行 标签 56 + 输入 */
+:root[data-ui="r5"] .lab-alist { margin-top: 4px; display: flex; flex-direction: column; gap: 2px; }
+:root[data-ui="r5"] .lab-alist > [data-empty] { height: 32px; display: flex; align-items: center; font-size: 13px; }
+:root[data-ui="r5"] .lab-aopt { height: 32px; display: flex; align-items: center; gap: 6px; padding: 0 8px; margin: 0 -8px; border-radius: var(--gr-r-ctl); font-size: 13px; line-height: 16px; text-align: left; }
+:root[data-ui="r5"] .lab-aopt:hover:not(:disabled) { background: var(--gr-fill-1); }
+:root[data-ui="r5"] .lab-aopt[aria-checked="true"] { background: var(--gr-fill-2); }
+:root[data-ui="r5"] .lab-aid { margin-left: auto; font-family: var(--gr-font-mono); }
+:root[data-ui="r5"] .lab-pwin { margin-top: 4px; display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: center; gap: 8px 12px; font-size: 13px; }
+:root[data-ui="r5"] .lab-pwin .g5-inp input { text-align: left; }
+:root[data-ui="r5"] .lab-apop .lab-deny + .g5-armed { margin-top: 12px; }
+/* 出证据包不是平仓 / 删除：确认条用中性底，不用危险色 */
+:root[data-ui="r5"] .lab-apop .g5-armed.lab-neutral { background: var(--gr-fill-1); }
+/* 真壳里数据卡比稿矮：5 行区不跟着卡被压扁（被压扁时滚动区溢出盖住「注记」），让注记列表去缩 */
+:root[data-ui="r5"] [data-g5-page="lab-detail"] .lab-dscw { flex: none; }

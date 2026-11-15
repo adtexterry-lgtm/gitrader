@@ -1,0 +1,21 @@
+{
+  "name": "@gitrader/connector-dydx-trade",
+  "version": "0.1.0",
+  "description": "Gitrader dYdX v4 perpetual trading connector (on-chain signed, offline-testable).",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

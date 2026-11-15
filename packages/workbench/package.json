@@ -1,0 +1,46 @@
+{
+  "name": "@gitrader/workbench",
+  "version": "0.1.0",
+  "description": "Gitrader workbench shell: layout engine, command palette, workspaces, popouts, settings.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./ui": {
+      "types": "./src/ui/index.d.ts",
+      "default": "./src/ui/index.js"
+    },
+    "./i18n": {
+      "types": "./src/ui/lib/i18n.d.ts",
+      "default": "./src/ui/lib/i18n.js"
+    },
+    "./launcher": "./src/core/launcher.ts",
+    "./dist/*": "./dist/*"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit",
+    "verify": "node verify/shell.mjs",
+    "audit": "node design/run-audit.mjs"
+  },
+  "dependencies": {
+    "@gitrader/blocks-default": "*",
+    "@gitrader/blocks-r5": "*",
+    "@gitrader/blocks-sdk": "*",
+    "@gitrader/protocol": "*",
+    "@radix-ui/react-dialog": "1.1.23",
+    "@radix-ui/react-dropdown-menu": "2.1.24",
+    "@radix-ui/react-popover": "1.1.23",
+    "preact": "^11.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "@types/ws": "^8.18.0",
+    "esbuild": "^0.28.2",
+    "tailwindcss": "4.3.3",
+    "vitest": "^5.0.3",
+    "ws": "^8.22.0"
+  }
+}

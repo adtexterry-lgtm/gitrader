@@ -1,0 +1,31 @@
+{
+  "name": "@gitrader/engine-core",
+  "version": "0.1.0",
+  "description": "Gitrader Core reference engine (GEP).",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit",
+    "build": "node build.mjs",
+    "bench": "node ../../bench/engine/run.mjs",
+    "conformance": "node scripts/conformance.mjs"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*",
+    "@gitrader/stats": "*",
+    "ajv": "^8.20.0",
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "vitest": "^5.0.3"
+  },
+  "bin": {
+    "gitrader-engine-core": "dist/engine-core.mjs"
+  }
+}

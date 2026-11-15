@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ExperimentToolInput",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ExperimentToolInput",
+  "type": "object",
+  "properties": {
+    "action": {
+      "enum": [
+        "create",
+        "get",
+        "list",
+        "update",
+        "attach",
+        "stage",
+        "pack",
+        "export"
+      ]
+    },
+    "experimentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ExpId"
+    },
+    "patch": {
+      "type": "object"
+    },
+    "attach": {
+      "$ref": "urn:gitrader:schema:model:0.1:ExperimentAttach"
+    },
+    "to": {
+      "enum": [
+        "draft",
+        "backtest",
+        "paper",
+        "live_small",
+        "review",
+        "closed",
+        "hypothesis",
+        "holdout",
+        "shadow",
+        "live",
+        "retired"
+      ]
+    },
+    "pack": {
+      "$ref": "urn:gitrader:schema:model:0.1:ExperimentPackInput"
+    },
+    "holdoutWindow": {
+      "$ref": "urn:gitrader:schema:model:0.1:Window"
+    }
+  },
+  "required": [
+    "action"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "get"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "experimentId"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "update"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "experimentId"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "attach"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "experimentId"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "stage"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "experimentId"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "pack"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "experimentId"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "export"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "experimentId"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "update"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "patch"
+        ],
+        "properties": {
+          "patch": {
+            "$ref": "urn:gitrader:schema:model:0.1:ExperimentPatch"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "create"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "patch"
+        ],
+        "properties": {
+          "patch": {
+            "$ref": "urn:gitrader:schema:model:0.1:ExperimentCreatePatch"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "attach"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "attach"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "stage"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "to"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "pack"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "pack"
+        ]
+      }
+    }
+  ]
+}

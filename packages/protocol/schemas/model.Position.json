@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Position",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Position",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "side": {
+      "enum": [
+        "long",
+        "short"
+      ]
+    },
+    "size": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "entryPrice": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "markPrice": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "markTs": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "notional": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "unrealizedPnl": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "realizedPnl": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "leverage": {
+      "type": "number"
+    },
+    "marginMode": {
+      "enum": [
+        "cross",
+        "isolated",
+        "strictIsolated",
+        "noCross"
+      ]
+    },
+    "initialMargin": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "maintenanceMargin": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "liquidationPrice": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "estimated": {
+      "type": "boolean"
+    },
+    "fundingSinceOpen": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "openedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "updatedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "legs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "legId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "exitPlanId": {
+            "type": "string"
+          },
+          "size": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+          },
+          "entryPrice": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+          }
+        },
+        "required": [
+          "legId",
+          "size"
+        ]
+      }
+    }
+  },
+  "required": [
+    "accountId",
+    "instrumentId",
+    "side",
+    "size",
+    "entryPrice",
+    "markPrice",
+    "notional",
+    "unrealizedPnl",
+    "realizedPnl",
+    "leverage",
+    "marginMode",
+    "liquidationPrice",
+    "fundingSinceOpen",
+    "openedAt",
+    "updatedAt"
+  ]
+}

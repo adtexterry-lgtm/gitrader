@@ -1,0 +1,65 @@
+{
+    "rule":  "llm-attribution",
+    "id":  "24-llm-attribution",
+    "steps":  [
+                  {
+                      "given":  {
+                                    "involved":  false,
+                                    "origin":  "llm-agent"
+                                },
+                      "operation":  "derived llm edit",
+                      "expect":  {
+                                     "involved":  true
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "cutoff":  null
+                                },
+                      "operation":  "unknown cutoff",
+                      "expect":  {
+                                     "state":  "unknown"
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "mandateId":  "mdt_sample"
+                                },
+                      "operation":  "unfamiliar mandate",
+                      "expect":  {
+                                     "code":  1016,
+                                     "rejected":  true
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "attachedAt":  10,
+                                    "from":  5
+                                },
+                      "operation":  "caller from ignored",
+                      "expect":  {
+                                     "effectiveFrom":  10
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "fillOrigin":  "agent",
+                                    "runOrigin":  "engine"
+                                },
+                      "operation":  "different origin fill",
+                      "expect":  {
+                                     "counted":  false
+                                 }
+                  },
+                  {
+                      "given":  {
+                                    "parallelExperiments":  2
+                                },
+                      "operation":  "parallel disclosure",
+                      "expect":  {
+                                     "allDisclosed":  true
+                                 }
+                  }
+              ],
+    "kind":  "kernel-contract"
+}

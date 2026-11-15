@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:JsonRpcNotification",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "JsonRpcNotification",
+  "type": "object",
+  "properties": {
+    "jsonrpc": {
+      "const": "2.0"
+    },
+    "method": {
+      "type": "string",
+      "minLength": 1
+    },
+    "params": {
+      "type": [
+        "object",
+        "array"
+      ]
+    }
+  },
+  "required": [
+    "jsonrpc",
+    "method"
+  ],
+  "not": {
+    "required": [
+      "id"
+    ]
+  }
+}

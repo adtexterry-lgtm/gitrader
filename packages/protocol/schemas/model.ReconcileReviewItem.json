@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ReconcileReviewItem",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ReconcileReviewItem",
+  "type": "object",
+  "properties": {
+    "itemId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "kind": {
+      "enum": [
+        "inferred_fill",
+        "known_difference",
+        "late_real_fill",
+        "confirmation_effects"
+      ]
+    },
+    "evidenceDigest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "observedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "blocking": {
+      "type": "boolean"
+    },
+    "finding": {
+      "$ref": "urn:gitrader:schema:model:0.1:ReconcileFindingView"
+    },
+    "suggestion": {
+      "$ref": "urn:gitrader:schema:model:0.1:ReconcileSuggestion"
+    },
+    "localFillsDigest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "fill": {
+      "$ref": "urn:gitrader:schema:model:0.1:Fill"
+    },
+    "confirmation": {
+      "$ref": "urn:gitrader:schema:model:0.1:ReconcileConfirmationReceipt"
+    },
+    "resolution": {
+      "$ref": "urn:gitrader:schema:model:0.1:ReconcileResolutionReceipt"
+    },
+    "confirmedFillId": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "itemId",
+    "accountId",
+    "kind",
+    "evidenceDigest",
+    "observedAt",
+    "summary",
+    "blocking"
+  ],
+  "additionalProperties": false
+}

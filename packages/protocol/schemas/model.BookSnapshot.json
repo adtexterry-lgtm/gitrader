@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:BookSnapshot",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "BookSnapshot",
+  "type": "object",
+  "properties": {
+    "book": {
+      "$ref": "urn:gitrader:schema:model:0.1:Book"
+    },
+    "asOf": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "stale": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "book",
+    "asOf",
+    "stale"
+  ]
+}

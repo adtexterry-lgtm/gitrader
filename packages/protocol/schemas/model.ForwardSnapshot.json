@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ForwardSnapshot",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ForwardSnapshot",
+  "type": "object",
+  "properties": {
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "at": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "recordedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "attestation": {
+      "enum": [
+        "kernel-observed",
+        "venue-confirmed",
+        "engine-reported",
+        "user-asserted"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "daily",
+        "stage"
+      ]
+    },
+    "equity": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "unrealizedPnl": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "valuationCcy": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "seq",
+    "accountId",
+    "at",
+    "recordedAt",
+    "attestation",
+    "kind",
+    "equity",
+    "unrealizedPnl",
+    "valuationCcy"
+  ]
+}

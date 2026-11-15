@@ -1,0 +1,20 @@
+{
+  "name": "@gitrader/plugin-notify-wecom",
+  "version": "0.1.0",
+  "description": "Gitrader notification channel plugin: WeCom (企业微信) group-robot webhook over GSP stdio, plain .mjs, no build step. Webhook URL from the environment only.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "main": "./gsp.mjs",
+  "exports": {
+    ".": "./gsp.mjs",
+    "./handler": "./index.mjs",
+    "./wecom": "./wecom.mjs",
+    "./format": "./format.mjs"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit",
+    "conformance": "node run-conformance.mjs"
+  }
+}

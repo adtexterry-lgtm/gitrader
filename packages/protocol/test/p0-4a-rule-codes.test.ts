@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: Apache-2.0
+import { describe, expect, it } from 'vitest'
+import { PROBLEM_CODES, RULE_CODES, RULE_PROBLEM_DEFAULTS } from '@gitrader/protocol'
+
+/** 追加 TPSL_INVALID / STOP_REQUIRED 之前的旧规则码列表（顺序不变）。 */
+const LEGACY_RULE_CODES = [
+  'LEVERAGE', 'ORDER_NOTIONAL', 'POSITION_NOTIONAL', 'TOTAL_NOTIONAL', 'OPEN_POSITIONS', 'DAILY_LOSS', 'COOLDOWN',
+  'INSUFFICIENT_MARGIN', 'REDUCE_ONLY', 'INSTRUMENT_NOT_ALLOWED', 'TRADING_STATE', 'DAILY_NOTIONAL',
+  'VENUE_NOT_ALLOWED', 'SLIPPAGE', 'STALE_PRICE', 'RATE_BUDGET', 'MANDATE_LEVEL', 'MANDATE_EXPIRED',
+  'MANDATE_LIMIT', 'NEEDS_APPROVAL', 'PROTECTOR', 'LLM_LIVE_ENTRY', 'KILL_SWITCH', 'ACCOUNT_UNKNOWN',
+  'PROTECTOR_UNAVAILABLE', 'VENUE_RULE', 'MANDATE_INCOMPLETE', 'SIZE_PRECISION', 'REDUCE_ONLY_MISMATCH',
+  'INTENT_EXPIRED',
+]
+
+describe('P0-4a rule codes', () => {
+  it('rule codes append TPSL_INVALID and STOP_REQUIRED at the end', () => {
+    expect(RULE_CODES.length).toBe(LEGACY_RULE_CODES.length + 2)
+    expect(RULE_CODES.slice(0, LEGACY_RULE_CODES.length)).toEqual(LEGACY_RULE_CODES)
+    expect(RULE_CODES.slice(-2)).toEqual(['TPSL_INVALID', 'STOP_REQUIRED'])
+  })
+
+  it('rule problem defaults map new codes to RULE_DENIED', () => {
+    expect(RULE_PROBLEM_DEFAULTS.TPSL_INVALID).toBe('RULE_DENIED')
+    expect(RULE_PROBLEM_DEFAULTS.STOP_REQUIRED).toBe('RULE_DENIED')
+    expect(PROBLEM_CODES.RULE_DENIED.category).toBe('RISK')
+  })
+})

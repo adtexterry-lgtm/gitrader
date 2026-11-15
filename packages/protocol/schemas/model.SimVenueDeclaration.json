@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:SimVenueDeclaration",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "SimVenueDeclaration",
+  "type": "object",
+  "properties": {
+    "connector": {
+      "const": "kernel-sim"
+    },
+    "modes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "paper",
+          "shadow"
+        ]
+      },
+      "minItems": 1
+    },
+    "mirrors": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+      }
+    },
+    "fillModel": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "bookShortfall": {
+          "type": "string"
+        },
+        "noBook": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "string"
+        },
+        "queuePosition": {
+          "type": "boolean"
+        },
+        "latencyMs": {
+          "type": "number"
+        },
+        "funding": {
+          "type": "string"
+        },
+        "liquidation": {
+          "type": "string"
+        },
+        "positionMode": {
+          "type": "string"
+        },
+        "marginMode": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "market",
+        "bookShortfall",
+        "noBook",
+        "limit",
+        "queuePosition",
+        "latencyMs",
+        "funding",
+        "liquidation",
+        "positionMode",
+        "marginMode"
+      ]
+    },
+    "knownGaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "connector",
+    "modes",
+    "mirrors",
+    "fillModel",
+    "knownGaps"
+  ]
+}

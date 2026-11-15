@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Attestation",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Attestation",
+  "type": "object",
+  "properties": {
+    "method": {
+      "enum": [
+        "passkey",
+        "wallet",
+        "pin",
+        "session",
+        "system"
+      ]
+    },
+    "by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "at": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "digest": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "sig": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "method",
+    "by",
+    "at",
+    "digest",
+    "sig"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ExperimentTransitionEvidence",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ExperimentTransitionEvidence",
+  "type": "object",
+  "properties": {
+    "actor": {
+      "type": "object",
+      "properties": {
+        "actorType": {
+          "enum": [
+            "human",
+            "engine",
+            "llm-agent",
+            "system"
+          ]
+        },
+        "mandateId": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "via": {
+          "enum": [
+            "mcp",
+            "ui",
+            "gep",
+            "gsp",
+            "cli",
+            "api",
+            "internal"
+          ]
+        }
+      },
+      "required": [
+        "actorType",
+        "via"
+      ]
+    },
+    "packs": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:EvidencePack"
+      }
+    },
+    "labRuns": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:LabRun"
+      }
+    },
+    "accounts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+          },
+          "mode": {
+            "enum": [
+              "paper",
+              "shadow",
+              "live"
+            ]
+          }
+        },
+        "required": [
+          "accountId",
+          "mode"
+        ]
+      }
+    },
+    "backtestEnteredAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "authorizationValid": {
+      "type": "boolean"
+    },
+    "riskPolicyValid": {
+      "type": "boolean"
+    },
+    "parallelExperimentsDisclosed": {
+      "type": "boolean"
+    },
+    "presence": {
+      "type": "object",
+      "properties": {
+        "verified": {
+          "type": "boolean"
+        },
+        "forwardPackDigest": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        }
+      },
+      "required": [
+        "verified",
+        "forwardPackDigest"
+      ]
+    }
+  },
+  "required": [
+    "actor",
+    "packs",
+    "labRuns",
+    "accounts"
+  ]
+}

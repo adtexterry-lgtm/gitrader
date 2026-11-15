@@ -1,0 +1,29 @@
+{
+  "name": "@gitrader/protocol",
+  "version": "0.1.14",
+  "description": "Gitrader protocol: unified trading model, JSON Schemas, GEP engine protocol, MCP tool manifest, conformance suite.",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./decimal": "./src/decimal.ts",
+    "./constants": "./src/constants.ts",
+    "./types": "./src/types.ts",
+    "./connector": "./src/connector/index.ts",
+    "./schemas/*": "./schemas/*",
+    "./conformance/*": "./conformance/*"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit",
+    "build:schemas": "node scripts/build-schemas.mjs",
+    "check:schemas": "node scripts/build-schemas.mjs --check",
+    "conformance": "vitest run --config ../../vitest.config.ts --root . conformance --fileParallelism=false",
+    "conformance:gsp": "vitest run --config ../../vitest.config.ts --root . conformance/gsp --fileParallelism=false"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1"
+  }
+}

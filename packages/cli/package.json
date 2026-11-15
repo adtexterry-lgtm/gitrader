@@ -1,0 +1,65 @@
+{
+  "name": "gitrader",
+  "version": "0.1.1",
+  "description": "Gitrader is an open-source AI quant trading base: embed it in any agent, and combine it with any functional trading plugin.",
+  "license": "CPAL-1.0",
+  "type": "module",
+  "keywords": [
+    "agent",
+    "trading",
+    "mcp",
+    "hyperliquid",
+    "risk",
+    "workbench"
+  ],
+  "engines": {
+    "node": ">=22.13"
+  },
+  "bin": {
+    "gitrader": "./dist/bin.js",
+    "gitrader-mcp": "./dist/gitrader-mcp.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "THIRD-PARTY-NOTICES.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "prepack": "node build.mjs",
+    "test": "vitest run --config ./vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "devDependencies": {
+    "@gitrader/connector-alpaca-data": "*",
+    "@gitrader/connector-alpaca-trade": "*",
+    "@gitrader/connector-binance-data": "*",
+    "@gitrader/connector-bitget-data": "*",
+    "@gitrader/connector-bybit-data": "*",
+    "@gitrader/connector-coinbase-data": "*",
+    "@gitrader/connector-deribit-data": "*",
+    "@gitrader/connector-dydx-data": "*",
+    "@gitrader/connector-gateio-data": "*",
+    "@gitrader/connector-kraken-data": "*",
+    "@gitrader/connector-kucoin-data": "*",
+    "@gitrader/connector-okx-data": "*",
+    "@gitrader/connector-binance-trade": "*",
+    "@gitrader/connector-okx-trade": "*",
+    "@gitrader/connector-bybit-trade": "*",
+    "@gitrader/connector-bitget-trade": "*",
+    "@gitrader/connector-gateio-trade": "*",
+    "@gitrader/protocol": "*",
+    "@gitrader/kernel": "*",
+    "@gitrader/venue-paper": "*",
+    "@gitrader/connector-hyperliquid": "*",
+    "@gitrader/connector-ibkr-trade": "*",
+    "@gitrader/engine-core": "*",
+    "@gitrader/bots": "*",
+    "@gitrader/optimizer": "*"
+  }
+}

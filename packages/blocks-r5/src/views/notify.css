@@ -1,0 +1,12 @@
+/* SPDX-License-Identifier: CPAL-1.0 */
+/* 设置 · 通知页专用：只许 var(--gr-*)；表格 / 表单的共用规则在 venues.css（同包同时加载）。 */
+:root[data-ui="r5"] .g5-pgcard .g5-chs{display:inline-flex;align-items:center;gap:16px;white-space:nowrap;vertical-align:middle}
+:root[data-ui="r5"] .g5-pgcard .g5-gapl{margin-left:8px}
+:root[data-ui="r5"] .g5-pgcard .g5-hd .g5-r .g5-t2{color:var(--gr-text-2)}
+:root[data-ui="r5"] .g5-pgcard .g5-cfoot{height:40px;flex:none;margin-top:auto;display:flex;align-items:center;padding:0 12px;box-shadow:inset 0 1px 0 var(--gr-sep)}
+:root[data-ui="r5"] .g5-pgcard .g5-ffoot .g5-neg{margin-left:-8px}
+:root[data-ui="r5"] .g5-pgcard .g5-fg > .g5-v.g5-wrapv{flex-wrap:wrap;padding:4px 0}
+:root[data-ui="r5"] .g5-pgcard .g5-dd.g5-tog{gap:8px}
+:root[data-ui="r5"] .g5-pgcard .g5-dd.g5-tog[aria-pressed="true"]{background:var(--gr-fill-3);color:var(--gr-text)}
+:root[data-ui="r5"] .g5-pgcard .g5-clogo svg:not(.g5-gl){display:block;width:16px;height:16px;color:var(--gr-on-kill)}
+:root[data-ui="r5"] .g5-pgcard .g5-cell > h2{font-size:14px;line-height:20px;font-weight:500;color:var(--gr-text);white-space:nowrap}

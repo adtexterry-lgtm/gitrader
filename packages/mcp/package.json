@@ -1,0 +1,34 @@
+{
+  "name": "@gitrader/mcp",
+  "version": "0.1.0",
+  "description": "Gitrader MCP server (stdio, 17 tools).",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "bin": {
+    "gitrader-mcp": "./dist/gitrader-mcp.js"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit",
+    "budget": "node scripts/budget.mjs"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "gitrader": {
+    "build": {
+      "entry": "src/bin.ts",
+      "outfile": "dist/gitrader-mcp.js",
+      "platform": "node",
+      "format": "esm",
+      "external": [
+        "node:*"
+      ]
+    }
+  }
+}

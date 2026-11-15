@@ -1,0 +1,135 @@
+{
+    "id":  "03-multi-account-intersection",
+    "input":  {
+                  "tier":  "forward_paper",
+                  "window":  {
+                                 "from":  0,
+                                 "to":  259200000
+                             },
+                  "stageEnteredAt":  0,
+                  "runs":  [
+                               {
+                                   "runId":  "run-acct_two",
+                                   "accountId":  "acct_two",
+                                   "executor":  {
+                                                    "kind":  "engine",
+                                                    "engineId":  "engine-fixture",
+                                                    "instanceId":  "inst_fixture",
+                                                    "codeDigest":  null
+                                                },
+                                   "attachedAt":  0,
+                                   "to":  null
+                               },
+                               {
+                                   "runId":  "run-acct_one",
+                                   "accountId":  "acct_one",
+                                   "executor":  {
+                                                    "kind":  "engine",
+                                                    "engineId":  "engine-fixture",
+                                                    "instanceId":  "inst_fixture",
+                                                    "codeDigest":  null
+                                                },
+                                   "attachedAt":  0,
+                                   "to":  null
+                               }
+                           ],
+                  "initialEquity":  [
+                                        {
+                                            "accountId":  "acct_two",
+                                            "at":  0,
+                                            "equity":  "200",
+                                            "unrealizedPnl":  "0"
+                                        },
+                                        {
+                                            "accountId":  "acct_one",
+                                            "at":  0,
+                                            "equity":  "100",
+                                            "unrealizedPnl":  "0"
+                                        }
+                                    ],
+                  "fills":  [
+
+                            ],
+                  "snapshots":  [
+                                    {
+                                        "seq":  1,
+                                        "accountId":  "acct_one",
+                                        "at":  86400000,
+                                        "recordedAt":  86400000,
+                                        "attestation":  "kernel-observed",
+                                        "kind":  "daily",
+                                        "equity":  "110",
+                                        "unrealizedPnl":  "10",
+                                        "valuationCcy":  "USD"
+                                    },
+                                    {
+                                        "seq":  2,
+                                        "accountId":  "acct_two",
+                                        "at":  86400000,
+                                        "recordedAt":  86400000,
+                                        "attestation":  "kernel-observed",
+                                        "kind":  "daily",
+                                        "equity":  "210",
+                                        "unrealizedPnl":  "10",
+                                        "valuationCcy":  "USD"
+                                    },
+                                    {
+                                        "seq":  3,
+                                        "accountId":  "acct_two",
+                                        "at":  172800000,
+                                        "recordedAt":  172800000,
+                                        "attestation":  "kernel-observed",
+                                        "kind":  "daily",
+                                        "equity":  "190",
+                                        "unrealizedPnl":  "-10",
+                                        "valuationCcy":  "USD"
+                                    },
+                                    {
+                                        "seq":  4,
+                                        "accountId":  "acct_one",
+                                        "at":  259200000,
+                                        "recordedAt":  259200000,
+                                        "attestation":  "kernel-observed",
+                                        "kind":  "daily",
+                                        "equity":  "90",
+                                        "unrealizedPnl":  "-10",
+                                        "valuationCcy":  "USD"
+                                    },
+                                    {
+                                        "seq":  5,
+                                        "accountId":  "acct_two",
+                                        "at":  259200000,
+                                        "recordedAt":  259200000,
+                                        "attestation":  "kernel-observed",
+                                        "kind":  "daily",
+                                        "equity":  "190",
+                                        "unrealizedPnl":  "-10",
+                                        "valuationCcy":  "USD"
+                                    }
+                                ],
+                  "valuationCcy":  "USD",
+                  "periodsPerYear":  365,
+                  "finalized":  true,
+                  "computedAt":  259200000
+              },
+    "expect":  {
+                   "sample":  {
+                                  "trades":  0,
+                                  "fills":  0,
+                                  "roundTrips":  0,
+                                  "spanDays":  3,
+                                  "activeDays":  0,
+                                  "snapshotDays":  2
+                              },
+                   "realizedPnl":  "0",
+                   "unrealizedPnlEnd":  "-20",
+                   "fees":  "0",
+                   "funding":  "0",
+                   "returnRatio":  -0.066666666666666666,
+                   "maxDrawdownRatio":  0.125,
+                   "sharpe":  null,
+                   "sortino":  null,
+                   "winRatio":  null
+               },
+    "tolerance":  1E-09
+}

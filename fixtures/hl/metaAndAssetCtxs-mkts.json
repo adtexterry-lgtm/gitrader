@@ -1,0 +1,80 @@
+[
+ {
+  "universe": [
+   {
+    "szDecimals": 3,
+    "name": "mkts:USTECH",
+    "maxLeverage": 25
+   },
+   {
+    "szDecimals": 3,
+    "name": "mkts:USBOND",
+    "maxLeverage": 10,
+    "onlyIsolated": true
+   },
+   {
+    "szDecimals": 3,
+    "name": "mkts:US500",
+    "maxLeverage": 25
+   },
+   {
+    "szDecimals": 3,
+    "name": "mkts:SMALL2000",
+    "maxLeverage": 20
+   },
+   {
+    "szDecimals": 2,
+    "name": "mkts:BVIV",
+    "maxLeverage": 5,
+    "onlyIsolated": true
+   }
+  ]
+ },
+ [
+  {
+   "funding": "0.0000057078",
+   "openInterest": "6494.104",
+   "prevDayPx": "754.295773239183",
+   "dayNtlVlm": "2508235.1788599994",
+   "oraclePx": "754.16",
+   "markPx": "754.16",
+   "midPx": "754.205"
+  },
+  {
+   "funding": "0.000031139",
+   "openInterest": "42309.488",
+   "prevDayPx": "76.60329031622501",
+   "dayNtlVlm": "1364495.8765259993",
+   "oraclePx": "77.76",
+   "markPx": "77.76",
+   "midPx": "77.757"
+  },
+  {
+   "funding": "0.0000057078",
+   "openInterest": "2393.928",
+   "prevDayPx": "774.506483934583",
+   "dayNtlVlm": "992934.7399099995",
+   "oraclePx": "777.62",
+   "markPx": "777.62",
+   "midPx": "777.61"
+  },
+  {
+   "funding": "0.0000226345",
+   "openInterest": "2565.01",
+   "prevDayPx": "275.6355157730421",
+   "dayNtlVlm": "941080.4422299999",
+   "oraclePx": "278.99",
+   "markPx": "278.99",
+   "midPx": "279.065"
+  },
+  {
+   "funding": "-0.0004660943",
+   "openInterest": "8353.92",
+   "prevDayPx": "40.126599552807555",
+   "dayNtlVlm": "451337.9924499997",
+   "oraclePx": "38.225",
+   "markPx": "38.225",
+   "midPx": "38.1815"
+  }
+ ]
+]

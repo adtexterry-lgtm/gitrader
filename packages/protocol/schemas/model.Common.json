@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Common",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Common definitions",
+  "$defs": {
+    "Decimal": {
+      "type": "string",
+      "description": "规范十进制字符串（契约 §1.3）：无指数、无前导 +、无尾随 0、零写 \"0\"、不写 \"-0\"；有效数字 ≤ 30。",
+      "allOf": [
+        {
+          "pattern": "^(?!-0$)-?(0|[1-9][0-9]*)(\\.[0-9]*[1-9])?$"
+        },
+        {
+          "not": {
+            "pattern": "^-?0*\\.?0*[1-9](?:\\.?[0-9]){30}"
+          }
+        }
+      ]
+    },
+    "Ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix 毫秒整数"
+    },
+    "Id": {
+      "type": "string",
+      "pattern": "^[a-z]{2,5}_[0-9A-Za-z]{3,26}$",
+      "description": "<前缀>_<ULID>；契约示例里有缩写，按缩写也放行"
+    },
+    "OrgId": {
+      "type": "string",
+      "pattern": "^org_[0-9A-Za-z]{3,26}$"
+    },
+    "UsrId": {
+      "type": "string",
+      "pattern": "^usr_[0-9A-Za-z]{3,26}$"
+    },
+    "GrpId": {
+      "type": "string",
+      "pattern": "^grp_[0-9A-Za-z]{3,26}$"
+    },
+    "AcctId": {
+      "type": "string",
+      "pattern": "^acct_[0-9A-Za-z]{3,26}$"
+    },
+    "OrdId": {
+      "type": "string",
+      "pattern": "^ord_[0-9A-Za-z]{3,26}$"
+    },
+    "FillId": {
+      "type": "string",
+      "pattern": "^fill_[0-9A-Za-z]{3,26}$"
+    },
+    "FundId": {
+      "type": "string",
+      "pattern": "^fund_[0-9A-Za-z]{3,26}$"
+    },
+    "PolId": {
+      "type": "string",
+      "pattern": "^pol_[0-9A-Za-z]{3,26}$"
+    },
+    "ProtId": {
+      "type": "string",
+      "pattern": "^prot_[0-9A-Za-z]{3,26}$"
+    },
+    "MdtId": {
+      "type": "string",
+      "pattern": "^mdt_[0-9A-Za-z]{3,26}$"
+    },
+    "AkId": {
+      "type": "string",
+      "pattern": "^ak_[0-9A-Za-z]{3,26}$"
+    },
+    "PropId": {
+      "type": "string",
+      "pattern": "^prop_[0-9A-Za-z]{3,26}$"
+    },
+    "PckId": {
+      "type": "string",
+      "pattern": "^pck_[0-9A-Za-z]{3,26}$"
+    },
+    "TkoId": {
+      "type": "string",
+      "pattern": "^tko_[0-9A-Za-z]{3,26}$"
+    },
+    "ExpId": {
+      "type": "string",
+      "pattern": "^exp_[0-9A-Za-z]{3,26}$"
+    },
+    "SigId": {
+      "type": "string",
+      "pattern": "^sig_[0-9A-Za-z]{3,26}$"
+    },
+    "DecId": {
+      "type": "string",
+      "pattern": "^dec_[0-9A-Za-z]{3,26}$"
+    },
+    "LedId": {
+      "type": "string",
+      "pattern": "^led_[0-9A-Za-z]{3,26}$"
+    },
+    "BindId": {
+      "type": "string",
+      "pattern": "^bind_[0-9A-Za-z]{3,26}$"
+    },
+    "JobId": {
+      "type": "string",
+      "pattern": "^job_[0-9A-Za-z]{3,26}$"
+    },
+    "EvtId": {
+      "type": "string",
+      "pattern": "^evt_[0-9A-Za-z]{3,26}$"
+    },
+    "SesId": {
+      "type": "string",
+      "pattern": "^ses_[0-9A-Za-z]{3,26}$"
+    },
+    "InstanceId": {
+      "type": "string",
+      "pattern": "^inst_[0-9A-Za-z]{3,26}$"
+    },
+    "EventId": {
+      "type": "string",
+      "pattern": "^evt_[0-9A-Za-z]{3,26}$"
+    },
+    "VenueId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "InstrumentId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*:.+$",
+      "description": "<venue>:<场所原生符号>，按第一个冒号切分"
+    },
+    "ClientOrderId": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "Ticket": {
+      "type": "string",
+      "pattern": "^T-[0-9]{8}-[0-9]{4,}$"
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "Actor": {
+      "type": "string",
+      "pattern": "^(user|agent|engine|workflow|strategy|plugin|system|mandate|venue):.+$"
+    },
+    "UserActor": {
+      "type": "string",
+      "pattern": "^user:.+$"
+    },
+    "Interval": {
+      "type": "string",
+      "minLength": 1
+    },
+    "Currency": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

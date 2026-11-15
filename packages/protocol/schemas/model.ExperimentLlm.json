@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ExperimentLlm",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ExperimentLlm",
+  "type": "object",
+  "properties": {
+    "involved": {
+      "type": "boolean"
+    },
+    "derivedFrom": {
+      "enum": [
+        "creator",
+        "workflow",
+        "declared"
+      ]
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "trainingCutoff": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          },
+          "source": {
+            "enum": [
+              "kernel-table",
+              "declared"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "source"
+        ]
+      }
+    }
+  },
+  "required": [
+    "involved",
+    "derivedFrom",
+    "models"
+  ]
+}

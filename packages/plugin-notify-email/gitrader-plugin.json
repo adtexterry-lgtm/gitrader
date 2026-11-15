@@ -1,0 +1,216 @@
+{
+  "schema": "gitrader-plugin/1",
+  "id": "connector.gitrader.notify-email",
+  "package": "block",
+  "kind": "connector",
+  "name": "邮件通知（SMTP）",
+  "desc": "把内核的通知按固定模板渲染成纯文本 + HTML 邮件，经用户配置的 SMTP 主机发出。认证信息由内核按 secrets 声明注入，插件不落盘、不回传；只发送通知文本，不读账户、不下单。",
+  "tags": [
+    "notify",
+    "email",
+    "smtp",
+    "utility"
+  ],
+  "version": "0.1.0",
+  "vendor": {
+    "id": "gitrader",
+    "name": "Gitrader",
+    "kind": "community",
+    "verified": false,
+    "url": null
+  },
+  "source": {
+    "repo": "local/plugin-notify-email",
+    "commit": "0000000000000000000000000000000000000000",
+    "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "fetchedAt": 1791500000000
+  },
+  "license": {
+    "spdx": "CPAL-1.0",
+    "redistribute": "bundle",
+    "notice": "插件代码为 Gitrader 本体的一部分（CPAL-1.0）；SMTP 与 MIME 逻辑复制自 packages/notify-email（同一许可证）。",
+    "commercialUse": true
+  },
+  "runtime": {
+    "type": "node",
+    "node": "22",
+    "native": false,
+    "diskMB": 1
+  },
+  "entry": {
+    "module": "./gsp.mjs",
+    "transport": "stdio"
+  },
+  "install": {
+    "by": "user-install",
+    "requireHashes": true
+  },
+  "permissions": [
+    "net.fetch"
+  ],
+  "net": {
+    "hosts": [
+      "localhost"
+    ]
+  },
+  "secrets": [
+    "SMTP_PASSWORD"
+  ],
+  "privacy": {
+    "hosted": false,
+    "sends": []
+  },
+  "provides": {
+    "channels": [
+      {
+        "tool": "notify_send",
+        "platform": "smtp"
+      }
+    ]
+  },
+  "tools": [
+    {
+      "name": "notify_send",
+      "desc": "发送一条通知邮件（协议的工具名不允许点号，清单与 GSP 都只用 notify_send；点号写法由内核侧映射）：标题、正文行、级别由内核给出，插件只做排版与投递；成功返回消息 id，失败返回原因与是否可重试。",
+      "tags": [
+        "utility",
+        "notify"
+      ],
+      "input": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "notice",
+          "params"
+        ],
+        "properties": {
+          "notice": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "key",
+              "level",
+              "title",
+              "lines"
+            ],
+            "properties": {
+              "key": {
+                "type": "string",
+                "description": "通知去重键，插件不解析，只用于后续扩展。"
+              },
+              "level": {
+                "enum": [
+                  "info",
+                  "warn",
+                  "critical"
+                ],
+                "description": "级别，决定主题前缀与正文首行。"
+              },
+              "title": {
+                "type": "string",
+                "description": "标题，原样进入主题与正文首行。"
+              },
+              "lines": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "正文行，顺序保留，内容不改写。"
+              },
+              "ts": {
+                "type": "number",
+                "description": "毫秒时间戳；有值时在末行给出 ISO 时间。"
+              },
+              "topic": {
+                "type": "string",
+                "description": "主题分类，插件不解析。"
+              }
+            }
+          },
+          "params": {
+            "type": "object",
+            "required": [
+              "host",
+              "from",
+              "to"
+            ],
+            "properties": {
+              "host": {
+                "type": "string",
+                "description": "SMTP 主机，来自用户配置（清单 net.hosts 是静态声明）。"
+              },
+              "port": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65535,
+                "description": "端口，缺省 465（secure 为真）或 587。"
+              },
+              "secure": {
+                "type": "boolean",
+                "description": "true = 连上即 TLS（465）；false = 明文起手，服务端宣告 STARTTLS 时升级（587）。"
+              },
+              "user": {
+                "type": "string",
+                "description": "认证用户名；留空表示不认证（本地 relay）。"
+              },
+              "from": {
+                "type": "string",
+                "description": "发件地址。"
+              },
+              "to": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "收件地址，至少一个。"
+              },
+              "subjectPrefix": {
+                "type": "string",
+                "description": "主题前缀，例如 [Gitrader] 。"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "required": [
+          "ok"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "ref": {
+            "type": "string",
+            "description": "成功时的消息 id（Message-ID）。"
+          },
+          "reason": {
+            "type": "string",
+            "description": "失败短句，已脱敏，不含任何认证信息。"
+          },
+          "retryable": {
+            "type": "boolean",
+            "description": "4xx / 网络类错误为真，5xx 为假。"
+          }
+        }
+      },
+      "permissions": [
+        "net.fetch"
+      ]
+    }
+  ],
+  "fixtures": {
+    "offline": [],
+    "smoke": []
+  },
+  "risk": {
+    "disclosure": "本插件只把通知文本发往用户配置的 SMTP 主机；不读账户、不下单、不改账本。",
+    "worstCase": "SMTP 主机不可达或拒绝投递时该条通知不会送达；插件返回原因与是否可重试，是否重试由内核决定。",
+    "builderAttribution": "off"
+  },
+  "compat": {
+    "gitrader": ">=0.1.0 <0.2.0",
+    "pluginSchema": "1"
+  }
+}

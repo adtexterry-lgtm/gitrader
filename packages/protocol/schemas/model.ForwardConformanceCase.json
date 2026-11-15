@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ForwardConformanceCase",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ForwardConformanceCase",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input": {
+      "$ref": "urn:gitrader:schema:model:0.1:ForwardStatsInput"
+    },
+    "expect": {
+      "type": "object",
+      "properties": {
+        "sample": {
+          "type": "object",
+          "properties": {
+            "trades": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "fills": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "roundTrips": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "spanDays": {
+              "type": "number",
+              "minimum": 0
+            },
+            "activeDays": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "snapshotDays": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "trades",
+            "fills",
+            "roundTrips",
+            "spanDays",
+            "activeDays",
+            "snapshotDays"
+          ]
+        },
+        "realizedPnl": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "unrealizedPnlEnd": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "fees": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "funding": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "returnRatio": {
+          "type": "number"
+        },
+        "maxDrawdownRatio": {
+          "type": "number"
+        },
+        "sharpe": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sortino": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "winRatio": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "sample",
+        "realizedPnl",
+        "unrealizedPnlEnd",
+        "fees",
+        "funding",
+        "returnRatio",
+        "maxDrawdownRatio",
+        "sharpe",
+        "sortino",
+        "winRatio"
+      ]
+    },
+    "tolerance": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "id",
+    "input",
+    "expect",
+    "tolerance"
+  ]
+}

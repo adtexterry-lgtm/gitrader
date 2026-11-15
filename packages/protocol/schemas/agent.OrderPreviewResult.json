@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:agent:0.1:OrderPreviewResult",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: agent | Version: 0.1 | Status: draft",
+  "title": "OrderPreviewResult",
+  "type": "object",
+  "properties": {
+    "confirmToken": {
+      "type": "string",
+      "minLength": 1
+    },
+    "normalizedIntent": {
+      "$ref": "urn:gitrader:schema:model:0.1:OrderIntent"
+    },
+    "precheck": {
+      "$ref": "urn:gitrader:schema:model:0.1:PrecheckResult"
+    },
+    "expiresAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    }
+  },
+  "required": [
+    "confirmToken",
+    "normalizedIntent",
+    "precheck",
+    "expiresAt"
+  ]
+}

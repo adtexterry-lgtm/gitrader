@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:EvidencePackBase",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "EvidencePackBase",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "gitrader-experiment/1"
+    },
+    "packId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "experimentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ExpId"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subjectKey": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "window": {
+      "$ref": "urn:gitrader:schema:model:0.1:Window"
+    },
+    "at": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "trialCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "trialStats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "specDigest": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+          },
+          "sharpe": {
+            "oneOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "nObs": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "runId",
+          "specDigest",
+          "sharpe",
+          "nObs"
+        ]
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "kernelVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "protocolVersion": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kernelVersion",
+        "protocolVersion"
+      ]
+    },
+    "attestation": {
+      "type": "object",
+      "properties": {
+        "alg": {
+          "const": "ed25519"
+        },
+        "keyId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+        },
+        "sig": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "alg",
+        "keyId",
+        "digest",
+        "sig"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "packId",
+    "experimentId",
+    "runId",
+    "subjectKey",
+    "window",
+    "at",
+    "trialCount",
+    "trialStats",
+    "provenance",
+    "attestation"
+  ]
+}

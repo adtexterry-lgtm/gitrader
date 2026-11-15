@@ -1,0 +1,98 @@
+{
+  "canvas": {
+    "width": 2048,
+    "height": 3072,
+    "colorSpace": "sRGB",
+    "background": "#0A0A0B"
+  },
+  "sourceScene": {
+    "file": "scene.png",
+    "width": 1024,
+    "height": 1536,
+    "sha256": "28C0BB517D03DB58EC2438DD9621E845C06053F6749FE6B7D113FC132EEF7784",
+    "generatedNative2k": false
+  },
+  "brand": {
+    "source": "../../brand/gitrader-wordmark.svg",
+    "sha256": "7BD5526F8C439C17BCA10A8C37193A6B231884EA0CBDACEF05CC2E9A511A1B05",
+    "embeddedOriginalBytes": true
+  },
+  "prompt": {
+    "file": "../PROMPTS.md",
+    "section": "01-stocks",
+    "sha256": "784D4C12A33D002D98B3507DA13699B3684AB126F5663ED105B39B2B311A3453"
+  },
+  "typography": {
+    "family": "Microsoft YaHei",
+    "weights": [
+      400,
+      700
+    ],
+    "isolatedFontconfig": true,
+    "fontFiles": [
+      {
+        "file": "msyh.ttc",
+        "bytes": 19704352,
+        "sha256": "D79C55E68B1131EEA0CC1C47BE4F572D964F28C682E143DB2AD09C1E4CB07A3F"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "bytes": 16883552,
+        "sha256": "4508821B3DFFE01F0EF5E5326A3E60DF705A44633858811F67B6982DCE3F6EE6"
+      }
+    ],
+    "renderEvidence": [
+      {
+        "file": "msyh.ttc",
+        "loaded": true,
+        "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+        "style": "style: \"Regular\"(s) \"Normal\"(s) \"obyčejné\"(s) \"Standard\"(s) \"Κανονικά\"(s) \"Normaali\"(s) \"Normál\"(s) \"Normale\"(s) \"Standaard\"(s) \"Normalny\"(s) \"Обычный\"(s) \"Normálne\"(s) \"Navadno\"(s) \"Arrunta\"(s)",
+        "weight": "weight: 80(f)(s)"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "loaded": true,
+        "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+        "style": "style: \"Bold\"(s) \"Negreta\"(s) \"tučné\"(s) \"fed\"(s) \"Fett\"(s) \"Έντονα\"(s) \"Negrita\"(s) \"Lihavoitu\"(s) \"Gras\"(s) \"Félkövér\"(s) \"Grassetto\"(s) \"Vet\"(s) \"Halvfet\"(s) \"Pogrubiony\"(s) \"Negrito\"(s) \"Полужирный\"(s) \"Fet\"(s) \"Kalın\"(s) \"Krepko\"(s) \"Lodia\"(s)",
+        "weight": "weight: 200(f)(s)"
+      }
+    ]
+  },
+  "outputs": {
+    "poster.svg": {
+      "sha256": "604AEC80115FF6EA74F4C113F815233785A20E4DF2AF2A7DE384676984187EA0"
+    },
+    "poster.png": {
+      "bytes": 2520497,
+      "sha256": "CCB25C116F83972AAF8419EEC263F35A7AC773B651986505036A43AC4F54DFE6",
+      "width": 2048,
+      "height": 3072
+    },
+    "poster-preview.png": {
+      "bytes": 1039742,
+      "sha256": "2BEA497DE6F32D4AA15FBE4DE94488375FB396192D4076B346DD031902FB5816",
+      "width": 1024,
+      "height": 1536
+    }
+  },
+  "copy": {
+    "headline": [
+      "把美股灵感",
+      "写成交易规则"
+    ],
+    "eyebrow": "AGENT TRADING / U.S. EQUITIES",
+    "support": [
+      "围绕你关注的美股，组合自己的智能体、数据与引擎。",
+      "把研究与执行接成你的工作流，标的随连接场所扩展。"
+    ],
+    "sceneLabel": "美股研究 · 行情观察",
+    "shortTag": "接入构想 · 标的依场所",
+    "benefits": [
+      "自选数据",
+      "自有引擎",
+      "规则自定"
+    ],
+    "cta": "了解美股接入",
+    "footer": "开源底座 · M1 开发中"
+  }
+}

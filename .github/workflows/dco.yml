@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: CPAL-1.0
+# DCO 检查：PR 里的每个提交都要带 `Signed-off-by: 姓名 <邮箱>`（git commit -s）。不依赖第三方 App / Action。
+# 说明见 CONTRIBUTING.md「DCO」一节。设为 main 的必需状态检查（Settings -> Branches -> Require status checks -> Signed-off-by）。
+name: DCO
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  dco:
+    name: Signed-off-by
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Every commit carries a Signed-off-by line
+        shell: bash
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          missing=0
+          for c in $(git rev-list --no-merges "$BASE..$HEAD"); do
+            if ! git log -1 --format=%B "$c" | grep -Eq '^Signed-off-by: .+ <.+>$'; then
+              echo "::error::commit $c has no Signed-off-by line ($(git log -1 --format=%s "$c"))"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "Add one with: git commit --amend -s   (several commits: git rebase --signoff $BASE)"
+            exit 1
+          fi
+          echo "All commits are signed off."

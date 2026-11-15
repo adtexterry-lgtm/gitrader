@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ReconcileResolutionReceipt",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ReconcileResolutionReceipt",
+  "type": "object",
+  "properties": {
+    "resolutionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input": {
+      "$ref": "urn:gitrader:schema:model:0.1:ReconcileResolutionInput"
+    },
+    "resolvedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "resolvedBy": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "resolutionId",
+    "input",
+    "resolvedAt",
+    "resolvedBy"
+  ],
+  "additionalProperties": false
+}

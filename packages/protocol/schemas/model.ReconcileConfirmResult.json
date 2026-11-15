@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ReconcileConfirmResult",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ReconcileConfirmResult",
+  "type": "object",
+  "properties": {
+    "fillId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "alreadyRecorded": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "fillId",
+    "alreadyRecorded"
+  ]
+}

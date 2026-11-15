@@ -1,0 +1,18 @@
+{
+  "name": "@gitrader/engine-python",
+  "version": "0.1.0",
+  "description": "Gitrader Python strategy engine: GEP over stdio (framing, method dispatch, strategy.* and backtest.* groups), Python >= 3.11, standard library only. This package.json only carries the conformance runner; there is no TypeScript build.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "python -m unittest discover -s tests",
+    "conformance": "node run-conformance.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

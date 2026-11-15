@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:GepEvent",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "GepEvent",
+  "type": "object",
+  "properties": {
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "eventId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stream": {
+      "enum": [
+        "order",
+        "fill",
+        "position",
+        "funding",
+        "account",
+        "strategy",
+        "signal",
+        "decision",
+        "backtest",
+        "takeover",
+        "policy",
+        "health",
+        "log",
+        "market"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "pattern": "^[a-z]+(\\.[a-z_]+)*$"
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "recvTs": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "tsNs": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "data": {
+      "type": "object"
+    },
+    "origin": {
+      "$ref": "urn:gitrader:schema:model:0.1:Origin"
+    },
+    "causation": {
+      "type": "object",
+      "properties": {}
+    },
+    "conflated": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "required": [
+    "seq",
+    "eventId",
+    "stream",
+    "type",
+    "ts",
+    "data"
+  ]
+}

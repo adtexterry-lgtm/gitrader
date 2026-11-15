@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:agent:0.1:ConfirmTokenClaims",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: agent | Version: 0.1 | Status: draft",
+  "title": "ConfirmTokenClaims",
+  "type": "object",
+  "properties": {
+    "mandateId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "normalizedIntentDigest": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    },
+    "precheckId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PckId"
+    },
+    "policyVersion": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "priceRef": {
+      "type": "object",
+      "properties": {
+        "markPrice": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        },
+        "ts": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        }
+      },
+      "required": [
+        "markPrice",
+        "ts"
+      ]
+    },
+    "maxDriftBps": {
+      "type": "number",
+      "minimum": 0
+    },
+    "expiresAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "nonce": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "mandateId",
+    "accountId",
+    "normalizedIntentDigest",
+    "precheckId",
+    "policyVersion",
+    "priceRef",
+    "maxDriftBps",
+    "expiresAt",
+    "nonce"
+  ]
+}

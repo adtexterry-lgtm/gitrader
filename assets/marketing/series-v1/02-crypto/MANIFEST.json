@@ -1,0 +1,98 @@
+{
+  "canvas": {
+    "width": 2048,
+    "height": 3072,
+    "colorSpace": "sRGB",
+    "background": "#0A0A0B"
+  },
+  "sourceScene": {
+    "file": "scene.png",
+    "width": 1024,
+    "height": 1536,
+    "sha256": "0AB530E1952C5A587569B506CB40FCF9C9E5D5603BD3BF77BCB6EE58CC8804C8",
+    "generatedNative2k": false
+  },
+  "brand": {
+    "source": "../../brand/gitrader-wordmark.svg",
+    "sha256": "7BD5526F8C439C17BCA10A8C37193A6B231884EA0CBDACEF05CC2E9A511A1B05",
+    "embeddedOriginalBytes": true
+  },
+  "prompt": {
+    "file": "../PROMPTS.md",
+    "section": "02-crypto",
+    "sha256": "DD57841DA4427826A04840645A20853F607C9A874AEC4482C0A9CEB68029314E"
+  },
+  "typography": {
+    "family": "Microsoft YaHei",
+    "weights": [
+      400,
+      700
+    ],
+    "isolatedFontconfig": true,
+    "fontFiles": [
+      {
+        "file": "msyh.ttc",
+        "bytes": 19704352,
+        "sha256": "D79C55E68B1131EEA0CC1C47BE4F572D964F28C682E143DB2AD09C1E4CB07A3F"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "bytes": 16883552,
+        "sha256": "4508821B3DFFE01F0EF5E5326A3E60DF705A44633858811F67B6982DCE3F6EE6"
+      }
+    ],
+    "renderEvidence": [
+      {
+        "file": "msyh.ttc",
+        "loaded": true,
+        "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+        "style": "style: \"Regular\"(s) \"Normal\"(s) \"obyčejné\"(s) \"Standard\"(s) \"Κανονικά\"(s) \"Normaali\"(s) \"Normál\"(s) \"Normale\"(s) \"Standaard\"(s) \"Normalny\"(s) \"Обычный\"(s) \"Normálne\"(s) \"Navadno\"(s) \"Arrunta\"(s)",
+        "weight": "weight: 80(f)(s)"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "loaded": true,
+        "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+        "style": "style: \"Bold\"(s) \"Negreta\"(s) \"tučné\"(s) \"fed\"(s) \"Fett\"(s) \"Έντονα\"(s) \"Negrita\"(s) \"Lihavoitu\"(s) \"Gras\"(s) \"Félkövér\"(s) \"Grassetto\"(s) \"Vet\"(s) \"Halvfet\"(s) \"Pogrubiony\"(s) \"Negrito\"(s) \"Полужирный\"(s) \"Fet\"(s) \"Kalın\"(s) \"Krepko\"(s) \"Lodia\"(s)",
+        "weight": "weight: 200(f)(s)"
+      }
+    ]
+  },
+  "outputs": {
+    "poster.svg": {
+      "sha256": "DB85477F7D3519E4B25F92F7AD70FF0534E3CA2A7122AD3911ECDC030150E840"
+    },
+    "poster.png": {
+      "bytes": 2500041,
+      "sha256": "3EDDC56283ACAC0A1404F4A09CCE6E6C2C4D6D907DB194E37DEAFF06EE869D56",
+      "width": 2048,
+      "height": 3072
+    },
+    "poster-preview.png": {
+      "bytes": 981916,
+      "sha256": "78B752676E058AFAB05CE6C5BB63DB340E78FE61099131F937A4AA850FE04C86",
+      "width": 1024,
+      "height": 1536
+    }
+  },
+  "copy": {
+    "headline": [
+      "让你的 AI",
+      "接入链上市场"
+    ],
+    "eyebrow": "AGENT TRADING / CRYPTO",
+    "support": [
+      "面向 DEX 链上交易，在你的环境运行自己的策略。",
+      "从只读到限额自动，权限边界由你设定，行动有据可查。"
+    ],
+    "sceneLabel": "交易提案 · 授权边界 · 场所连接",
+    "shortTag": "场景构想 · 接入以当前能力为准",
+    "benefits": [
+      "私有运行",
+      "分级授权",
+      "资金不托管"
+    ],
+    "cta": "了解连接方式",
+    "footer": "开源底座 · M1 开发中"
+  }
+}

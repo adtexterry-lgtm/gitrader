@@ -1,0 +1,104 @@
+{
+  "verifiedAt": "2026-10-22",
+  "entries": [
+    {
+      "venue": "binance",
+      "host": "demo-fapi.binance.com",
+      "kind": "测试网",
+      "officialUrl": "https://developers.binance.com/en/docs/products/derivatives-trading-usds-futures/general-info",
+      "officialMention": false,
+      "verifiedAt": "2026-10-22",
+      "note": "文档「Testnet API Information」节：The REST base url for testnet is https://demo-fapi.binance.com。curl 取回 302 → AWS WAF 202 挑战页（正文 0 字节），正文由抽取器读到；页面 Last modified 2026-10-21。 链接可达、正文经抽取器核（curl 被 WAF/CF 挡）。"
+    },
+    {
+      "venue": "okx",
+      "host": "www.okx.com",
+      "kind": "模拟盘",
+      "officialUrl": "https://www.okx.com/docs-v5/en/",
+      "officialMention": true,
+      "verifiedAt": "2026-10-22",
+      "note": "模拟盘与实盘同主机，靠请求头 x-simulated-trading: 1 区分；文档页正文含该头与 https://www.okx.com 基址。"
+    },
+    {
+      "venue": "bybit",
+      "host": "api-testnet.bybit.com",
+      "kind": "测试网",
+      "officialUrl": "https://bybit-exchange.github.io/docs/v5/guide",
+      "officialMention": true,
+      "verifiedAt": "2026-10-22",
+      "note": "文档 Quick Start 的 Testnet 节给出 api-testnet.bybit.com；页面正文命中 3 处。本仓 tools/testnet 原写 api.testnet.bybit.com（DNS 不解析、curl 报 Could not resolve host），本轮按官方文档改正。"
+    },
+    {
+      "venue": "bitget",
+      "host": "api.bitget.com",
+      "kind": "模拟盘",
+      "officialUrl": "https://www.bitget.com/api-doc/uta/guide",
+      "officialMention": true,
+      "verifiedAt": "2026-10-22",
+      "note": "文档 Demo Trading 节：REST 用同一域名 https://api.bitget.com，请求头加 paptrading: 1（正文同时印出 api.bitget.com 与 paptrading）。另见 classic 页 https://bitget.com/docs/classic/demo-trading/rest-api（只印 paptrading，未印域名）。"
+    },
+    {
+      "venue": "gateio",
+      "host": "api-testnet.gateapi.io",
+      "kind": "测试网",
+      "officialUrl": "https://www.gate.com/docs/developers/apiv4/en/",
+      "officialMention": false,
+      "verifiedAt": "2026-10-22",
+      "note": "文档 Access URL 节：TestNet trading: https://api-testnet.gateapi.io/api/v4。curl 直连 403（Cloudflare WAF），正文由抽取器读到。 链接可达、正文经抽取器核（curl 被 WAF/CF 挡）。"
+    },
+    {
+      "venue": "alpaca",
+      "host": "paper-api.alpaca.markets",
+      "kind": "模拟盘",
+      "officialUrl": "https://docs.alpaca.markets/docs/paper-trading",
+      "officialMention": true,
+      "verifiedAt": "2026-10-22",
+      "note": "Paper Trading 文档页正文命中 paper-api.alpaca.markets 3 处。行情域 data.alpaca.markets 不是下单基址，未登记。"
+    },
+    {
+      "venue": "ibkr",
+      "host": "127.0.0.1",
+      "kind": "模拟盘",
+      "officialUrl": "https://interactivebrokers.github.io/tws-api/initial_setup.html",
+      "officialMention": false,
+      "verifiedAt": "2026-10-22",
+      "note": "IBKR 没有公网测试网：socket API 连本机 TWS / IB Gateway。官方 TWS API 文档给出模拟盘端口（production 7496 / paper 7497），但主机是回环地址而非场所域名，故 officialMention=false：链接可达，正文给出端口、未印主机名。"
+    },
+    {
+      "venue": "dydx",
+      "host": "indexer.v4testnet.dydx.exchange",
+      "kind": "测试网",
+      "officialUrl": "https://docs.dydx.xyz/interaction/endpoints",
+      "officialMention": true,
+      "verifiedAt": "2026-10-22",
+      "note": "文档 Endpoints · Indexer · testnet 表：HTTP https://indexer.v4testnet.dydx.exchange（正文命中 2 处），链 id dydx-testnet-4。"
+    },
+    {
+      "venue": "dydx",
+      "host": "dydx-testnet-rest.publicnode.com",
+      "kind": "测试网",
+      "officialUrl": "https://docs.dydx.xyz/interaction/endpoints",
+      "officialMention": false,
+      "verifiedAt": "2026-10-22",
+      "note": "第三方公共节点（publicnode），不是 dYdX 官方域名：官方 testnet 表只列 OEGS / KingNodes / Polkachu 的 gRPC / RPC 主机，不下发该 REST 主机。officialMention=false（链接可达、正文未提该主机）；登记理由是本轮旅程实际使用且非实盘域名，替换官方节点后应删掉这一行。"
+    },
+    {
+      "venue": "htx",
+      "host": null,
+      "kind": "无测试网",
+      "officialUrl": "https://www.htx.com/en-us/opend/newApiPages?id=8cb81024-77b5-11ed-9966-0242ac110003",
+      "officialMention": false,
+      "verifiedAt": "2026-10-22",
+      "note": "无测试网。HTX USDT 本位永续官方 API 文档「Request Address」只列 Online https://api.hbdm.com 与 Online(preferred by aws) https://api.hbdm.vn，全页 testnet 字样 0 处。批 8 教训：api.hbdm.vip 没有任何官方出处，曾被当成测试网差点连实盘；本表不登记任何 HTX 测试网主机，旅程脚本对 HTX 一律报错不运行。"
+    },
+    {
+      "venue": "hyperliquid",
+      "host": "api.hyperliquid-testnet.xyz",
+      "kind": "测试网",
+      "officialUrl": "https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api",
+      "officialMention": false,
+      "verifiedAt": "2026-10-22",
+      "note": "host 出自包内常量 packages/connector-hyperliquid/src/rest.ts:12（HL_ENDPOINTS.testnet.http）；主网是 api.hyperliquid.xyz，不同主机，主网主机不入本表。officialUrl 取自随包依赖 @nktkas/hyperliquid 的 README（它链到 Hyperliquid 官方开发者文档）；本标段不联网，未用抽取器核页面正文，故 officialMention=false，页面对 testnet 主机的描述待 维护者 核对官方页。"
+    }
+  ]
+}

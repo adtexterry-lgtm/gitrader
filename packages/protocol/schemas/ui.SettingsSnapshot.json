@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:ui:0.1:SettingsSnapshot",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: ui | Version: 0.1 | Status: draft",
+  "title": "SettingsSnapshot",
+  "type": "object",
+  "properties": {
+    "network": {
+      "enum": [
+        "mainnet",
+        "testnet"
+      ]
+    },
+    "pinSet": {
+      "type": "boolean"
+    },
+    "agentLayout": {
+      "type": "boolean"
+    },
+    "keys": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:ui:0.1:KeyInfo"
+      }
+    }
+  },
+  "required": [
+    "network",
+    "pinSet",
+    "agentLayout",
+    "keys"
+  ]
+}

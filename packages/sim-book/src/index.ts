@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: CPAL-1.0
+// @gitrader/sim-book：盘口级成交仿真的确定性核心。三种 JSONL 记录（快照 / 增量 / 逐笔成交）与校验器、
+// 带流动性台账的盘口状态、八种订单形态的逐档撮合。撮合核心不碰 I/O；读写只在 records.ts。
+export { MarketBook } from './book'
+export type { BookLevel, LevelView } from './book'
+export { SimBook } from './engine'
+export type { OrderPatch, SimBookOptions } from './engine'
+export { FeeLedger, FeeModel, toFeeModel } from './fees'
+export type { FeeConfig, FeeRates, FeeTotals } from './fees'
+export { LatencyModel, MAX_LATENCY_MS, toLatencyModel } from './latency'
+export type { LatencyConfig, LatencyOp } from './latency'
+export { MAKER_FILL_MODES, MakerFillJudge } from './queue'
+export type { MakerFillInput, MakerFillMode, MakerFillResult } from './queue'
+export { commitWalk, isTriggered, planWalk, wouldCross } from './match'
+export type { FillPlan, PlannedFill, TriggerBasis } from './match'
+export { formatJsonl, formatRecord, parseJsonLine, readJsonlText, writeJsonlFile } from './records'
+export { validateJsonl, validateRecords } from './validate'
+export type { IssueCode, ValidateOptions, ValidationIssue, ValidationResult } from './validate'
+export { DECIMAL_TEXT, fmtDecimal, isDecimalText, parseDecimal, parsePositive } from './num'
+export type * from './types'

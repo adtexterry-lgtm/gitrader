@@ -1,0 +1,94 @@
+{
+  "poster": {
+    "id": "05",
+    "directory": "05-pro",
+    "title": [
+      "保留你的专业",
+      "定制引擎性能"
+    ],
+    "textNodes": 12,
+    "canvas": {
+      "width": 2048,
+      "height": 3072,
+      "colorSpace": "sRGB",
+      "background": "#0A0A0B"
+    },
+    "preview": {
+      "width": 1024,
+      "height": 1536
+    }
+  },
+  "promptSource": "../PROMPTS.md#05-pro",
+  "promptSectionSha256": "82F3DE33AA3DA19E941405390CF72B49926E6F9ED8401CF83C84EA152E18E9E4",
+  "scene": {
+    "file": "scene.png",
+    "sourceWidth": 1024,
+    "sourceHeight": 1536,
+    "format": "png",
+    "channels": 3,
+    "bytes": 1598960,
+    "sha256": "8FE585381F355EE2692E1847B20831CC1AC3D20AE57A8ED8B4FF4705B9063AA9",
+    "embeddedOriginalBytes": true
+  },
+  "brand": {
+    "source": "../../brand/gitrader-wordmark.svg",
+    "bytes": 8000,
+    "sha256": "7BD5526F8C439C17BCA10A8C37193A6B231884EA0CBDACEF05CC2E9A511A1B05",
+    "embeddedOriginalBytes": true
+  },
+  "typography": {
+    "family": "Microsoft YaHei",
+    "weights": [
+      400,
+      700
+    ],
+    "isolatedFontconfig": true,
+    "localFontCopies": [
+      {
+        "file": "msyh.ttc",
+        "bytes": 19704352,
+        "sha256": "D79C55E68B1131EEA0CC1C47BE4F572D964F28C682E143DB2AD09C1E4CB07A3F"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "bytes": 16883552,
+        "sha256": "4508821B3DFFE01F0EF5E5326A3E60DF705A44633858811F67B6982DCE3F6EE6"
+      }
+    ],
+    "fcDebug": "1060",
+    "renderEvidence": [
+      {
+        "file": "msyh.ttc",
+        "loaded": true,
+        "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+        "style": "style: \"Regular\"(s) \"Normal\"(s) \"obyčejné\"(s) \"Standard\"(s) \"Κανονικά\"(s) \"Normaali\"(s) \"Normál\"(s) \"Normale\"(s) \"Standaard\"(s) \"Normalny\"(s) \"Обычный\"(s) \"Normálne\"(s) \"Navadno\"(s) \"Arrunta\"(s)",
+        "weight": "weight: 80(f)(s)"
+      },
+      {
+        "file": "msyhbd.ttc",
+        "loaded": true,
+        "family": "family: \"Microsoft YaHei\"(s) \"微软雅黑\"(s)",
+        "style": "style: \"Bold\"(s) \"Negreta\"(s) \"tučné\"(s) \"fed\"(s) \"Fett\"(s) \"Έντονα\"(s) \"Negrita\"(s) \"Lihavoitu\"(s) \"Gras\"(s) \"Félkövér\"(s) \"Grassetto\"(s) \"Vet\"(s) \"Halvfet\"(s) \"Pogrubiony\"(s) \"Negrito\"(s) \"Полужирный\"(s) \"Fet\"(s) \"Kalın\"(s) \"Krepko\"(s) \"Lodia\"(s)",
+        "weight": "weight: 200(f)(s)"
+      }
+    ]
+  },
+  "outputs": {
+    "poster.svg": {
+      "bytes": 2146059,
+      "sha256": "0658AE51E4CC34A739B5B9D78E4039C8F0709FA68760465FA447BB089460117D"
+    },
+    "poster.png": {
+      "bytes": 2134027,
+      "sha256": "50D179F73F169D6E9C4A02177A148AC7DD958517C1F21070FDE367A5756A1654",
+      "width": 2048,
+      "height": 3072
+    },
+    "poster-preview.png": {
+      "bytes": 897316,
+      "sha256": "5BC7D2EAB7F1B4D7D7D9400C729B3610FA7399D624FBADD30DBDA7AB80050138",
+      "width": 1024,
+      "height": 1536
+    }
+  }
+}

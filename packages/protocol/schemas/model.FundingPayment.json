@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:FundingPayment",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "FundingPayment",
+  "type": "object",
+  "properties": {
+    "fundingId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/FundId"
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "rate": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "intervalMs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "positionSize": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "amount": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "asset": {
+      "type": "string",
+      "minLength": 1
+    },
+    "venueRef": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "fundingId",
+    "accountId",
+    "instrumentId",
+    "ts",
+    "rate",
+    "intervalMs",
+    "positionSize",
+    "amount",
+    "asset"
+  ]
+}

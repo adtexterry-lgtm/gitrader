@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:TemporaryRelax",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "TemporaryRelax",
+  "type": "object",
+  "properties": {
+    "fields": {
+      "type": "object"
+    },
+    "from": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "until": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "revertToVersion": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "fields",
+    "from",
+    "until",
+    "revertToVersion"
+  ]
+}

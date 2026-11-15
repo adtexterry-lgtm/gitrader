@@ -1,0 +1,370 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ExperimentConformanceCase",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ExperimentConformanceCase",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "const": "transition"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "experiment": {
+              "$ref": "urn:gitrader:schema:model:0.1:Experiment"
+            },
+            "to": {
+              "enum": [
+                "draft",
+                "backtest",
+                "paper",
+                "live_small",
+                "review",
+                "closed",
+                "hypothesis",
+                "holdout",
+                "shadow",
+                "live",
+                "retired"
+              ]
+            },
+            "evidence": {
+              "$ref": "urn:gitrader:schema:model:0.1:ExperimentTransitionEvidence"
+            },
+            "now": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+            }
+          },
+          "required": [
+            "experiment",
+            "to",
+            "evidence",
+            "now"
+          ]
+        },
+        "expect": {
+          "type": "object",
+          "properties": {
+            "ok": {
+              "type": "boolean"
+            },
+            "missing": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "ok",
+            "missing"
+          ]
+        },
+        "then": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "to": {
+                "enum": [
+                  "draft",
+                  "backtest",
+                  "paper",
+                  "live_small",
+                  "review",
+                  "closed",
+                  "hypothesis",
+                  "holdout",
+                  "shadow",
+                  "live",
+                  "retired"
+                ]
+              },
+              "now": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+              },
+              "expect": {
+                "type": "object",
+                "properties": {
+                  "ok": {
+                    "type": "boolean"
+                  },
+                  "missing": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "ok",
+                  "missing"
+                ]
+              }
+            },
+            "required": [
+              "to",
+              "now",
+              "expect"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "input",
+        "expect"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "const": "readonly"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "patch": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "patch"
+          ]
+        },
+        "expect": {
+          "type": "object",
+          "properties": {
+            "paths": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "paths"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "input",
+        "expect"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "const": "append-only"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "current": {
+              "$ref": "urn:gitrader:schema:model:0.1:Experiment"
+            },
+            "next": {
+              "$ref": "urn:gitrader:schema:model:0.1:Experiment"
+            }
+          },
+          "required": [
+            "current",
+            "next"
+          ]
+        },
+        "expect": {
+          "type": "object",
+          "properties": {
+            "paths": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "paths"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "input",
+        "expect"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "const": "schema"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "value": {}
+          },
+          "required": [
+            "schema",
+            "value"
+          ]
+        },
+        "expect": {
+          "type": "object",
+          "properties": {
+            "ok": {
+              "type": "boolean"
+            },
+            "readonlyPaths": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "ok"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "input",
+        "expect"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "const": "candles-digest"
+        },
+        "streams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "instrumentId": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+              },
+              "candles": {
+                "type": "array",
+                "items": {
+                  "$ref": "urn:gitrader:schema:model:0.1:Candle"
+                }
+              },
+              "variants": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "urn:gitrader:schema:model:0.1:Candle"
+                  }
+                }
+              },
+              "digest": {
+                "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+              }
+            },
+            "required": [
+              "instrumentId",
+              "candles",
+              "variants",
+              "digest"
+            ]
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "streams"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "const": "kernel-contract"
+        },
+        "rule": {
+          "enum": [
+            "frozen",
+            "trial-count",
+            "holdout",
+            "llm-attribution",
+            "lifecycle"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "given": {
+                "type": "object"
+              },
+              "expect": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "operation",
+              "given",
+              "expect"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "rule",
+        "steps"
+      ]
+    }
+  ]
+}

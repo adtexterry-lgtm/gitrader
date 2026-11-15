@@ -1,0 +1,61 @@
+{
+    "input":  {
+                  "to":  "backtest",
+                  "evidence":  {
+                                   "actor":  {
+                                                 "via":  "ui",
+                                                 "actorType":  "human"
+                                             },
+                                   "packs":  [
+
+                                             ],
+                                   "accounts":  [
+                                                    {
+                                                        "accountId":  "acct_000000000000000000000001",
+                                                        "mode":  "paper"
+                                                    }
+                                                ],
+                                   "labRuns":  [
+
+                                               ]
+                               },
+                  "experiment":  {
+                                     "experimentId":  "exp_000000000000000000000001",
+                                     "title":  "Sample experiment",
+                                     "hypothesis":  "A synthetic hypothesis",
+                                     "stage":  "draft",
+                                     "subject":  {
+                                                     "params":  {
+
+                                                                }
+                                                 },
+                                     "assumptions":  {
+                                                         "slippageBps":  0,
+                                                         "fillModel":  "next-bar-open",
+                                                         "liquidation":  false,
+                                                         "fees":  "venue",
+                                                         "funding":  false
+                                                     },
+                                     "origin":  {
+                                                    "actor":  "user:usr_000000000000000000000001",
+                                                    "actorType":  "human",
+                                                    "tool":  "experiment",
+                                                    "via":  "ui",
+                                                    "requestId":  "00000000-0000-4000-8000-000000000001"
+                                                },
+                                     "createdAt":  0,
+                                     "updatedAt":  0,
+                                     "stageEnteredAt":  0,
+                                     "subjectKey":  "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                 },
+                  "now":  1000
+              },
+    "expect":  {
+                   "missing":  [
+
+                               ],
+                   "ok":  true
+               },
+    "id":  "18-draft-alias-backtest",
+    "kind":  "transition"
+}

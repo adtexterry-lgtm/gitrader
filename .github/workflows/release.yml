@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: CPAL-1.0
+# Release 资产草稿：构建 npm 包 tgz + 各平台便携包，连同 SHA256SUMS、RELEASE-NOTES.md 一起上传成 artifact。
+# 只手动触发（workflow_dispatch），不自动跑发布。npm 发布由 维护者 手动执行，见 docs/release-checklist.md。
+name: Release assets (draft)
+
+on:
+  workflow_dispatch:
+    inputs:
+      platforms:
+        description: '逗号分隔的平台列表'
+        required: false
+        default: 'win-x64,linux-x64,darwin-arm64'
+
+permissions:
+  contents: read
+
+jobs:
+  assets:
+    name: Build release assets
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: npm ci
+      # 构建 tgz（触发 packages/cli 的 prepack 构建）与三平台便携包；运行时从 nodejs.org 下载并校验 sha256
+      - name: Build release assets
+        run: node scripts/release/build-release-assets.mjs --platforms "${{ inputs.platforms }}"
+      - name: Show checksums
+        run: cat dist-release/SHA256SUMS
+      # 只有构建产物，没有 npm publish 步骤：npm 发布由 维护者 手动执行，见 docs/release-checklist.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-assets
+          path: |
+            dist-release/*.tgz
+            dist-release/*.zip
+            dist-release/*.tar.gz
+            dist-release/SHA256SUMS
+            dist-release/RELEASE-NOTES.md
+          if-no-files-found: error
+          retention-days: 14

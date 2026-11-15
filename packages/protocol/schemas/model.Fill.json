@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Fill",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Fill",
+  "type": "object",
+  "properties": {
+    "fillId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/FillId"
+    },
+    "orderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+    },
+    "clientOrderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+    },
+    "venueFillId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "instrumentId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+    },
+    "side": {
+      "enum": [
+        "buy",
+        "sell"
+      ]
+    },
+    "price": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "size": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "fee": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "feeCcy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "builderFee": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "liquidity": {
+      "enum": [
+        "maker",
+        "taker"
+      ]
+    },
+    "realizedPnl": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "liquidation": {
+      "type": "boolean"
+    },
+    "legId": {
+      "type": "string"
+    },
+    "exitPlanId": {
+      "type": "string"
+    },
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "inferred": {
+      "type": "object",
+      "properties": {
+        "suggestionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reportId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confirmedAt": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "confirmedBy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "priceSource": {
+          "enum": [
+            "venue_avg_fill_price",
+            "local_last_fill_price"
+          ]
+        },
+        "basisDigest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "suggestionId",
+        "reportId",
+        "confirmedAt",
+        "confirmedBy",
+        "priceSource",
+        "basisDigest"
+      ]
+    }
+  },
+  "required": [
+    "fillId",
+    "orderId",
+    "clientOrderId",
+    "venueFillId",
+    "accountId",
+    "instrumentId",
+    "side",
+    "price",
+    "size",
+    "fee",
+    "feeCcy",
+    "liquidity",
+    "realizedPnl",
+    "ts"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@gitrader/blocks-r5",
+  "version": "0.1.0",
+  "description": "Gitrader r5 first-party blocks and shared UI kit.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ./vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*",
+    "@gitrader/blocks-sdk": "*",
+    "@gitrader/workbench": "*",
+    "@gitrader/blocks-default": "*",
+    "klinecharts": "10.1.0"
+  },
+  "peerDependencies": {
+    "preact": "^10 || ^11"
+  }
+}

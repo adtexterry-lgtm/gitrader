@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ForwardStatsInput",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ForwardStatsInput",
+  "type": "object",
+  "properties": {
+    "tier": {
+      "const": "forward_paper"
+    },
+    "window": {
+      "$ref": "urn:gitrader:schema:model:0.1:Window"
+    },
+    "stageEnteredAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "runs": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:ForwardRunInput"
+      }
+    },
+    "initialEquity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+          },
+          "at": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+          },
+          "equity": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+          },
+          "unrealizedPnl": {
+            "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+          }
+        },
+        "required": [
+          "accountId",
+          "at",
+          "equity",
+          "unrealizedPnl"
+        ]
+      }
+    },
+    "fills": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:ForwardFillSlice"
+      }
+    },
+    "snapshots": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:ForwardSnapshot"
+      }
+    },
+    "valuationCcy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "periodsPerYear": {
+      "type": "number"
+    },
+    "finalized": {
+      "type": "boolean"
+    },
+    "computedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "baseline": {
+      "type": "object",
+      "properties": {
+        "baselineId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "window": {
+          "$ref": "urn:gitrader:schema:model:0.1:Window"
+        },
+        "returnRatio": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "baselineId",
+        "window",
+        "returnRatio"
+      ]
+    }
+  },
+  "required": [
+    "tier",
+    "window",
+    "stageEnteredAt",
+    "runs",
+    "initialEquity",
+    "fills",
+    "snapshots",
+    "valuationCcy",
+    "periodsPerYear",
+    "finalized",
+    "computedAt"
+  ]
+}

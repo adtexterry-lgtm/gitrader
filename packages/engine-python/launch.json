@@ -1,0 +1,14 @@
+{
+  "engines": [
+    {
+      "id": "python-engine",
+      "enabled": true,
+      "launch": {
+        "command": "python",
+        "args": ["engine/main.py"],
+        "env": {},
+        "cwd": "."
+      }
+    }
+  ]
+}

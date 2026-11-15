@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:Problem",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "Problem",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "enum": [
+        "REJECTED",
+        "RISK",
+        "VENUE",
+        "ENGINE",
+        "PROTOCOL"
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "retryable": {
+      "type": "boolean"
+    },
+    "retryAfterMs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ruleHits": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:RuleHit"
+      }
+    },
+    "precheckId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PckId"
+    },
+    "venue": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "code": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "message"
+      ]
+    },
+    "correlationId": {
+      "type": "string"
+    },
+    "clientOrderIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "code",
+    "name",
+    "category",
+    "message",
+    "retryable"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "RISK"
+          }
+        },
+        "required": [
+          "category"
+        ]
+      },
+      "then": {
+        "required": [
+          "ruleHits",
+          "precheckId"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "VENUE"
+          }
+        },
+        "required": [
+          "category"
+        ]
+      },
+      "then": {
+        "required": [
+          "venue"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "code": {
+            "const": 1011
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "name": {
+            "const": "EXPERIMENT_FIELD_READONLY"
+          },
+          "category": {
+            "const": "REJECTED"
+          },
+          "retryable": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "code": {
+            "const": 1012
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "name": {
+            "const": "EXPERIMENT_FIELD_FROZEN"
+          },
+          "category": {
+            "const": "REJECTED"
+          },
+          "retryable": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "code": {
+            "const": 1013
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "name": {
+            "const": "EXPERIMENT_TRANSITION_DENIED"
+          },
+          "category": {
+            "const": "REJECTED"
+          },
+          "retryable": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "code": {
+            "const": 1014
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "name": {
+            "const": "EXPERIMENT_EVIDENCE_INCOMPLETE"
+          },
+          "category": {
+            "const": "REJECTED"
+          },
+          "retryable": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "code": {
+            "const": 1015
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "name": {
+            "const": "EXPERIMENT_APPEND_ONLY"
+          },
+          "category": {
+            "const": "REJECTED"
+          },
+          "retryable": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "code": {
+            "const": 1016
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "name": {
+            "const": "EXPERIMENT_FORBIDDEN"
+          },
+          "category": {
+            "const": "REJECTED"
+          },
+          "retryable": {
+            "const": false
+          }
+        }
+      }
+    }
+  ]
+}

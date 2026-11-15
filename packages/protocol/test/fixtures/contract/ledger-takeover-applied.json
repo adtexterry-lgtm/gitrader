@@ -1,0 +1,16 @@
+{
+  "schema": "gitrader-ledger/1",
+  "seq": 18240,
+  "id": "led_01JABE0T3M",
+  "ts": 1791549420000,
+  "recordedAt": 1791549420004,
+  "type": "takeover.applied",
+  "origin": {"actor": "user:usr_local", "tool": "ui:statusbar.flatten_all", "requestId": "6c5d4e3f-2a1b-4c0d-9e8f-7a6b5c4d3e2f", "via": "ui"},
+  "subject": {"takeoverId": "tko_01JABE0T2", "accountId": "acct_01JAB0QZ8W3K5M7N9P1R3T5V7X"},
+  "ruleHits": [],
+  "payload": {"level": "flatten_all", "scope": {"type": "account", "id": "acct_01JAB0QZ8W3K5M7N9P1R3T5V7X"}, "reason": "Manual flatten before macro release", "cancelled": 3, "closeOrders": 2, "tradingStateAfter": "HALTED"},
+  "payloadHash": "sha256:<64hex>",
+  "attestation": "kernel-observed",
+  "prevHash": "sha256:<64hex>",
+  "hash": "sha256:<64hex>"
+}

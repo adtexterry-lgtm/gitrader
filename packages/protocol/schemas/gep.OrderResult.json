@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:gep:0.1:OrderResult",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: gep | Version: 0.1 | Status: draft",
+  "title": "OrderResult",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/OrdId"
+    },
+    "clientOrderId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/ClientOrderId"
+    },
+    "status": {
+      "enum": [
+        "new",
+        "submitted",
+        "open",
+        "untriggered",
+        "partially_filled",
+        "filled",
+        "cancelled",
+        "expired",
+        "rejected",
+        "denied"
+      ]
+    },
+    "order": {
+      "$ref": "urn:gitrader:schema:model:0.1:Order"
+    },
+    "precheck": {
+      "$ref": "urn:gitrader:schema:model:0.1:PrecheckResult"
+    },
+    "problem": {
+      "$ref": "urn:gitrader:schema:model:0.1:Problem"
+    }
+  },
+  "required": [
+    "orderId",
+    "clientOrderId",
+    "status"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ReconcileFindingView",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ReconcileFindingView",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "severity": {
+      "enum": [
+        "blocker",
+        "warn",
+        "info"
+      ]
+    },
+    "detail": {
+      "type": "string"
+    },
+    "advice": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requiresHuman": {
+          "type": "boolean"
+        },
+        "why": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "action",
+        "requiresHuman",
+        "why"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:ReconcileEvidence"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "code",
+    "severity",
+    "detail",
+    "advice",
+    "evidence"
+  ]
+}

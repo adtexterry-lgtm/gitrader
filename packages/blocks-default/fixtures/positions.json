@@ -1,0 +1,440 @@
+{
+  "_now": 1791570250464,
+  "events": [],
+  "queries": {
+    "account.list": [
+      {
+        "accountId": "acct_01JB0000000000000000000001",
+        "alias": "测试网主账户",
+        "orgId": "org_01JB0000000000000000000001",
+        "groupIds": [],
+        "venue": "hyperliquid",
+        "environment": "testnet",
+        "mode": "live",
+        "owner": {
+          "address": "0x00000000000000000000000000000000000000a1"
+        },
+        "accountModel": "unified",
+        "signer": {
+          "type": "api-wallet",
+          "credentialRef": "wlt_demo",
+          "permissions": {
+            "trade": true,
+            "withdraw": false
+          }
+        },
+        "status": "active"
+      }
+    ],
+    "account.summary": {
+      "accountId": "acct_01JB0000000000000000000001",
+      "equity": "12480.2",
+      "available": "8120.4",
+      "dayStartEquity": "12351.8",
+      "ts": 1791570250464
+    },
+    "account.positions": [
+      {
+        "accountId": "acct_01JB0000000000000000000001",
+        "instrumentId": "hyperliquid:BTC",
+        "side": "long",
+        "size": "0.08",
+        "entryPrice": "64210.5",
+        "markPrice": "64880.2",
+        "notional": "5190.42",
+        "unrealizedPnl": "53.58",
+        "realizedPnl": "0",
+        "leverage": 4,
+        "marginMode": "cross",
+        "liquidationPrice": "52110",
+        "fundingSinceOpen": "-1.24",
+        "openedAt": 1791559450464,
+        "updatedAt": 1791570248464
+      },
+      {
+        "accountId": "acct_01JB0000000000000000000001",
+        "instrumentId": "hyperliquid:ETH",
+        "side": "short",
+        "size": "1.2",
+        "entryPrice": "3185.2",
+        "markPrice": "3170.8",
+        "notional": "3804.96",
+        "unrealizedPnl": "17.28",
+        "realizedPnl": "0",
+        "leverage": 3,
+        "marginMode": "cross",
+        "liquidationPrice": "3890.5",
+        "fundingSinceOpen": "-1.24",
+        "openedAt": 1791559450464,
+        "updatedAt": 1791570248464
+      },
+      {
+        "accountId": "acct_01JB0000000000000000000001",
+        "instrumentId": "hyperliquid:xyz:TSLA",
+        "side": "long",
+        "size": "5",
+        "entryPrice": "241.8",
+        "markPrice": "241.8",
+        "notional": "1209",
+        "unrealizedPnl": "0",
+        "realizedPnl": "0",
+        "leverage": 2,
+        "marginMode": "cross",
+        "liquidationPrice": "188.2",
+        "fundingSinceOpen": "-1.24",
+        "openedAt": 1791559450464,
+        "updatedAt": 1791570248464
+      }
+    ],
+    "account.fills": [
+      {
+        "fillId": "fill_01JB0000000000000000000001",
+        "orderId": "ord_01JB0000000000000000000001",
+        "clientOrderId": "00000000000000000000000000000001",
+        "venueFillId": "v1",
+        "accountId": "acct_01JB0000000000000000000001",
+        "instrumentId": "hyperliquid:BTC",
+        "side": "buy",
+        "price": "64210.5",
+        "size": "0.25",
+        "fee": "0.9",
+        "feeCcy": "USDC",
+        "liquidity": "taker",
+        "realizedPnl": "0",
+        "ts": 1791559450464
+      },
+      {
+        "fillId": "fill_01JB0000000000000000000002",
+        "orderId": "ord_01JB0000000000000000000002",
+        "clientOrderId": "00000000000000000000000000000002",
+        "venueFillId": "v2",
+        "accountId": "acct_01JB0000000000000000000001",
+        "instrumentId": "hyperliquid:ETH",
+        "side": "sell",
+        "price": "3185.2",
+        "size": "3",
+        "fee": "0.9",
+        "feeCcy": "USDC",
+        "liquidity": "taker",
+        "realizedPnl": "0",
+        "ts": 1791563050464
+      },
+      {
+        "fillId": "fill_01JB0000000000000000000003",
+        "orderId": "ord_01JB0000000000000000000003",
+        "clientOrderId": "00000000000000000000000000000003",
+        "venueFillId": "v3",
+        "accountId": "acct_01JB0000000000000000000001",
+        "instrumentId": "hyperliquid:SOL",
+        "side": "sell",
+        "price": "150.2",
+        "size": "20",
+        "fee": "0.9",
+        "feeCcy": "USDC",
+        "liquidity": "taker",
+        "realizedPnl": "18.4",
+        "ts": 1791569650464
+      }
+    ],
+    "account.orders": [
+      {
+        "orderId": "ord_01JB0000000000000000000001",
+        "clientOrderId": "00000000000000000000000000000001",
+        "accountId": "acct_01JB0000000000000000000001",
+        "instrumentId": "hyperliquid:BTC",
+        "side": "buy",
+        "type": "limit",
+        "tif": "gtc",
+        "size": "1",
+        "filledSize": "1",
+        "status": "filled",
+        "fee": "0",
+        "origin": {
+          "actor": "agent:ak_01JB000000000000000000000B",
+          "actorType": "llm-agent",
+          "tool": "propose",
+          "requestId": "00000000-0000-4000-8000-000000000001",
+          "via": "mcp",
+          "onBehalfOf": "user:usr_local"
+        },
+        "createdAt": 1791559450464,
+        "updatedAt": 1791559450464
+      },
+      {
+        "orderId": "ord_01JB0000000000000000000002",
+        "clientOrderId": "00000000000000000000000000000002",
+        "accountId": "acct_01JB0000000000000000000001",
+        "instrumentId": "hyperliquid:ETH",
+        "side": "sell",
+        "type": "limit",
+        "tif": "gtc",
+        "size": "1",
+        "filledSize": "1",
+        "status": "filled",
+        "fee": "0",
+        "origin": {
+          "actor": "strategy:ema-trend",
+          "actorType": "engine",
+          "tool": "strategy:ema-trend",
+          "requestId": "00000000-0000-4000-8000-000000000003",
+          "via": "gep"
+        },
+        "createdAt": 1791563050464,
+        "updatedAt": 1791563050464
+      },
+      {
+        "orderId": "ord_01JB0000000000000000000005",
+        "clientOrderId": "00000000000000000000000000000005",
+        "accountId": "acct_01JB0000000000000000000001",
+        "instrumentId": "hyperliquid:xyz:TSLA",
+        "side": "buy",
+        "type": "limit",
+        "tif": "gtc",
+        "size": "1",
+        "filledSize": "1",
+        "status": "filled",
+        "fee": "0",
+        "origin": {
+          "actor": "user:usr_local",
+          "actorType": "human",
+          "tool": "ui:proposal.approve",
+          "requestId": "00000000-0000-4000-8000-000000000004",
+          "via": "ui"
+        },
+        "createdAt": 1791555850464,
+        "updatedAt": 1791555850464
+      }
+    ],
+    "ledger.query": [
+      {
+        "schema": "gitrader-ledger/1",
+        "seq": 101,
+        "id": "led_01JB0000000000000000000065",
+        "ts": 1791559450464,
+        "recordedAt": 1791559450467,
+        "type": "order.intent",
+        "origin": {
+          "actor": "agent:ak_01JB000000000000000000000B",
+          "actorType": "llm-agent",
+          "tool": "propose",
+          "requestId": "00000000-0000-4000-8000-000000000001",
+          "via": "mcp",
+          "onBehalfOf": "user:usr_local"
+        },
+        "subject": {
+          "accountId": "acct_01JB0000000000000000000001",
+          "instrumentId": "hyperliquid:BTC"
+        },
+        "payload": {
+          "intent": {
+            "accountId": "acct_01JB0000000000000000000001",
+            "instrumentId": "hyperliquid:BTC",
+            "side": "buy",
+            "type": "limit",
+            "size": "0.25",
+            "price": "64210",
+            "tif": "gtc",
+            "reason": "突破前高后回踩确认，按计划加仓"
+          }
+        },
+        "payloadHash": "sha256:0000000000000000000000000000000000000000000000000000000000000065",
+        "attestation": "kernel-observed",
+        "prevHash": "sha256:0000000000000000000000000000000000000000000000000000000000000064",
+        "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000065",
+        "precheck": {
+          "precheckId": "pck_01JB0000000000000000000001",
+          "verdict": "allow",
+          "policyVersion": 3,
+          "estimates": {}
+        }
+      },
+      {
+        "schema": "gitrader-ledger/1",
+        "seq": 102,
+        "id": "led_01JB0000000000000000000066",
+        "ts": 1791559451264,
+        "recordedAt": 1791559451267,
+        "type": "fill",
+        "origin": {
+          "actor": "agent:ak_01JB000000000000000000000B",
+          "actorType": "llm-agent",
+          "tool": "propose",
+          "requestId": "00000000-0000-4000-8000-000000000001",
+          "via": "mcp",
+          "onBehalfOf": "user:usr_local"
+        },
+        "subject": {
+          "accountId": "acct_01JB0000000000000000000001",
+          "instrumentId": "hyperliquid:BTC"
+        },
+        "payload": {
+          "price": "64210.5",
+          "size": "0.25",
+          "side": "buy",
+          "fee": "0.9",
+          "realizedPnl": "0"
+        },
+        "payloadHash": "sha256:0000000000000000000000000000000000000000000000000000000000000066",
+        "attestation": "kernel-observed",
+        "prevHash": "sha256:0000000000000000000000000000000000000000000000000000000000000065",
+        "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000066"
+      },
+      {
+        "schema": "gitrader-ledger/1",
+        "seq": 110,
+        "id": "led_01JB000000000000000000006E",
+        "ts": 1791568750464,
+        "recordedAt": 1791568750467,
+        "type": "order.intent",
+        "origin": {
+          "actor": "strategy:ema-trend",
+          "actorType": "engine",
+          "tool": "strategy:ema-trend",
+          "requestId": "00000000-0000-4000-8000-000000000003",
+          "via": "gep"
+        },
+        "subject": {
+          "accountId": "acct_01JB0000000000000000000001",
+          "instrumentId": "hyperliquid:BTC"
+        },
+        "payload": {
+          "intent": {
+            "accountId": "acct_01JB0000000000000000000001",
+            "instrumentId": "hyperliquid:BTC",
+            "side": "buy",
+            "type": "limit",
+            "size": "2",
+            "price": "64300",
+            "tif": "gtc",
+            "reason": "杠杆过高的试单"
+          }
+        },
+        "payloadHash": "sha256:000000000000000000000000000000000000000000000000000000000000006e",
+        "attestation": "kernel-observed",
+        "prevHash": "sha256:000000000000000000000000000000000000000000000000000000000000006d",
+        "hash": "sha256:000000000000000000000000000000000000000000000000000000000000006e",
+        "precheck": {
+          "precheckId": "pck_01JB000000000000000000000A",
+          "verdict": "deny",
+          "policyVersion": 3,
+          "estimates": {}
+        },
+        "ruleHits": [
+          {
+            "ruleId": "pol_01JB#maxOrderNotional",
+            "code": "ORDER_NOTIONAL",
+            "limit": "5000",
+            "actual": "128600",
+            "unit": "USDC",
+            "action": "deny",
+            "scope": "org"
+          },
+          {
+            "ruleId": "pol_01JB#maxLeverage",
+            "code": "LEVERAGE",
+            "limit": "5",
+            "actual": "12",
+            "unit": "×",
+            "action": "deny",
+            "scope": "org"
+          }
+        ]
+      }
+    ],
+    "agentkey.list": [
+      {
+        "keyId": "ak_01JB000000000000000000000B",
+        "name": "Claude Code",
+        "host": "claude-code",
+        "mandateId": "mdt_01JB0000000000000000000015",
+        "status": "active",
+        "createdAt": 1791138250464,
+        "expiresAt": 1798914250464,
+        "lastSeenAt": 1791570230464,
+        "createdBy": "user:usr_local"
+      },
+      {
+        "keyId": "ak_01JB000000000000000000000C",
+        "name": "Hermes",
+        "host": "hermes",
+        "mandateId": "mdt_01JB0000000000000000000016",
+        "status": "active",
+        "createdAt": 1791397450464,
+        "expiresAt": 1799173450464,
+        "lastSeenAt": 1791566650464,
+        "createdBy": "user:usr_local"
+      }
+    ],
+    "proposal.list": [
+      {
+        "proposalId": "prop_01JB0000000000000000000006",
+        "ticket": "T-20261010-0006",
+        "kind": "order",
+        "status": "executed",
+        "accountId": "acct_01JB0000000000000000000001",
+        "intents": [
+          {
+            "accountId": "acct_01JB0000000000000000000001",
+            "instrumentId": "hyperliquid:BTC",
+            "side": "buy",
+            "type": "limit",
+            "size": "0.03",
+            "price": "64300",
+            "tif": "gtc",
+            "reason": "上一单被拦后改走提案：同一标的小仓位，止损已设"
+          }
+        ],
+        "intentsDigest": "sha256:000000000000000000000000000000000000000000000000000000000000038a",
+        "reason": "上一单被拦后改走提案：同一标的小仓位，止损已设",
+        "precheck": {
+          "precheckId": "pck_01JB0000000000000000000006",
+          "verdict": "review",
+          "policyVersion": 3,
+          "ruleHits": [
+            {
+              "ruleId": "mdt_01JB#autoMaxOrderNotional",
+              "code": "NEEDS_APPROVAL",
+              "limit": "2000",
+              "actual": "9600",
+              "unit": "USDC",
+              "action": "review",
+              "scope": "org"
+            }
+          ],
+          "estimates": {
+            "notional": "32105",
+            "marginRequired": "6421",
+            "liquidationPrice": "52110",
+            "slippageBps": 6
+          },
+          "expiresAt": 1791567970464
+        },
+        "priceBounds": {
+          "referencePrice": "64210",
+          "maxDriftBps": 30
+        },
+        "mandateId": "mdt_01JB0000000000000000000015",
+        "expiresAt": 1791567970464,
+        "decision": {
+          "by": "user:usr_local",
+          "at": 1791567970464
+        },
+        "execution": {
+          "orderIds": [
+            "ord_01JB0000000000000000000006"
+          ],
+          "at": 1791567971364,
+          "result": "filled"
+        },
+        "origin": {
+          "actor": "agent:ak_01JB000000000000000000000B",
+          "actorType": "llm-agent",
+          "tool": "propose",
+          "requestId": "00000000-0000-4000-8000-000000000001",
+          "via": "mcp",
+          "onBehalfOf": "user:usr_local"
+        }
+      }
+    ]
+  }
+}

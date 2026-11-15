@@ -1,0 +1,18 @@
+{
+  "precheckId": "pck_01JAB9QJ8",
+  "verdict": "allow",
+  "policyVersion": 3,
+  "ruleHits": [],
+  "estimates": {
+    "notional": "249.24",
+    "marginRequired": "83.08",
+    "liquidationPrice": "55410",
+    "slippageBps": 1.2,
+    "feeEstimate": "0.112158",
+    "positionNotionalRatioAfter": "0.025",
+    "totalNotionalRatioAfter": "0.125",
+    "rateBudgetRemaining": 612
+  },
+  "priceRef": {"markPrice": "83080", "ts": 1791549157600},
+  "expiresAt": 1791549187600
+}

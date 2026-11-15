@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:PaperReplayFrame",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "PaperReplayFrame",
+  "type": "object",
+  "properties": {
+    "ts": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "marks": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+      },
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+      }
+    },
+    "books": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "bids": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                },
+                {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "minItems": 1
+          },
+          "asks": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                },
+                {
+                  "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "bids",
+          "asks"
+        ]
+      },
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+      }
+    },
+    "funding": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+      },
+      "propertyNames": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+      }
+    },
+    "candles": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:PaperReplayCandle"
+      }
+    }
+  },
+  "required": [
+    "ts",
+    "marks",
+    "books",
+    "candles"
+  ]
+}

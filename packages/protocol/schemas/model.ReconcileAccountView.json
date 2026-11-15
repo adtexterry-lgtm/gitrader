@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ReconcileAccountView",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ReconcileAccountView",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+    },
+    "offerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "idle",
+        "running",
+        "ready",
+        "unavailable"
+      ]
+    },
+    "lastAttemptAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "lastSuccessAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "reportId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generatedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "verdict": {
+      "enum": [
+        "clean",
+        "attention",
+        "blocked"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:ReconcileFindingView"
+      }
+    },
+    "suggestions": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:ReconcileSuggestion"
+      }
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:ReconcileReviewItem"
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "asOf": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "unavailable": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "historyChecked": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "historyTotal": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "asOf",
+        "truncated",
+        "unavailable",
+        "historyChecked",
+        "historyTotal"
+      ]
+    },
+    "problem": {
+      "$ref": "urn:gitrader:schema:model:0.1:Problem"
+    }
+  },
+  "required": [
+    "accountId",
+    "state",
+    "findings",
+    "suggestions"
+  ]
+}

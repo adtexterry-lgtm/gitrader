@@ -1,0 +1,21 @@
+{
+  "name": "@gitrader/exec-algos",
+  "version": "0.1.0",
+  "description": "Gitrader execution algorithms as pure functions: maker-then-market state machine, tail guard, triple-capped close quantity, cancel confirmation, client order ids, fill dedupe keys. No I/O, no kernel wiring.",
+  "license": "CPAL-1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run --config ../../vitest.config.ts --root .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "@gitrader/protocol": "*"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.3"
+  }
+}

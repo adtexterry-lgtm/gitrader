@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:ForwardStats",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "ForwardStats",
+  "type": "object",
+  "properties": {
+    "tier": {
+      "enum": [
+        "forward_paper",
+        "forward_live"
+      ]
+    },
+    "runIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "accountIds": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+      }
+    },
+    "window": {
+      "$ref": "urn:gitrader:schema:model:0.1:Window"
+    },
+    "ledgerRange": {
+      "type": "object",
+      "properties": {
+        "fromSeq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "toSeq": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "fromSeq",
+        "toSeq"
+      ]
+    },
+    "sample": {
+      "type": "object",
+      "properties": {
+        "trades": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fills": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "roundTrips": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "spanDays": {
+          "type": "number",
+          "minimum": 0
+        },
+        "activeDays": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "snapshotDays": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "trades",
+        "fills",
+        "roundTrips",
+        "spanDays",
+        "activeDays",
+        "snapshotDays"
+      ]
+    },
+    "valuationCcy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "realizedPnl": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "unrealizedPnlEnd": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "fees": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "funding": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+    },
+    "returnRatio": {
+      "type": "number"
+    },
+    "maxDrawdownRatio": {
+      "type": "number"
+    },
+    "sharpe": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sortino": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "winRatio": {
+      "oneOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "periodsPerYear": {
+      "type": "number"
+    },
+    "includesUnrealized": {
+      "const": true
+    },
+    "vsBaseline": {
+      "type": "object",
+      "properties": {
+        "baselineId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "excessReturnRatio": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "baselineId",
+        "excessReturnRatio"
+      ]
+    },
+    "provisional": {
+      "type": "boolean"
+    },
+    "computedAt": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "computedBy": {
+      "const": "kernel"
+    },
+    "digest": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Sha256"
+    }
+  },
+  "required": [
+    "tier",
+    "runIds",
+    "accountIds",
+    "window",
+    "ledgerRange",
+    "sample",
+    "valuationCcy",
+    "realizedPnl",
+    "unrealizedPnlEnd",
+    "fees",
+    "funding",
+    "returnRatio",
+    "maxDrawdownRatio",
+    "sharpe",
+    "sortino",
+    "winRatio",
+    "periodsPerYear",
+    "includesUnrealized",
+    "provisional",
+    "computedAt",
+    "computedBy",
+    "digest"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "tier": {
+            "const": "forward_paper"
+          }
+        },
+        "required": [
+          "tier"
+        ]
+      },
+      "then": {
+        "properties": {
+          "funding": {
+            "const": "0"
+          }
+        }
+      }
+    }
+  ]
+}

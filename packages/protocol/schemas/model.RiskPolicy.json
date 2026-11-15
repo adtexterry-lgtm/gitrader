@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:model:0.1:RiskPolicy",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: model | Version: 0.1 | Status: draft",
+  "title": "RiskPolicy",
+  "type": "object",
+  "properties": {
+    "policyId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/PolId"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "org",
+            "group",
+            "account",
+            "mandate",
+            "strategy"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ]
+    },
+    "limits": {
+      "$ref": "urn:gitrader:schema:model:0.1:RiskLimits"
+    },
+    "protectors": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Protector"
+      }
+    },
+    "limitMode": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "boolean"
+        },
+        "leverage": {
+          "type": "boolean"
+        },
+        "maxSlippageBps": {
+          "type": "boolean"
+        }
+      }
+    },
+    "killSwitch": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "boolean"
+        },
+        "onTrip": {
+          "type": "object",
+          "properties": {
+            "cancelAll": {
+              "type": "boolean"
+            },
+            "keepStopLoss": {
+              "type": "boolean"
+            },
+            "closeAll": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "cancelAll",
+            "keepStopLoss",
+            "closeAll"
+          ]
+        }
+      }
+    },
+    "failClosed": {
+      "type": "object",
+      "properties": {
+        "stalePriceMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "staleAccountMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "onMissingPrice": {
+          "const": "deny"
+        }
+      },
+      "required": [
+        "stalePriceMs",
+        "onMissingPrice"
+      ]
+    },
+    "denyLlmLiveEntries": {
+      "type": "boolean",
+      "default": true,
+      "description": "缺省 = true；LLM 来源的实盘开仓一律拒绝"
+    },
+    "temporaryRelax": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:TemporaryRelax"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "dailyResetAt": {
+      "type": "string",
+      "pattern": "^\\d{2}:\\d{2}Z$"
+    },
+    "valuationCcy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attestation": {
+      "$ref": "urn:gitrader:schema:model:0.1:Attestation"
+    }
+  },
+  "required": [
+    "policyId",
+    "version",
+    "scope",
+    "limits",
+    "failClosed",
+    "dailyResetAt",
+    "valuationCcy",
+    "attestation"
+  ]
+}

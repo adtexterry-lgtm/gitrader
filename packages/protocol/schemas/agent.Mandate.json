@@ -1,0 +1,322 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gitrader:schema:agent:0.1:Mandate",
+  "$comment": "SPDX-License-Identifier: Apache-2.0 | Spec: agent | Version: 0.1 | Status: draft",
+  "title": "Mandate",
+  "type": "object",
+  "properties": {
+    "mandateId": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/MdtId"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "agentKey",
+            "engine",
+            "workflow",
+            "plugin"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ]
+    },
+    "level": {
+      "enum": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ]
+    },
+    "accounts": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/AcctId"
+      }
+    },
+    "venueAllowlist": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/VenueId"
+      }
+    },
+    "instrumentAllowlist": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/InstrumentId"
+      }
+    },
+    "limits": {
+      "$ref": "urn:gitrader:schema:agent:0.1:MandateLimits"
+    },
+    "notBefore": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "notAfter": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Ms"
+    },
+    "heartbeat": {
+      "type": "object",
+      "properties": {
+        "intervalSec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "timeoutSec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "onTimeout": {
+          "type": "object",
+          "properties": {
+            "downgradeTo": {
+              "enum": [
+                "L0",
+                "L1",
+                "L2",
+                "L3",
+                "L4"
+              ]
+            },
+            "takeover": {
+              "enum": [
+                "none",
+                "halt_new",
+                "cancel_all"
+              ]
+            }
+          },
+          "required": [
+            "downgradeTo",
+            "takeover"
+          ]
+        }
+      },
+      "required": [
+        "intervalSec",
+        "timeoutSec",
+        "onTimeout"
+      ]
+    },
+    "approval": {
+      "type": "object",
+      "properties": {
+        "pendingTtlSec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "executeWithinSec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "presenceAboveNotional": {
+          "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+        }
+      },
+      "required": [
+        "pendingTtlSec",
+        "executeWithinSec",
+        "presenceAboveNotional"
+      ]
+    },
+    "promotion": {
+      "type": "object",
+      "properties": {
+        "next": {
+          "enum": [
+            "L0",
+            "L1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        "criteria": {
+          "type": "object",
+          "properties": {
+            "minDays": {
+              "type": "number"
+            },
+            "minSamples": {
+              "type": "integer"
+            },
+            "maxDrawdownRatio": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "maxHeartbeatTimeouts": {
+              "type": "integer"
+            },
+            "minApprovalRatio": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            }
+          }
+        },
+        "progress": {
+          "type": "object",
+          "properties": {
+            "days": {
+              "type": "number"
+            },
+            "samples": {
+              "type": "integer"
+            },
+            "drawdownRatio": {
+              "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/Decimal"
+            },
+            "heartbeatTimeouts": {
+              "type": "integer"
+            },
+            "eligible": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "days",
+            "samples",
+            "drawdownRatio",
+            "heartbeatTimeouts",
+            "eligible"
+          ]
+        }
+      },
+      "required": [
+        "next",
+        "criteria",
+        "progress"
+      ]
+    },
+    "temporaryRelax": {
+      "oneOf": [
+        {
+          "$ref": "urn:gitrader:schema:model:0.1:TemporaryRelax"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "denyLlmLiveEntries": {
+      "type": "boolean",
+      "default": true,
+      "description": "缺省 = true；LLM 来源的实盘开仓一律拒绝"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "suspended",
+        "expired",
+        "revoked",
+        "downgraded"
+      ]
+    },
+    "issuedBy": {
+      "$ref": "urn:gitrader:schema:model:0.1:Common#/$defs/UserActor"
+    },
+    "attestation": {
+      "$ref": "urn:gitrader:schema:model:0.1:Attestation"
+    }
+  },
+  "required": [
+    "mandateId",
+    "version",
+    "subject",
+    "level",
+    "accounts",
+    "limits",
+    "notBefore",
+    "notAfter",
+    "status",
+    "issuedBy",
+    "attestation"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "enum": [
+              "L2",
+              "L3",
+              "L4"
+            ]
+          }
+        },
+        "required": [
+          "level"
+        ]
+      },
+      "then": {
+        "required": [
+          "venueAllowlist",
+          "instrumentAllowlist"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "const": "L2"
+          }
+        },
+        "required": [
+          "level"
+        ]
+      },
+      "then": {
+        "properties": {
+          "limits": {
+            "required": [
+              "maxOrderNotional",
+              "maxDailyNotional"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "enum": [
+              "L3",
+              "L4"
+            ]
+          }
+        },
+        "required": [
+          "level"
+        ]
+      },
+      "then": {
+        "required": [
+          "heartbeat"
+        ],
+        "properties": {
+          "limits": {
+            "required": [
+              "maxOrderNotional",
+              "maxDailyNotional",
+              "maxDailyLoss",
+              "autoMaxOrderNotional"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
